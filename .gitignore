@@ -1,0 +1,6 @@
+build
+build.*
+!script/build
+!*.gradle
+*.iml
+.idea/

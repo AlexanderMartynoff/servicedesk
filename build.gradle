@@ -1,0 +1,36 @@
+@SuppressWarnings('all')
+class JsConcat extends DefaultTask{
+    // for first in the line 
+    def ordPattern
+    // take only by this pattern
+    def filterPattern
+    def srcDirName
+    def targetFileUri
+    def externalInfo
+
+    @TaskAction
+    void concat(){
+    	def srcFiles = []
+    	def srcDir = new File(srcDirName)
+
+        srcDir.eachFileRecurse {
+            if (it.isFile() && it.absolutePath =~ filterPattern){
+                srcFiles << it
+            }
+        }
+
+        srcFiles.sort { a, b ->
+            if(a =~ ordPattern && b =~ ordPattern) { 0 }
+            else if(a =~ ordPattern) { -1 }
+            else if(b =~ ordPattern) { 1 }
+            else { 0 }
+        }
+
+        (new File(targetFileUri)).text = externalInfo + "\n" + srcFiles.collect { it.text }.join("\n")
+    }
+}
+
+// import in all child projects
+subprojects{
+	ext.JsConcat = JsConcat
+}

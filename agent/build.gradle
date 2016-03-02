@@ -1,0 +1,29 @@
+apply plugin: "war"
+apply plugin: "java"
+
+version = "0.0.1"
+
+def appDirName = "src/main/war"
+def jsDir = "$appDirName/public/application/module"
+
+war {
+    webAppDirName = "src/main/war"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(project(":common"))
+}
+
+task jsConcat(type: JsConcat) {
+    ordPattern = /module.js$/
+    filterPattern = /\.js$/
+    srcDirName = "$projectDir/$jsDir"
+    targetFileUri = "$projectDir/$appDirName/public/application/build.js"
+    externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
+}
+
+war.dependsOn jsConcat

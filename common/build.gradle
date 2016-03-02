@@ -1,0 +1,44 @@
+apply plugin: "java"
+
+// component version var
+def servletApiVer = "3.0.1"
+def jspApiVer = "2.1"
+def jstlVer = "1.1.2"
+def springVer = "4.2.2.RELEASE"
+def springSecurityVer = "4.0.3.RELEASE"
+def jacksonVer = "2.6.3"
+def gsonVer = "2.4"
+def hibernateVer = "4.3.5.Final"
+def mysqlVer = "5.1.6"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            [group: "javax.servlet", name: "javax.servlet-api", version: servletApiVer],
+            [group: "javax.servlet.jsp", name: "jsp-api", version: jspApiVer],
+            [group: "javax.servlet", name: "jstl", version: jstlVer],
+            [group: "org.springframework", name: "spring-webmvc", version: springVer],
+            [group: "org.springframework", name: "spring-core", version: springVer],
+            [group: "org.springframework", name: "spring-web", version: springVer],
+            [group: "org.springframework", name: "spring-orm", version: springVer],
+            [group: "org.springframework.security", name:"spring-security-core", version: springSecurityVer],
+            [group: "org.springframework.security", name:"spring-security-web", version: springSecurityVer],
+            [group: "org.springframework.security", name: "spring-security-config", version: springSecurityVer],
+            [group: "org.hibernate", name: "hibernate-core", version: hibernateVer],
+            [group: "com.google.code.gson", name: "gson", version: gsonVer],
+            [group: "mysql", name: "mysql-connector-java", version: mysqlVer],
+            [group: "com.fasterxml.jackson.core", name: "jackson-core", version: jacksonVer],
+            [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVer],
+            [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVer]
+    )
+}
+
+jar {
+  from {
+  	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
