@@ -21,7 +21,10 @@ dependencies {
 task jsConcat(type: JsConcat) {
     ordPattern = /module.js$/
     filterPattern = /\.js$/
-    srcDirName = ["$projectDir/$jsDir", "/home/alexander/Desktop/itsm/common/src/main/war/public/application/module"]
+    srcDirName = [
+            "$projectDir/$jsDir",
+            "/home/alexander/Desktop/itsm/common/src/main/war/public/application/module"
+    ]
     targetFileUri = "$projectDir/$appDirName/public/application/build.js"
     externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
 }
