@@ -1,6 +1,6 @@
 @SuppressWarnings('all')
-class JsConcat extends DefaultTask{
-    // for first in the line 
+class JsConcat extends DefaultTask {
+    // for first in the line
     def ordPattern
     // take only by this pattern
     def filterPattern
@@ -9,21 +9,27 @@ class JsConcat extends DefaultTask{
     def externalInfo
 
     @TaskAction
-    void concat(){
-    	def srcFiles = []
-    	def srcDir = new File(srcDirName)
-
-        srcDir.eachFileRecurse {
-            if (it.isFile() && it.absolutePath =~ filterPattern){
-                srcFiles << it
+    void concat() {
+        def srcFiles = []
+        srcDirName = srcDirName instanceof Collection ? srcDirName : [srcDirName]
+        srcDirName.forEach {
+            new File(it).eachFileRecurse {
+                if (it.isFile() && it.absolutePath =~ filterPattern) {
+                    srcFiles << it
+                }
             }
         }
 
         srcFiles.sort { a, b ->
-            if(a =~ ordPattern && b =~ ordPattern) { 0 }
-            else if(a =~ ordPattern) { -1 }
-            else if(b =~ ordPattern) { 1 }
-            else { 0 }
+            if (a =~ ordPattern && b =~ ordPattern) {
+                0
+            } else if (a =~ ordPattern) {
+                -1
+            } else if (b =~ ordPattern) {
+                1
+            } else {
+                0
+            }
         }
 
         (new File(targetFileUri)).text = externalInfo + "\n" + srcFiles.collect { it.text }.join("\n")
@@ -31,6 +37,6 @@ class JsConcat extends DefaultTask{
 }
 
 // import in all child projects
-subprojects{
-	ext.JsConcat = JsConcat
+subprojects {
+    ext.JsConcat = JsConcat
 }

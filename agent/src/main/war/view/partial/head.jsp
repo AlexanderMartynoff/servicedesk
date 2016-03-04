@@ -16,7 +16,7 @@
 <script src="${pageContext.request.contextPath}/public/vendor/angular.js"></script>
 <script src="${pageContext.request.contextPath}/public/vendor/angular-ui-router.js"></script>
 <script src="${pageContext.request.contextPath}/public/vendor/angular-locale_ru-ru.js"></script>
-<script src="${pageContext.request.contextPath}/public/vendor/ui-bootstrap-tpls-1.1.0.js"></script>
+<script src="${pageContext.request.contextPath}/public/vendor/ui-bootstrap-tpls-1.2.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/public/vendor/sprintf.js"></script>
 
 <script src="${pageContext.request.contextPath}/public/application/build.js"></script>

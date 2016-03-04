@@ -7,19 +7,19 @@
     </div>
     <ul class="x-menu-sidebar">
         <li>
-            <a href="#backend/ticket/list"><b class="fa fa-left fa-ticket"></b>Заявки</a>
+            <a href="#/ticket/list"><b class="fa fa-left fa-ticket"></b>Заявки</a>
         </li>
         <li>
-            <a href="#backend/problem/list"><b class="fa fa-left fa-medkit"></b>Проблемы</a>
+            <a href="#/problem/list"><b class="fa fa-left fa-medkit"></b>Проблемы</a>
         </li>
         <li>
-            <a href="#backend/skillhub/list"><b class="fa fa-left fa-database"></b>База знаний</a>
+            <a href="#/skillhub/list"><b class="fa fa-left fa-database"></b>База знаний</a>
         </li>
         <li>
-            <a href="#backend/contractor"><b class="fa fa-left fa-user-secret"></b>Котрагнеты</a>
+            <a href="#/contractor"><b class="fa fa-left fa-user-secret"></b>Котрагнеты</a>
         </li>
         <li>
-            <a href="#backend/partner"><b class="fa fa-left fa-medkit"></b>Услуги</a>
+            <a href="#/partner"><b class="fa fa-left fa-medkit"></b>Услуги</a>
         </li>
     </ul>
 </div>
