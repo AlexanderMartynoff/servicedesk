@@ -1,4 +1,4 @@
-include 'agent'
 include 'common'
+include 'agent'
 include 'customer'
 

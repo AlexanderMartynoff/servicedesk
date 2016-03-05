@@ -1,1 +1,5 @@
-apply plugin: 'java'
+apply plugin: 'war'
+
+war {
+    webAppDirName = "src/main/web"
+}

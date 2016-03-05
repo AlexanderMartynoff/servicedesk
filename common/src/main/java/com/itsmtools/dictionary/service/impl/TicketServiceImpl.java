@@ -1,5 +1,6 @@
 package com.itsmtools.dictionary.service.impl;
 
+
 import com.itsmtools.dictionary.model.Ticket;
 import com.itsmtools.dictionary.service.spec.TicketService;
 import org.hibernate.Session;

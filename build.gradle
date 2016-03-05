@@ -1,3 +1,8 @@
+// import in all child projects
+subprojects {
+    ext.JsConcat = JsConcat
+}
+
 @SuppressWarnings('all')
 class JsConcat extends DefaultTask {
     // for first in the line
@@ -34,9 +39,4 @@ class JsConcat extends DefaultTask {
 
         (new File(targetFileUri)).text = externalInfo + "\n" + srcFiles.collect { it.text }.join("\n")
     }
-}
-
-// import in all child projects
-subprojects {
-    ext.JsConcat = JsConcat
 }

@@ -2,8 +2,10 @@ apply plugin: "war"
 
 version = "0.0.1"
 
-def appDirName = "src/main/war"
+def appDirName = "$projectDir/src/main/war"
 def jsDir = "$appDirName/WEB-INF/public/application/module"
+def commonJsDir = "${project(':common').projectDir}/src/main/resources/application/module"
+
 
 war {
     webAppDirName = "src/main/war"
@@ -17,12 +19,12 @@ dependencies {
     compile project(":common")
 }
 
-task jsConcat(type: JsConcat) {
+task ngBuild(type: JsConcat) {
     ordPattern = /module.js$/
     filterPattern = /\.js$/
-    srcDirName = ["$projectDir/$jsDir", "${project(':common').projectDir}/src/main/resources/application/module"]
-    targetFileUri = "$projectDir/$appDirName/WEB-INF/public/application/build.js"
+    srcDirName = [jsDir, commonJsDir]
+    targetFileUri = "$appDirName/WEB-INF/public/application/build.js"
     externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
 }
 
-war.dependsOn jsConcat
+war.dependsOn ngBuild
