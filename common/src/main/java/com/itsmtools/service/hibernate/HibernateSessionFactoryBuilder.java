@@ -4,7 +4,6 @@ package com.itsmtools.service.hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
-
 import java.util.Properties;
 
 
