@@ -12,17 +12,57 @@ public class Contractor {
     @Id
     @Column
     @GeneratedValue
-    public Integer id;
+    private Integer id;
 
     @Column
-    public String shortName;
+    private String shortName;
 
     @Column
-    public String fullName;
+    private String fullName;
 
     @Column
-    public Integer uniqueName;
+    private Integer uniqueName;
 
     @Column
-    public String metaInfo;
+    private String metaInfo;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Integer getUniqueName() {
+        return uniqueName;
+    }
+
+    public void setUniqueName(Integer uniqueName) {
+        this.uniqueName = uniqueName;
+    }
+
+    public String getMetaInfo() {
+        return metaInfo;
+    }
+
+    public void setMetaInfo(String metaInfo) {
+        this.metaInfo = metaInfo;
+    }
 }

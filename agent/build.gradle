@@ -1,10 +1,9 @@
 apply plugin: "war"
-apply plugin: "java"
 
 version = "0.0.1"
 
 def appDirName = "src/main/war"
-def jsDir = "$appDirName/public/application/module"
+def jsDir = "$appDirName/WEB-INF/public/application/module"
 
 war {
     webAppDirName = "src/main/war"
@@ -21,11 +20,8 @@ dependencies {
 task jsConcat(type: JsConcat) {
     ordPattern = /module.js$/
     filterPattern = /\.js$/
-    srcDirName = [
-            "$projectDir/$jsDir",
-            "/home/alexander/Desktop/itsm/common/src/main/war/public/application/module"
-    ]
-    targetFileUri = "$projectDir/$appDirName/public/application/build.js"
+    srcDirName = ["$projectDir/$jsDir", "${project(':common').projectDir}/src/main/resources/application/module"]
+    targetFileUri = "$projectDir/$appDirName/WEB-INF/public/application/build.js"
     externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
 }
 
