@@ -1,30 +1,28 @@
 package com.itsmtools.agent.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.itsmtools.common.dictionary.dto.ComplexUa;
 import com.itsmtools.common.dictionary.model.UaGlobal;
+import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import com.itsmtools.common.service.jackson.ObjectMapperBean;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
 public class UaController {
-
-    @Autowired
-    private static Session session;
-
     @Autowired
     ObjectMapperBean mapper;
+    @Autowired
+    BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
 
-    @RequestMapping(value = "/ua/global")
+    @RequestMapping(value = "/ua/global", method = RequestMethod.GET)
     public String get() throws JsonProcessingException {
-        List list = session.createCriteria(UaGlobal.class).list();
-        return mapper.writeValueAsString(list);
+        return mapper.writeValueAsString(uaGlobalService.listComplex());
     }
 
     @RequestMapping(value = "/ua/groups/{id}")

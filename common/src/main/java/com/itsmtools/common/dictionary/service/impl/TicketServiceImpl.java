@@ -27,7 +27,7 @@ public class TicketServiceImpl extends BaseServiceImpl implements TicketService 
         }else{
             request.setProgress((byte)0);
         }
-        request.setAuthor(getPrincipal().getUaGlobal());
+        request.setAuthor(getPrincipal().getUa().getUaGlobal());
         session.save(request);
         session.flush();
     }

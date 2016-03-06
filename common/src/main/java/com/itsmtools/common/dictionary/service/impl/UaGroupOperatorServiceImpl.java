@@ -2,14 +2,12 @@ package com.itsmtools.common.dictionary.service.impl;
 
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
-import com.itsmtools.common.dictionary.model.UaGroupManager;
 import com.itsmtools.common.dictionary.model.UaGroupOperator;
 import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

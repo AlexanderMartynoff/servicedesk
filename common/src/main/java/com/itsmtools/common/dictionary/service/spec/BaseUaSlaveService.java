@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface BaseUaSlaveService<T> {
     Optional<T> get(Integer id);
-    @SuppressWarnings("unchecked")
     Optional<T> getByUaGlobal(UaGlobal uaGlobal);
     void save(T entity);
     void update(T entity);

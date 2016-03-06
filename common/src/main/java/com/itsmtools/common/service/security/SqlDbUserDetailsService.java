@@ -1,10 +1,10 @@
 package com.itsmtools.common.service.security;
 
 
+import com.itsmtools.common.dictionary.dto.ComplexUa;
 import com.itsmtools.common.dictionary.model.*;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,9 +21,7 @@ public class SqlDbUserDetailsService implements UserDetailsService {
     private List<SimpleGrantedAuthority> granted = new ArrayList<>();
 
     @Autowired
-    Session session;
-    @Autowired
-    BaseUaMasterService<UaGlobal> uaGlobalService;
+    BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
     @Autowired
     BaseUaSlaveService<UaContextBackend> uaContextBackendService;
     @Autowired
@@ -41,31 +39,33 @@ public class SqlDbUserDetailsService implements UserDetailsService {
     @SuppressWarnings("unchecked")
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException{
 
-        UaGlobal uaGlobal = uaGlobalService.getByLogin(login)
+        ComplexUa complexUa = uaGlobalService.getComplexByUaGlobalLogin(login)
             .orElseThrow(() -> new UsernameNotFoundException("Username not found exception"));
 
         // for all case
         granted.add(new SimpleGrantedAuthority("Global"));
 
-        Optional<UaContextBackend> uaContextBackend = uaContextBackendService.getByUaGlobal(uaGlobal);
-        Optional<UaContextFrontend> uaContextFrontend = uaContextFrontendService.getByUaGlobal(uaGlobal);
-        Optional<UaGroupAdmin> uaGroupAdmin = uaGroupAdminService.getByUaGlobal(uaGlobal);
-        Optional<UaGroupManager> uaGroupManager = uaGroupManagerService.getByUaGlobal(uaGlobal);
-        Optional<UaGroupOperator> uaGroupOperator = uaGroupOperatorService.getByUaGlobal(uaGlobal);
-        Optional<UaGroupPerformer> uaGroupPerformer = uaGroupPerformerService.getByUaGlobal(uaGlobal);
+        Optional.ofNullable(complexUa.getUaContextBackend())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("ContextBackend")));
 
-        uaContextBackend.ifPresent((value) -> granted.add(new SimpleGrantedAuthority("ContextBackend")));
-        uaContextFrontend.ifPresent((value) -> granted.add(new SimpleGrantedAuthority("ContextFrontend")));
-        uaGroupAdmin.ifPresent((value) -> granted.add(new SimpleGrantedAuthority("GroupAdmin")));
-        uaGroupManager.ifPresent((value) -> granted.add(new SimpleGrantedAuthority("GroupManager")));
-        uaGroupOperator.ifPresent((value) -> granted.add(new SimpleGrantedAuthority("GroupOperator")));
-        uaGroupPerformer.ifPresent((value) -> granted.add(new SimpleGrantedAuthority("GroupPerformer")));
+        Optional.ofNullable(complexUa.getUaContextBackend())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("ContextFrontend")));
 
-        return new Principal(
-            uaGlobal, uaContextBackend,
-            uaContextFrontend, uaGroupAdmin,
-            uaGroupManager, uaGroupOperator,
-            uaGroupPerformer, granted
-        );
+        Optional.ofNullable(complexUa.getUaContextFrontend())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("ContextFrontend")));
+
+        Optional.ofNullable(complexUa.getUaGroupAdmin())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupAdmin")));
+
+        Optional.ofNullable(complexUa.getUaGroupManager())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupManager")));
+
+        Optional.ofNullable(complexUa.getUaGroupOperator())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupOperator")));
+
+        Optional.ofNullable(complexUa.getUaGroupPerformer())
+            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupPerformer")));
+
+        return new Principal(complexUa, granted);
     }
 }

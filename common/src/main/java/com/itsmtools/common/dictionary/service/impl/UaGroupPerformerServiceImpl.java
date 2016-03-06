@@ -2,7 +2,6 @@ package com.itsmtools.common.dictionary.service.impl;
 
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
-import com.itsmtools.common.dictionary.model.UaGroupOperator;
 import com.itsmtools.common.dictionary.model.UaGroupPerformer;
 import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
 import org.hibernate.Session;
@@ -27,7 +26,7 @@ public class UaGroupPerformerServiceImpl implements BaseUaSlaveService<UaGroupPe
     @Override
     @SuppressWarnings("unchecked")
     public Optional<UaGroupPerformer> getByUaGlobal(UaGlobal uaGlobal) {
-        return session.createCriteria(UaGroupOperator.class)
+        return session.createCriteria(UaGroupPerformer.class)
             .add(Restrictions.eq("uaGlobal", uaGlobal))
             .list()
             .stream()

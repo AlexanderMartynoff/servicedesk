@@ -5,7 +5,7 @@
 <div class="x-sidebar navbar-default">
     <div class="user-face">
         <b class="fa fa-user"></b><br/>
-        <span>${principal.uaGlobal.firstName} ${principal.uaGlobal.secondName}</span>
+        <span>${principal.ua.uaGlobal.firstName} ${principal.ua.uaGlobal.secondName}</span>
     </div>
     <ul class="x-menu-sidebar">
         <li>
