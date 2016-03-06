@@ -1,75 +1,17 @@
 angular.module("backend.settings")
-  .controller("UsersController", function ($scope) {
-    $scope.users = [
-      {
-        uaGlobalName: "Ramses",
-        uaContext: [
-          {label: "backend"},
-          {label: "frontend"}
-        ],
-        uaGroup: [
-          {label: "manager"}
+    .controller("UsersController", function ($scope, userForm, uaService) {
+        $scope.users = [{
+            uaGlobal: {
+                login: null,
+                password: null
+            }
+        }];
 
-        ]
-      },
-      {
-        uaGlobalName: "Jesus",
-        uaContext: [
-          {label: "frontend"}
-        ],
-        uaGroup: [
-          {label: "performer"},
-          {label: "customer"}
+        uaService.listComplex().then(function(response){
+            $scope.users = response;
+        });
 
-        ]
-      },
-      {
-        uaGlobalName: "Mariya",
-        uaContext: [
-          {label: "backend"},
-          {label: "frontend"}
-        ],
-        uaGroup: [
-          {label: "performer"},
-          {label: "customer"},
-          {label: "manager"}
-
-        ]
-      },
-      {
-        uaGlobalName: "Anna",
-        uaContext: [
-          {label: "backend"}
-        ],
-        uaGroup: [
-          {label: "customer"},
-          {label: "manager"}
-
-        ]
-      },
-      {
-        uaGlobalName: "Alexander",
-        uaContext: [
-          {label: "backend"},
-          {label: "frontend"}
-        ],
-        uaGroup: [
-          {label: "performer"},
-          {label: "manager"}
-
-        ]
-      },
-      {
-        uaGlobalName: "Wiki",
-        uaContext: [
-          {label: "backend"},
-          {label: "frontend"}
-        ],
-        uaGroup: [
-          {label: "performer"},
-          {label: "customer"}
-
-        ]
-      }
-    ];
-  });
+        $scope.openUser = function(record){
+            userForm.open(record);
+        };
+    });

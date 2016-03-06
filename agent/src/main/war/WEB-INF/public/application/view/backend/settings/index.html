@@ -1,13 +1,11 @@
 <div>
-    <uib-tabset>
+    <uib-tabset active="active">
         <uib-tab ng-repeat="tab in tabs"
-                 id="tab-{{tab.id}}"
                  heading="{{tab.heading}}"
-                 ng-click="saveActiveTab($event)"
-                 active="tab.active">
+                 ng-click="saveActiveTab($index)"
+                 index="$index">
 
             <ng-include src="tab.templateUrl"></ng-include>
-
         </uib-tab>
     </uib-tabset>
 </div>
