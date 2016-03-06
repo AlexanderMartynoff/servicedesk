@@ -1,16 +1,24 @@
 package com.itsmtools.context.backend.controller;
 
 
+import com.itsmtools.service.security.Principal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
-    public String index() {
-        return "index";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView index() {
+        Principal principal = (Principal)SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
+
+        return new ModelAndView("index")
+            .addObject("principal", principal);
     }
 }

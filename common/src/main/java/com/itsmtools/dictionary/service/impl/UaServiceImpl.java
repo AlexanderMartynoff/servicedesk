@@ -4,35 +4,47 @@ package com.itsmtools.dictionary.service.impl;
 import com.itsmtools.dictionary.dto.UaComplex;
 import com.itsmtools.dictionary.model.UaGlobal;
 import com.itsmtools.dictionary.service.spec.UaService;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class UaServiceImpl implements UaService{
 
+    @Autowired
+    Session session;
+
     @Override
-    public UaComplex item(Integer id) {
+    public Optional<UaGlobal> item(Integer id) {
         return null;
     }
 
     @Override
-    public UaGlobal getByUsername(String login) {
-        return new UaGlobal(login, "12345678");
+    @SuppressWarnings("unchecked")
+    public Optional<UaGlobal> getByUsername(String login) {
+        return (Optional<UaGlobal>)session.createCriteria(UaGlobal.class)
+            .add(Restrictions.eq("login", login))
+            .list()
+            .stream()
+            .findFirst();
     }
 
     @Override
-    public void save(UaComplex entity) {
+    public void save(UaGlobal entity) {
 
     }
 
     @Override
-    public void update(UaComplex entity) {
+    public void update(UaGlobal entity) {
 
     }
 
     @Override
-    public List<UaComplex> fetch() {
+    public List<UaGlobal> fetch() {
         return null;
     }
 }

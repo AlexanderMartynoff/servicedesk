@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -15,7 +16,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    @Autowired
+    UserDetailsService userDetailsService;
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
@@ -25,14 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+
+        builder.userDetailsService(userDetailsService);
+
+        // if db is empty - we have this user :)
         builder.inMemoryAuthentication()
-            .withUser("user")
-            .password("user")
-            .roles("USER")
-            .and()
             .withUser("admin")
             .password("admin")
-            .roles("ADMIN");
+            .roles("GLOBAL");
     }
 
     @Override
@@ -46,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf()
             .disable()
             //.exceptionHandling()
-                // for AJAX response 401
+            // for AJAX response 401
             // .authenticationEntryPoint(authenticationEntryPoint)
             //.and()
             .formLogin()

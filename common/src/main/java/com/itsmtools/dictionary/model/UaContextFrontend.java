@@ -13,10 +13,4 @@ public class UaContextFrontend {
     @Column
     @GeneratedValue
     public Integer id;
-
-    @Column
-    public String login;
-
-    @Column
-    public String password;
 }

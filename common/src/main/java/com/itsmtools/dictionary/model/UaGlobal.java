@@ -12,13 +12,22 @@ public class UaGlobal {
     @Id
     @Column
     @GeneratedValue
-    public Integer id;
+    private Integer id;
 
     @Column
-    public String login;
+    private String login;
 
     @Column
-    public String password;
+    private String password;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String secondName;
+
+    @Column
+    private String thirdName;
 
     public UaGlobal(String login, String password){
         this.login = login;
@@ -26,4 +35,52 @@ public class UaGlobal {
     }
 
     public UaGlobal(){}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getThirdName() {
+        return thirdName;
+    }
+
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
+    }
 }

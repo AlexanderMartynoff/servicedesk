@@ -1,9 +1,11 @@
+<%--@elvariable id="principal" type="com.itsmtools.service.security.Principal"--%>
+
 <%@ page language="java" pageEncoding="utf-8" %>
 
 <div class="x-sidebar navbar-default">
     <div class="user-face">
         <b class="fa fa-user"></b><br/>
-        <span>Иван Иванов</span>
+        <span>${principal.firstName} ${principal.secondName}</span>
     </div>
     <ul class="x-menu-sidebar">
         <li>
