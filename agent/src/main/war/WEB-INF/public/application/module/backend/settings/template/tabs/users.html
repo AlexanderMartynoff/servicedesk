@@ -26,14 +26,14 @@
                 <tr ng-repeat="user in users">
                     <td>{{user.uaGlobalName}}</td>
                     <td>
-                                <span ng-repeat="context in user.uaContext">
-                                    <a href="#">{{context.label}}</a>{{$last ? '' : ' |'}}
-                                </span>
+                        <span ng-repeat="context in user.uaContext">
+                            <a href="#">{{context.label}}</a>{{$last ? '' : ' |'}}
+                        </span>
                     </td>
                     <td>
-                                <span ng-repeat="group in user.uaGroup">
-                                    <a href="#">{{group.label}}</a>{{$last ? '' : ' |'}}
-                                </span>
+                        <span ng-repeat="group in user.uaGroup">
+                            <a href="#">{{group.label}}</a>{{$last ? '' : ' |'}}
+                        </span>
                     </td>
                 </tr>
                 </tbody>

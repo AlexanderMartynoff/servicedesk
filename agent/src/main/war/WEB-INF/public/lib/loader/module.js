@@ -1,6 +1,6 @@
 angular.module('shared.loader', ["ng"])
 
-    .constant("moduleRootUrl", "/static/application/module/")
+    .constant("moduleRootUrl", "/public/application/module/")
 
     .directive("load", function (Loader, $compile, $log, $timeout) {
         return {
@@ -17,7 +17,6 @@ angular.module('shared.loader', ["ng"])
                         var loader = new Loader();
 
                         var template = element.html();
-                        console.log($compile());
 
                         loader.load(attrs.module.split(/\s/))
                             .then(function () {

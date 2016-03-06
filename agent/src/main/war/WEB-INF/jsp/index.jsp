@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8" %>
-<%--@elvariable id="principal" type="com.itsmtools.service.security.Principal"--%>
+<%--@elvariable id="principal" type="com.itsmtools.common.service.security.Principal"--%>
 
 <!doctype html>
 <html ng-app="backend.application" ng-controller="RootController" ng-cloak>
