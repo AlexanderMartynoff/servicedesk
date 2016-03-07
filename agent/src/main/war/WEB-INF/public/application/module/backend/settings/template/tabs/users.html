@@ -24,14 +24,14 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in users" ng-click="openUser(user)">
-                    <td>{{user.uaGlobal.login}}</td>
+                    <td>{{user.login}}</td>
                     <td>
-                        <span ng-repeat="context in []">
+                        <span ng-repeat="context in user.contexts">
                             <a href="#">{{context.label}}</a>{{$last ? '' : ' |'}}
                         </span>
                     </td>
                     <td>
-                        <span ng-repeat="group in []">
+                        <span ng-repeat="group in user.groups">
                             <a href="#">{{group.label}}</a>{{$last ? '' : ' |'}}
                         </span>
                     </td>

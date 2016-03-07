@@ -17,19 +17,19 @@ import java.util.stream.Collectors;
 @Service
 public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, ComplexUa> {
     @Autowired
-    Session session;
+    private Session session;
     @Autowired
-    BaseUaSlaveService<UaContextBackend> uaContextBackendService;
+    private BaseUaSlaveService<UaContextBackend> uaContextBackendService;
     @Autowired
-    BaseUaSlaveService<UaContextFrontend> uaContextFrontendService;
+    private BaseUaSlaveService<UaContextFrontend> uaContextFrontendService;
     @Autowired
-    BaseUaSlaveService<UaGroupAdmin> uaGroupAdminService;
+    private BaseUaSlaveService<UaGroupAdmin> uaGroupAdminService;
     @Autowired
-    BaseUaSlaveService<UaGroupManager> uaGroupManagerService;
+    private BaseUaSlaveService<UaGroupManager> uaGroupManagerService;
     @Autowired
-    BaseUaSlaveService<UaGroupOperator> uaGroupOperatorService;
+    private BaseUaSlaveService<UaGroupOperator> uaGroupOperatorService;
     @Autowired
-    BaseUaSlaveService<UaGroupPerformer> uaGroupPerformerService;
+    private BaseUaSlaveService<UaGroupPerformer> uaGroupPerformerService;
 
     @Override
     public Optional<UaGlobal> get(Integer id) {
@@ -49,10 +49,10 @@ public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, Comple
     @Override
     @SuppressWarnings("unchecked")
     public List<ComplexUa> listComplex() {
-        return (List<ComplexUa>)session.createCriteria(UaGlobal.class)
+        return (List<ComplexUa>) session.createCriteria(UaGlobal.class)
             .list()
             .stream()
-            .map((uaGlobal) -> buildByUaGlobal((UaGlobal) uaGlobal))
+            .map((e) -> buildComplexByUaGlobal((UaGlobal) e))
             .collect(Collectors.toList());
     }
 
@@ -64,27 +64,44 @@ public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, Comple
             .list()
             .stream()
             .findFirst()
-            .map((e) -> buildByUaGlobal((UaGlobal)e));
+            .map((e) -> buildComplexByUaGlobal((UaGlobal) e));
     }
 
-    public ComplexUa buildByUaGlobal(UaGlobal global){
+    public ComplexUa buildComplexByUaGlobal(UaGlobal ua) {
         ComplexUa complexUa = new ComplexUa();
-        complexUa.setUaGlobal(global);
-        uaContextBackendService.getByUaGlobal(global).ifPresent(complexUa::setUaContextBackend);
-        uaContextFrontendService.getByUaGlobal(global).ifPresent(complexUa::setUaContextFrontend);
-        uaGroupAdminService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupAdmin);
-        uaGroupManagerService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupManager);
-        uaGroupManagerService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupManager);
-        uaGroupOperatorService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupOperator);
-        uaGroupPerformerService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupPerformer);
+        complexUa.setUaGlobal(ua);
+
+        uaContextBackendService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaContextBackend);
+
+        uaContextFrontendService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaContextFrontend);
+
+        uaGroupAdminService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaGroupAdmin);
+
+        uaGroupManagerService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaGroupManager);
+
+        uaGroupManagerService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaGroupManager);
+
+        uaGroupOperatorService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaGroupOperator);
+
+        uaGroupPerformerService.getByUaGlobal(ua)
+            .ifPresent(complexUa::setUaGroupPerformer);
+
         return complexUa;
     }
 
     @Override
-    public void save(UaGlobal entity) {}
+    public void save(UaGlobal entity) {
+    }
 
     @Override
-    public void update(UaGlobal entity) {}
+    public void update(UaGlobal entity) {
+    }
 
     @Override
     public List<UaGlobal> list() {

@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UaGroupAdminServiceImpl implements BaseUaSlaveService<UaGroupAdmin> {
 
     @Autowired
-    Session session;
+    private Session session;
 
     @Override
     public Optional<UaGroupAdmin> get(Integer id) {

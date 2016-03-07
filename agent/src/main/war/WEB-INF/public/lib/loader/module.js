@@ -120,6 +120,7 @@ angular.module('shared.loader', ["ng"])
                             function (reason) {
                                 me._defer.reject(reason);
                             });
+
                     }, this);
 
                     if (Object.keys(this._loadProcessRegistry).length === 0) {
@@ -182,9 +183,7 @@ angular.module('shared.loader', ["ng"])
                 };
 
 
-                this._getAlreadyRegisterModules = function () {
-
-                };
+                this._getAlreadyRegisterModules = function () {};
 
 
                 this._getModuleInvokeQueue = function (moduleName) {
@@ -217,9 +216,7 @@ angular.module('shared.loader', ["ng"])
                 };
 
 
-                this._initRunBlock = function (moduleName) {
-
-                };
+                this._initRunBlock = function (moduleName) {};
 
 
                 this._getModuleRequires = function (moduleName) {

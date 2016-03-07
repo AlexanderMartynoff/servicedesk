@@ -4,7 +4,6 @@ package com.itsmtools.common.service.security;
 import com.itsmtools.common.dictionary.dto.ComplexUa;
 import com.itsmtools.common.dictionary.model.*;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
-import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,22 +20,9 @@ public class SqlDbUserDetailsService implements UserDetailsService {
     private List<SimpleGrantedAuthority> granted = new ArrayList<>();
 
     @Autowired
-    BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
-    @Autowired
-    BaseUaSlaveService<UaContextBackend> uaContextBackendService;
-    @Autowired
-    BaseUaSlaveService<UaContextFrontend> uaContextFrontendService;
-    @Autowired
-    BaseUaSlaveService<UaGroupAdmin> uaGroupAdminService;
-    @Autowired
-    BaseUaSlaveService<UaGroupManager> uaGroupManagerService;
-    @Autowired
-    BaseUaSlaveService<UaGroupOperator> uaGroupOperatorService;
-    @Autowired
-    BaseUaSlaveService<UaGroupPerformer> uaGroupPerformerService;
+    private BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
 
     @Override
-    @SuppressWarnings("unchecked")
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException{
 
         ComplexUa complexUa = uaGlobalService.getComplexByUaGlobalLogin(login)

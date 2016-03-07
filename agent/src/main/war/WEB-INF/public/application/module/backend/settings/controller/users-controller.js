@@ -1,10 +1,17 @@
 angular.module("backend.settings")
     .controller("UsersController", function ($scope, userForm, uaService) {
+
         $scope.users = [{
             uaGlobal: {
                 login: null,
                 password: null
-            }
+            },
+            uaContextBackend: null,
+            uaContextFrontend: null,
+            uaGroupAdmin: null,
+            uaGroupManager: null,
+            uaGroupOperator: null,
+            uaGroupPerformer: null
         }];
 
         uaService.listComplex().then(function(response){

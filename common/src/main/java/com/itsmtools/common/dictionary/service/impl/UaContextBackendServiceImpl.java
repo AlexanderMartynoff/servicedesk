@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UaContextBackendServiceImpl implements BaseUaSlaveService<UaContextBackend> {
 
     @Autowired
-    Session session;
+    private Session session;
 
     @Override
     public Optional<UaContextBackend> get(Integer id) {
@@ -34,14 +34,10 @@ public class UaContextBackendServiceImpl implements BaseUaSlaveService<UaContext
     }
 
     @Override
-    public void save(UaContextBackend entity) {
-
-    }
+    public void save(UaContextBackend entity) {}
 
     @Override
-    public void update(UaContextBackend entity) {
-
-    }
+    public void update(UaContextBackend entity) {}
 
     @Override
     public List<UaContextBackend> list() {
