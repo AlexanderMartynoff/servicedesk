@@ -1,0 +1,179 @@
+<cover trigger="covered" type="success" label="подождите...">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-10">
+                <h3 class="modal-title">
+                    {{ticket.id ? "Редактирование заявки #" + ticket.id : "Создание новой заявки"}}
+                </h3>
+            </div>
+            <div class="col-xs-2 text-right">
+                <a href="" class="btn btn-default btn-sm" ng-click="close()">
+                    <b class="fa fa-close"></b>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="title" class="control-label">Заголовок</label>
+                        <input type="text" class="form-control" id="title" ng-model="ticket.title">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        <label class="control-label">Дата фиксации</label>
+
+                        <p class="input-group" ng-controller="DateTicketController">
+                            <input class="form-control"
+                                   ng-model="ticket.dateOpen"
+                                   uib-datepicker-popup="dd.MM.yyyy"
+                                   is-open="opened"
+                                   close-text="Закрыть"
+                                   clear-text="Очистить"
+                                   current-text="Сегодня"
+                                   ng-click="open($event)"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                        </p>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label class="control-label">Приоритет</label>
+                        <select class="form-control">
+                            <option>Высокий</option>
+                            <option selected="selected">Средний</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label for="line-support" class="control-label">Линия поддержки</label>
+                        <p class="input-group">
+                            <span class="input-group-btn" ng-if="ticket.supportLevelId > 1">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="doEscalation(-1)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </span>
+                            <input id="line-support" type="text" class="form-control" ng-model="ticket.supportLevelId" readonly/>
+                            <span class="input-group-btn" ng-if="ticket.supportLevelId < 5">
+                                <button type="button"
+                                        class="btn btn-default"
+                                        ng-click="doEscalation(1)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        <label class="control-label">Инициатор</label>
+
+                        <p class="input-group">
+                            <input type="text" class="form-control" disabled>
+                        <span class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-default" disabled>
+                                <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <button type="button" class="btn btn-default">Я</button>
+                        </span>
+                        </p>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label class="control-label">Контрагент</label>
+
+                        <p class="input-group">
+                            <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-default">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                        </span>
+                        </p>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label class="control-label">Исполнитель</label>
+
+                        <p class="input-group">
+                            <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-default">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <button type="button" class="btn btn-default">Я</button>
+                        </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        <label class="control-label">Прогресс (%)</label>
+                        <input type="text" class="form-control" ng-model="ticket.progress"/>
+                    </div>
+                    <div class="col-xs-10">
+                        <label class="control-label">Прикрепления</label>
+                        <p class="input-group">
+                            <span class="form-control">
+                                <a href="#">Документация.doc</a> <b class="fa fa-remove red-text fa-right"></b>,
+                                <a href="#">Скриншот.png</a> <b class="fa fa-remove red-text fa-right"></b>
+                            </span>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="fa fa-paperclip"></i> Прикрепить
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="description" class="control-label">Описание</label>
+                        <textarea class="form-control"
+                                  rows="5"
+                                  ng-model="ticket.description"
+                                  id="description"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-danger"
+                type="button"
+                ng-click="delete(ticket.id)"
+                ng-if="ticket">Удалить</button>
+
+        <button class="btn btn-primary"
+                type="button"
+                ng-if="ticket.id"
+                ng-click="update(ticket)">Сохранить</button>
+
+        <button class="btn btn-primary"
+                type="button"
+                ng-click="new(ticket)"
+                ng-if="!ticket.id">Создать</button>
+        <button class="btn btn-warning" type="button" ng-click="close()">Отмена</button>
+    </div>
+</cover>

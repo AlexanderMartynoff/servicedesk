@@ -1,0 +1,23 @@
+<form class="form-horizontal">
+
+    <fieldset>
+        <div class="form-group">
+
+            <div class="col-xs-6">
+                <label class="control-label">Контрагент</label>
+                <select class="form-control"
+                        ng-init="contractorSel = contractors[0]"
+                        ng-options="contractor.name for contractor in contractors"
+                        ng-model="contractorSel"></select>
+            </div>
+
+            <div class="col-xs-6">
+                <label class="control-label">Должность</label>
+                <select class="form-control"
+                        ng-init="positionSel = positions[0]"
+                        ng-options="position.name for position in positions"
+                        ng-model="positionSel"></select>
+            </div>
+        </div>
+    </fieldset>
+</form>

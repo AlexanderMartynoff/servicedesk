@@ -1,0 +1,63 @@
+<cover trigger="covered">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-10">
+                <h3 class="modal-title">Пользователь</h3>
+            </div>
+            <div class="col-xs-2 text-right">
+                <a href="" class="btn btn-default btn-sm" ng-click="cancel()">
+                    <b class="fa fa-close"></b>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <uib-tabset>
+            <uib-tab heading="Глобальная учетная запись">
+                <ng-include src="tpl.uaGlobal"></ng-include>
+            </uib-tab>
+
+            <uib-tab heading="Учетная запись контекста">
+                <div class="x-margin-top-10">
+                    <uib-tabset type="pills">
+                        <uib-tab heading="Клиент">
+                            <ng-include src="tpl.uaContextCustomer"></ng-include>
+                        </uib-tab>
+                        <uib-tab heading="Агент">
+                            <ng-include src="tpl.uaContextAgent"></ng-include>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </uib-tab>
+
+            <uib-tab heading="Учетная запись группы">
+                <div class="x-margin-top-10">
+                    <uib-tabset type="pills">
+                        <uib-tab heading="Оператор">
+                            <ng-include src="tpl.uaGroupOperator"></ng-include>
+                        </uib-tab>
+                        <uib-tab heading="Менеджер">
+                            <ng-include src="tpl.uaGroupManager"></ng-include>
+                        </uib-tab>
+                        <uib-tab heading="Клиент">
+                            <ng-include src="tpl.uaGroupCustomer"></ng-include>
+                        </uib-tab>
+                        <uib-tab heading="Исполнитель">
+                            <ng-include src="tpl.uaGroupPerformer"></ng-include>
+                        </uib-tab>
+                        <uib-tab heading="Администратор">
+                            <ng-include src="tpl.uaGroupAdmin"></ng-include>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </uib-tab>
+
+        </uib-tabset>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button">Создать</button>
+        <button class="btn btn-warning" type="button" ng-click="close()">Отмена</button>
+    </div>
+</cover>

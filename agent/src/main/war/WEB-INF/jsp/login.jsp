@@ -53,8 +53,21 @@
                     <strong>Ответ сервера</strong>: {{response.statusText}}
                 </div>
 
-                <input name="username" type="text" id="inputEmail" ng-model="username" class="form-control" placeholder="Почта">
-                <input name="password" type="password" id="inputPassword" ng-model="password" class="form-control" placeholder="Пароль">
+                <input name="username"
+                       type="text"
+                       id="inputEmail"
+                       ng-model="username"
+                       class="form-control"
+                       autocomplete="off"
+                       placeholder="Почта">
+
+                <input name="password"
+                       type="password"
+                       id="inputPassword"
+                       ng-model="password"
+                       class="form-control"
+                       autocomplete="off"
+                       placeholder="Пароль">
 
                 <div class="checkbox">
                     <div class="row">
