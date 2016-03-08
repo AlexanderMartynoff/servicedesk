@@ -41,7 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf()
             .disable()
             //.exceptionHandling()
-            // for AJAX response 401
             // .authenticationEntryPoint(authenticationEntryPoint)
             //.and()
             .formLogin()

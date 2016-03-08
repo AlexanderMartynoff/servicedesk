@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class TicketServiceImpl extends BaseServiceImpl implements TicketService {
+public class TicketServiceImpl implements TicketService {
 
     @Autowired
     Session session;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface BaseUaSlaveService<T> {
+public interface BaseUaSlaveService<T> extends BaseService{
     Optional<T> get(Integer id);
     Optional<T> getByUaGlobal(UaGlobal uaGlobal);
     void save(T entity);

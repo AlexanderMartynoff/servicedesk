@@ -1,5 +1,6 @@
 angular.module('backend.settings')
   .controller('GroupListController', function ($scope, userGroupForm, userGroupService) {
+
     $scope.updateGroupList = function () {
       userGroupService.list().then(function(response){
         $scope.userGroupList = response;

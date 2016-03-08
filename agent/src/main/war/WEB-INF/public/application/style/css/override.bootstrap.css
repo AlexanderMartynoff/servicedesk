@@ -87,3 +87,6 @@ h1 {
 .alert-small{
     padding: 8px;
 }
+.alert{
+    margin-bottom: 0;
+}

@@ -8,23 +8,23 @@ def commonJsDir = "${project(':common').projectDir}/src/main/resources/applicati
 
 
 war {
-    webAppDirName = "src/main/war"
+  webAppDirName = "src/main/war"
 }
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    compile project(":common")
+  compile project(":common")
 }
 
 task ngBuild(type: JsConcat) {
-    ordPattern = /module.js$/
-    filterPattern = /\.js$/
-    srcDirName = [jsDir, commonJsDir]
-    targetFileUri = "$appDirName/WEB-INF/public/application/build.js"
-    externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
+  ordPattern = /module.js$/
+  filterPattern = /\.js$/
+  srcDirName = [jsDir, commonJsDir]
+  targetFileUri = "$appDirName/WEB-INF/public/application/build.js"
+  externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
 }
 
 war.dependsOn ngBuild
