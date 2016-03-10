@@ -29,6 +29,14 @@ public class Ticket {
     @Column
     private Byte progress;
 
+
+    @ManyToOne
+    @JoinColumn(
+        name = "contractorId",
+        referencedColumnName = "id"
+    )
+    private Contractor contractor;
+
     @ManyToOne
     @JoinColumn(
         name = "consumerId",
@@ -197,5 +205,13 @@ public class Ticket {
 
     public void setSupportLevel(SupportLevel supportLevel) {
         this.supportLevel = supportLevel;
+    }
+
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
     }
 }

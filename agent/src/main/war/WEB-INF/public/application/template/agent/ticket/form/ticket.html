@@ -80,31 +80,17 @@
                 <div class="form-group">
                     <div class="col-xs-4">
                         <label class="control-label">Инициатор</label>
-
-                        <p class="input-group">
-                            <input type="text" class="form-control" disabled>
-                        <span class="input-group-btn">
-                            <button type="button"
-                                    class="btn btn-default" disabled>
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                            <button type="button" class="btn btn-default">Я</button>
-                        </span>
-                        </p>
+                        <input type="text"
+                               value="{{ticket.author.firstName}} {{ticket.author.secondName}}"
+                               class="form-control"
+                               readonly>
                     </div>
 
                     <div class="col-xs-4">
                         <label class="control-label">Контрагент</label>
-
-                        <p class="input-group">
-                            <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button type="button"
-                                    class="btn btn-default">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                        </span>
-                        </p>
+                        <input type="text" ng-model="ticket.contractor"
+                               uib-typeahead="contractor as contractor.fullName for contractor in contractorStore | filter:$viewValue"
+                               class="form-control">
                     </div>
 
                     <div class="col-xs-4">

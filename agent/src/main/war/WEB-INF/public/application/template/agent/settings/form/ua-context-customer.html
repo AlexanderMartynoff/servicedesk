@@ -12,8 +12,8 @@
             </div>
 
             <div class="col-xs-6">
-                <label class="control-label">Должность</label>
-                <select class="form-control"
+                <label for="position" class="control-label">Должность</label>
+                <select id="position" class="form-control"
                         ng-init="positionSel = positions[0]"
                         ng-options="position.name for position in positions"
                         ng-model="positionSel"></select>
