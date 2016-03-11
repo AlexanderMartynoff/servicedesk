@@ -1,6 +1,6 @@
-package com.itsmtools.agent.init.springframework;
+package com.itsmtools.agent.config.springframework;
 
-import com.itsmtools.agent.config.springframework.BaseConfig;
+
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;

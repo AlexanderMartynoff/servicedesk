@@ -42,6 +42,12 @@ angular.module("common.dictionary.data")
           }.bind(this));
       },
 
+      listRawComplex: function(){
+        return $http.get('/ua/global', {}).then(function(response){
+          return response.data;
+        });
+      },
+
       saveComplex: function(complexUa){
 
       }

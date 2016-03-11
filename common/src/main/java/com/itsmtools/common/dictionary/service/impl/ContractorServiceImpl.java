@@ -22,10 +22,20 @@ public class ContractorServiceImpl implements ContractorService {
     }
 
     @Override
-    public void save(Contractor entity) {}
+    public void save(Contractor entity) {
+        session.save(entity);
+    }
 
     @Override
-    public void update(Contractor entity) {}
+    public void update(Contractor entity) {
+        Optional.ofNullable((Contractor) session.get(Contractor.class, entity.getId()))
+            .ifPresent((value) -> {
+                value.setFullName(entity.getFullName());
+                value.setMetaInfo(entity.getMetaInfo());
+                session.update(value);
+                session.flush();
+            });
+    }
 
     @Override
     public void delete(Integer id) {

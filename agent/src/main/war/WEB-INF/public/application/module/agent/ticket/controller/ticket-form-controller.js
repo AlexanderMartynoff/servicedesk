@@ -1,9 +1,12 @@
 angular.module("backend.ticket")
-  .controller("TicketFormController", function ($scope, $uibModalInstance, ticketService, contractorService, record) {
+  .controller("TicketFormController", function ($scope, $uibModalInstance,
+                                                ticketService, contractorService,
+                                                record, uaPerformerService) {
     $scope.covered = true;
     $scope.ticket = record;
     $scope.ticket.supportLevelId = 1;
     $scope.contractorStore = [];
+    $scope.performerStore = [];
 
     $uibModalInstance.opened.then(function (reason) {
       $scope.covered = false;
@@ -51,5 +54,13 @@ angular.module("backend.ticket")
       });
     };
 
+    $scope.updatePerformerStore = function(){
+      uaPerformerService.listAsUaGlobal().then(function(response){
+        $scope.performerStore = response;
+      });
+    };
+
+
+    $scope.updatePerformerStore();
     $scope.updateContractorStore();
   });

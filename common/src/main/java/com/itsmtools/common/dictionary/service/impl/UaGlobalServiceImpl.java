@@ -71,26 +71,13 @@ public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, Comple
         ComplexUa complexUa = new ComplexUa();
         complexUa.setUaGlobal(ua);
 
-        uaContextBackendService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaContextBackend);
-
-        uaContextFrontendService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaContextFrontend);
-
-        uaGroupAdminService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaGroupAdmin);
-
-        uaGroupManagerService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaGroupManager);
-
-        uaGroupManagerService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaGroupManager);
-
-        uaGroupOperatorService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaGroupOperator);
-
-        uaGroupPerformerService.getByUaGlobal(ua)
-            .ifPresent(complexUa::setUaGroupPerformer);
+        uaContextBackendService.getByUaGlobal(ua).ifPresent(complexUa::setUaContextBackend);
+        uaContextFrontendService.getByUaGlobal(ua).ifPresent(complexUa::setUaContextFrontend);
+        uaGroupAdminService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupAdmin);
+        uaGroupManagerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupManager);
+        uaGroupManagerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupManager);
+        uaGroupOperatorService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupOperator);
+        uaGroupPerformerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupPerformer);
 
         return complexUa;
     }

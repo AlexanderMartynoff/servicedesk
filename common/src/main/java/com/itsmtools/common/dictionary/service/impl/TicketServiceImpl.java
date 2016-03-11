@@ -40,6 +40,7 @@ public class TicketServiceImpl implements TicketService {
         ticket.setDescription(request.getDescription());
         ticket.setDateOpen(request.getDateOpen());
         ticket.setContractor(request.getContractor());
+        ticket.setPerformer(request.getPerformer());
 
         if(request.getProgress() != null){
             ticket.setProgress(request.getProgress() >= 0 && request.getProgress() <= 100 ? request.getProgress() : 100);

@@ -37,6 +37,7 @@ class JsConcat extends DefaultTask {
       }
     }
 
-    (new File(targetFileUri)).text = externalInfo + "\n" + srcFiles.collect { it.text }.join("\n")
+    (new File(targetFileUri)).text = "// @count ${srcFiles.size()}\n" +
+      "$externalInfo\n" + srcFiles.collect { it.text }.join("\n")
   }
 }

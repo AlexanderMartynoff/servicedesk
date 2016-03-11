@@ -2,20 +2,38 @@
 
 <div class="row x-margin-btm-10">
     <div class="col-xs-12">
-        <a href="" class="btn btn-success btn-sm" ng-click="new()">
-            <b class="fa fa-plus-square fa-left"></b>Создать
-        </a>
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="control-label">Роль</label>
+                <select class="form-control">
+                    <option>Менеджер</option>
+                    <option selected="selected">Исполнитель</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text"
+                       class="form-control width-200"
+                       placeholder="Поиск по заголовку">
+            </div>
+            <div class="form-group">
+                <input type="email"
+                       class="form-control width-200"
+                       placeholder="Поиск по исполнителю">
+            </div>
+            <a href="" class="btn btn-success form-control" ng-click="new()">
+                <b class="fa fa-plus-square fa-left"></b>Создать
+            </a>
+        </form>
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12">
-
-        <div ng-if="list.length === 0" class="alert alert-info">
+        <div ng-if="paginator.$$collection.length === 0" class="alert alert-info">
             Записи удовлетворяющие условиям поиска не найдены
         </div>
 
-        <table ng-if="list.length > 0" class="table table-striped table-hover x-table-clickable">
+        <table ng-if="paginator.$$collection.length > 0" class="table table-striped table-hover x-table-clickable">
             <thead>
             <tr>
                 <th>ID</th>
@@ -24,8 +42,7 @@
                 <th>Прогресс</th>
             </tr>
             </thead>
-            <tr ng-repeat="i in list" ng-click="edit(i)">
-
+            <tr ng-repeat="i in paginator.getCurrentPage()" ng-click="edit(i)">
                 <td>{{i.id}}</td>
                 <td>{{i.title.length < 20 ? i.title : i.title.substring(0, 20) + '...'}}</td>
                 <td>{{i.description.length < 20 ? i.description : i.description.substring(0, 20) + '...'}}</td>
@@ -39,16 +56,13 @@
             </tr>
         </table>
 
-        <div ng-if="list.length > 0" class="center">
-            <ul class="pagination pagination-sm">
-                <li><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-            </ul>
+        <div ng-if="paginator.$$collection.length > 0" class="center">
+            <uib-pagination total-items="paginator.$$collection.length"
+                            ng-model="paginator.$$index"
+                            direction-links="false"
+                            items-per-page="paginator.PAGE_SIZE"
+                            class="pagination-sm">
+            </uib-pagination>
         </div>
     </div>
 </div>

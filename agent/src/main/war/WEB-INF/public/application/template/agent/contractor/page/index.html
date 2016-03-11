@@ -1,43 +1,45 @@
 <h1>Управление контрагентами</h1>
 <hr/>
 
-<uib-tabset>
-    <uib-tab heading="Локальный список">
-        <br/>
+<div class="row x-margin-btm-10">
+    <div class="col-xs-12">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text"
+                       class="form-control width-200"
+                       placeholder="Поиск по наименованию">
+            </div>
+            <a href="" class="btn btn-success form-control" ng-click="open()">
+                <b class="fa fa-plus-square fa-left"></b>Создать
+            </a>
+        </form>
+    </div>
+</div>
 
-        <div class="alert alert-warning">
-            <strong>Внимание!</strong> Данные врменно отсутвуют :(
-        </div>
-    </uib-tab>
-    <uib-tab heading="Из базы 1C" active>
-        <br/>
+<div class="row">
+    <div class="col-xs-12">
         <table class="table table-striped table-hover x-table-clickable">
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>Наименование</th>
-                <th>Описание</th>
-            </tr>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Описание</th>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="record in records">
-                <td>{{record.inn}}</td>
-                <td>{{record.name}}</td>
-                <td>{{record.description}}</td>
-            </tr>
+                <tr ng-repeat="record in paginator.getCurrentPage()" ng-click="open(record)">
+                    <td>{{record.fullName}}</td>
+                    <td>{{record.metaInfo}}</td>
+                </tr>
             </tbody>
         </table>
-    </uib-tab>
-</uib-tabset>
+    </div>
+</div>
 
 <div class="center">
-    <ul class="pagination pagination-sm">
-        <li><a href="#">«</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
+    <uib-pagination total-items="paginator.$$collection.length"
+                    ng-model="paginator.$$index"
+                    direction-links="false"
+                    items-per-page="paginator.PAGE_SIZE"
+                    class="pagination-sm">
+    </uib-pagination>
 </div>
