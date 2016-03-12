@@ -1,12 +1,14 @@
 angular.module("backend.settings")
-  .controller("UaContextCustomerFormController", function ($scope) {
-    $scope.contractors = [
-      {name: "ООО \"Берег СВ\""},
-      {name: "Бумага-бланки, ООО"},
-      {name: "Бумоптторг, ООО"},
-      {name: "Бумсервис, ЗАО"},
-      {name: "Гафуров А.Р., ИП"},
-      {name: "ООО \"Рога и копыта\""},
-      {name: "Европапир, ООО"}
-    ];
+  .controller("UaContextCustomerFormController", function ($scope, contractorService) {
+
+    $scope.complexUa.uaContextFrontend = $scope.complexUa.uaContextFrontend || {};
+
+    $scope.updateContractors = function(){
+      contractorService.list().then(function(response){
+        $scope.contractors = response;
+        $scope.complexUa.uaContextFrontend.contractor = $scope.contractors[0];
+      });
+    };
+
+    $scope.updateContractors();
   });

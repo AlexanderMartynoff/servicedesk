@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -84,10 +85,31 @@ public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, Comple
 
     @Override
     public void save(UaGlobal entity) {
+        session.save(entity);
+        session.flush();
+    }
+
+    @Override
+    public void saveByComplexUa(ComplexUa complexUa) {
+        save(complexUa.getUaGlobal());
+    }
+
+    @Override
+    public void updateByComplexUa(ComplexUa complexUa) {
+        update(complexUa.getUaGlobal());
     }
 
     @Override
     public void update(UaGlobal entity) {
+        Optional.ofNullable((UaGlobal) session.get(UaGlobal.class, entity.getId()))
+            .ifPresent((value) -> {
+                value.setFirstName(entity.getFirstName());
+                value.setSecondName(entity.getSecondName());
+                value.setPassword(entity.getPassword());
+
+                session.update(value);
+                session.flush();
+            });
     }
 
     @Override

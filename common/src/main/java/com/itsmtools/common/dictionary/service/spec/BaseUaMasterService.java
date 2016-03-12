@@ -12,6 +12,8 @@ public interface BaseUaMasterService<Master, Complex> {
     Complex buildComplexByUaGlobal(Master master);
     Optional<Complex> getComplexByUaGlobalLogin(String login);
     void save(Master entity);
+    void saveByComplexUa(Complex complex);
+    void updateByComplexUa(Complex complex);
     void update(Master entity);
     List<Master> list();
 }

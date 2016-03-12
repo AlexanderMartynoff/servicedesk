@@ -1,22 +1,22 @@
-<form class="form-horizontal" ng-controller="UaContextCustomerFormController">
+<ng-include src="tpl.offOnToolbar"></ng-include>
 
+
+<form class="form-horizontal" ng-controller="UaContextCustomerFormController">
     <fieldset>
         <div class="form-group">
-
             <div class="col-xs-6">
                 <label class="control-label">Контрагент</label>
                 <select class="form-control"
-                        ng-init="contractorSel = contractors[0]"
-                        ng-options="contractor.name for contractor in contractors"
-                        ng-model="contractorSel"></select>
+                        ng-options="contractor as contractor.fullName for contractor in contractors"
+                        ng-model="complexUa.uaContextFrontend.contractor"></select>
             </div>
-
             <div class="col-xs-6">
-                <label for="position" class="control-label">Должность</label>
-                <select id="position" class="form-control"
-                        ng-init="positionSel = positions[0]"
-                        ng-options="position.name for position in positions"
-                        ng-model="positionSel"></select>
+                <label for="position"
+                       class="control-label">Должность</label>
+                <input type="text"
+                       id="position"
+                       class="form-control"
+                       ng-model="complexUa.uaContextFrontend.position"/>
             </div>
         </div>
     </fieldset>

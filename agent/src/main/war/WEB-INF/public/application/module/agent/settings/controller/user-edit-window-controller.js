@@ -1,14 +1,10 @@
 angular.module("backend.settings")
-  .controller("UserEditWindowController", function ($scope, $uibModalInstance) {
+  .controller("UserEditWindowController", function ($scope, $rootScope, record,
+                                                    $uibModalInstance, UaComplexModel, uaService) {
     var tplRootUrl = '/public/application/template/agent/settings/form/';
 
-    $scope.positions = [
-      {name: "Бухгалтер"},
-      {name: "Менеджер по продажам"},
-      {name: "Технический директор"},
-      {name: "Операто ПК"},
-      {name: "Товаровед"}
-    ];
+    $scope.complexUa = record || new UaComplexModel();
+    $scope.covered = false;
 
     $scope.tpl = {
       uaGlobal: tplRootUrl + 'ua-global.html',
@@ -18,10 +14,28 @@ angular.module("backend.settings")
       uaGroupManager: tplRootUrl + 'ua-group-manager.html',
       uaGroupPerformer: tplRootUrl + 'ua-group-performer.html',
       uaGroupCustomer: tplRootUrl + 'ua-group-customer.html',
-      uaGroupAdmin: tplRootUrl + 'ua-group-admin.html'
+      uaGroupAdmin: tplRootUrl + 'ua-group-admin.html',
+      offOnToolbar: tplRootUrl + '../toolbar/off-on.html'
     };
 
     $scope.cancel = function () {
+      $scope.covered = false;
       $uibModalInstance.close();
+    };
+
+    $scope.save = function(complexUa){
+      $scope.covered = true;
+      uaService.saveComplex(complexUa).then(function(response){
+        $rootScope.$broadcast('onEditComplexUa');
+        $scope.cancel();
+      });
+    };
+
+    $scope.update = function(complexUa){
+      $scope.covered = true;
+      uaService.updateComplex(complexUa).then(function(response){
+        $rootScope.$broadcast('onEditComplexUa');
+        $scope.cancel();
+      });
     };
   });

@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in users" ng-click="openUser(user)">
+                <tr ng-repeat="user in users" ng-click="openUser(user.$$complexUa)">
                     <td>{{user.login}}</td>
                     <td>
                         <span ng-repeat="context in user.contexts">

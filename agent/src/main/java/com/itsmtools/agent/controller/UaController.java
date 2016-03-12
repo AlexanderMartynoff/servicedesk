@@ -6,27 +6,30 @@ import com.itsmtools.common.dictionary.model.UaGlobal;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import com.itsmtools.common.service.jackson.ObjectMapperBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class UaController {
     @Autowired
-    ObjectMapperBean mapper;
+    private ObjectMapperBean mapper;
     @Autowired
-    BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
+    private BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
 
     @RequestMapping(value = "/ua/global", method = RequestMethod.GET)
-    public String get() throws JsonProcessingException {
+    public String getListComplexUa() throws JsonProcessingException {
         return mapper.writeValueAsString(uaGlobalService.listComplex());
     }
 
-    @RequestMapping(value = "/ua/groups/{id}")
-    public String getUserGroupsByUaId(@PathVariable("id") Integer id) throws JsonProcessingException {
-        return mapper.writeValueAsString(new ArrayList<>());
+    @RequestMapping(value = "/ua/complex/create", method = RequestMethod.POST)
+    public String createComplexUa(@RequestBody ComplexUa complexUa) throws JsonProcessingException {
+        uaGlobalService.saveByComplexUa(complexUa);
+        return mapper.writeValueAsString(null);
+    }
+
+    @RequestMapping(value = "/ua/complex/update", method = RequestMethod.PUT)
+    public String updateComplexUa(@RequestBody ComplexUa complexUa) throws JsonProcessingException {
+        uaGlobalService.updateByComplexUa(complexUa);
+        return mapper.writeValueAsString(null);
     }
 }

@@ -1,19 +1,19 @@
+<ng-include src="tpl.offOnToolbar"></ng-include>
+
 <form class="form-horizontal" ng-controller="UaContextAgentFormController">
     <fieldset>
         <div class="form-group">
             <div class="col-xs-6">
                 <label class="control-label">Уровень линии поддержки</label>
                 <select class="form-control"
-                        ng-init="levelSel = levels[0]"
                         ng-options="level.name for level in levels"
-                        ng-model="levelSel"></select>
+                        ng-model="complexUa.uaContextBackend.levelSupport"></select>
             </div>
             <div class="col-xs-6">
                 <label class="control-label">Должность</label>
-                <select class="form-control"
-                        ng-init="positionSel = positions[0]"
-                        ng-options="position.name for position in positions"
-                        ng-model="positionSel"></select>
+                <input type="text"
+                       class="form-control"
+                       ng-model="complexUa.uaContextBackend.position"/>
             </div>
         </div>
     </fieldset>

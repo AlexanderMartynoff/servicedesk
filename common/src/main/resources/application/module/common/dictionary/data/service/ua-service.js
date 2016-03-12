@@ -8,6 +8,7 @@ angular.module("common.dictionary.data")
 
             response.data.forEach(function (complexUa) {
               record = {
+                $$complexUa: complexUa,
                 contexts: [],
                 groups: []
               };
@@ -22,7 +23,8 @@ angular.module("common.dictionary.data")
 
                 switch (uaSpec.type) {
                   case "global":
-                    angular.extend(record, ua);
+                    //angular.extend(record, ua);
+                    record.login = ua.login;
                     break;
                   case "group":
                     record.groups.push(ua);
@@ -49,7 +51,15 @@ angular.module("common.dictionary.data")
       },
 
       saveComplex: function(complexUa){
+        return $http.post('/ua/complex/create', complexUa).then(function(response){
+          return response.data;
+        });
+      },
 
+      updateComplex: function(complexUa){
+        return $http.put('/ua/complex/update', complexUa).then(function(response){
+          return response.data;
+        });
       }
     }
   });
