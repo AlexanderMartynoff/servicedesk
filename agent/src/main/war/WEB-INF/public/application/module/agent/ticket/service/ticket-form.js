@@ -1,11 +1,12 @@
 angular.module("backend.ticket")
   .factory("ticketForm", function ($uibModal) {
     return {
-      open: function (ticket, $scope) {
+      open: function (ticket) {
         $uibModal.open({
-          scope: $scope,
           controller: 'TicketFormController',
-          resolve: {record: ticket},
+          resolve: {
+            record: ticket
+          },
           size: 'lg',
           backdrop: 'static',
           templateUrl: '/public/application/template/agent/ticket/form/ticket.html'

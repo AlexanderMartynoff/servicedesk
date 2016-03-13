@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in users" ng-click="openUser(user.$$complexUa)">
+                <tr ng-repeat="user in paginator.getCurrentPage()" ng-click="openUser(user.$$complexUa)">
                     <td>{{user.login}}</td>
                     <td>
                         <span ng-repeat="context in user.contexts">
@@ -39,16 +39,13 @@
                 </tbody>
             </table>
 
-            <div class="center">
-                <ul class="pagination pagination-sm">
-                    <li><a href="#">«</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
+            <div ng-if="paginator.$$collection.length > 0" class="center">
+                <uib-pagination total-items="paginator.$$collection.length"
+                                ng-model="paginator.$$index"
+                                direction-links="false"
+                                items-per-page="paginator.PAGE_SIZE"
+                                class="pagination-sm">
+                </uib-pagination>
             </div>
 
         </div>

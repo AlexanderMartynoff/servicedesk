@@ -1,5 +1,5 @@
 angular.module("backend.ticket")
-  .controller("TicketFormController", function ($scope, $uibModalInstance,
+  .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 ticketService, contractorService,
                                                 record, uaPerformerService) {
     $scope.covered = true;
@@ -28,7 +28,7 @@ angular.module("backend.ticket")
       $scope.covered = true;
       ticketService.new(record).then(function (response) {
         $scope.close();
-        $scope.$parent.updateTicketList();
+        $rootScope.$broadcast('onTicketEdit');
       });
     };
 
@@ -36,7 +36,7 @@ angular.module("backend.ticket")
       $scope.covered = true;
       ticketService.delete(id).then(function (response) {
         $scope.close();
-        $scope.$parent.updateTicketList();
+        $rootScope.$broadcast('onTicketEdit');
       });
     };
 
@@ -59,7 +59,6 @@ angular.module("backend.ticket")
         $scope.performerStore = response;
       });
     };
-
 
     $scope.updatePerformerStore();
     $scope.updateContractorStore();

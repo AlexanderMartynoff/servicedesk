@@ -20,6 +20,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("com.itsmtools")
 public class BaseConfig extends WebMvcConfigurerAdapter {
 
+    private String[] resourcesDirs = new String[] {
+        "/WEB-INF/public/",
+        "classpath:/META-INF/resources/public/"
+    };
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
@@ -27,7 +32,7 @@ public class BaseConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/public/**").addResourceLocations("/WEB-INF/public/");
+        registry.addResourceHandler("/public/**").addResourceLocations(resourcesDirs);
     }
 
     @Bean

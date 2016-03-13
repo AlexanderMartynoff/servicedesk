@@ -4,8 +4,7 @@ version = "0.0.1"
 
 def appDirName = "$projectDir/src/main/war"
 def jsDir = "$appDirName/WEB-INF/public/application/module"
-def commonJsDir = "${project(':common').projectDir}/src/main/resources/application/module"
-
+def commonJsDir = "${project(':common').projectDir}/src/main/resources/META-INF/resources/public/application/module"
 
 war {
   webAppDirName = "src/main/war"

@@ -4,11 +4,11 @@ angular.module("backend.ticket")
     $scope.paginator = new Paginator();
 
     $scope.edit = function (ticket) {
-      ticketForm.open(ticket, $scope);
+      ticketForm.open(ticket);
     };
 
     $scope.new = function () {
-      ticketForm.open(new TicketModel(), $scope);
+      ticketForm.open(new TicketModel());
     };
 
     $scope.updateTicketList = function () {
@@ -16,6 +16,10 @@ angular.module("backend.ticket")
         $scope.paginator.load(response);
       });
     };
+
+    $scope.$on('onTicketEdit', function(){
+      $scope.updateTicketList();
+    });
 
     $scope.updateTicketList();
   });
