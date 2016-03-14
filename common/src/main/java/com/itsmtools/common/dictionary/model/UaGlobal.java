@@ -29,6 +29,9 @@ public class UaGlobal {
     @Column
     private String thirdName;
 
+    @Column
+    private Boolean enable;
+
     public UaGlobal(String login, String password){
         this.login = login;
         this.password = password;
@@ -82,5 +85,13 @@ public class UaGlobal {
 
     public void setThirdName(String thirdName) {
         this.thirdName = thirdName;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

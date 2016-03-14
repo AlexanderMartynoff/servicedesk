@@ -32,6 +32,7 @@ angular.module("backend.settings")
     };
 
     $scope.update = function(complexUa){
+      console.log(complexUa);
       $scope.covered = true;
       uaService.updateComplex(complexUa).then(function(response){
         $rootScope.$broadcast('onEditComplexUa');

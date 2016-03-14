@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -106,6 +105,7 @@ public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, Comple
                 value.setFirstName(entity.getFirstName());
                 value.setSecondName(entity.getSecondName());
                 value.setPassword(entity.getPassword());
+                value.setEnable(entity.getEnable());
 
                 session.update(value);
                 session.flush();

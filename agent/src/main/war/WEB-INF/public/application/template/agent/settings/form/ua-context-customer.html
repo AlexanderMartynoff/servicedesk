@@ -1,23 +1,26 @@
-<ng-include src="tpl.offOnToolbar"></ng-include>
+<div ng-controller="UaContextCustomerFormController">
+    <ng-include src="tpl.offOnToolbar"></ng-include>
 
-
-<form class="form-horizontal" ng-controller="UaContextCustomerFormController">
-    <fieldset>
-        <div class="form-group">
-            <div class="col-xs-6">
-                <label class="control-label">Контрагент</label>
-                <select class="form-control"
-                        ng-options="contractor as contractor.fullName for contractor in contractors"
-                        ng-model="complexUa.uaContextFrontend.contractor"></select>
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <label class="control-label">Контрагент</label>
+                    <select class="form-control"
+                            ng-disabled="!ua.enable"
+                            ng-options="contractor as contractor.fullName for contractor in contractors"
+                            ng-model="complexUa.uaContextFrontend.contractor"></select>
+                </div>
+                <div class="col-xs-6">
+                    <label for="position"
+                           class="control-label">Должность</label>
+                    <input type="text"
+                           id="position"
+                           ng-disabled="!ua.enable"
+                           class="form-control"
+                           ng-model="complexUa.uaContextFrontend.position"/>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <label for="position"
-                       class="control-label">Должность</label>
-                <input type="text"
-                       id="position"
-                       class="form-control"
-                       ng-model="complexUa.uaContextFrontend.position"/>
-            </div>
-        </div>
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>

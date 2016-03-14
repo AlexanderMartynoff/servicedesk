@@ -1,6 +1,8 @@
-<div class="btn-toolbar x-margin-top-10" role="toolbar" aria-label="Toolbar with button groups">
-    <div class="btn-group" role="group" aria-label="First group">
-        <button type="button" class="btn btn-success">Подключить</button>
-        <button type="button" class="btn btn-success">Приостановить</button>
+<div class="btn-toolbar x-margin-top-10" role="toolbar">
+    <div class="btn-group" role="group">
+        <button ng-class="{'btn-success': !ua.enable, 'btn-default': ua.enable}"
+                type="button"
+                class="btn"
+                ng-click="ua.enable = !ua.enable">{{ua.enable ? 'Отключить' : 'Подключить'}}</button>
     </div>
 </div>

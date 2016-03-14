@@ -1,20 +1,24 @@
-<ng-include src="tpl.offOnToolbar"></ng-include>
+<div ng-controller="UaContextAgentFormController">
+    <ng-include src="tpl.offOnToolbar"></ng-include>
 
-<form class="form-horizontal" ng-controller="UaContextAgentFormController">
-    <fieldset>
-        <div class="form-group">
-            <div class="col-xs-6">
-                <label class="control-label">Уровень линии поддержки</label>
-                <select class="form-control"
-                        ng-options="level.name for level in levels"
-                        ng-model="complexUa.uaContextBackend.levelSupport"></select>
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <label class="control-label">Уровень линии поддержки</label>
+                    <select class="form-control"
+                            ng-disabled="!ua.enable"
+                            ng-options="level.name for level in levels"
+                            ng-model="complexUa.uaContextBackend.levelSupport"></select>
+                </div>
+                <div class="col-xs-6">
+                    <label class="control-label">Должность</label>
+                    <input type="text"
+                           ng-disabled="!ua.enable"
+                           class="form-control"
+                           ng-model="complexUa.uaContextBackend.position"/>
+                </div>
             </div>
-            <div class="col-xs-6">
-                <label class="control-label">Должность</label>
-                <input type="text"
-                       class="form-control"
-                       ng-model="complexUa.uaContextBackend.position"/>
-            </div>
-        </div>
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>
