@@ -27,7 +27,7 @@ public class Ticket {
     private String description;
 
     @Column
-    private Byte progress;
+    private Integer progress;
 
 
     @ManyToOne
@@ -135,11 +135,11 @@ public class Ticket {
         this.description = description;
     }
 
-    public Byte getProgress() {
+    public Integer getProgress() {
         return progress;
     }
 
-    public void setProgress(Byte progress) {
+    public void setProgress(Integer progress) {
         this.progress = progress;
     }
 

@@ -35,7 +35,8 @@ public class UaContextFrontendServiceImpl implements BaseUaSlaveService<UaContex
 
     @Override
     public void save(UaContextFrontend entity) {
-
+        session.save(entity);
+        session.flush();
     }
 
     @Override

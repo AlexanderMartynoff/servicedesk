@@ -6,6 +6,7 @@ import com.itsmtools.common.dictionary.model.*;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, ComplexUa> {
+public class UaComplexServiceImpl implements BaseUaMasterService<UaGlobal, ComplexUa> {
     @Autowired
     private Session session;
     @Autowired
@@ -89,8 +90,52 @@ public class UaGlobalServiceImpl implements BaseUaMasterService<UaGlobal, Comple
     }
 
     @Override
-    public void saveByComplexUa(ComplexUa complexUa) {
-        save(complexUa.getUaGlobal());
+    public void saveByComplexUa(ComplexUa ua) {
+
+        if(ua.getUaGlobal() == null){
+            throw new NullPointerException();
+        }
+
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.save(ua.getUaGlobal());
+
+            Optional.ofNullable(ua.getUaContextBackend()).ifPresent((value) -> {
+                value.setUaGlobal(ua.getUaGlobal());
+                uaContextBackendService.save(value);
+            });
+
+            Optional.ofNullable(ua.getUaContextFrontend()).ifPresent((value) -> {
+                value.setUaGlobal(ua.getUaGlobal());
+                uaContextFrontendService.save(value);
+            });
+
+            Optional.ofNullable(ua.getUaGroupAdmin()).ifPresent((value) -> {
+                value.setUaGlobal(ua.getUaGlobal());
+                uaGroupAdminService.save(value);
+            });
+
+            Optional.ofNullable(ua.getUaGroupManager()).ifPresent((value) -> {
+                value.setUaGlobal(ua.getUaGlobal());
+                uaGroupManagerService.save(value);
+            });
+
+            Optional.ofNullable(ua.getUaGroupOperator()).ifPresent((value) -> {
+                value.setUaGlobal(ua.getUaGlobal());
+                uaGroupOperatorService.save(value);
+            });
+
+            Optional.ofNullable(ua.getUaGroupPerformer()).ifPresent((value) -> {
+                value.setUaGlobal(ua.getUaGlobal());
+                uaGroupPerformerService.save(value);
+            });
+
+            transaction.commit();
+        }catch (RuntimeException e){
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override

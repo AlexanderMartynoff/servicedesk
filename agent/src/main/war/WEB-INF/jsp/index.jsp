@@ -16,7 +16,9 @@
                     </jsp:include>
                 </div>
                 <div class="x-content">
-                    <div ui-view="index"></div>
+                    <cover trigger="indexViewCovered">
+                        <div ui-view="index"></div>
+                    </cover>
                 </div>
             </div>
         </div>

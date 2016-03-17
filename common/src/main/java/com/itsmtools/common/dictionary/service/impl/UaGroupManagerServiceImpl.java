@@ -34,7 +34,10 @@ public class UaGroupManagerServiceImpl implements BaseUaSlaveService<UaGroupMana
     }
 
     @Override
-    public void save(UaGroupManager entity) {}
+    public void save(UaGroupManager entity) {
+        session.save(entity);
+        session.flush();
+    }
 
     @Override
     public void update(UaGroupManager entity) {}

@@ -34,7 +34,10 @@ public class UaGroupPerformerServiceImpl implements BaseUaSlaveService<UaGroupPe
     }
 
     @Override
-    public void save(UaGroupPerformer entity) {}
+    public void save(UaGroupPerformer entity) {
+        session.save(entity);
+        session.flush();
+    }
 
     @Override
     public void update(UaGroupPerformer entity) {}

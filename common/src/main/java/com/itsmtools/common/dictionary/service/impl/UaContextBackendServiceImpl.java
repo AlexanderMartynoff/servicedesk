@@ -34,7 +34,10 @@ public class UaContextBackendServiceImpl implements BaseUaSlaveService<UaContext
     }
 
     @Override
-    public void save(UaContextBackend entity) {}
+    public void save(UaContextBackend entity) {
+        session.save(entity);
+        session.flush();
+    }
 
     @Override
     public void update(UaContextBackend entity) {}

@@ -3,7 +3,6 @@ package com.itsmtools.agent.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.itsmtools.common.dictionary.model.ContextCatalog;
-import com.itsmtools.common.service.jackson.ObjectMapperBean;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +16,8 @@ public class ContextController {
     @Autowired
     private Session session;
 
-    @Autowired
-    private ObjectMapperBean mapper;
-
     @RequestMapping("/context")
-    public String list() throws JsonProcessingException {
-        List list = session.createCriteria(ContextCatalog.class).list();
-        return mapper.writeValueAsString(list);
+    public List<?> list() throws JsonProcessingException {
+        return session.createCriteria(ContextCatalog.class).list();
     }
 }

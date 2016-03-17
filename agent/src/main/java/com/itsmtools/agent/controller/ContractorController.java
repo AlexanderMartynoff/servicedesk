@@ -1,40 +1,38 @@
 package com.itsmtools.agent.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.itsmtools.common.controller.ApplicationController;
+import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Contractor;
 import com.itsmtools.common.dictionary.service.spec.ContractorService;
-import com.itsmtools.common.service.jackson.ObjectMapperBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 
 @RestController
-public class ContractorController {
+public class ContractorController extends ApplicationController {
 
     @Autowired
     private ContractorService contractors;
 
-    @Autowired
-    private ObjectMapperBean mapper;
-
     @RequestMapping("/contractor/list")
-    public String list() throws JsonProcessingException {
-        return mapper.writeValueAsString(contractors.list());
+    public List<?> list() {
+        return contractors.list();
     }
 
     @RequestMapping(value = "/contractor", method = RequestMethod.POST)
-    public String create(@RequestBody Contractor contractor) throws JsonProcessingException {
+    public Response create(@RequestBody Contractor contractor) {
         contractors.save(contractor);
-        return mapper.writeValueAsString(null);
+        return empty();
     }
 
     @RequestMapping(value = "/contractor", method = RequestMethod.PUT)
-    public String update(@RequestBody Contractor contractor) throws JsonProcessingException {
+    public Response update(@RequestBody Contractor contractor) {
         contractors.update(contractor);
-        return mapper.writeValueAsString(null);
+        return empty();
     }
 }

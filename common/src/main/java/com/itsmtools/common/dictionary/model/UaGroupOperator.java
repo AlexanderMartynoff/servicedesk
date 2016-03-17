@@ -9,12 +9,28 @@ public class UaGroupOperator {
     @Id
     @Column
     @GeneratedValue
-    public Integer id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(
         name = "uaGlobalId",
         referencedColumnName = "id"
     )
-    UaGlobal uaGlobal;
+    private UaGlobal uaGlobal;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public UaGlobal getUaGlobal() {
+        return uaGlobal;
+    }
+
+    public void setUaGlobal(UaGlobal uaGlobal) {
+        this.uaGlobal = uaGlobal;
+    }
 }

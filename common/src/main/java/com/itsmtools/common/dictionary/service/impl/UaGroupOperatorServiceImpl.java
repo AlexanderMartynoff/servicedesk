@@ -34,7 +34,10 @@ public class UaGroupOperatorServiceImpl implements BaseUaSlaveService<UaGroupOpe
     }
 
     @Override
-    public void save(UaGroupOperator entity) {}
+    public void save(UaGroupOperator entity) {
+        session.save(entity);
+        session.flush();
+    }
 
     @Override
     public void update(UaGroupOperator entity) {}

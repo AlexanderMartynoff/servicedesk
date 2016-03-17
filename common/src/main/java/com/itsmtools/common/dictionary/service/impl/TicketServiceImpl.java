@@ -6,6 +6,7 @@ import com.itsmtools.common.dictionary.service.spec.TicketService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -22,11 +23,12 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void save(Ticket request) {
-        if(request.getProgress() != null){
-            request.setProgress(request.getProgress() >= 0 && request.getProgress() <= 100 ? request.getProgress() : 100);
-        }else{
-            request.setProgress((byte)0);
+        if (request.getProgress() == null || request.getProgress() < 0) {
+            request.setProgress(0);
+        } else if (request.getProgress() > 100) {
+            request.setProgress(100);
         }
+
         request.setAuthor(getPrincipal().getUa().getUaGlobal());
         session.save(request);
         session.flush();
@@ -42,10 +44,12 @@ public class TicketServiceImpl implements TicketService {
         ticket.setContractor(request.getContractor());
         ticket.setPerformer(request.getPerformer());
 
-        if(request.getProgress() != null){
-            ticket.setProgress(request.getProgress() >= 0 && request.getProgress() <= 100 ? request.getProgress() : 100);
-        }else{
-            ticket.setProgress((byte)0);
+        if (request.getProgress() == null || request.getProgress() < 0) {
+            ticket.setProgress(0);
+        } else if (request.getProgress() > 100) {
+            ticket.setProgress(100);
+        } else {
+            ticket.setProgress(request.getProgress());
         }
 
         session.save(ticket);
@@ -65,6 +69,6 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @SuppressWarnings("unchecked")
     public List<Ticket> list() {
-        return (List<Ticket>)session.createCriteria(Ticket.class).list();
+        return (List<Ticket>) session.createCriteria(Ticket.class).list();
     }
 }

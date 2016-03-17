@@ -12,24 +12,24 @@ def hibernateVer = "4.3.5.Final"
 def mysqlVer = "5.1.6"
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    compile group: "javax.servlet", name: "javax.servlet-api", version: servletApiVer
-    compile group: "javax.servlet.jsp", name: "jsp-api", version: jspApiVer
-    compile group: "javax.servlet", name: "jstl", version: jstlVer
-    compile group: "org.springframework", name: "spring-webmvc", version: springVer
-    compile group: "org.springframework", name: "spring-core", version: springVer
-    compile group: "org.springframework", name: "spring-web", version: springVer
-    compile group: "org.springframework", name: "spring-orm", version: springVer
-    compile group: "org.springframework.security", name: "spring-security-core", version: springSecurityVer
-    compile group: "org.springframework.security", name: "spring-security-web", version: springSecurityVer
-    compile group: "org.springframework.security", name: "spring-security-config", version: springSecurityVer
-    compile group: "org.hibernate", name: "hibernate-core", version: hibernateVer
-    compile group: "com.google.code.gson", name: "gson", version: gsonVer
-    compile group: "mysql", name: "mysql-connector-java", version: mysqlVer
-    compile group: "com.fasterxml.jackson.core", name: "jackson-core", version: jacksonVer
-    compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVer
-    compile group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVer
+  compile group: "javax.servlet", name: "javax.servlet-api", version: servletApiVer
+  compile group: "javax.servlet.jsp", name: "jsp-api", version: jspApiVer
+  compile group: "javax.servlet", name: "jstl", version: jstlVer
+  compile group: "org.springframework", name: "spring-webmvc", version: springVer
+  compile group: "org.springframework", name: "spring-core", version: springVer
+  compile group: "org.springframework", name: "spring-web", version: springVer
+  compile group: "org.springframework", name: "spring-orm", version: springVer
+  compile group: "org.springframework.security", name: "spring-security-core", version: springSecurityVer
+  compile group: "org.springframework.security", name: "spring-security-web", version: springSecurityVer
+  compile group: "org.springframework.security", name: "spring-security-config", version: springSecurityVer
+  compile group: "org.hibernate", name: "hibernate-core", version: hibernateVer
+  compile group: "com.google.code.gson", name: "gson", version: gsonVer
+  compile group: "mysql", name: "mysql-connector-java", version: mysqlVer
+  compile group: "com.fasterxml.jackson.core", name: "jackson-core", version: jacksonVer
+  compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVer
+  compile group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVer
 }
