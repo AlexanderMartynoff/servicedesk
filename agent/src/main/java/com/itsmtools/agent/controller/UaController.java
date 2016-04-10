@@ -3,12 +3,12 @@ package com.itsmtools.agent.controller;
 
 import com.itsmtools.common.controller.ApplicationController;
 import com.itsmtools.common.controller.response.Response;
-import com.itsmtools.common.dictionary.dto.ComplexUa;
+import com.itsmtools.common.dictionary.model.ComplexUa;
 import com.itsmtools.common.dictionary.model.UaGlobal;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import java.util.Collection;
 
 
 @RestController
@@ -17,7 +17,7 @@ public class UaController extends ApplicationController {
     private BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
 
     @RequestMapping(value = "/ua/global", method = RequestMethod.GET)
-    public List<?> getListComplexUa() {
+    public Collection<?> getListComplexUa() {
         return uaGlobalService.listComplex();
     }
 

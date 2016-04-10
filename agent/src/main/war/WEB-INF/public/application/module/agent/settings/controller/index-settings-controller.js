@@ -11,18 +11,8 @@ angular.module("backend.settings")
       },
       {
         id: 2,
-        heading: "Приложения",
+        heading: "ITSM",
         templateUrl: "/public/application/template/agent/settings/tab/contexts.html"
-      },
-      {
-        id: 3,
-        heading: "Группы",
-        templateUrl: "/public/application/template/agent/settings/tab/groups.html"
-      },
-      {
-        id: 4,
-        heading: "Внешний вид",
-        templateUrl: "/public/application/template/agent/settings/tab/ui.html"
       }
     ];
 

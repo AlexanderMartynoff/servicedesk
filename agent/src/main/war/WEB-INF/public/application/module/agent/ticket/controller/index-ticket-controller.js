@@ -1,6 +1,6 @@
 angular.module("backend.ticket")
-  .controller("IndexTicketController", function ($scope, ticketForm, TicketModel,
-                                                 ticketService, $timeout, Paginator) {
+  .controller("IndexTicketController", function ($scope, ticketForm, TicketModel, ticketService, $timeout, Paginator) {
+
     $scope.paginator = new Paginator();
 
     $scope.edit = function (ticket) {
@@ -17,7 +17,7 @@ angular.module("backend.ticket")
       });
     };
 
-    $scope.$on('onTicketEdit', function(){
+    $scope.$on('ticket::change', function(){
       $scope.updateTicketList();
     });
 

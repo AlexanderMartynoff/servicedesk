@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/public/vendor/font-awesome-4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/public/application/style/css/override.bootstrap.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/public/application/style/css/cover.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/public/application/style/css/loader.css"/>
 
 <script src="${pageContext.request.contextPath}/public/vendor/angular.js"></script>
 <script src="${pageContext.request.contextPath}/public/vendor/angular-ui-router.js"></script>

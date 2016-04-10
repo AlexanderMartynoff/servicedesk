@@ -3,14 +3,11 @@ angular.module('common.ui.cover', [])
     return {
       compile: function (element, attrs) {
         var html = sprintf(
-          '<div class="cover" ng-if="%s"></div>' +
-          '<div class="cover-progress" ng-if="%s">' +
-          '<uib-progressbar class="progress-striped active" type="%s"><b>%s</b></uib-progressbar>' +
+          '<div ng-if="%s" class="data-loader-wrap %s">' +
+            '<div data-loader="circle"></div>' +
           '</div>',
-          attrs.trigger || 'covered',
-          attrs.trigger || 'covered',
-          attrs.type || 'info',
-          attrs.label || 'loading ...');
+          attrs.trigger || 'covered', attrs.classes || 'white'
+        );
 
         element.css('position', 'relative')
           .css('display', 'block')

@@ -1,7 +1,6 @@
 package com.itsmtools.common.dictionary.service.impl;
 
 
-import com.itsmtools.common.dictionary.dto.ComplexUa;
 import com.itsmtools.common.dictionary.model.*;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
@@ -90,57 +89,58 @@ public class UaComplexServiceImpl implements BaseUaMasterService<UaGlobal, Compl
     }
 
     @Override
-    public void saveByComplexUa(ComplexUa ua) {
+    public void saveByComplexUa(ComplexUa entity) {
 
-        if(ua.getUaGlobal() == null){
+        if (entity.getUaGlobal() == null) {
             throw new NullPointerException();
         }
 
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.save(ua.getUaGlobal());
+            session.save(entity.getUaGlobal());
 
-            Optional.ofNullable(ua.getUaContextBackend()).ifPresent((value) -> {
-                value.setUaGlobal(ua.getUaGlobal());
-                uaContextBackendService.save(value);
-            });
+            if(entity.getUaContextBackend() != null){
+                entity.getUaContextBackend().setUaGlobal(entity.getUaGlobal());
+                uaContextBackendService.save(entity.getUaContextBackend());
+            }
 
-            Optional.ofNullable(ua.getUaContextFrontend()).ifPresent((value) -> {
-                value.setUaGlobal(ua.getUaGlobal());
-                uaContextFrontendService.save(value);
-            });
+            if(entity.getUaContextFrontend() != null){
+                entity.getUaContextFrontend().setUaGlobal(entity.getUaGlobal());
+                uaContextFrontendService.save(entity.getUaContextFrontend());
+            }
 
-            Optional.ofNullable(ua.getUaGroupAdmin()).ifPresent((value) -> {
-                value.setUaGlobal(ua.getUaGlobal());
-                uaGroupAdminService.save(value);
-            });
+            if(entity.getUaGroupAdmin() != null){
+                entity.getUaGroupAdmin().setUaGlobal(entity.getUaGlobal());
+                uaGroupAdminService.save(entity.getUaGroupAdmin());
+            }
 
-            Optional.ofNullable(ua.getUaGroupManager()).ifPresent((value) -> {
-                value.setUaGlobal(ua.getUaGlobal());
-                uaGroupManagerService.save(value);
-            });
+            if(entity.getUaGroupManager() != null){
+                entity.getUaGroupManager().setUaGlobal(entity.getUaGlobal());
+                uaGroupManagerService.save(entity.getUaGroupManager());
+            }
 
-            Optional.ofNullable(ua.getUaGroupOperator()).ifPresent((value) -> {
-                value.setUaGlobal(ua.getUaGlobal());
-                uaGroupOperatorService.save(value);
-            });
+            if(entity.getUaGroupOperator() != null){
+                entity.getUaGroupOperator().setUaGlobal(entity.getUaGlobal());
+                uaGroupOperatorService.save(entity.getUaGroupOperator());
+            }
 
-            Optional.ofNullable(ua.getUaGroupPerformer()).ifPresent((value) -> {
-                value.setUaGlobal(ua.getUaGlobal());
-                uaGroupPerformerService.save(value);
-            });
+            if(entity.getUaGroupPerformer() != null){
+                entity.getUaGroupPerformer().setUaGlobal(entity.getUaGlobal());
+                uaGroupPerformerService.save(entity.getUaGroupPerformer());
+            }
 
             transaction.commit();
-        }catch (RuntimeException e){
+
+        } catch (RuntimeException e) {
             transaction.rollback();
             throw e;
         }
     }
 
     @Override
-    public void updateByComplexUa(ComplexUa complexUa) {
-        update(complexUa.getUaGlobal());
+    public void updateByComplexUa(ComplexUa entity) {
+        update(entity.getUaGlobal());
     }
 
     @Override
@@ -151,7 +151,6 @@ public class UaComplexServiceImpl implements BaseUaMasterService<UaGlobal, Compl
                 value.setSecondName(entity.getSecondName());
                 value.setPassword(entity.getPassword());
                 value.setEnable(entity.getEnable());
-
                 session.update(value);
                 session.flush();
             });
@@ -161,5 +160,4 @@ public class UaComplexServiceImpl implements BaseUaMasterService<UaGlobal, Compl
     public List<UaGlobal> list() {
         return null;
     }
-
 }

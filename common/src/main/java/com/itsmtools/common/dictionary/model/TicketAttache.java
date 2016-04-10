@@ -1,5 +1,6 @@
 package com.itsmtools.common.dictionary.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +19,8 @@ public class TicketAttache {
     public String title;
 
     @Column
-    public String url;
+    public String mime;
 
     @Column
-    public String ticketId;
+    public String base64;
 }

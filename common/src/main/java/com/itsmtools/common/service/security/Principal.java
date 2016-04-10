@@ -1,7 +1,7 @@
 package com.itsmtools.common.service.security;
 
 
-import com.itsmtools.common.dictionary.dto.ComplexUa;
+import com.itsmtools.common.dictionary.model.ComplexUa;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import java.util.List;

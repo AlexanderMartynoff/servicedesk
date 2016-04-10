@@ -1,5 +1,6 @@
 package com.itsmtools.common.dictionary.model;
 
+
 import javax.persistence.*;
 
 

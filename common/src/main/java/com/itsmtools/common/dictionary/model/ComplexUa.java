@@ -1,7 +1,4 @@
-package com.itsmtools.common.dictionary.dto;
-
-
-import com.itsmtools.common.dictionary.model.*;
+package com.itsmtools.common.dictionary.model;
 
 
 public class ComplexUa {

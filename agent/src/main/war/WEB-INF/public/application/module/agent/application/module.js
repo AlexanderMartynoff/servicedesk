@@ -10,5 +10,6 @@ angular.module('backend.application', [
   'backend.contractor',
   'common.dictionary.data',
   'common.dictionary.util',
-  'common.ui.cover'
+  'common.ui.cover',
+  'common.ui.xinputfile'
 ]);

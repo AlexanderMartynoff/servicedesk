@@ -47,7 +47,7 @@
     </head>
     <body>
         <form class="form-signin" ng-controller="AuthController">
-            <cover trigger="covered" label="аутентификация...">
+            <cover trigger="covered" classes="grey">
 
                 <div ng-if="response.status !== 200" class="alert alert-small alert-danger">
                     <strong>Ответ сервера</strong>: {{response.statusText}}
@@ -58,7 +58,6 @@
                        id="inputEmail"
                        ng-model="username"
                        class="form-control"
-                       autocomplete="off"
                        placeholder="Почта">
 
                 <input name="password"
@@ -66,7 +65,6 @@
                        id="inputPassword"
                        ng-model="password"
                        class="form-control"
-                       autocomplete="off"
                        placeholder="Пароль">
 
                 <div class="checkbox">

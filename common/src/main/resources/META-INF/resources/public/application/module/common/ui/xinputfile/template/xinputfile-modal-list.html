@@ -1,0 +1,23 @@
+<cover trigger="covered">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-8">
+                <h3 class="modal-title">Файлы</h3>
+            </div>
+            <div class="col-xs-4 text-right">
+                <a href="" class="btn btn-default btn-sm" ng-click="cancel()">
+                    <b class="fa fa-close"></b>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <span ng-repeat="file in files">
+             <span class="label label-success">{{file.name}}</span> &nbsp;
+        </span>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+</cover>

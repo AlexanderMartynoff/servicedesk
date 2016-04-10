@@ -87,6 +87,19 @@ h1 {
 .alert-small{
     padding: 8px;
 }
-.alert{
-    margin-bottom: 0;
+
+.relative{
+    position: relative;
+}
+.overflow{
+    overflow: hidden;
+}
+.xinputfile{
+    opacity: 0;
+    display: inline;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

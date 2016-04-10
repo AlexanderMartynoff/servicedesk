@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
+import java.util.Collection;
 
 
 @RestController
@@ -17,7 +17,7 @@ public class ContextController {
     private Session session;
 
     @RequestMapping("/context")
-    public List<?> list() throws JsonProcessingException {
+    public Collection<?> list() throws JsonProcessingException {
         return session.createCriteria(ContextCatalog.class).list();
     }
 }

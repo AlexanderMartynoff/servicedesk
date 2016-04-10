@@ -8,7 +8,7 @@ import com.itsmtools.common.dictionary.model.Ticket;
 import com.itsmtools.common.dictionary.service.spec.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import java.util.Collection;
 
 
 @RestController
@@ -23,7 +23,7 @@ public class TicketController extends ApplicationController {
     }
 
     @RequestMapping(value="/ticket/list", method = RequestMethod.GET)
-    public List<?> list() {
+    public Collection<?> list() {
         return ticketService.list();
     }
 

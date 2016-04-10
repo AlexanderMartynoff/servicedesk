@@ -5,7 +5,7 @@
 
 html, body {
     height: 100%;
-    font-family: Ubuntu, Arial, sans-serif !important;
+    font-family: Helvetica, Arial, sans-serif !important;
 }
 
 a:hover, a:focus {
@@ -185,4 +185,7 @@ textarea {
 }
 .width-200{
     width: 200px !important;
+}
+.customer-container{
+    padding-top: 70px;
 }

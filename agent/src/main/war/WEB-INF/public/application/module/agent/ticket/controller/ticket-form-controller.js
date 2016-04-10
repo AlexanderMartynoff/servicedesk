@@ -28,7 +28,7 @@ angular.module("backend.ticket")
       $scope.covered = true;
       ticketService.new(record).then(function (response) {
         $scope.close();
-        $rootScope.$broadcast('onTicketEdit');
+        $rootScope.$broadcast('ticket::change');
       });
     };
 
@@ -36,7 +36,7 @@ angular.module("backend.ticket")
       $scope.covered = true;
       ticketService.delete(id).then(function (response) {
         $scope.close();
-        $rootScope.$broadcast('onTicketEdit');
+        $rootScope.$broadcast('ticket::change');
       });
     };
 

@@ -1,7 +1,7 @@
 package com.itsmtools.common.service.security;
 
 
-import com.itsmtools.common.dictionary.dto.ComplexUa;
+import com.itsmtools.common.dictionary.model.ComplexUa;
 import com.itsmtools.common.dictionary.model.*;
 import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
