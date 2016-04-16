@@ -2,8 +2,8 @@ package com.itsmtools.common.dictionary.service.impl;
 
 
 import com.itsmtools.common.dictionary.model.*;
-import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
-import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
+import com.itsmtools.common.dictionary.service.spec.UaMasterService;
+import com.itsmtools.common.dictionary.service.spec.UaSlaveService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UaComplexServiceImpl implements BaseUaMasterService<UaGlobal, ComplexUa> {
+public class UaComplexServiceImpl implements UaMasterService<UaGlobal, ComplexUa> {
     @Autowired
     private Session session;
     @Autowired
-    private BaseUaSlaveService<UaContextBackend> uaContextBackendService;
+    private UaSlaveService<UaContextBackend> uaContextBackendService;
     @Autowired
-    private BaseUaSlaveService<UaContextFrontend> uaContextFrontendService;
+    private UaSlaveService<UaContextFrontend> uaContextFrontendService;
     @Autowired
-    private BaseUaSlaveService<UaGroupAdmin> uaGroupAdminService;
+    private UaSlaveService<UaGroupAdmin> uaGroupAdminService;
     @Autowired
-    private BaseUaSlaveService<UaGroupManager> uaGroupManagerService;
+    private UaSlaveService<UaGroupManager> uaGroupManagerService;
     @Autowired
-    private BaseUaSlaveService<UaGroupOperator> uaGroupOperatorService;
+    private UaSlaveService<UaGroupOperator> uaGroupOperatorService;
     @Autowired
-    private BaseUaSlaveService<UaGroupPerformer> uaGroupPerformerService;
+    private UaSlaveService<UaGroupPerformer> uaGroupPerformerService;
 
     @Override
     public Optional<UaGlobal> get(Integer id) {

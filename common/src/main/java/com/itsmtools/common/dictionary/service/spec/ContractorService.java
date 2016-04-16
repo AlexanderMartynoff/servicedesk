@@ -5,7 +5,7 @@ import com.itsmtools.common.dictionary.model.Contractor;
 
 import java.util.List;
 
-public interface ContractorService extends BaseService{
+public interface ContractorService extends Service {
     Contractor item(Integer id);
     void save(Contractor entity);
     void update(Contractor entity);

@@ -6,7 +6,6 @@ import com.itsmtools.common.dictionary.service.spec.TicketService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class TicketServiceImpl implements TicketService {
 
     @Autowired
-    Session session;
+    private Session session;
 
     @Override
     public Ticket item(Integer id) {

@@ -1,9 +1,6 @@
 angular.module("common.dictionary.data")
   .factory("contractorService", function ($http) {
     return {
-      item: function (id) {
-      },
-
       list: function (start, limit) {
         return $http.get("/contractor/list", {}).then(function (response) {
           return response.data;
@@ -20,9 +17,6 @@ angular.module("common.dictionary.data")
         return $http.post("/contractor", record).then(function (response) {
           return response.data;
         });
-      },
-
-      delete: function (id) {
       }
     }
   });

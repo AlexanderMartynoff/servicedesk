@@ -5,7 +5,7 @@ import com.itsmtools.common.dictionary.model.Ticket;
 import java.util.List;
 
 
-public interface TicketService extends BaseService{
+public interface TicketService extends Service {
     Ticket item(Integer id);
     void save(Ticket entity);
     void update(Ticket entity);

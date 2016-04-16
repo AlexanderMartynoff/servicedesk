@@ -3,7 +3,7 @@ package com.itsmtools.common.dictionary.service.impl;
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
 import com.itsmtools.common.dictionary.model.UaGroupPerformer;
-import com.itsmtools.common.dictionary.service.spec.BaseUaSlaveService;
+import com.itsmtools.common.dictionary.service.spec.UaSlaveService;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Service
-public class UaGroupPerformerServiceImpl implements BaseUaSlaveService<UaGroupPerformer> {
+public class UaGroupPerformerServiceImpl implements UaSlaveService<UaGroupPerformer> {
 
     @Autowired
     Session session;

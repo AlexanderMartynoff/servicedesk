@@ -5,7 +5,7 @@ import com.itsmtools.common.controller.ApplicationController;
 import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.ComplexUa;
 import com.itsmtools.common.dictionary.model.UaGlobal;
-import com.itsmtools.common.dictionary.service.spec.BaseUaMasterService;
+import com.itsmtools.common.dictionary.service.spec.UaMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
@@ -14,7 +14,7 @@ import java.util.Collection;
 @RestController
 public class UaController extends ApplicationController {
     @Autowired
-    private BaseUaMasterService<UaGlobal, ComplexUa> uaGlobalService;
+    private UaMasterService<UaGlobal, ComplexUa> uaGlobalService;
 
     @RequestMapping(value = "/ua/global", method = RequestMethod.GET)
     public Collection<?> getListComplexUa() {

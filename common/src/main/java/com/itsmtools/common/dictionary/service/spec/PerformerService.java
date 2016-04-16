@@ -5,7 +5,7 @@ import com.itsmtools.common.dictionary.model.UaGlobal;
 import java.util.List;
 
 
-public interface PerformerService extends BaseService{
+public interface PerformerService extends Service {
     UaGlobal item(Integer id);
     void save(UaGlobal entity);
     void update(UaGlobal entity);

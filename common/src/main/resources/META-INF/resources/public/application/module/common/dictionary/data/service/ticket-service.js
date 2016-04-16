@@ -1,6 +1,6 @@
 angular.module("common.dictionary.data")
   .factory("ticketService", function ($http, converter) {
-    // Ticket business layer
+
     return {
       item: function (id) {
         return $http.get("/ticket/" + id, {}).then(function (response) {
@@ -11,7 +11,7 @@ angular.module("common.dictionary.data")
       list: function (start, limit) {
         return $http.get("/ticket/list", {}).then(function (response) {
           return converter.in(response.data);
-        }.bind(this));
+        });
       },
 
       update: function (record) {

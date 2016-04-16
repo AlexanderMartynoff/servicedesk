@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface BaseUaMasterService<Master, Complex> {
+public interface UaMasterService<Master, Complex> {
     Optional<Master> get(Integer id);
     Optional<Master> getByLogin(String login);
     List<Complex> listComplex();
