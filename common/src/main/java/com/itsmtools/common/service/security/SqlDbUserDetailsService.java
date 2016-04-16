@@ -2,8 +2,7 @@ package com.itsmtools.common.service.security;
 
 
 import com.itsmtools.common.dictionary.model.ComplexUa;
-import com.itsmtools.common.dictionary.model.*;
-import com.itsmtools.common.dictionary.service.spec.UaMasterService;
+import com.itsmtools.common.dictionary.service.spec.UaComplexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +18,14 @@ import java.util.Optional;
 public class SqlDbUserDetailsService implements UserDetailsService {
     private List<SimpleGrantedAuthority> granted = new ArrayList<>();
 
+
     @Autowired
-    private UaMasterService<UaGlobal, ComplexUa> uaGlobalService;
+    private UaComplexService<ComplexUa> uaGlobalService;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException{
 
-        ComplexUa complexUa = uaGlobalService.getComplexByUaGlobalLogin(login)
+        ComplexUa complexUa = uaGlobalService.getByLogin(login)
             .orElseThrow(() -> new UsernameNotFoundException("Username not found exception"));
 
         // for all case

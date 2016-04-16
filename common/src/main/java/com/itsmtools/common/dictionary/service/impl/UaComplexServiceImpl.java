@@ -2,7 +2,7 @@ package com.itsmtools.common.dictionary.service.impl;
 
 
 import com.itsmtools.common.dictionary.model.*;
-import com.itsmtools.common.dictionary.service.spec.UaMasterService;
+import com.itsmtools.common.dictionary.service.spec.UaComplexService;
 import com.itsmtools.common.dictionary.service.spec.UaSlaveService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
 
 
 @Service
-public class UaComplexServiceImpl implements UaMasterService<UaGlobal, ComplexUa> {
+public class UaComplexServiceImpl implements UaComplexService<ComplexUa> {
     @Autowired
     private Session session;
+    @Autowired
+    private UaSlaveService<UaGlobal> uaGlobalService;
     @Autowired
     private UaSlaveService<UaContextBackend> uaContextBackendService;
     @Autowired
@@ -32,42 +34,27 @@ public class UaComplexServiceImpl implements UaMasterService<UaGlobal, ComplexUa
     private UaSlaveService<UaGroupPerformer> uaGroupPerformerService;
 
     @Override
-    public Optional<UaGlobal> get(Integer id) {
-        return null;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public Optional<UaGlobal> getByLogin(String login) {
-        return session.createCriteria(UaGlobal.class)
-            .add(Restrictions.eq("login", login))
-            .list()
-            .stream()
-            .findFirst();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<ComplexUa> listComplex() {
+    public List<ComplexUa> list() {
         return (List<ComplexUa>) session.createCriteria(UaGlobal.class)
             .list()
             .stream()
-            .map((e) -> buildComplexByUaGlobal((UaGlobal) e))
-            .collect(Collectors.toList());
+            .map((e) -> buildByUaGlobal((UaGlobal) e))
+            .collect(toList());
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Optional<ComplexUa> getComplexByUaGlobalLogin(String login) {
+    public Optional<ComplexUa> getByLogin(String login) {
         return session.createCriteria(UaGlobal.class)
             .add(Restrictions.eq("login", login))
             .list()
             .stream()
             .findFirst()
-            .map((e) -> buildComplexByUaGlobal((UaGlobal) e));
+            .map((e) -> buildByUaGlobal((UaGlobal) e));
     }
 
-    public ComplexUa buildComplexByUaGlobal(UaGlobal ua) {
+    protected ComplexUa buildByUaGlobal(UaGlobal ua) {
         ComplexUa complexUa = new ComplexUa();
         complexUa.setUaGlobal(ua);
 
@@ -83,13 +70,7 @@ public class UaComplexServiceImpl implements UaMasterService<UaGlobal, ComplexUa
     }
 
     @Override
-    public void save(UaGlobal entity) {
-        session.save(entity);
-        session.flush();
-    }
-
-    @Override
-    public void saveByComplexUa(ComplexUa entity) {
+    public void save(ComplexUa entity) {
 
         if (entity.getUaGlobal() == null) {
             throw new NullPointerException();
@@ -98,7 +79,7 @@ public class UaComplexServiceImpl implements UaMasterService<UaGlobal, ComplexUa
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.save(entity.getUaGlobal());
+            uaGlobalService.save(entity.getUaGlobal());
 
             if(entity.getUaContextBackend() != null){
                 entity.getUaContextBackend().setUaGlobal(entity.getUaGlobal());
@@ -136,28 +117,5 @@ public class UaComplexServiceImpl implements UaMasterService<UaGlobal, ComplexUa
             transaction.rollback();
             throw e;
         }
-    }
-
-    @Override
-    public void updateByComplexUa(ComplexUa entity) {
-        update(entity.getUaGlobal());
-    }
-
-    @Override
-    public void update(UaGlobal entity) {
-        Optional.ofNullable((UaGlobal) session.get(UaGlobal.class, entity.getId()))
-            .ifPresent((value) -> {
-                value.setFirstName(entity.getFirstName());
-                value.setSecondName(entity.getSecondName());
-                value.setPassword(entity.getPassword());
-                value.setEnable(entity.getEnable());
-                session.update(value);
-                session.flush();
-            });
-    }
-
-    @Override
-    public List<UaGlobal> list() {
-        return null;
     }
 }

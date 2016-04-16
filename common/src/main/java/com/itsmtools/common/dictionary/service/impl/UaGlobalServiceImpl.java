@@ -34,7 +34,15 @@ public class UaGlobalServiceImpl implements UaSlaveService<UaGlobal> {
 
     @Override
     public void update(UaGlobal entity) {
-
+        Optional.ofNullable((UaGlobal) session.get(UaGlobal.class, entity.getId()))
+            .ifPresent((value) -> {
+                value.setFirstName(entity.getFirstName());
+                value.setSecondName(entity.getSecondName());
+                value.setPassword(entity.getPassword());
+                value.setEnable(entity.getEnable());
+                session.update(value);
+                session.flush();
+            });
     }
 
     @Override
