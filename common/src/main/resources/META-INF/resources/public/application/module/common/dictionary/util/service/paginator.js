@@ -14,7 +14,7 @@ angular.module('common.dictionary.util')
 
     return function (){
       // constants
-      this.PAGE_SIZE = 5;
+      this.PAGE_SIZE = 8;
       this.$$collection = [];
       /// First page index is 1
       this.$$index = 1;

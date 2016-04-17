@@ -52,7 +52,6 @@ textarea {
 }
 
 .x-layout {
-    padding-left: 170px;
     min-height: 100%;
 }
 
@@ -63,7 +62,7 @@ textarea {
 .x-topbar {
     position: fixed;
     z-index: 1039;
-    left: 170px;
+    left: 0;
     right: 0;
     height: 40px;
     border-bottom: solid 1px #e9e9e9;

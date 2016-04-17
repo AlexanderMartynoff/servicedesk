@@ -10,7 +10,14 @@
         <div class="x-layout">
             <div class="container-fluid">
                 <jsp:include  page="./partial/toolbar.jsp"/>
-                <div class="x-content" ui-view="index"></div>
+                <div class="x-sidebar navbar-default">
+                    <jsp:include page="./partial/sidebar.jsp">
+                        <jsp:param name="principal" value="${principal}"/>
+                    </jsp:include>
+                </div>
+                <div class="x-content">
+                    <div ui-view="index"></div>
+                </div>
             </div>
         </div>
     </body>
