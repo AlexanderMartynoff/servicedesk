@@ -1,3 +1,5 @@
 include 'common'
 include 'agent'
 include 'customer'
+include 'publisher'
+

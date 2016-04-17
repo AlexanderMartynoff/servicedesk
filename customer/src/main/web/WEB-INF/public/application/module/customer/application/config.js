@@ -16,7 +16,7 @@ angular.module('customer.application')
         url: '/ticket/list',
         views: {
           index: {
-            controller: 'CustomerTicketCtrl',
+            controller: 'TicketController',
             templateUrl: customerTemplateRootUrl + 'ticket/page/index.html'
           }
         }

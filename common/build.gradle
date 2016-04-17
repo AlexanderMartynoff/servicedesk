@@ -26,6 +26,8 @@ dependencies {
   compile group: "org.springframework.security", name: "spring-security-core", version: springSecurityVer
   compile group: "org.springframework.security", name: "spring-security-web", version: springSecurityVer
   compile group: "org.springframework.security", name: "spring-security-config", version: springSecurityVer
+  compile group: "org.springframework", name: "spring-websocket", version: springVer
+
   compile group: "org.hibernate", name: "hibernate-core", version: hibernateVer
   compile group: "com.google.code.gson", name: "gson", version: gsonVer
   compile group: "mysql", name: "mysql-connector-java", version: mysqlVer

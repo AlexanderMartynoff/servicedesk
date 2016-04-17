@@ -9,6 +9,7 @@ import com.itsmtools.common.dictionary.service.spec.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import java.util.Map;
 
 
 @RestController
@@ -22,14 +23,14 @@ public class TicketController extends ApplicationController {
         return ticketService.item(id);
     }
 
-    @RequestMapping(value="/ticket/list", method = RequestMethod.GET)
-    public Collection<?> list() {
-        return ticketService.list();
+    @RequestMapping(value="/ticket", method = RequestMethod.GET)
+    public Collection<?> list(@RequestParam Map<String, String> filter) {
+        return ticketService.list(filter);
     }
 
     @RequestMapping(value="/ticket", method = RequestMethod.POST)
-    public Response create(@RequestBody Ticket data) throws JsonProcessingException {
-        ticketService.save(data);
+    public Response create(@RequestBody Ticket ticket) throws JsonProcessingException {
+        ticketService.save(ticket);
         return empty();
     }
 

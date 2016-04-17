@@ -19,7 +19,7 @@ public class ContractorController extends ApplicationController {
     @Autowired
     private ContractorService contractors;
 
-    @RequestMapping("/contractor/list")
+    @RequestMapping("/contractor")
     public Collection<?> list() {
         return contractors.list();
     }

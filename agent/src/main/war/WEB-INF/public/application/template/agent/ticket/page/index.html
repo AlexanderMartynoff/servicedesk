@@ -34,12 +34,12 @@
 
         <table ng-if="paginator.$$collection.length > 0" class="table table-striped table-hover x-table-clickable">
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>Наименование</th>
-                <th>Описание</th>
-                <th>Прогресс</th>
-            </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Наименование</th>
+                    <th>Описание</th>
+                    <th>Прогресс</th>
+                </tr>
             </thead>
             <tr ng-repeat="i in paginator.getCurrentPage()" ng-click="edit(i)">
                 <td>{{i.id}}</td>

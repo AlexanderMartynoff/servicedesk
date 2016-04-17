@@ -9,7 +9,7 @@ angular.module("common.dictionary.data")
       },
 
       list: function (start, limit) {
-        return $http.get("/ticket/list", {}).then(function (response) {
+        return $http.get("/ticket", {}).then(function (response) {
           return converter.in(response.data);
         });
       },

@@ -2,7 +2,7 @@ angular.module("common.dictionary.data")
   .factory("contractorService", function ($http) {
     return {
       list: function (start, limit) {
-        return $http.get("/contractor/list", {}).then(function (response) {
+        return $http.get("/contractor", {}).then(function (response) {
           return response.data;
         });
       },

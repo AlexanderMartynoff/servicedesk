@@ -2,7 +2,7 @@ angular.module("common.dictionary.data")
   .factory("uaService", function ($http, uaSpecStore) {
     return {
       listComplex: function (start, limit) {
-        return $http.get('/ua/global', {})
+        return $http.get('/ua', {})
           .then(function (response) {
             var record, records = [];
 
@@ -45,19 +45,19 @@ angular.module("common.dictionary.data")
       },
 
       listRawComplex: function(){
-        return $http.get('/ua/global', {}).then(function(response){
+        return $http.get('/ua', {}).then(function(response){
           return response.data;
         });
       },
 
       saveComplex: function(complexUa){
-        return $http.post('/ua/complex/create', complexUa).then(function(response){
+        return $http.post('/ua', complexUa).then(function(response){
           return response.data;
         });
       },
 
       updateComplex: function(complexUa){
-        return $http.put('/ua/complex/update', complexUa).then(function(response){
+        return $http.put('/ua', complexUa).then(function(response){
           return response.data;
         });
       }

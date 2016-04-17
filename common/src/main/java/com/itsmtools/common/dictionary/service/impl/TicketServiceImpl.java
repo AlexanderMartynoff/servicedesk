@@ -4,9 +4,11 @@ package com.itsmtools.common.dictionary.service.impl;
 import com.itsmtools.common.dictionary.model.Ticket;
 import com.itsmtools.common.dictionary.service.spec.TicketService;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -57,7 +59,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void delete(Integer id) {
-        Object instance = session.load(Ticket.class, id);
+        Ticket instance = (Ticket) session.load(Ticket.class, id);
 
         if (instance != null) {
             session.delete(instance);
@@ -67,7 +69,10 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Ticket> list() {
-        return (List<Ticket>) session.createCriteria(Ticket.class).list();
+    public List<Ticket> list(Map filter) {
+
+        return (List<Ticket>) session.createCriteria(Ticket.class)
+            //.add(Restrictions.eq("supportLevel.id", filter.getOrDefault("supportLevelId", 1)))
+            .list();
     }
 }
