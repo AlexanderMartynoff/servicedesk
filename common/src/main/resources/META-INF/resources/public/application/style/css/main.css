@@ -11,9 +11,11 @@ html, body {
 a:hover, a:focus {
     text-decoration: none !important;
 }
+
 input:focus{
     z-index: 99999 !important;
 }
+
 textarea {
     resize: none;
 }
@@ -187,4 +189,17 @@ textarea {
 }
 .customer-container{
     padding-top: 60px;
+}
+
+.x-app-menu{
+    min-width: 400px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+.x-app-menu .panel{
+    margin: 0 !important;
+}
+.x-app-menu .list-group{
+    margin: 0 !important;
 }

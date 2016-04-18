@@ -7,8 +7,6 @@
  * paginator.load(collection);
  */
 
-
-
 angular.module('common.dictionary.util')
   .factory('Paginator', function(){
 
@@ -59,6 +57,7 @@ angular.module('common.dictionary.util')
 
       this.paging = function(collection, pageSize){
         pageSize = parseInt(pageSize);
+
         if(isNaN(pageSize) || pageSize < 1){
           pageSize = 1;
         }
