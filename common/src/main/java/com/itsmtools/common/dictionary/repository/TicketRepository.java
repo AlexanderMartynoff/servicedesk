@@ -1,29 +1,25 @@
-package com.itsmtools.common.dictionary.service.impl;
+package com.itsmtools.common.dictionary.repository;
 
 
 import com.itsmtools.common.dictionary.model.Ticket;
-import com.itsmtools.common.dictionary.service.spec.TicketService;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
 
-@Service
-public class TicketServiceImpl implements TicketService {
+@Repository
+public class TicketRepository extends AbstractRepository<Ticket, Integer> {
 
     @Autowired
     private Session session;
 
-    @Override
-    public Ticket item(Integer id) {
+    public Ticket get(Integer id) {
         return (Ticket) session.get(Ticket.class, id);
     }
 
-    @Override
-    public void save(Ticket request) {
+    public void create(Ticket request) {
         if (request.getProgress() == null || request.getProgress() < 0) {
             request.setProgress(0);
         } else if (request.getProgress() > 100) {
@@ -35,7 +31,6 @@ public class TicketServiceImpl implements TicketService {
         session.flush();
     }
 
-    @Override
     public void update(Ticket request) {
         Ticket ticket = (Ticket) session.get(Ticket.class, request.getId());
 
@@ -57,7 +52,6 @@ public class TicketServiceImpl implements TicketService {
         session.flush();
     }
 
-    @Override
     public void delete(Integer id) {
         Ticket instance = (Ticket) session.load(Ticket.class, id);
 
@@ -67,10 +61,8 @@ public class TicketServiceImpl implements TicketService {
         }
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public List<Ticket> list(Map filter) {
-
         return (List<Ticket>) session.createCriteria(Ticket.class)
             //.add(Restrictions.eq("supportLevel.id", filter.getOrDefault("supportLevelId", 1)))
             .list();

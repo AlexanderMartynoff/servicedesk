@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.itsmtools.common.controller.ApplicationController;
 import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Ticket;
-import com.itsmtools.common.dictionary.service.spec.TicketService;
+import com.itsmtools.common.dictionary.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;

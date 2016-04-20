@@ -2,7 +2,7 @@ package com.itsmtools.common.service.security;
 
 
 import com.itsmtools.common.dictionary.model.ComplexUa;
-import com.itsmtools.common.dictionary.service.spec.UaComplexService;
+import com.itsmtools.common.dictionary.service.UaComplexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,48 +10,38 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
 public class SqlDbUserDetailsService implements UserDetailsService {
     private List<SimpleGrantedAuthority> granted = new ArrayList<>();
-
+    private Map<String, Object> map = new HashMap<>();
 
     @Autowired
-    private UaComplexService<ComplexUa> uaGlobalService;
+    private UaComplexService uaService;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        ComplexUa ua = uaService.getByLogin(login)
+            .orElseThrow(() -> new UsernameNotFoundException("No such user"));
 
-        ComplexUa complexUa = uaGlobalService.getByLogin(login)
-            .orElseThrow(() -> new UsernameNotFoundException("Username not found exception"));
+        map.put("ContextBackend", ua.getUaContextBackend());
+        map.put("ContextFrontend", ua.getUaContextFrontend());
+        map.put("GroupAdmin", ua.getUaGroupAdmin());
+        map.put("GroupOperator", ua.getUaGroupOperator());
+        map.put("GroupPerformer", ua.getUaGroupPerformer());
+
+        map.entrySet().forEach((entry) -> {
+            if(entry.getValue() != null)
+                granted.add(new SimpleGrantedAuthority(entry.getKey()));
+        });
 
         // for all case
         granted.add(new SimpleGrantedAuthority("Global"));
 
-        Optional.ofNullable(complexUa.getUaContextBackend())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("ContextBackend")));
-
-        Optional.ofNullable(complexUa.getUaContextBackend())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("ContextFrontend")));
-
-        Optional.ofNullable(complexUa.getUaContextFrontend())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("ContextFrontend")));
-
-        Optional.ofNullable(complexUa.getUaGroupAdmin())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupAdmin")));
-
-        Optional.ofNullable(complexUa.getUaGroupManager())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupManager")));
-
-        Optional.ofNullable(complexUa.getUaGroupOperator())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupOperator")));
-
-        Optional.ofNullable(complexUa.getUaGroupPerformer())
-            .ifPresent((e) -> granted.add(new SimpleGrantedAuthority("GroupPerformer")));
-
-        return new Principal(complexUa, granted);
+        return new Principal(ua, granted);
     }
 }

@@ -1,9 +1,8 @@
-package com.itsmtools.common.dictionary.service.impl;
+package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
 import com.itsmtools.common.dictionary.model.UaGroupManager;
-import com.itsmtools.common.dictionary.service.spec.UaSlaveService;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +12,15 @@ import java.util.Optional;
 
 
 @Service
-public class UaGroupManagerServiceImpl implements UaSlaveService<UaGroupManager> {
+public class UaGroupManagerService {
 
     @Autowired
     Session session;
 
-    @Override
     public Optional<UaGroupManager> get(Integer id) {
         return null;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public Optional<UaGroupManager> getByUaGlobal(UaGlobal uaGlobal) {
         return session.createCriteria(UaGroupManager.class)
@@ -33,16 +30,13 @@ public class UaGroupManagerServiceImpl implements UaSlaveService<UaGroupManager>
             .findFirst();
     }
 
-    @Override
     public void save(UaGroupManager entity) {
         session.save(entity);
         session.flush();
     }
 
-    @Override
     public void update(UaGroupManager entity) {}
 
-    @Override
     public List<UaGroupManager> list() {
         return null;
     }

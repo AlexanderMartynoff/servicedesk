@@ -1,9 +1,7 @@
-package com.itsmtools.common.dictionary.service.impl;
+package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.*;
-import com.itsmtools.common.dictionary.service.spec.UaComplexService;
-import com.itsmtools.common.dictionary.service.spec.UaSlaveService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -15,25 +13,24 @@ import static java.util.stream.Collectors.toList;
 
 
 @Service
-public class UaComplexServiceImpl implements UaComplexService<ComplexUa> {
+public class UaComplexService {
     @Autowired
     private Session session;
     @Autowired
-    private UaSlaveService<UaGlobal> uaGlobalService;
+    private UaGlobalService globalService;
     @Autowired
-    private UaSlaveService<UaContextBackend> uaContextBackendService;
+    private UaContextBackendService contextBackendService;
     @Autowired
-    private UaSlaveService<UaContextFrontend> uaContextFrontendService;
+    private UaContextFrontendService contextFrontendService;
     @Autowired
-    private UaSlaveService<UaGroupAdmin> uaGroupAdminService;
+    private UaGroupAdminService groupAdminService;
     @Autowired
-    private UaSlaveService<UaGroupManager> uaGroupManagerService;
+    private UaGroupManagerService groupManagerService;
     @Autowired
-    private UaSlaveService<UaGroupOperator> uaGroupOperatorService;
+    private UaGroupOperatorService groupOperatorService;
     @Autowired
-    private UaSlaveService<UaGroupPerformer> uaGroupPerformerService;
+    private UaGroupPerformerService groupPerformerService;
 
-    @Override
     @SuppressWarnings("unchecked")
     public List<ComplexUa> list() {
         return (List<ComplexUa>) session.createCriteria(UaGlobal.class)
@@ -43,7 +40,6 @@ public class UaComplexServiceImpl implements UaComplexService<ComplexUa> {
             .collect(toList());
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public Optional<ComplexUa> getByLogin(String login) {
         return session.createCriteria(UaGlobal.class)
@@ -58,57 +54,56 @@ public class UaComplexServiceImpl implements UaComplexService<ComplexUa> {
         ComplexUa complexUa = new ComplexUa();
         complexUa.setUaGlobal(ua);
 
-        uaContextBackendService.getByUaGlobal(ua).ifPresent(complexUa::setUaContextBackend);
-        uaContextFrontendService.getByUaGlobal(ua).ifPresent(complexUa::setUaContextFrontend);
-        uaGroupAdminService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupAdmin);
-        uaGroupManagerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupManager);
-        uaGroupManagerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupManager);
-        uaGroupOperatorService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupOperator);
-        uaGroupPerformerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupPerformer);
+        contextBackendService.getByUaGlobal(ua).ifPresent(complexUa::setUaContextBackend);
+        contextFrontendService.getByUaGlobal(ua).ifPresent(complexUa::setUaContextFrontend);
+        groupAdminService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupAdmin);
+        groupManagerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupManager);
+        groupManagerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupManager);
+        groupOperatorService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupOperator);
+        groupPerformerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupPerformer);
 
         return complexUa;
     }
 
-    @Override
     public void save(ComplexUa entity) {
 
         if (entity.getUaGlobal() == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Global UA must be set");
         }
 
         Transaction transaction = session.beginTransaction();
 
         try {
-            uaGlobalService.save(entity.getUaGlobal());
+            globalService.save(entity.getUaGlobal());
 
             if(entity.getUaContextBackend() != null){
                 entity.getUaContextBackend().setUaGlobal(entity.getUaGlobal());
-                uaContextBackendService.save(entity.getUaContextBackend());
+                contextBackendService.save(entity.getUaContextBackend());
             }
 
             if(entity.getUaContextFrontend() != null){
                 entity.getUaContextFrontend().setUaGlobal(entity.getUaGlobal());
-                uaContextFrontendService.save(entity.getUaContextFrontend());
+                contextFrontendService.save(entity.getUaContextFrontend());
             }
 
             if(entity.getUaGroupAdmin() != null){
                 entity.getUaGroupAdmin().setUaGlobal(entity.getUaGlobal());
-                uaGroupAdminService.save(entity.getUaGroupAdmin());
+                groupAdminService.save(entity.getUaGroupAdmin());
             }
 
             if(entity.getUaGroupManager() != null){
                 entity.getUaGroupManager().setUaGlobal(entity.getUaGlobal());
-                uaGroupManagerService.save(entity.getUaGroupManager());
+                groupManagerService.save(entity.getUaGroupManager());
             }
 
             if(entity.getUaGroupOperator() != null){
                 entity.getUaGroupOperator().setUaGlobal(entity.getUaGlobal());
-                uaGroupOperatorService.save(entity.getUaGroupOperator());
+                groupOperatorService.save(entity.getUaGroupOperator());
             }
 
             if(entity.getUaGroupPerformer() != null){
                 entity.getUaGroupPerformer().setUaGlobal(entity.getUaGlobal());
-                uaGroupPerformerService.save(entity.getUaGroupPerformer());
+                groupPerformerService.save(entity.getUaGroupPerformer());
             }
 
             transaction.commit();

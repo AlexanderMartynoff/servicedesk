@@ -4,7 +4,7 @@ package com.itsmtools.agent.controller;
 import com.itsmtools.common.controller.ApplicationController;
 import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Contractor;
-import com.itsmtools.common.dictionary.service.spec.ContractorService;
+import com.itsmtools.common.dictionary.service.ContractorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
