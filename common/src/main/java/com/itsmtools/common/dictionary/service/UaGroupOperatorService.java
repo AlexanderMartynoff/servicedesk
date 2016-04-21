@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Service
-public class UaGroupOperatorService {
+public class UaGroupOperatorService implements UserAccountService<UaGroupOperator, UaGlobal> {
 
     @Autowired
     Session session;

@@ -14,16 +14,21 @@
             <div class="form-group">
                 <label class="control-label">Заголовок</label>
                 <input type="text"
+                       ng-model="filter.title"
                        class="form-control width-200"
                        placeholder="Поиск по заголовку">
             </div>
 
             <div class="form-group">
                 <label class="control-label">Исполнитель</label>
-                <input type="email"
+                <input type="text"
+                       ng-model="filter.performer"
                        class="form-control width-200"
                        placeholder="Поиск по исполнителю">
             </div>
+            <a href="" class="btn btn-info form-control" ng-click="updateTicketList()">
+                <b class="fa fa-search fa-left"></b>Применить
+            </a>
             <a href="" class="btn btn-success form-control" ng-click="new()">
                 <b class="fa fa-plus-square fa-left"></b>Создать
             </a>
@@ -43,6 +48,7 @@
                     <th>ID</th>
                     <th>Наименование</th>
                     <th>Описание</th>
+                    <th>Автор</th>
                     <th>Прогресс</th>
                 </tr>
             </thead>
@@ -50,6 +56,7 @@
                 <td>{{i.id}}</td>
                 <td>{{i.title.length < 20 ? i.title : i.title.substring(0, 20) + '...'}}</td>
                 <td>{{i.description.length < 20 ? i.description : i.description.substring(0, 20) + '...'}}</td>
+                <td>{{i.author.firstName}} {{i.author.secondName}}</td>
                 <td>
                     <uib-progressbar animate="true"
                                      value="i.progress"

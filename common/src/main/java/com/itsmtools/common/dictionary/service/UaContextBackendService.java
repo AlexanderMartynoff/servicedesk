@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Service
-public class UaContextBackendService {
+public class UaContextBackendService implements UserAccountService<UaContextBackend, UaGlobal> {
 
     @Autowired
     private Session session;

@@ -10,24 +10,28 @@ import java.util.Optional;
 
 
 @Service
-public class UaGlobalService {
+public class UaGlobalService implements UserAccountService<UaGlobal, UaGlobal> {
 
     @Autowired
     private Session session;
 
+    @Override
     public Optional<UaGlobal> get(Integer id) {
         return null;
     }
 
+    @Override
     public Optional<UaGlobal> getByUaGlobal(UaGlobal uaGlobal) {
-        return null;
+        return Optional.of(uaGlobal);
     }
 
+    @Override
     public void save(UaGlobal entity) {
         session.save(entity);
         session.flush();
     }
 
+    @Override
     public void update(UaGlobal entity) {
         Optional.ofNullable((UaGlobal) session.get(UaGlobal.class, entity.getId()))
             .ifPresent((value) -> {
@@ -40,6 +44,7 @@ public class UaGlobalService {
             });
     }
 
+    @Override
     public List<UaGlobal> list() {
         return null;
     }

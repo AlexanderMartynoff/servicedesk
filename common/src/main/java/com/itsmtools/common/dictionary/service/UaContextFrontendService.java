@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @Service
-public class UaContextFrontendService {
+public class UaContextFrontendService implements UserAccountService<UaContextFrontend, UaGlobal> {
 
     @Autowired
     Session session;

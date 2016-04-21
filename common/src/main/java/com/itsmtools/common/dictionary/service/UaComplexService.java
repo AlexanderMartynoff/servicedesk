@@ -7,7 +7,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 
@@ -50,7 +53,39 @@ public class UaComplexService {
             .map((e) -> buildByUaGlobal((UaGlobal) e));
     }
 
-    protected ComplexUa buildByUaGlobal(UaGlobal ua) {
+    @SuppressWarnings("unchecked")
+    public void save(ComplexUa complexUa) {
+        Map<SlaveUserAccount, UserAccountService<SlaveUserAccount, UaGlobal>> map = new HashMap<>();
+
+        map.put(complexUa.getUaContextBackend(), (UserAccountService) contextBackendService);
+        map.put(complexUa.getUaContextFrontend(), (UserAccountService) contextFrontendService);
+        map.put(complexUa.getUaGroupAdmin(), (UserAccountService) groupAdminService);
+        map.put(complexUa.getUaGroupManager(), (UserAccountService) groupManagerService);
+        map.put(complexUa.getUaGroupOperator(), (UserAccountService) groupOperatorService);
+        map.put(complexUa.getUaGroupPerformer(), (UserAccountService) groupPerformerService);
+
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            globalService.save(complexUa.getUaGlobal());
+            map.entrySet()
+                .stream()
+                .filter((e) -> e.getKey() != null)
+                .forEach((e) -> {
+                    e.getKey().setUaGlobal(complexUa.getUaGlobal());
+                    e.getValue().save(e.getKey());
+                });
+
+            transaction.commit();
+
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
+
+    // builder ComplexUa object
+    private ComplexUa buildByUaGlobal(UaGlobal ua) {
         ComplexUa complexUa = new ComplexUa();
         complexUa.setUaGlobal(ua);
 
@@ -63,54 +98,5 @@ public class UaComplexService {
         groupPerformerService.getByUaGlobal(ua).ifPresent(complexUa::setUaGroupPerformer);
 
         return complexUa;
-    }
-
-    public void save(ComplexUa entity) {
-
-        if (entity.getUaGlobal() == null) {
-            throw new NullPointerException("Global UA must be set");
-        }
-
-        Transaction transaction = session.beginTransaction();
-
-        try {
-            globalService.save(entity.getUaGlobal());
-
-            if(entity.getUaContextBackend() != null){
-                entity.getUaContextBackend().setUaGlobal(entity.getUaGlobal());
-                contextBackendService.save(entity.getUaContextBackend());
-            }
-
-            if(entity.getUaContextFrontend() != null){
-                entity.getUaContextFrontend().setUaGlobal(entity.getUaGlobal());
-                contextFrontendService.save(entity.getUaContextFrontend());
-            }
-
-            if(entity.getUaGroupAdmin() != null){
-                entity.getUaGroupAdmin().setUaGlobal(entity.getUaGlobal());
-                groupAdminService.save(entity.getUaGroupAdmin());
-            }
-
-            if(entity.getUaGroupManager() != null){
-                entity.getUaGroupManager().setUaGlobal(entity.getUaGlobal());
-                groupManagerService.save(entity.getUaGroupManager());
-            }
-
-            if(entity.getUaGroupOperator() != null){
-                entity.getUaGroupOperator().setUaGlobal(entity.getUaGlobal());
-                groupOperatorService.save(entity.getUaGroupOperator());
-            }
-
-            if(entity.getUaGroupPerformer() != null){
-                entity.getUaGroupPerformer().setUaGlobal(entity.getUaGlobal());
-                groupPerformerService.save(entity.getUaGroupPerformer());
-            }
-
-            transaction.commit();
-
-        } catch (RuntimeException e) {
-            transaction.rollback();
-            throw e;
-        }
     }
 }

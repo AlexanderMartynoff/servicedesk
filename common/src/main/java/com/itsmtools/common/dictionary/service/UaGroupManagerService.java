@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @Service
-public class UaGroupManagerService {
+public class UaGroupManagerService implements UserAccountService<UaGroupManager, UaGlobal> {
 
     @Autowired
     Session session;

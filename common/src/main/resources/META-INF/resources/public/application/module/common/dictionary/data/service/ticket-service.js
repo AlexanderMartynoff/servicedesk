@@ -8,8 +8,12 @@ angular.module("common.dictionary.data")
         });
       },
 
-      list: function (start, limit) {
-        return $http.get("/ticket", {}).then(function (response) {
+      list: function (params) {
+        return $http({
+          method: "GET",
+          params: params,
+          url: "/ticket"
+        }).then(function (response) {
           return converter.in(response.data);
         });
       },

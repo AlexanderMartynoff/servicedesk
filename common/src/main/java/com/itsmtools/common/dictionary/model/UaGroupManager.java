@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class UaGroupManager {
+public class UaGroupManager implements SlaveUserAccount{
 
     @Id
     @Column

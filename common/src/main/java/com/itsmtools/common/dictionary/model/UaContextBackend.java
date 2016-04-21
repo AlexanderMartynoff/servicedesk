@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class UaContextBackend {
+public class UaContextBackend implements SlaveUserAccount{
 
     @Id
     @Column

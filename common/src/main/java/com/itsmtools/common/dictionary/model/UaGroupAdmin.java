@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class UaGroupAdmin {
+public class UaGroupAdmin implements SlaveUserAccount{
 
     @Id
     @Column
@@ -27,10 +27,12 @@ public class UaGroupAdmin {
         this.id = id;
     }
 
+    @Override
     public UaGlobal getUaGlobal() {
         return uaGlobal;
     }
 
+    @Override
     public void setUaGlobal(UaGlobal uaGlobal) {
         this.uaGlobal = uaGlobal;
     }
