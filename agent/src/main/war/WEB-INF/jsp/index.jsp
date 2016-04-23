@@ -8,8 +8,8 @@
     </head>
     <body>
         <div class="x-layout">
+            <jsp:include  page="./partial/toolbar.jsp"/>
             <div class="container-fluid">
-                <jsp:include  page="./partial/toolbar.jsp"/>
                 <div class="x-content" ui-view="index"></div>
             </div>
         </div>

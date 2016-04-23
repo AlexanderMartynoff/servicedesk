@@ -55,20 +55,15 @@ public class UaComplexService {
 
     @SuppressWarnings("unchecked")
     public void save(ComplexUa complexUa) {
-        Map<SlaveUserAccount, UserAccountService<SlaveUserAccount, UaGlobal>> map = new HashMap<>();
-
-        map.put(complexUa.getUaContextBackend(), (UserAccountService) contextBackendService);
-        map.put(complexUa.getUaContextFrontend(), (UserAccountService) contextFrontendService);
-        map.put(complexUa.getUaGroupAdmin(), (UserAccountService) groupAdminService);
-        map.put(complexUa.getUaGroupManager(), (UserAccountService) groupManagerService);
-        map.put(complexUa.getUaGroupOperator(), (UserAccountService) groupOperatorService);
-        map.put(complexUa.getUaGroupPerformer(), (UserAccountService) groupPerformerService);
+        Map<SlaveUserAccount, UserAccountService> uaServiceMap = buildUaServiceMap(complexUa);
 
         Transaction transaction = session.beginTransaction();
 
         try {
+            // global UA is another
             globalService.save(complexUa.getUaGlobal());
-            map.entrySet()
+
+            uaServiceMap.entrySet()
                 .stream()
                 .filter((e) -> e.getKey() != null)
                 .forEach((e) -> {
@@ -82,6 +77,19 @@ public class UaComplexService {
             transaction.rollback();
             throw e;
         }
+    }
+
+    private Map<SlaveUserAccount, UserAccountService> buildUaServiceMap(ComplexUa complexUa){
+        Map<SlaveUserAccount, UserAccountService> uaServiceMap = new HashMap<>();
+
+        uaServiceMap.put(complexUa.getUaContextBackend(), contextBackendService);
+        uaServiceMap.put(complexUa.getUaContextFrontend(), contextFrontendService);
+        uaServiceMap.put(complexUa.getUaGroupAdmin(), groupAdminService);
+        uaServiceMap.put(complexUa.getUaGroupManager(), groupManagerService);
+        uaServiceMap.put(complexUa.getUaGroupOperator(), groupOperatorService);
+        uaServiceMap.put(complexUa.getUaGroupPerformer(), groupPerformerService);
+
+        return uaServiceMap;
     }
 
     // builder ComplexUa object

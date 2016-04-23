@@ -38,11 +38,11 @@
                                    clear-text="Очистить"
                                    current-text="Сегодня"
                                    ng-click="open($event)"/>
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)">
-                                <i class="fa fa-calendar"></i>
-                            </button>
-                        </span>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
                         </p>
                     </div>
 
@@ -152,6 +152,7 @@
                 type="button"
                 ng-click="new(ticket)"
                 ng-if="!ticket.id">Создать</button>
+
         <button class="btn btn-warning" type="button" ng-click="close()">Отмена</button>
     </div>
 </cover>

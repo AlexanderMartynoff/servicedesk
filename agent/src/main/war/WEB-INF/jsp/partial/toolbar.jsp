@@ -1,9 +1,11 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
-<div class="x-topbar navbar-default">
-    <div class="row">
-        <div class="col-xs-9">
-            <ul class="x-topbar-menu" ng-controller="ApplicationMenu">
+
+<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="ApplicationMenu">
+    <div class="navbar-collapse collapse">
+
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
                 <li uib-dropdown>
                     <a href="#" uib-dropdown-toggle>
                         <b class="fa fa-bars"></b>
@@ -60,7 +62,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#/settings"
                        tooltip-placement="bottom"
@@ -70,15 +71,15 @@
                     </a>
                 </li>
             </ul>
-        </div>
-        <div class="col-xs-3">
-            <ul class="x-topbar-menu text-right">
-                <li style="margin-right: 10px" tooltip-placement="left" uib-tooltip="Выйти из приложения">
+            <ul class="nav navbar-nav navbar-right">
+                <li tooltip-placement="left" uib-tooltip="Выйти из приложения">
                     <a href="/logout">
                         <b class="fa fa-sign-out"></b>
                     </a>
                 </li>
             </ul>
+
         </div>
+
     </div>
 </div>

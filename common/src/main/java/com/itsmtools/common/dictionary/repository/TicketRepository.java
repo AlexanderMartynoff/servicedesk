@@ -2,9 +2,14 @@ package com.itsmtools.common.dictionary.repository;
 
 
 import com.itsmtools.common.dictionary.model.Ticket;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
@@ -62,9 +67,24 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ticket> list(Map filter) {
-        return (List<Ticket>) session.createCriteria(Ticket.class)
-            //.add(Restrictions.eq("supportLevel.id", filter.getOrDefault("supportLevelId", 1)))
-            .list();
+    public List<Ticket> list(Map<String, ?> filter) {
+        Criteria criteria = session.createCriteria(Ticket.class);
+
+        if (filter.containsKey("title")) {
+            criteria.add(Restrictions.like("title", filter.get("title").toString(), MatchMode.ANYWHERE));
+        }
+
+        if (filter.containsKey("performer")) {
+            criteria.createAlias("performer", "performer")
+                .add(Restrictions.or(
+                    Restrictions.like("performer.firstName", filter.get("performer").toString(), MatchMode.ANYWHERE),
+                    Restrictions.like("performer.secondName", filter.get("performer").toString(), MatchMode.ANYWHERE),
+                    Restrictions.like("performer.thirdName", filter.get("performer").toString(), MatchMode.ANYWHERE)
+                ));
+        }
+
+        criteria.addOrder(Order.desc("id"));
+
+        return criteria.list();
     }
 }

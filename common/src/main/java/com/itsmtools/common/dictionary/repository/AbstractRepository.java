@@ -19,5 +19,5 @@ abstract public class AbstractRepository<E, I>{
     abstract public void create(E entity);
     abstract public void update(E entity);
     abstract public void delete(I id);
-    abstract public List<E> list(Map filter);
+    abstract public List<E> list(Map<String, ?> filter);
 }

@@ -31,7 +31,7 @@ public class TicketService{
         repository.delete(id);
     }
 
-    public List<Ticket> list(Map filter) {
+    public List<Ticket> list(Map<String, ?> filter) {
         return repository.list(filter);
     }
 }
