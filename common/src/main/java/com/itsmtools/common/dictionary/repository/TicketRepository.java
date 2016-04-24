@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -73,33 +72,42 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ticket> list(Map<String, String> filter) {
+    public List<Ticket> list(Map<String, String> params) {
         Criteria criteria = session.createCriteria(Ticket.class);
 
-        if (filter.containsKey("title")) {
-            criteria.add(Restrictions.like("title", filter.get("title"), MatchMode.ANYWHERE));
+        if (params.containsKey("title")) {
+            criteria.add(Restrictions.like("title", params.get("title"), MatchMode.ANYWHERE));
         }
 
-        if (filter.containsKey("performer")) {
+        if (params.containsKey("performer")) {
             criteria.createAlias("performer", "performer")
                 .add(Restrictions.or(
-                    Restrictions.like("performer.firstName", filter.get("performer"), MatchMode.ANYWHERE),
-                    Restrictions.like("performer.secondName", filter.get("performer"), MatchMode.ANYWHERE),
-                    Restrictions.like("performer.thirdName", filter.get("performer"), MatchMode.ANYWHERE)
+                    Restrictions.like("performer.firstName", params.get("performer"), MatchMode.ANYWHERE),
+                    Restrictions.like("performer.secondName", params.get("performer"), MatchMode.ANYWHERE),
+                    Restrictions.like("performer.thirdName", params.get("performer"), MatchMode.ANYWHERE)
                 ));
         }
 
         try {
-            if (filter.containsKey("dateOpenFrom") && filter.containsKey("dateOpenUntil")) {
-                Date from = format.parse(filter.get("dateOpenFrom"));
-                Date until = format.parse(filter.get("dateOpenUntil"));
-                criteria.add(Restrictions.between("dateOpen", from.getTime(), until.getTime()));
-            }else if(filter.containsKey("dateOpenFrom")){
-                Date from = format.parse(filter.get("dateOpenFrom"));
-                criteria.add(Restrictions.ge("dateOpen", from.getTime()));
-            }else if(filter.containsKey("dateOpenUntil")){
-                Date until = format.parse(filter.get("dateOpenUntil"));
-                criteria.add(Restrictions.le("dateOpen", until.getTime()));
+            if (params.containsKey("dateOpenFrom") && params.containsKey("dateOpenUntil")) {
+                // if both
+                criteria.add(Restrictions.between(
+                    "dateOpen",
+                    format.parse(params.get("dateOpenFrom")).getTime(),
+                    format.parse(params.get("dateOpenUntil")).getTime()
+                ));
+            } else if (params.containsKey("dateOpenFrom")) {
+                // if just from
+                criteria.add(Restrictions.ge(
+                    "dateOpen",
+                    format.parse(params.get("dateOpenFrom")).getTime()
+                ));
+            } else if (params.containsKey("dateOpenUntil")) {
+                // if just until
+                criteria.add(Restrictions.le(
+                    "dateOpen",
+                    format.parse(params.get("dateOpenUntil")).getTime()
+                ));
             }
         } catch (ParseException e) {
             e.printStackTrace();
