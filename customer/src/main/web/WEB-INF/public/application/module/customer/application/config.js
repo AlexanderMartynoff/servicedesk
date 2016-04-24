@@ -8,7 +8,8 @@ angular.module('customer.application')
         url: '',
         views: {
           index: {
-            templateUrl: customerTemplateRootUrl + 'application/page/index.html'
+            controller: 'TicketController',
+            templateUrl: customerTemplateRootUrl + 'ticket/page/index.html'
           }
         }
       })

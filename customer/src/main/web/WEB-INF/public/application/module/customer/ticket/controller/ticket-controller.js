@@ -5,7 +5,7 @@ angular.module('customer.ticket')
 
       $scope.updateTickets = function () {
         ticketService.list().then(function (data) {
-          $scope.paginator.load(data, 12);
+          $scope.paginator.load(data);
         });
       };
 

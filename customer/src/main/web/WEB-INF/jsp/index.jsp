@@ -8,25 +8,21 @@
     <body>
         <div>
             <nav class="navbar navbar-default navbar-fixed-top" ng-controller="CustomerNavMenu">
-                <div class="container">
+                <div class="container-fluid">
                     <div id="navbar" class="navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li ng-class="{active: activeItem == 'ticket'}"
-                                ng-click="activeItem = 'ticket'">
-                                <a href="#/ticket/list">Заявки</a>
-                            </li>
                             <li ng-class="{active: activeItem == 'profile'}"
                                 ng-click="activeItem = 'profile'">
-                                <a href="#/profile">Профиль</a>
+                                <a href="#/profile"><i class="fa fa-left fa-info"></i></a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#/logout">Выход</a></li>
+                            <li><a href="/logout">Выход</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
-            <div class="container customer-container">
+            <div class="container-fluid customer-container">
                 <div ui-view="index"></div>
             </div>
         </div>

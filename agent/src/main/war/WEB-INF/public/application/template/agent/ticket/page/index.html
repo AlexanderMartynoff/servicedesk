@@ -7,17 +7,18 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label class="control-label">Дата начала</label>
-                    <div class="input-group" ng-controller="DateTicketController">
+                    <div class="input-group">
                         <input class="form-control"
                                ng-model="filter.dateOpenFrom"
                                uib-datepicker-popup="dd.MM.yyyy"
-                               is-open="opened"
+                               is-open="dateOpenFromOpened"
                                close-text="Закрыть"
                                clear-text="Очистить"
                                current-text="Сегодня"
-                               ng-click="open($event)"/>
+                               readonly="readonly"/>
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="dateOpenFromOpened = !dateOpenFromOpened">
                                 <i class="fa fa-calendar"></i>
                             </button>
                         </span>
@@ -25,17 +26,19 @@
                 </div>
                 <div class="col-sm-6">
                     <label class="control-label">Дата конца</label>
-                    <div class="input-group" ng-controller="DateTicketController">
+                    <div class="input-group">
                         <input class="form-control"
                                ng-model="filter.dateOpenUntil"
                                uib-datepicker-popup="dd.MM.yyyy"
-                               is-open="opened"
+                               is-open="dateOpenUntilOpened"
                                close-text="Закрыть"
                                clear-text="Очистить"
                                current-text="Сегодня"
-                               ng-click="open($event)"/>
+                               readonly="readonly"/>
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    ng-click="dateOpenUntilOpened = !dateOpenUntilOpened">
                                 <i class="fa fa-calendar"></i>
                             </button>
                         </span>
@@ -70,17 +73,18 @@
                 </div>
             </div>
 
-
             <div class="form-group">
                 <div class="col-sm-6">
-                    <a href="" class="vertical-align-btm btn btn-info form-control" ng-click="updateTicketList()">
-                        <b class="fa fa-search fa-left"></b>Обновить
-                    </a>
+                    <button class="btn btn-xs btn-info form-control"
+                       ng-click="updateTicketList()">
+                        <b class="fa fa-refresh fa-left"></b>Обновить
+                    </button>
                 </div>
                 <div class="col-sm-6">
-                    <a href="" class="vertical-align-btm btn btn-success form-control" ng-click="new()">
+                    <button class="btn btn-xs btn-success form-control"
+                       ng-click="new()">
                         <b class="fa fa-plus-square fa-left"></b>Создать
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -90,44 +94,46 @@
     <div class="col-sm-9">
         <div class="row">
             <div class="col-xs-12">
-                <div ng-if="paginator.$$collection.length === 0" class="alert alert-info">
-                    Записи удовлетворяющие условиям поиска не найдены
-                </div>
+                <cover trigger="covered">
+                    <div ng-if="paginator.$$collection.length === 0" class="alert alert-info">
+                        Записи удовлетворяющие условиям поиска не найдены
+                    </div>
 
-                <table ng-if="paginator.$$collection.length > 0" class="table table-striped table-hover x-table-clickable">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Дата</th>
-                        <th>Наименование</th>
-                        <th>Описание</th>
-                        <th>Автор</th>
-                        <th>Прогресс</th>
-                    </tr>
-                    </thead>
-                    <tr ng-repeat="i in paginator.getCurrentPage()" ng-click="edit(i)">
-                        <td>{{i.id}}</td>
-                        <td>{{i.dateOpen}}</td>
-                        <td>{{i.title.length < 20 ? i.title : i.title.substring(0, 20) + '...'}}</td>
-                        <td>{{i.description.length < 20 ? i.description : i.description.substring(0, 20) + '...'}}</td>
-                        <td>{{i.author.firstName}} {{i.author.secondName}}</td>
-                        <td>
-                            <uib-progressbar animate="true"
-                                             value="i.progress"
-                                             tooltip-placement="top"
-                                             uib-tooltip="{{i.progress}}%"
-                                             type="success"></uib-progressbar>
-                        </td>
-                    </tr>
-                </table>
+                    <table ng-if="paginator.$$collection.length > 0" class="table table-striped table-hover x-table-clickable">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Дата</th>
+                            <th>Наименование</th>
+                            <th>Уровень поддрежки</th>
+                            <th>Автор</th>
+                            <th>Прогресс</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="i in paginator.getCurrentPage()" ng-click="edit(i)">
+                            <td>{{i.id}}</td>
+                            <td>{{i.dateOpen}}</td>
+                            <td>{{i.title}}</td>
+                            <td>{{i.supportLevel.title}}</td>
+                            <td>{{i.author.firstName}} {{i.author.secondName}}</td>
+                            <td>
+                                <uib-progressbar animate="true"
+                                                 value="i.progress"
+                                                 tooltip-placement="top"
+                                                 uib-tooltip="{{i.progress}}%"
+                                                 type="success"></uib-progressbar>
+                            </td>
+                        </tr>
+                    </table>
 
-                <div ng-if="paginator.$$collection.length > 0" class="center">
-                    <uib-pagination total-items="paginator.$$collection.length"
-                                    ng-model="paginator.$$index"
-                                    direction-links="false"
-                                    items-per-page="pageSize">
-                    </uib-pagination>
-                </div>
+                    <div ng-if="paginator.$$collection.length > 0" class="center">
+                        <uib-pagination total-items="paginator.$$collection.length"
+                                        ng-model="paginator.$$index"
+                                        direction-links="false"
+                                        items-per-page="pageSize">
+                        </uib-pagination>
+                    </div>
+                </cover>
             </div>
         </div>
     </div>

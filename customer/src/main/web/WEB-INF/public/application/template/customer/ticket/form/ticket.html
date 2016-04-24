@@ -33,11 +33,11 @@
                             <input class="form-control"
                                    ng-model="ticket.dateOpen"
                                    uib-datepicker-popup="dd.MM.yyyy"
-                                   is-open="opened"
+                                   is-open="dateOpenCalendar"
                                    close-text="Закрыть"
                                    clear-text="Очистить"
                                    current-text="Сегодня"
-                                   ng-click="open($event)"/>
+                                   ng-click="dateOpenCalendar = !dateOpenCalendar"/>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open($event)">
                                 <i class="fa fa-calendar"></i>

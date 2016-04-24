@@ -1,5 +1,5 @@
 angular.module("common.dictionary.data")
-  .factory("ticketService", function ($http, converter) {
+  .factory("ticketService", function ($http, converter, TicketSupportLevelModel) {
 
     return {
       item: function (id) {
@@ -36,8 +36,20 @@ angular.module("common.dictionary.data")
         });
       },
 
-      doEscalation: function (ticket, q) {
-        ticket.supportLevelId = parseInt(ticket.supportLevelId) + parseInt(q || 0);
+      doEscalation: function (ticket, offset, supportLevelStore) {
+        var number;
+
+        if(!ticket.supportLevel){
+          ticket.supportLevel = new TicketSupportLevelModel();
+        }
+
+        number = ticket.supportLevel.number + offset;
+
+        supportLevelStore.forEach(function(supportLevel){
+          if(supportLevel.number === number){
+            ticket.supportLevel = supportLevel;
+          }
+        });
       }
     }
   });

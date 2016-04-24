@@ -5,7 +5,7 @@ angular.module("backend.ticket")
         $uibModal.open({
           controller: 'TicketFormController',
           resolve: {
-            record: ticket
+            ticket: ticket
           },
           size: 'lg',
           backdrop: 'static',

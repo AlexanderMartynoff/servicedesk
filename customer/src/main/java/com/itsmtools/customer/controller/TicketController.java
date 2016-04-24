@@ -17,7 +17,7 @@ public class TicketController {
     TicketService ticketService;
 
     @RequestMapping(value = "/ticket", method = RequestMethod.GET)
-    public Collection<?> list(@RequestParam Map<String, Object> params){
+    public Collection<?> list(@RequestParam Map<String, String> params){
         return ticketService.list(params);
     }
 }

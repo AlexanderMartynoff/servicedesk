@@ -4,7 +4,7 @@ angular.module("customer.ticket")
       open: function (ticket) {
         $uibModal.open({
           controller: 'TicketFormController',
-          resolve: { record: ticket },
+          resolve: { ticket: ticket },
           size: 'lg',
           backdrop: 'static',
           templateUrl: '/public/application/template/customer/ticket/form/ticket.html'

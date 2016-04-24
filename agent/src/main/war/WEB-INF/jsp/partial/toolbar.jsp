@@ -37,7 +37,7 @@
                                            class="list-group-item"
                                            ng-class="{active: selModule == 'problem'}"
                                            ng-click="selModule = 'problem'">
-                                            <i class="fa fa-left fa-medkit"></i> Проблемы
+                                            <i class="fa fa-left fa-question"></i> Проблемы
                                             <span class="pull-right small">
                                                 <em>Управление проблемами</em>
                                             </span>
@@ -57,7 +57,7 @@
                                            class="list-group-item"
                                            ng-class="{active: selModule == 'contractor'}"
                                            ng-click="selModule = 'contractor'">
-                                            <i class="fa fa-left fa-medkit"></i> Котрагнеты
+                                            <i class="fa fa-left fa-group"></i> Котрагнеты
                                             <span class="pull-right small">
                                                 <em>Управление контрагентами</em>
                                             </span>

@@ -4,6 +4,7 @@ angular.module("backend.ticket")
     $scope.filter = {};
     $scope.paginator = new Paginator();
     $scope.pageSize = 10;
+    $scope.covered = true;
 
     $scope.edit = function (ticket) {
       ticketForm.open(ticket);
@@ -14,8 +15,10 @@ angular.module("backend.ticket")
     };
 
     $scope.updateTicketList = function () {
+      $scope.covered = true;
       ticketService.list($scope.filter).then(function (response) {
         $scope.paginator.load(response, $scope.pageSize);
+        $scope.covered = false;
       });
     };
 

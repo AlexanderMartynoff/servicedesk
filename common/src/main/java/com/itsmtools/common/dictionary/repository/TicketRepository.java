@@ -9,7 +9,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,23 +40,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         session.flush();
     }
 
-    public void update(Ticket request) {
-        Ticket ticket = (Ticket) session.get(Ticket.class, request.getId());
-
-        ticket.setTitle(request.getTitle());
-        ticket.setDescription(request.getDescription());
-        ticket.setDateOpen(request.getDateOpen());
-        ticket.setContractor(request.getContractor());
-        ticket.setPerformer(request.getPerformer());
-
-        if (request.getProgress() == null || request.getProgress() < 0) {
-            ticket.setProgress(0);
-        } else if (request.getProgress() > 100) {
-            ticket.setProgress(100);
-        } else {
-            ticket.setProgress(request.getProgress());
-        }
-
+    public void update(Ticket ticket) {
         session.save(ticket);
         session.flush();
     }

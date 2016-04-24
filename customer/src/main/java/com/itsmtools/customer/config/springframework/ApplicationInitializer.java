@@ -3,6 +3,7 @@ package com.itsmtools.customer.config.springframework;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class ApplicationInitializer implements WebApplicationInitializer{
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 
-        //servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy())
-        //    .addMappingForUrlPatterns(null, true, "/*");
+        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy())
+            .addMappingForUrlPatterns(null, true, "/*");
     }
 }

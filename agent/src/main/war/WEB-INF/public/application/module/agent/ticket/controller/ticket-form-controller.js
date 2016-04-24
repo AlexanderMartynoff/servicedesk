@@ -1,12 +1,27 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 ticketService, contractorService,
-                                                record, uaPerformerService) {
+                                                ticket, uaPerformerService,
+                                                supportLevelService, TicketSupportLevelModel) {
+
+
     $scope.covered = true;
-    $scope.ticket = record;
-    $scope.ticket.supportLevelId = 1;
+    $scope.ticket = ticket;
     $scope.contractorStore = [];
     $scope.performerStore = [];
+    $scope.supportLevelStore = [];
+    $scope.progressStates = [];
+
+    (function(state, step, limit){
+      while(state <= limit){
+        $scope.progressStates.push(state);
+        state += step;
+      }
+    })(0, 10, 100);
+
+    if(!ticket.supportLevel){
+      ticket.supportLevel = new TicketSupportLevelModel();
+    }
 
     $uibModalInstance.opened.then(function (reason) {
       $scope.covered = false;
@@ -17,16 +32,16 @@ angular.module("backend.ticket")
       $scope.covered = false;
     };
 
-    $scope.update = function (record) {
+    $scope.update = function (data) {
       $scope.covered = true;
-      ticketService.update(record).then(function (response) {
+      ticketService.update(data).then(function (response) {
         $scope.close();
       });
     };
 
-    $scope.new = function (record) {
+    $scope.new = function (data) {
       $scope.covered = true;
-      ticketService.new(record).then(function (response) {
+      ticketService.new(data).then(function (response) {
         $scope.close();
         $rootScope.$broadcast('ticket::change');
       });
@@ -40,12 +55,8 @@ angular.module("backend.ticket")
       });
     };
 
-    $scope.openCalendar = function ($event) {
-      $scope.calendarIsOpen = true;
-    };
-
-    $scope.doEscalation = function (q) {
-      ticketService.doEscalation(record, q);
+    $scope.doEscalation = function (offset) {
+      ticketService.doEscalation(ticket, offset, $scope.supportLevelStore);
     };
 
     $scope.updateContractorStore = function(){
@@ -60,6 +71,13 @@ angular.module("backend.ticket")
       });
     };
 
+    $scope.updateSupportLevelStore = function(){
+      supportLevelService.list().then(function(data){
+        $scope.supportLevelStore = data;
+      });
+    };
+
+    $scope.updateSupportLevelStore();
     $scope.updatePerformerStore();
     $scope.updateContractorStore();
   });

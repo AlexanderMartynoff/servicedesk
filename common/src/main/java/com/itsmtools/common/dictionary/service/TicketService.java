@@ -24,7 +24,17 @@ public class TicketService{
     }
 
     public void update(Ticket request) {
-        repository.update(request);
+        Ticket ticket = repository.get(request.getId());
+
+        ticket.setTitle(request.getTitle());
+        ticket.setDescription(request.getDescription());
+        ticket.setDateOpen(request.getDateOpen());
+        ticket.setContractor(request.getContractor());
+        ticket.setPerformer(request.getPerformer());
+        ticket.setProgress(request.getProgress());
+        ticket.setSupportLevel(request.getSupportLevel());
+
+        repository.update(ticket);
     }
 
     public void delete(Integer id) {
