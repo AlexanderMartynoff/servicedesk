@@ -9,7 +9,7 @@
                     <label class="control-label">Дата начала</label>
                     <div class="input-group" ng-controller="DateTicketController">
                         <input class="form-control"
-                               ng-model="ticket.dateOpen"
+                               ng-model="filter.dateOpenFrom"
                                uib-datepicker-popup="dd.MM.yyyy"
                                is-open="opened"
                                close-text="Закрыть"
@@ -27,7 +27,7 @@
                     <label class="control-label">Дата конца</label>
                     <div class="input-group" ng-controller="DateTicketController">
                         <input class="form-control"
-                               ng-model="ticket.dateOpen"
+                               ng-model="filter.dateOpenUntil"
                                uib-datepicker-popup="dd.MM.yyyy"
                                is-open="opened"
                                close-text="Закрыть"
@@ -48,25 +48,40 @@
                     <label class="control-label">Заголовок</label>
                     <input type="text"
                            ng-model="filter.title"
-                           class="form-control"
-                           placeholder="Поиск по заголовку">
+                           class="form-control">
                 </div>
                 <div class="col-sm-12">
+                    <label class="control-label">Контрагент</label>
+                    <input type="text"
+                           ng-model="filter.title"
+                           class="form-control">
+                </div>
+                <div class="col-sm-6">
                     <label class="control-label">Исполнитель</label><br/>
                     <input type="text"
                            ng-model="filter.performer"
-                           class="form-control"
-                           placeholder="Поиск по исполнителю">
+                           class="form-control">
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Автор</label><br/>
+                    <input type="text"
+                           ng-model="filter.performer"
+                           class="form-control">
                 </div>
             </div>
 
-            <div class="btn-group btn-group-justified">
-                <a href="" class="vertical-align-btm btn btn-info form-control" ng-click="updateTicketList()">
-                    <b class="fa fa-search fa-left"></b>Обновить
-                </a>
-                <a href="" class="vertical-align-btm btn btn-success form-control" ng-click="new()">
-                    <b class="fa fa-plus-square fa-left"></b>Создать
-                </a>
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <a href="" class="vertical-align-btm btn btn-info form-control" ng-click="updateTicketList()">
+                        <b class="fa fa-search fa-left"></b>Обновить
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="" class="vertical-align-btm btn btn-success form-control" ng-click="new()">
+                        <b class="fa fa-plus-square fa-left"></b>Создать
+                    </a>
+                </div>
             </div>
 
         </form>
@@ -110,8 +125,7 @@
                     <uib-pagination total-items="paginator.$$collection.length"
                                     ng-model="paginator.$$index"
                                     direction-links="false"
-                                    items-per-page="paginator.PAGE_SIZE"
-                                    class="pagination-sm">
+                                    items-per-page="pageSize">
                     </uib-pagination>
                 </div>
             </div>

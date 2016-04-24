@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 
-abstract public class AbstractRepository<E, I>{
+abstract public class AbstractRepository<E, I, V>{
 
     public Principal getPrincipal(){
         return (Principal) SecurityContextHolder.getContext()
@@ -19,5 +19,5 @@ abstract public class AbstractRepository<E, I>{
     abstract public void create(E entity);
     abstract public void update(E entity);
     abstract public void delete(I id);
-    abstract public List<E> list(Map<String, ?> filter);
+    abstract public List<E> list(Map<String, V> filter);
 }

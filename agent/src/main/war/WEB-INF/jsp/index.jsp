@@ -8,7 +8,9 @@
     </head>
     <body>
         <div class="x-layout">
-            <jsp:include  page="./partial/toolbar.jsp"/>
+            <jsp:include  page="./partial/toolbar.jsp">
+                <jsp:param name="principal" value="${principal}"/>
+            </jsp:include>
             <div class="container-fluid">
                 <div class="x-content" ui-view="index"></div>
             </div>

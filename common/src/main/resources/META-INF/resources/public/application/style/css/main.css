@@ -35,7 +35,9 @@ textarea {
 .x-table-clickable tr:hover {
     text-decoration: underline;
 }
-
+.x-no-margin{
+    margin: 0 !important;
+}
 .x-margin-btm-10 {
     margin-bottom: 10px;
 }

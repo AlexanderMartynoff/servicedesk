@@ -10,15 +10,21 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 
 @Repository
-public class TicketRepository extends AbstractRepository<Ticket, Integer> {
+public class TicketRepository extends AbstractRepository<Ticket, Integer, String> {
 
     @Autowired
     private Session session;
+
+    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     public Ticket get(Integer id) {
         return (Ticket) session.get(Ticket.class, id);
@@ -67,20 +73,36 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ticket> list(Map<String, ?> filter) {
+    public List<Ticket> list(Map<String, String> filter) {
         Criteria criteria = session.createCriteria(Ticket.class);
 
         if (filter.containsKey("title")) {
-            criteria.add(Restrictions.like("title", filter.get("title").toString(), MatchMode.ANYWHERE));
+            criteria.add(Restrictions.like("title", filter.get("title"), MatchMode.ANYWHERE));
         }
 
         if (filter.containsKey("performer")) {
             criteria.createAlias("performer", "performer")
                 .add(Restrictions.or(
-                    Restrictions.like("performer.firstName", filter.get("performer").toString(), MatchMode.ANYWHERE),
-                    Restrictions.like("performer.secondName", filter.get("performer").toString(), MatchMode.ANYWHERE),
-                    Restrictions.like("performer.thirdName", filter.get("performer").toString(), MatchMode.ANYWHERE)
+                    Restrictions.like("performer.firstName", filter.get("performer"), MatchMode.ANYWHERE),
+                    Restrictions.like("performer.secondName", filter.get("performer"), MatchMode.ANYWHERE),
+                    Restrictions.like("performer.thirdName", filter.get("performer"), MatchMode.ANYWHERE)
                 ));
+        }
+
+        try {
+            if (filter.containsKey("dateOpenFrom") && filter.containsKey("dateOpenUntil")) {
+                Date from = format.parse(filter.get("dateOpenFrom"));
+                Date until = format.parse(filter.get("dateOpenUntil"));
+                criteria.add(Restrictions.between("dateOpen", from.getTime(), until.getTime()));
+            }else if(filter.containsKey("dateOpenFrom")){
+                Date from = format.parse(filter.get("dateOpenFrom"));
+                criteria.add(Restrictions.ge("dateOpen", from.getTime()));
+            }else if(filter.containsKey("dateOpenUntil")){
+                Date until = format.parse(filter.get("dateOpenUntil"));
+                criteria.add(Restrictions.le("dateOpen", until.getTime()));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         criteria.addOrder(Order.desc("id"));

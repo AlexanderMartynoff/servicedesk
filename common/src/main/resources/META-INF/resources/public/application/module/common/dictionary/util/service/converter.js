@@ -7,10 +7,10 @@ angular.module("common.dictionary.util")
       this.out = function (ticket) {
         var clone = angular.copy(ticket);
         if (clone.dateOpen instanceof Date) {
-          clone.dateOpen = clone.dateOpen.getTime() / 1000;
+          clone.dateOpen = clone.dateOpen.getTime();
         }
         if (clone.dateClose instanceof Date) {
-          clone.dateClose = clone.dateClose.getTime() / 1000;
+          clone.dateClose = clone.dateClose.getTime();
         }
 
         clone.progress = clone.progress >= 0 && clone.progress <= 100 ? clone.progress : 100;
@@ -28,10 +28,10 @@ angular.module("common.dictionary.util")
 
         data.forEach(function (i) {
           if (typeof i.dateOpen == 'number') {
-            i.dateOpen = new Date(i.dateOpen * 1000);
+            i.dateOpen = new Date(i.dateOpen);
           }
           if (typeof i.dateClose == 'number') {
-            i.dateClose = new Date(i.dateClose * 1000);
+            i.dateClose = new Date(i.dateClose);
           }
         });
 

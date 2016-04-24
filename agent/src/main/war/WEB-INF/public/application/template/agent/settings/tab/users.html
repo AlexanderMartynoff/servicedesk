@@ -16,26 +16,26 @@
         <div class="col-xs-12">
             <table class="table table-striped table-hover x-table-clickable">
                 <thead>
-                <tr>
-                    <th>Имя корневой учетной записи</th>
-                    <th>Контексты</th>
-                    <th>Группы</th>
-                </tr>
+                    <tr>
+                        <th>Имя корневой учетной записи</th>
+                        <th>Контексты</th>
+                        <th>Группы</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in paginator.getCurrentPage()" ng-click="openUser(user.$$complexUa)">
-                    <td>{{user.login}}</td>
-                    <td>
-                        <span ng-repeat="context in user.contexts">
-                            <a href="#">{{context.label}}</a>{{$last ? '' : ' |'}}
-                        </span>
-                    </td>
-                    <td>
-                        <span ng-repeat="group in user.groups">
-                            <a href="#">{{group.label}}</a>{{$last ? '' : ' |'}}
-                        </span>
-                    </td>
-                </tr>
+                    <tr ng-repeat="user in paginator.getCurrentPage()" ng-click="openUser(user.$$complexUa)">
+                        <td>{{user.login}}</td>
+                        <td>
+                            <span ng-repeat="context in user.contexts">
+                                <a href="#">{{context.label}}</a>{{$last ? '' : ' |'}}
+                            </span>
+                        </td>
+                        <td>
+                            <span ng-repeat="group in user.groups">
+                                <a href="#">{{group.label}}</a>{{$last ? '' : ' |'}}
+                            </span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -43,8 +43,7 @@
                 <uib-pagination total-items="paginator.$$collection.length"
                                 ng-model="paginator.$$index"
                                 direction-links="false"
-                                items-per-page="paginator.PAGE_SIZE"
-                                class="pagination-sm">
+                                items-per-page="paginator.PAGE_SIZE">
                 </uib-pagination>
             </div>
 

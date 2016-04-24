@@ -7,7 +7,7 @@ angular.module("common.ui.xinputfile")
           resolve: {
             files: function(){ return files }
           },
-          size: "lg",
+          size: "sm",
           templateUrl: '/public/application/module/common/ui/xinputfile/template/xinputfile-modal-list.html'
         });
       }

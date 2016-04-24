@@ -4,8 +4,8 @@ angular.module('customer.ticket')
       $scope.paginator = new Paginator();
 
       $scope.updateTickets = function () {
-        ticketService.list({contractorId: 0}).then(function (data) {
-          $scope.paginator.load(data);
+        ticketService.list().then(function (data) {
+          $scope.paginator.load(data, 12);
         });
       };
 
