@@ -1,6 +1,7 @@
 angular.module("backend.settings")
   .controller("UserEditWindowController", function ($scope, $rootScope, record,
                                                     $uibModalInstance, UaComplexModel, uaService) {
+
     var tplRootUrl = '/public/application/template/agent/settings/form/';
 
     $scope.complexUa = record || new UaComplexModel();
@@ -26,16 +27,15 @@ angular.module("backend.settings")
     $scope.save = function(complexUa){
       $scope.covered = true;
       uaService.saveComplex(complexUa).then(function(response){
-        $rootScope.$broadcast('onEditComplexUa');
+        $rootScope.$broadcast('ua::change');
         $scope.cancel();
       });
     };
 
     $scope.update = function(complexUa){
-      console.log(complexUa);
       $scope.covered = true;
       uaService.updateComplex(complexUa).then(function(response){
-        $rootScope.$broadcast('onEditComplexUa');
+        $rootScope.$broadcast('ua::change');
         $scope.cancel();
       });
     };

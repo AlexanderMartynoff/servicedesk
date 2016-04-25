@@ -13,7 +13,7 @@ angular.module("backend.settings")
       userEditWindow.open(record);
     };
 
-    $scope.$on('onEditComplexUa', updateListComplex);
+    $scope.$on('ua::change', updateListComplex);
 
     updateListComplex();
   });

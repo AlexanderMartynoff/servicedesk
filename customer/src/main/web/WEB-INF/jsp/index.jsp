@@ -17,7 +17,7 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/logout">Выход</a></li>
+                            <li><a href="/logout"><b class="fa fa-sign-out"></b></a></li>
                         </ul>
                     </div>
                 </div>

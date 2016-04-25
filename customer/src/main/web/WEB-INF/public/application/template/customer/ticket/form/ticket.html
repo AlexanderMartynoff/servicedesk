@@ -17,68 +17,31 @@
     <div class="modal-body">
         <form class="form-horizontal">
             <fieldset>
-
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label for="title" class="control-label">Заголовок</label>
-                        <input type="text" class="form-control" id="title" ng-model="ticket.title">
+                        <label class="control-label">Заголовок</label>
+                        <input type="text" class="form-control" ng-model="ticket.title">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <label class="control-label">Дата фиксации</label>
-
-                        <p class="input-group">
-                            <input class="form-control"
-                                   ng-model="ticket.dateOpen"
-                                   uib-datepicker-popup="dd.MM.yyyy"
-                                   is-open="dateOpenCalendar"
-                                   close-text="Закрыть"
-                                   clear-text="Очистить"
-                                   current-text="Сегодня"
-                                   ng-click="dateOpenCalendar = !dateOpenCalendar"/>
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)">
-                                <i class="fa fa-calendar"></i>
-                            </button>
-                        </span>
-                        </p>
+                        <input class="form-control" ng-model="ticket.dateOpen" readonly/>
                     </div>
 
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <label class="control-label">Приоритет</label>
-                        <select class="form-control">
+                        <select class="form-control" ng-if="!ticket.id">
                             <option>Высокий</option>
                             <option selected="selected">Средний</option>
                         </select>
+                        <input value="Средний" class="form-control" ng-if="ticket.id" readonly/>
                     </div>
-
-                    <div class="col-xs-4">
-                        <label for="line-support" class="control-label">Линия поддержки</label>
-                        <p class="input-group">
-                            <span class="input-group-btn" ng-if="ticket.supportLevelId > 1">
-                                <button type="button"
-                                        class="btn btn-default"
-                                        ng-click="doEscalation(-1)">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </span>
-                            <input id="line-support" type="text" class="form-control" ng-model="ticket.supportLevelId" readonly/>
-                            <span class="input-group-btn" ng-if="ticket.supportLevelId < 5">
-                                <button type="button"
-                                        class="btn btn-default"
-                                        ng-click="doEscalation(1)">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </span>
-                        </p>
-                    </div>
-
                 </div>
 
-                <div class="form-group">
-                    <div class="col-xs-4">
+                <div class="form-group" ng-if="ticket.id">
+                    <div class="col-xs-6">
                         <label class="control-label">Инициатор</label>
                         <input type="text"
                                value="{{ticket.author.firstName}} {{ticket.author.secondName}}"
@@ -86,51 +49,26 @@
                                readonly>
                     </div>
 
-                    <div class="col-xs-4">
-                        <label class="control-label">Контрагент</label>
-                        <input type="text" ng-model="ticket.contractor"
-                               uib-typeahead="contractor as contractor.fullName for contractor in contractorStore | filter:$viewValue"
-                               class="form-control">
-                    </div>
-
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <label class="control-label">Исполнитель</label>
-                        <input type="text" ng-model="ticket.performer"
-                               uib-typeahead="performer as performer.firstName for performer in performerStore | filter:$viewValue"
-                               class="form-control">
+                        <input type="text" ng-model="ticket.performer" class="form-control" readonly/>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-xs-2">
-                        <label class="control-label">Прогресс (%)</label>
-                        <input type="text" class="form-control" ng-model="ticket.progress"/>
-                    </div>
-                    <div class="col-xs-10">
-                        <label class="control-label">Прикрепления</label>
-                        <p class="input-group">
-                            <span class="form-control">
-                                <a href="#">Документация.doc</a> <b class="fa fa-remove red-text fa-right"></b>,
-                                <a href="#">Скриншот.png</a> <b class="fa fa-remove red-text fa-right"></b>
-                            </span>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default">
-                                    <i class="fa fa-ellipsis-h"></i>
-                                </button>
-                                <button type="button" class="btn btn-default">
-                                    <i class="fa fa-paperclip"></i> Прикрепить
-                                </button>
-                            </span>
-                        </p>
+                <div class="form-group" ng-if="ticket.progress > 0">
+                    <div class="col-xs-12">
+                        <label class="control-label">Прогресс</label>
+                        <uib-progressbar animate="true" value="ticket.progress" type="success">
+                            {{ticket.progress}}%
+                        </uib-progressbar>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label for="description" class="control-label">Описание</label>
+                        <label class="control-label">Описание</label>
                         <textarea class="form-control"
                                   rows="5"
-                                  ng-model="ticket.description"
-                                  id="description"></textarea>
+                                  ng-model="ticket.description"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -147,6 +85,7 @@
                 type="button"
                 ng-click="new(ticket)"
                 ng-if="!ticket.id">Создать</button>
+
         <button class="btn btn-warning" type="button" ng-click="close()">Отмена</button>
     </div>
 </cover>

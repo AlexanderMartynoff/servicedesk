@@ -4,6 +4,7 @@ package com.itsmtools.common.dictionary.service;
 import com.itsmtools.common.dictionary.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -37,10 +38,11 @@ public class UaComplexService {
     @SuppressWarnings("unchecked")
     public List<ComplexUa> list() {
         return (List<ComplexUa>) session.createCriteria(UaGlobal.class)
+            .addOrder(Order.desc("id"))
             .list()
             .stream()
             .map((e) -> buildByUaGlobal((UaGlobal) e))
-            .collect(toList());
+            .collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")

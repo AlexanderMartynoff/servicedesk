@@ -1,23 +1,36 @@
 package com.itsmtools.customer.controller;
 
 
+import com.itsmtools.common.controller.ApplicationController;
+import com.itsmtools.common.controller.response.Response;
+import com.itsmtools.common.dictionary.model.Ticket;
 import com.itsmtools.common.dictionary.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Collection;
 import java.util.Map;
 
 
 @RestController
-public class TicketController {
+public class TicketController extends ApplicationController{
     @Autowired
-    TicketService ticketService;
+    TicketService service;
 
     @RequestMapping(value = "/ticket", method = RequestMethod.GET)
     public Collection<?> list(@RequestParam Map<String, String> params){
-        return ticketService.list(params);
+        return service.list(params);
+    }
+
+    @RequestMapping(value = "/ticket", method = RequestMethod.POST)
+    public Response create(@RequestBody Ticket ticket){
+        service.save(ticket);
+        return empty();
+    }
+
+    @RequestMapping(value = "/ticket", method = RequestMethod.PUT)
+    public Response update(@RequestBody Ticket ticket){
+        service.update(ticket);
+        return empty();
     }
 }

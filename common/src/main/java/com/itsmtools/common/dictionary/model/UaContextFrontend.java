@@ -14,6 +14,13 @@ public class UaContextFrontend implements SlaveUserAccount{
     @Column
     private Boolean enable;
 
+    @ManyToOne
+    @JoinColumn(
+        name = "uaContractorId",
+        referencedColumnName = "id"
+    )
+    private Contractor contractor;
+
     @OneToOne
     @JoinColumn(
         name = "uaGlobalId",
@@ -43,5 +50,13 @@ public class UaContextFrontend implements SlaveUserAccount{
 
     public void setUaGlobal(UaGlobal uaGlobal) {
         this.uaGlobal = uaGlobal;
+    }
+
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
     }
 }

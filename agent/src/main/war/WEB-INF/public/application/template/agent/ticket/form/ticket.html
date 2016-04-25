@@ -17,14 +17,12 @@
     <div class="modal-body">
         <form class="form-horizontal">
             <fieldset>
-
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label for="title" class="control-label">Заголовок</label>
                         <input type="text" class="form-control" id="title" ng-model="ticket.title">
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="col-xs-4">
                         <label class="control-label">Дата фиксации</label>
@@ -36,10 +34,11 @@
                                    is-open="dateOpenCalendar"
                                    close-text="Закрыть"
                                    clear-text="Очистить"
-                                   current-text="Сегодня"
-                                   ng-click="dateOpenCalendar = !dateOpenCalendar"/>
+                                   current-text="Сегодня" readonly/>
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default">
+                                <button type="button"
+                                        ng-click="dateOpenCalendar = !dateOpenCalendar"
+                                        class="btn btn-default">
                                     <i class="fa fa-calendar"></i>
                                 </button>
                             </span>

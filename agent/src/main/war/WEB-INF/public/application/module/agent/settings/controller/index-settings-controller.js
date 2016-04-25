@@ -11,7 +11,7 @@ angular.module("backend.settings")
       },
       {
         id: 2,
-        heading: "ITSM",
+        heading: "Общие",
         templateUrl: "/public/application/template/agent/settings/tab/contexts.html"
       }
     ];

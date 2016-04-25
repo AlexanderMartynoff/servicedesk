@@ -7,7 +7,6 @@ angular.module("backend.settings")
     $scope.updateContractors = function(){
       contractorService.list().then(function(response){
         $scope.contractors = response;
-        $scope.complexUa.uaContextFrontend.contractor = $scope.contractors[0];
       });
     };
 

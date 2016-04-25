@@ -1,17 +1,25 @@
 angular.module('customer.ticket')
-  .controller('TicketController', ['$scope', 'ticketForm', 'ticketService', 'Paginator',
-    function ($scope, form, ticketService, Paginator) {
-      $scope.paginator = new Paginator();
+  .controller('TicketController', function ($scope, ticketForm, ticketService, Paginator, TicketModel) {
 
-      $scope.updateTickets = function () {
-        ticketService.list().then(function (data) {
-          $scope.paginator.load(data);
-        });
-      };
+    $scope.paginator = new Paginator();
 
-      $scope.open = function (ticket) {
-        form.open(ticket);
-      };
+    $scope.updateTickets = function () {
+      ticketService.list().then(function (data) {
+        $scope.paginator.load(data);
+      });
+    };
 
+    $scope.open = function (ticket) {
+      ticketForm.open(ticket);
+    };
+
+    $scope.new = function () {
+      ticketForm.open(new TicketModel());
+    };
+
+    $scope.$on("ticket::change", function(){
       $scope.updateTickets();
-    }]);
+    });
+
+    $scope.updateTickets();
+  });

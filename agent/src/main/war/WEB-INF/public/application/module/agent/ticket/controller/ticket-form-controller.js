@@ -1,9 +1,7 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 ticketService, contractorService,
-                                                ticket, uaPerformerService,
-                                                supportLevelService, TicketSupportLevelModel) {
-
+                                                ticket, uaPerformerService, supportLevelService) {
 
     $scope.covered = true;
     $scope.ticket = ticket;
@@ -11,17 +9,14 @@ angular.module("backend.ticket")
     $scope.performerStore = [];
     $scope.supportLevelStore = [];
     $scope.progressStates = [];
+    $scope.levelNumber = 1;
 
-    (function(state, step, limit){
-      while(state <= limit){
+    (function (state, step, limit) {
+      while (state <= limit) {
         $scope.progressStates.push(state);
         state += step;
       }
     })(0, 10, 100);
-
-    if(!ticket.supportLevel){
-      ticket.supportLevel = new TicketSupportLevelModel();
-    }
 
     $uibModalInstance.opened.then(function (reason) {
       $scope.covered = false;
@@ -59,20 +54,33 @@ angular.module("backend.ticket")
       ticketService.doEscalation(ticket, offset, $scope.supportLevelStore);
     };
 
-    $scope.updateContractorStore = function(){
-      contractorService.list().then(function(response){
+    $scope.updateContractorStore = function () {
+      contractorService.list().then(function (response) {
         $scope.contractorStore = response;
       });
     };
 
-    $scope.updatePerformerStore = function(){
-      uaPerformerService.listAsUaGlobal().then(function(response){
+    $scope.updatePerformerStore = function () {
+      uaPerformerService.listAsUaGlobal().then(function (response) {
         $scope.performerStore = response;
       });
     };
 
-    $scope.updateSupportLevelStore = function(){
-      supportLevelService.list().then(function(data){
+    $scope.setTicketLevelSupport = function (store) {
+      if (ticket.supportLevel)
+        return;
+
+      store.filter(function (level) {
+        return level.number === $scope.levelNumber;
+      }).forEach(function (level) {
+        ticket.supportLevel = level;
+      });
+
+    };
+
+    $scope.updateSupportLevelStore = function () {
+      supportLevelService.list().then(function (data) {
+        $scope.setTicketLevelSupport(data);
         $scope.supportLevelStore = data;
       });
     };

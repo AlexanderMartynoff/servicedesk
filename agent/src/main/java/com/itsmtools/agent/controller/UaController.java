@@ -13,16 +13,16 @@ import java.util.Collection;
 @RestController
 public class UaController extends ApplicationController {
     @Autowired
-    private UaComplexService uaGlobalService;
+    private UaComplexService service;
 
     @RequestMapping(value = "/ua", method = RequestMethod.GET)
     public Collection<?> getListComplexUa() {
-        return uaGlobalService.list();
+        return service.list();
     }
 
     @RequestMapping(value = "/ua", method = RequestMethod.POST)
     public Response createComplexUa(@RequestBody ComplexUa complexUa) {
-        uaGlobalService.save(complexUa);
+        service.save(complexUa);
         return jsonOk();
     }
 

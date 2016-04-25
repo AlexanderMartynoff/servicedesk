@@ -1,7 +1,6 @@
 <h1 class="page-header">Заявки</h1>
 
 <div class="row">
-
     <div class="col-sm-3">
         <form class="form-horizontal">
             <div class="form-group">
@@ -56,7 +55,7 @@
                 <div class="col-sm-12">
                     <label class="control-label">Контрагент</label>
                     <input type="text"
-                           ng-model="filter.title"
+                           ng-model="filter.contractor"
                            class="form-control">
                 </div>
                 <div class="col-sm-6">
@@ -68,7 +67,7 @@
                 <div class="col-sm-6">
                     <label class="control-label">Автор</label><br/>
                     <input type="text"
-                           ng-model="filter.performer"
+                           ng-model="filter.author"
                            class="form-control">
                 </div>
             </div>
@@ -87,7 +86,6 @@
                     </button>
                 </div>
             </div>
-
         </form>
     </div>
 
@@ -101,14 +99,14 @@
 
                     <table ng-if="paginator.$$collection.length > 0" class="table table-striped table-hover x-table-clickable">
                         <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Дата</th>
-                            <th>Наименование</th>
-                            <th>Уровень поддрежки</th>
-                            <th>Автор</th>
-                            <th>Прогресс</th>
-                        </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Дата</th>
+                                <th>Наименование</th>
+                                <th>Уровень поддрежки</th>
+                                <th>Автор</th>
+                                <th>Прогресс</th>
+                            </tr>
                         </thead>
                         <tr ng-repeat="i in paginator.getCurrentPage()" ng-click="edit(i)">
                             <td>{{i.id}}</td>

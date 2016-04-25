@@ -4,8 +4,8 @@ angular.module("common.dictionary.data")
     return function TicketModel(){
       this.id = null;
       this.title = null;
-      this.dateOpen = null;
-      this.dateClose = null;
+      this.dateOpen =  new Date();
+      this.dateClose = new Date();
       this.description = null;
       this.consumer = null;
       this.author = null;

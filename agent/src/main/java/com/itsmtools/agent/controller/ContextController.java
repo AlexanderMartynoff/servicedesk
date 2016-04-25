@@ -18,6 +18,8 @@ public class ContextController {
 
     @RequestMapping("/context")
     public Collection<?> list() throws JsonProcessingException {
+
+        // TODO - use enum almost ContextCatalog
         return session.createCriteria(ContextCatalog.class).list();
     }
 }
