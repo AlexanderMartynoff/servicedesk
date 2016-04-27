@@ -14,6 +14,9 @@ public class UaContextBackend implements SlaveUserAccount{
     @Column
     private Boolean enable;
 
+    @Column
+    String position;
+
     @OneToOne
     @JoinColumn(
         name = "uaGlobalId",
@@ -43,5 +46,13 @@ public class UaContextBackend implements SlaveUserAccount{
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

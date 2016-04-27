@@ -1,7 +1,6 @@
 angular.module("backend.settings")
   .controller("UaContextAgentFormController", function ($scope, UaCommonStub) {
     $scope.complexUa.uaContextBackend = $scope.complexUa.uaContextBackend || new UaCommonStub();
-    $scope.ua = $scope.complexUa.uaContextBackend;
 
     $scope.levels = [
       {name: '1'},

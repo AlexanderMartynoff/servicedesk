@@ -23,11 +23,12 @@ public class UaController extends ApplicationController {
     @RequestMapping(value = "/ua", method = RequestMethod.POST)
     public Response createComplexUa(@RequestBody ComplexUa complexUa) {
         service.save(complexUa);
-        return jsonOk();
+        return empty();
     }
 
     @RequestMapping(value = "/ua", method = RequestMethod.PUT)
     public Response updateComplexUa(@RequestBody ComplexUa complexUa) {
-        return jsonOk();
+        service.update(complexUa);
+        return empty();
     }
 }

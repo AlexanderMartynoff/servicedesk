@@ -51,6 +51,13 @@ angular.module("common.dictionary.data")
       },
 
       saveComplex: function(complexUa){
+
+        Object.keys(complexUa).forEach(function(key){
+          if(complexUa[key] && !complexUa[key].enable && !complexUa[key].id){
+            complexUa[key] = null;
+          }
+        });
+
         return $http.post('/ua', complexUa).then(function(response){
           return response.data;
         });

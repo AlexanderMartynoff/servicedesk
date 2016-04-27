@@ -33,15 +33,15 @@ public class UaGlobalService implements UserAccountService<UaGlobal, UaGlobal> {
 
     @Override
     public void update(UaGlobal entity) {
-        Optional.ofNullable((UaGlobal) session.get(UaGlobal.class, entity.getId()))
-            .ifPresent((value) -> {
-                value.setFirstName(entity.getFirstName());
-                value.setSecondName(entity.getSecondName());
-                value.setPassword(entity.getPassword());
-                value.setEnable(entity.getEnable());
-                session.update(value);
-                session.flush();
-            });
+        UaGlobal uaGlobal = (UaGlobal) session.get(UaGlobal.class, entity.getId());
+
+        uaGlobal.setFirstName(entity.getFirstName());
+        uaGlobal.setSecondName(entity.getSecondName());
+        uaGlobal.setPassword(entity.getPassword());
+        uaGlobal.setEnable(entity.getEnable());
+
+        session.save(uaGlobal);
+        session.flush();
     }
 
     @Override

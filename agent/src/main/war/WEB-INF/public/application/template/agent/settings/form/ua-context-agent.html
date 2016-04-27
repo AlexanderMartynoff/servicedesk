@@ -1,20 +1,25 @@
 <div ng-controller="UaContextAgentFormController">
-    <ng-include src="tpl.offOnToolbar"></ng-include>
+
+    <div class="btn-toolbar x-margin-top-10" role="toolbar">
+        <div class="btn-group" role="group">
+            <button class="btn"
+                    ng-class="{
+                    'btn-success': !complexUa.uaContextBackend.enable,
+                    'btn-danger': complexUa.uaContextBackend.enable
+                    }"
+                    ng-click="complexUa.uaContextBackend.enable = !complexUa.uaContextBackend.enable">
+                {{complexUa.uaContextBackend.enable ? 'Отключить' : 'Подключить'}}
+            </button>
+        </div>
+    </div>
 
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">
-                <div class="col-xs-6">
-                    <label class="control-label">Уровень линии поддержки</label>
-                    <select class="form-control"
-                            ng-disabled="!ua.enable"
-                            ng-options="level.name for level in levels"
-                            ng-model="complexUa.uaContextBackend.levelSupport"></select>
-                </div>
-                <div class="col-xs-6">
+                <div class="col-xs-12">
                     <label class="control-label">Должность</label>
                     <input type="text"
-                           ng-disabled="!ua.enable"
+                           ng-disabled="!complexUa.uaContextBackend.enable"
                            class="form-control"
                            ng-model="complexUa.uaContextBackend.position"/>
                 </div>

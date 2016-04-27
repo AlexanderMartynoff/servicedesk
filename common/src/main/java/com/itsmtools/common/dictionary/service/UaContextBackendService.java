@@ -36,8 +36,13 @@ public class UaContextBackendService implements UserAccountService<UaContextBack
         session.flush();
     }
 
-    public void update(UaContextBackend entity) {}
-
+    public void update(UaContextBackend entity) {
+        UaContextBackend ua = (UaContextBackend) session.get(UaContextBackend.class, entity.getId());
+        ua.setEnable(entity.getEnable());
+        ua.setPosition(entity.getPosition());
+        session.save(ua);
+        session.flush();
+    }
 
     public List<UaContextBackend> list() {
         return null;

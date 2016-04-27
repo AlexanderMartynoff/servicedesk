@@ -1,10 +1,10 @@
 angular.module("backend.settings")
-  .controller("UserEditWindowController", function ($scope, $rootScope, record,
+  .controller("UserEditWindowController", function ($scope, $rootScope, uaComplex,
                                                     $uibModalInstance, UaComplexModel, uaService) {
 
     var tplRootUrl = '/public/application/template/agent/settings/form/';
 
-    $scope.complexUa = record || new UaComplexModel();
+    $scope.complexUa = uaComplex || new UaComplexModel();
     $scope.covered = false;
 
     $scope.tpl = {

@@ -1,13 +1,13 @@
 angular.module("backend.settings")
   .controller("UsersController", function ($scope, userEditWindow, uaService, Paginator) {
 
+    $scope.paginator = new Paginator();
+
     function updateListComplex(){
       uaService.listComplex().then(function (response) {
         $scope.paginator.load(response);
       });
     }
-
-    $scope.paginator = new Paginator();
 
     $scope.openUser = function (record) {
       userEditWindow.open(record);

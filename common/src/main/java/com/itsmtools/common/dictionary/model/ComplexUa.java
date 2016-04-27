@@ -1,7 +1,7 @@
 package com.itsmtools.common.dictionary.model;
 
 
-public class ComplexUa implements SlaveUserAccount{
+public class ComplexUa{
 
     private UaGlobal uaGlobal;
     private UaContextBackend uaContextBackend;

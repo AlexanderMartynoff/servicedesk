@@ -1,22 +1,36 @@
 <div ng-controller="UaContextCustomerFormController">
-    <ng-include src="tpl.offOnToolbar"></ng-include>
+
+    <div class="btn-toolbar x-margin-top-10" role="toolbar">
+        <div class="btn-group" role="group">
+            <button class="btn"
+                    ng-class="{
+                    'btn-success': !complexUa.uaContextFrontend.enable,
+                    'btn-danger': complexUa.uaContextFrontend.enable
+                    }"
+                    ng-click="complexUa.uaContextFrontend.enable = !complexUa.uaContextFrontend.enable">
+                {{complexUa.uaContextFrontend.enable ? 'Отключить' : 'Подключить'}}
+            </button>
+        </div>
+    </div>
 
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">
                 <div class="col-xs-6">
+
                     <label class="control-label">Контрагент</label>
-                    <select class="form-control"
-                            ng-disabled="!ua.enable"
-                            ng-options="contractor as contractor.fullName for contractor in contractors"
-                            ng-model="complexUa.uaContextFrontend.contractor"></select>
+                    <input type="text"
+                           ng-model="complexUa.uaContextFrontend.contractor"
+                           uib-typeahead="contractor as contractor.fullName for contractor in contractors | filter:$viewValue"
+                           ng-disabled="!complexUa.uaContextFrontend.enable"
+                           class="form-control">
                 </div>
                 <div class="col-xs-6">
                     <label for="position"
                            class="control-label">Должность</label>
                     <input type="text"
                            id="position"
-                           ng-disabled="!ua.enable"
+                           ng-disabled="!complexUa.uaContextFrontend.enable"
                            class="form-control"
                            ng-model="complexUa.uaContextFrontend.position"/>
                 </div>

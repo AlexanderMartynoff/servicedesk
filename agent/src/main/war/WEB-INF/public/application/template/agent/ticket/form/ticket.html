@@ -56,7 +56,7 @@
                     <div class="col-xs-4">
                         <label for="line-support" class="control-label">Линия поддержки</label>
                         <p class="input-group">
-                            <span class="input-group-btn" ng-if="ticket.supportLevel.number > 1">
+                            <span class="input-group-btn" ng-if="ticket.supportLevels.number > 1">
                                 <button type="button"
                                         class="btn btn-default"
                                         ng-click="doEscalation(-1)">
@@ -66,10 +66,10 @@
                             <input id="line-support"
                                    type="text"
                                    class="form-control"
-                                   value="{{ticket.supportLevel.number}} ({{ticket.supportLevel.title}})"
+                                   value="{{ticket.supportLevels.number}} ({{ticket.supportLevels.title}})"
                                    readonly/>
                             <span class="input-group-btn"
-                                  ng-if="ticket.supportLevel.number < supportLevelStore.length">
+                                  ng-if="ticket.supportLevels.number < supportLevelStore.length">
                                 <button type="button"
                                         class="btn btn-default"
                                         ng-click="doEscalation(1)">

@@ -36,9 +36,14 @@ public class UaContextFrontendService implements UserAccountService<UaContextFro
     }
 
     public void update(UaContextFrontend entity) {
+        UaContextFrontend ua  = (UaContextFrontend) session.get(UaContextFrontend.class, entity.getId());
+        ua.setContractor(entity.getContractor());
+        ua.setEnable(entity.getEnable());
+        ua.setPosition(entity.getPosition());
 
+        session.save(ua);
+        session.flush();
     }
-
 
     public List<UaContextFrontend> list() {
         return null;

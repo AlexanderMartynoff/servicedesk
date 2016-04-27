@@ -14,6 +14,9 @@ public class UaContextFrontend implements SlaveUserAccount{
     @Column
     private Boolean enable;
 
+    @Column
+    String position;
+
     @ManyToOne
     @JoinColumn(
         name = "uaContractorId",
@@ -58,5 +61,13 @@ public class UaContextFrontend implements SlaveUserAccount{
 
     public void setContractor(Contractor contractor) {
         this.contractor = contractor;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
