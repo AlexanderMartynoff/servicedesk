@@ -22,7 +22,7 @@
                     <input type="text"
                            ng-model="complexUa.uaContextFrontend.contractor"
                            uib-typeahead="contractor as contractor.fullName for contractor in contractors | filter:$viewValue"
-                           ng-disabled="!complexUa.uaContextFrontend.enable"
+                           ng-disabled="!complexUa.uaContextFrontend.enable || !contractors.length"
                            class="form-control">
                 </div>
                 <div class="col-xs-6">

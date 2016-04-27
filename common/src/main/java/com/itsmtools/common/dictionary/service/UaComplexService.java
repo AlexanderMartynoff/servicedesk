@@ -72,8 +72,15 @@ public class UaComplexService {
         globalService.update(complexUa.getUaGlobal());
 
         uaServiceMap.entrySet().stream()
-            .filter(e -> e.getKey() != null && e.getKey().getId() != null)
-            .forEach(e -> e.getValue().update(e.getKey()));
+            .filter(e -> e.getKey() != null)
+            .forEach(e -> {
+                if(e.getKey().getId() == null){
+                    e.getKey().setUaGlobal(complexUa.getUaGlobal());
+                    e.getValue().save(e.getKey());
+                }else{
+                    e.getValue().update(e.getKey());
+                }
+            });
     }
 
     private Map<SlaveUserAccount, UserAccountService> buildUaServiceMap(ComplexUa complexUa){
