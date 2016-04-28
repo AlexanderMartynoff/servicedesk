@@ -1,18 +1,4 @@
 <div ng-controller="UaContextCustomerFormController">
-
-    <div class="btn-toolbar x-margin-top-10" role="toolbar">
-        <div class="btn-group" role="group">
-            <button class="btn"
-                    ng-class="{
-                    'btn-success': !complexUa.uaContextFrontend.enable,
-                    'btn-danger': complexUa.uaContextFrontend.enable
-                    }"
-                    ng-click="complexUa.uaContextFrontend.enable = !complexUa.uaContextFrontend.enable">
-                {{complexUa.uaContextFrontend.enable ? 'Отключить' : 'Подключить'}}
-            </button>
-        </div>
-    </div>
-
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">

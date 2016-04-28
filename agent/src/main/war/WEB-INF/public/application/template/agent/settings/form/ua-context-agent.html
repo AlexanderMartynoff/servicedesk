@@ -1,18 +1,4 @@
 <div ng-controller="UaContextAgentFormController">
-
-    <div class="btn-toolbar x-margin-top-10" role="toolbar">
-        <div class="btn-group" role="group">
-            <button class="btn"
-                    ng-class="{
-                    'btn-success': !complexUa.uaContextBackend.enable,
-                    'btn-danger': complexUa.uaContextBackend.enable
-                    }"
-                    ng-click="complexUa.uaContextBackend.enable = !complexUa.uaContextBackend.enable">
-                {{complexUa.uaContextBackend.enable ? 'Отключить' : 'Подключить'}}
-            </button>
-        </div>
-    </div>
-
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">

@@ -1,10 +1,12 @@
 angular.module("backend.settings")
-  .controller("UserEditWindowController", function ($scope, $rootScope, uaComplex,
+  .controller("UserEditWindowController", function ($scope, $rootScope, uaComplex, UaCommonStub,
                                                     $uibModalInstance, UaComplexModel, uaService) {
 
     var tplRootUrl = '/public/application/template/agent/settings/form/';
 
     $scope.complexUa = uaComplex || new UaComplexModel();
+    $scope.complexUa.uaContextFrontend = $scope.complexUa.uaContextFrontend || new UaCommonStub();
+
     $scope.covered = false;
 
     $scope.tpl = {
@@ -22,6 +24,17 @@ angular.module("backend.settings")
     $scope.cancel = function () {
       $scope.covered = false;
       $uibModalInstance.close();
+    };
+
+    $scope.toggle = function($event, uaKey){
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      var ua = $scope.complexUa[uaKey];
+
+      if(ua){
+        ua.enable = !ua.enable;
+      }
     };
 
     $scope.save = function(complexUa){

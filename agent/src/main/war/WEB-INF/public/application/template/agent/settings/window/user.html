@@ -5,9 +5,9 @@
                 <h3 class="modal-title">{{complexUa.uaGlobal.id ? 'Редактирование' : 'Создание'}} пользователя</h3>
             </div>
             <div class="col-xs-2 text-right">
-                <a href="" class="btn btn-default btn-sm" ng-click="cancel()">
+                <button class="btn btn-default btn-sm" ng-click="cancel()">
                     <b class="fa fa-close"></b>
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -19,37 +19,65 @@
             </uib-tab>
 
             <uib-tab heading="Учетная запись контекста">
+
                 <div class="x-margin-top-10">
-                    <uib-tabset type="pills">
-                        <uib-tab heading="Клиент">
+                    <uib-accordion close-others="true">
+                        <uib-accordion-group>
+                            <uib-accordion-heading>
+                                Клиент <toggle ref="complexUa.uaContextFrontend" flag="enable"></toggle>
+                            </uib-accordion-heading>
                             <ng-include src="tpl.uaContextCustomer"></ng-include>
-                        </uib-tab>
-                        <uib-tab heading="Агент">
+                        </uib-accordion-group>
+                        <uib-accordion-group>
+                            <uib-accordion-heading>
+                                Агент <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
+                            </uib-accordion-heading>
                             <ng-include src="tpl.uaContextAgent"></ng-include>
-                        </uib-tab>
-                    </uib-tabset>
+                        </uib-accordion-group>
+                    </uib-accordion>
                 </div>
             </uib-tab>
 
             <uib-tab heading="Учетная запись группы">
+
                 <div class="x-margin-top-10">
-                    <uib-tabset type="pills">
-                        <uib-tab heading="Оператор">
+                    <uib-accordion close-others="true">
+                        <uib-accordion-group heading="Оператор">
+                            <uib-accordion-heading>
+                                Агент <toggle ref="complexUa.uaContextFrontend" flag="enable"></toggle>
+                            </uib-accordion-heading>
                             <ng-include src="tpl.uaGroupOperator"></ng-include>
-                        </uib-tab>
-                        <uib-tab heading="Менеджер">
+                        </uib-accordion-group>
+
+                        <uib-accordion-group>
+                            <uib-accordion-heading>
+                                Менеджер <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
+                            </uib-accordion-heading>
                             <ng-include src="tpl.uaGroupManager"></ng-include>
-                        </uib-tab>
-                        <uib-tab heading="Клиент">
+                        </uib-accordion-group>
+
+                        <uib-accordion-group>
+                            <uib-accordion-heading>
+                                Клиент <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
+                            </uib-accordion-heading>
+
                             <ng-include src="tpl.uaGroupCustomer"></ng-include>
-                        </uib-tab>
-                        <uib-tab heading="Исполнитель">
+                        </uib-accordion-group>
+
+                        <uib-accordion-group>
+                            <uib-accordion-heading>
+                                Исполнитель <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
+                            </uib-accordion-heading>
                             <ng-include src="tpl.uaGroupPerformer"></ng-include>
-                        </uib-tab>
-                        <uib-tab heading="Администратор">
+                        </uib-accordion-group>
+
+                        <uib-accordion-group>
+                            <uib-accordion-heading>
+                                Администратор <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
+                            </uib-accordion-heading>
                             <ng-include src="tpl.uaGroupAdmin"></ng-include>
-                        </uib-tab>
-                    </uib-tabset>
+                        </uib-accordion-group>
+                    </uib-accordion>
                 </div>
             </uib-tab>
 
@@ -59,13 +87,15 @@
     <div class="modal-footer">
         <button class="btn btn-primary"
                 ng-if="!complexUa.uaGlobal.id"
-                type="button" ng-click="save(complexUa)">Создать</button>
+                type="button" ng-click="save(complexUa)"><i class="fa fa-plus"></i> Создать</button>
 
         <button class="btn btn-primary"
                 ng-if="complexUa.uaGlobal.id"
                 ng-click="update(complexUa)"
-                type="button">Обновить</button>
+                type="button"> <i class="fa fa-refresh"></i> Обновить</button>
 
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Отмена</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">
+            <i class="fa fa-close"></i> Отмена
+        </button>
     </div>
 </cover>

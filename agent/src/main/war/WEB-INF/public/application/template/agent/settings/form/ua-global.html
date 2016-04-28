@@ -1,16 +1,5 @@
 <div ng-controller="UaGlobalFormController">
 
-    <div class="btn-toolbar x-margin-top-10" role="toolbar">
-        <div class="btn-group" role="group">
-            <button ng-class="{'btn-success': !complexUa.uaGlobal.enable,'btn-danger': complexUa.uaGlobal.enable}"
-                    type="button"
-                    class="btn"
-                    ng-click="complexUa.uaGlobal.enable = !complexUa.uaGlobal.enable">
-                {{complexUa.uaGlobal.enable ? 'Отключить' : 'Подключить'}}
-            </button>
-        </div>
-    </div>
-
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">
