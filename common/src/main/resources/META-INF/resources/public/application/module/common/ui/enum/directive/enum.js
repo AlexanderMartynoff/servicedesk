@@ -31,8 +31,6 @@ angular.module('common.ui.enum')
           }else{
             $scope.model.splice(index, 1);
           }
-
-          console.log($scope.model);
         };
       }
     }
