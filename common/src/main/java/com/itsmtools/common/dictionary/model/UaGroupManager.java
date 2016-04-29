@@ -19,7 +19,7 @@ public class UaGroupManager implements SlaveUserAccount{
     )
     private UaGlobal uaGlobal;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "ConcatUaGroupManagerSupportLevels",
         joinColumns = @JoinColumn(name = "uaGroupManagerId", referencedColumnName = "id"),

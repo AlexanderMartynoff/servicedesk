@@ -1,0 +1,18 @@
+<div class="btn-group btn-group-justified" role="group">
+    <div class="btn-group" ng-repeat="record in store">
+        <button type="button"
+                ng-class="{
+                'btn-success': $index % 2 === 0,
+                'btn-warning': $index % 2 !== 0
+                }"
+                ng-click="click(record)"
+                class="btn btn-secondary">
+            <i class="fa"
+               ng-class="{
+               'fa-dot-circle-o' : isIn(record),
+               'fa-circle-o' : !isIn(record)
+               }"></i>
+            {{record.title}}
+        </button>
+    </div>
+</div>

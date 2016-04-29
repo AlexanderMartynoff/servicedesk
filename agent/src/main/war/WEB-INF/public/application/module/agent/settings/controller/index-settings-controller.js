@@ -1,7 +1,7 @@
 angular.module("backend.settings")
   .controller("IndexSettingsController", function ($scope) {
 
-    $scope.active = + localStorage.getItem("agent.settings.tab.index") || 0;
+    $scope.active = +localStorage.getItem("agent.settings.tab.index") || 0;
 
     $scope.tabs = [
       {

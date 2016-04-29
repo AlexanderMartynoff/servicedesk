@@ -34,10 +34,10 @@ public class SqlDbUserDetailsService implements UserDetailsService {
         map.put("GroupOperator", ua.getUaGroupOperator());
         map.put("GroupPerformer", ua.getUaGroupPerformer());
 
-        map.entrySet().forEach((entry) -> {
-            if(entry.getValue() != null)
-                granted.add(new SimpleGrantedAuthority(entry.getKey()));
-        });
+        map.entrySet()
+            .stream()
+            .filter(e -> e.getValue() != null)
+            .forEach(e -> granted.add(new SimpleGrantedAuthority(e.getKey())));
 
         // for all case
         granted.add(new SimpleGrantedAuthority("Global"));

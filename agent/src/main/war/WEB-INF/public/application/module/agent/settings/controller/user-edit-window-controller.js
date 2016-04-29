@@ -1,12 +1,14 @@
 angular.module("backend.settings")
   .controller("UserEditWindowController", function ($scope, $rootScope, uaComplex, UaCommonStub,
-                                                    $uibModalInstance, UaComplexModel, uaService) {
+                                                    $uibModalInstance, UaComplexModel, uaService,
+                                                    supportLevelService) {
 
     var tplRootUrl = '/public/application/template/agent/settings/form/';
 
     $scope.complexUa = uaComplex || new UaComplexModel();
     $scope.complexUa.uaContextFrontend = $scope.complexUa.uaContextFrontend || new UaCommonStub();
-
+    $scope.complexUa.uaContextBackend = $scope.complexUa.uaContextBackend || new UaCommonStub();
+    $scope.complexUa.uaGroupManager = $scope.complexUa.uaGroupManager || new UaCommonStub();
     $scope.covered = false;
 
     $scope.tpl = {
@@ -26,15 +28,10 @@ angular.module("backend.settings")
       $uibModalInstance.close();
     };
 
-    $scope.toggle = function($event, uaKey){
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      var ua = $scope.complexUa[uaKey];
-
-      if(ua){
-        ua.enable = !ua.enable;
-      }
+    $scope.updateSupportLevelStore = function(){
+      supportLevelService.list().then(function(response){
+        $scope.supportLevelStore = response;
+      });
     };
 
     $scope.save = function(complexUa){
@@ -46,10 +43,15 @@ angular.module("backend.settings")
     };
 
     $scope.update = function(complexUa){
+
+      $scope.complexUa.uaGroupManager.supportLevels = [];
+
       $scope.covered = true;
       uaService.updateComplex(complexUa).then(function(response){
         $rootScope.$broadcast('ua::change');
         $scope.cancel();
       });
     };
+
+    $scope.updateSupportLevelStore();
   });

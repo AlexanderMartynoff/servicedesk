@@ -1,14 +1,15 @@
 package com.itsmtools.common.dictionary.service;
 
 
+import com.itsmtools.common.dictionary.model.SupportLevel;
 import com.itsmtools.common.dictionary.model.UaGlobal;
 import com.itsmtools.common.dictionary.model.UaGroupManager;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 
 @Service
@@ -35,7 +36,13 @@ public class UaGroupManagerService implements UserAccountService<UaGroupManager,
         session.flush();
     }
 
-    public void update(UaGroupManager entity) {}
+    public void update(UaGroupManager entity) {
+        UaGroupManager uaGroupManager = (UaGroupManager) session.get(UaGroupManager.class, entity.getId());
+        uaGroupManager.setSupportLevels(entity.getSupportLevels());
+
+        session.save(uaGroupManager);
+        session.flush();
+    }
 
     public List<UaGroupManager> list() {
         return null;
