@@ -10,7 +10,9 @@ angular.module('common.ui.enum')
       controller: function($scope){
 
         $scope.isIn = function(record){
-          return Array.isArray($scope.model) ? $scope.model.indexOf(record) != -1: false;
+          return Array.isArray($scope.model) ? $scope.model.map(function(e){
+            return e.id;
+          }).indexOf(record.id) != -1: false;
         };
 
         $scope.click = function(record){
@@ -22,13 +24,15 @@ angular.module('common.ui.enum')
             $scope.model = $scope.store.map(function(e){ return e });
           }
 
-          index = $scope.model.indexOf(record);
+          index = $scope.model.map(function(e){ return e.id }).indexOf(record.id);
 
           if(index == -1){
             $scope.model.push(record);
           }else{
             $scope.model.splice(index, 1);
           }
+
+          console.log($scope.model);
         };
       }
     }

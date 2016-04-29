@@ -43,9 +43,6 @@ angular.module("backend.settings")
     };
 
     $scope.update = function(complexUa){
-
-      $scope.complexUa.uaGroupManager.supportLevels = [];
-
       $scope.covered = true;
       uaService.updateComplex(complexUa).then(function(response){
         $rootScope.$broadcast('ua::change');
