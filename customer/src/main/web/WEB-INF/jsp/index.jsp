@@ -7,13 +7,17 @@
     </head>
     <body>
         <div>
-            <nav class="navbar navbar-default navbar-fixed-top" ng-controller="CustomerNavMenu">
+            <nav class="navbar navbar-default navbar-fixed-top" ng-controller="CustomerToolbar">
                 <div class="container-fluid">
                     <div id="navbar" class="navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li ng-class="{active: activeItem == 'profile'}"
-                                ng-click="activeItem = 'profile'">
-                                <a href="#/profile"><i class="fa fa-left fa-info"></i></a>
+                        <ul class="nav navbar-nav user-info">
+                            <li>
+                                <a href="#"
+                                   popover-title="{{contractor.fullName || '---'}}"
+                                   popover-placement="auto"
+                                   uib-popover-template="infoPopoverTplUrl">
+                                    <i class="fa fa-left fa-info"></i>
+                                </a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">

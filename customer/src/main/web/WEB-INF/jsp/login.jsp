@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
 <!doctype html>
-<html>
+<html ng-cloack>
     <head>
         <jsp:include page="partial/head.jsp"/>
         <style type="text/css">

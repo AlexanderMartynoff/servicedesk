@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8" %>
-<%--@elvariable id="principal" type="com.itsmtools.common.service.security.Principal"--%>
 
 <!doctype html>
 <html ng-controller="RootController" ng-cloak>

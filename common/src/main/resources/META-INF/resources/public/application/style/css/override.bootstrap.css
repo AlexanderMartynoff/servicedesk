@@ -109,3 +109,9 @@ h1 {
 [tabindex]{
     outline: none !important;
 }
+.popover{
+    max-width: none !important;
+}
+.popover *{
+    font-size: 13px !important;
+}

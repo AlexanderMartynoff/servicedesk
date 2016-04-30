@@ -226,3 +226,6 @@ textarea {
 .users-table .group-col{
     width: 30%;
 }
+.customer-user-info-popup{
+    width: 300px;
+}
