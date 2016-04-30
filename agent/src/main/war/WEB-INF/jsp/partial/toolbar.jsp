@@ -1,8 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
-<%--@elvariable id="principal" type="com.itsmtools.common.service.security.Principal"--%>
-
-<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="ApplicationMenu">
+<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="ApplicationToolbar">
     <div class="navbar-collapse collapse">
 
         <div class="container-fluid">
@@ -18,7 +16,9 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span>${principal.ua.uaGlobal.firstName} ${principal.ua.uaGlobal.secondName}</span>
+                                        <span>
+                                            {{firstName}} {{secondName}} ({{position}})
+                                        </span>
                                     </h3>
                                 </div>
                                 <div class="panel-body">
@@ -100,8 +100,6 @@
                     </a>
                 </li>
             </ul>
-
         </div>
-
     </div>
 </div>

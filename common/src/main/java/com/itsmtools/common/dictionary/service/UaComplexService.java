@@ -41,7 +41,7 @@ public class UaComplexService {
             .addOrder(Order.desc("id"))
             .list()
             .stream()
-            .map((e) -> buildByUaGlobal((UaGlobal) e))
+            .map(e -> buildByUaGlobal((UaGlobal) e))
             .collect(Collectors.toList());
     }
 

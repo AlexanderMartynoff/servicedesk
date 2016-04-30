@@ -12,11 +12,13 @@ class JsConcat extends DefaultTask {
   def srcDirName
   def targetFileUri
   def externalInfo
+  def outFile
 
   @TaskAction
   void concat() {
     def srcFiles = []
     srcDirName = srcDirName instanceof Collection ? srcDirName : [srcDirName]
+
     srcDirName.forEach {
       new File(it).eachFileRecurse {
         if (it.isFile() && it.absolutePath =~ filterPattern) {
@@ -37,7 +39,10 @@ class JsConcat extends DefaultTask {
       }
     }
 
-    (new File(targetFileUri)).text = "// @count ${srcFiles.size()}\n" +
-      "$externalInfo\n" + srcFiles.collect { it.text }.join("\n")
+    outFile = new File(targetFileUri)
+
+    outFile.text = "// @count ${srcFiles.size()}\n"
+    outFile.text += "$externalInfo\n"
+    outFile.text += srcFiles.collect { it.text }.join("\n")
   }
 }

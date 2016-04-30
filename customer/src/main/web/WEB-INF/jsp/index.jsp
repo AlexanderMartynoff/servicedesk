@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
 <!doctype html>
-<html ng-app="customer.application">
+<html>
     <head>
         <jsp:include page="./partial/head.jsp"/>
     </head>

@@ -2,7 +2,6 @@ package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
-import com.itsmtools.common.dictionary.model.UaGroupAdmin;
 import com.itsmtools.common.dictionary.model.UaGroupOperator;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

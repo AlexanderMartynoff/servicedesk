@@ -54,15 +54,4 @@ public class SupportLevel {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public boolean equals(Object other){
-        if(other instanceof SupportLevel){
-            return id.equals(((SupportLevel) other).id);
-        }
-        return super.equals(other);
-    }
-
-    public int hashCode(){
-        return id != null ? id : 0;
-    }
 }

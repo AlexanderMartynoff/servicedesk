@@ -15,24 +15,24 @@
     <div class="modal-body">
         <uib-tabset>
             <uib-tab heading="Глобальная учетная запись">
-                <ng-include src="tpl.uaGlobal"></ng-include>
+                <ng-include src="tplDir + 'ua-global.html'"></ng-include>
             </uib-tab>
 
             <uib-tab heading="Учетная запись контекста">
 
                 <div class="x-margin-top-10">
-                    <uib-accordion close-others="true">
-                        <uib-accordion-group>
+                    <uib-accordion>
+                        <uib-accordion-group is-open="ctxFrtOpen">
                             <uib-accordion-heading>
                                 Клиент <toggle ref="complexUa.uaContextFrontend" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tpl.uaContextCustomer"></ng-include>
+                            <ng-include src="tplDir + 'ua-context-customer.html'"></ng-include>
                         </uib-accordion-group>
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Агент <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tpl.uaContextAgent"></ng-include>
+                            <ng-include src="tplDir + 'ua-context-agent.html'"></ng-include>
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>
@@ -42,18 +42,18 @@
 
                 <div class="x-margin-top-10">
                     <uib-accordion close-others="true">
-                        <uib-accordion-group heading="Оператор">
+                        <uib-accordion-group>
                             <uib-accordion-heading>
                                 Оператор <toggle ref="complexUa.uaGroupOperator" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tpl.uaGroupOperator"></ng-include>
+                            <ng-include src="tplDir + 'ua-group-operator.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Менеджер <toggle ref="complexUa.uaGroupManager" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tpl.uaGroupManager"></ng-include>
+                            <ng-include src="tplDir + 'ua-group-manager.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
@@ -61,26 +61,25 @@
                                 Клиент <toggle ref="complexUa.uaGroupCustomer" flag="enable"></toggle>
                             </uib-accordion-heading>
 
-                            <ng-include src="tpl.uaGroupCustomer"></ng-include>
+                            <ng-include src="tplDir + 'ua-group-customer.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Исполнитель <toggle ref="complexUa.uaGroupPerformer" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tpl.uaGroupPerformer"></ng-include>
+                            <ng-include src="tplDir + 'ua-group-performer.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Администратор <toggle ref="complexUa.uaGroupAdmin" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tpl.uaGroupAdmin"></ng-include>
+                            <ng-include src="tplDir + 'ua-group-admin.html'"></ng-include>
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>
             </uib-tab>
-
         </uib-tabset>
     </div>
 
@@ -94,7 +93,7 @@
                 ng-click="update(complexUa)"
                 type="button"> <i class="fa fa-refresh"></i> Обновить</button>
 
-        <button class="btn btn-warning" type="button" ng-click="cancel()">
+        <button class="btn btn-danger" type="button" ng-click="cancel()">
             <i class="fa fa-close"></i> Отмена
         </button>
     </div>
