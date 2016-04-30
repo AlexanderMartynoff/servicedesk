@@ -35,6 +35,7 @@ public class UaGlobalService implements UserAccountService<UaGlobal, UaGlobal> {
     public void update(UaGlobal entity) {
         UaGlobal uaGlobal = (UaGlobal) session.get(UaGlobal.class, entity.getId());
 
+        uaGlobal.setLogin(entity.getLogin());
         uaGlobal.setFirstName(entity.getFirstName());
         uaGlobal.setSecondName(entity.getSecondName());
         uaGlobal.setPassword(entity.getPassword());

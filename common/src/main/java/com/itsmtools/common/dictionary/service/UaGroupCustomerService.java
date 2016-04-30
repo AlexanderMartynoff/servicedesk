@@ -2,7 +2,7 @@ package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
-import com.itsmtools.common.dictionary.model.UaGroupAdmin;
+import com.itsmtools.common.dictionary.model.UaGroupCustomer;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +13,38 @@ import java.util.Optional;
 
 
 @Service
-public class UaGroupAdminService implements UserAccountService<UaGroupAdmin, UaGlobal> {
+public class UaGroupCustomerService implements UserAccountService<UaGroupCustomer, UaGlobal> {
 
     @Autowired
     private Session session;
 
-    public Optional<UaGroupAdmin> get(Integer id) {
+    public Optional<UaGroupCustomer> get(Integer id) {
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<UaGroupAdmin> getByUaGlobal(UaGlobal uaGlobal) {
-        return session.createCriteria(UaGroupAdmin.class)
+    public Optional<UaGroupCustomer> getByUaGlobal(UaGlobal uaGlobal) {
+        return session.createCriteria(UaGroupCustomer.class)
             .add(Restrictions.eq("uaGlobal", uaGlobal))
             .list()
             .stream()
             .findFirst();
     }
 
-    public void save(UaGroupAdmin entity) {
+    public void save(UaGroupCustomer entity) {
         session.save(entity);
         session.flush();
     }
 
-    public void update(UaGroupAdmin entity) {
-        UaGroupAdmin uaGroupAdmin = (UaGroupAdmin) session.get(UaGroupAdmin.class, entity.getId());
-        uaGroupAdmin.setEnable(entity.getEnable());
+    public void update(UaGroupCustomer request) {
+        UaGroupCustomer record = (UaGroupCustomer) session.get(UaGroupCustomer.class, request.getId());
+        record.setEnable(request.getEnable());
 
-        session.save(uaGroupAdmin);
+        session.save(record);
         session.flush();
     }
 
-    public List<UaGroupAdmin> list() {
+    public List<UaGroupCustomer> list() {
         return null;
     }
 }

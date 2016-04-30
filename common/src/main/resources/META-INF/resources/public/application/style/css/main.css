@@ -33,7 +33,6 @@ textarea {
 }
 
 .x-table-clickable tr:hover {
-    text-decoration: underline;
 }
 .x-no-margin{
     margin: 0 !important;
@@ -50,7 +49,9 @@ textarea {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
+.margin-right-5{
+    margin-right: 5px;
+}
 .center {
     text-align: center;
 }
@@ -206,4 +207,22 @@ textarea {
 }
 .x-app-menu .list-group{
     margin: 0 !important;
+}
+.user-table-label{
+    margin-right: 3px !important;
+    font-weight: bold !important;
+    font-size: 10px !important;
+    border-radius: 3px !important;
+    padding: 3px !important;
+}
+.users-table .login-col{
+    width: 40%;
+}
+
+.users-table .application-col{
+    width: 30%;
+}
+
+.users-table .group-col{
+    width: 30%;
 }

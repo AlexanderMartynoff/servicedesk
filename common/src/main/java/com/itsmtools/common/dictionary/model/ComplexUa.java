@@ -10,6 +10,7 @@ public class ComplexUa{
     private UaGroupManager uaGroupManager;
     private UaGroupOperator uaGroupOperator;
     private UaGroupPerformer uaGroupPerformer;
+    private UaGroupCustomer uaGroupCustomer;
 
     public UaGlobal getUaGlobal() {
         return uaGlobal;
@@ -65,5 +66,13 @@ public class ComplexUa{
 
     public void setUaGroupPerformer(UaGroupPerformer uaGroupPerformer) {
         this.uaGroupPerformer = uaGroupPerformer;
+    }
+
+    public UaGroupCustomer getUaGroupCustomer() {
+        return uaGroupCustomer;
+    }
+
+    public void setUaGroupCustomer(UaGroupCustomer uaGroupCustomer) {
+        this.uaGroupCustomer = uaGroupCustomer;
     }
 }

@@ -12,6 +12,9 @@ public class UaGroupPerformer implements SlaveUserAccount{
     @GeneratedValue
     private Integer id;
 
+    @Column
+    private Boolean enable;
+
     @OneToOne
     @JoinColumn(
         name = "uaGlobalId",
@@ -49,5 +52,13 @@ public class UaGroupPerformer implements SlaveUserAccount{
 
     public void setSupportLevels(Set<SupportLevel> supportLevels) {
         this.supportLevels = supportLevels;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

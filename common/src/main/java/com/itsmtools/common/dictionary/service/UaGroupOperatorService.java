@@ -2,6 +2,7 @@ package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.UaGlobal;
+import com.itsmtools.common.dictionary.model.UaGroupAdmin;
 import com.itsmtools.common.dictionary.model.UaGroupOperator;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -36,7 +37,13 @@ public class UaGroupOperatorService implements UserAccountService<UaGroupOperato
         session.flush();
     }
 
-    public void update(UaGroupOperator entity) {}
+    public void update(UaGroupOperator entity) {
+        UaGroupOperator uaGroupOperator = (UaGroupOperator) session.get(UaGroupOperator.class, entity.getId());
+        uaGroupOperator.setEnable(entity.getEnable());
+
+        session.save(uaGroupOperator);
+        session.flush();
+    }
 
     public List<UaGroupOperator> list() {
         return null;

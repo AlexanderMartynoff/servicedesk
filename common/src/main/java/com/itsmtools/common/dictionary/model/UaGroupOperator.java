@@ -12,6 +12,9 @@ public class UaGroupOperator implements SlaveUserAccount{
     @GeneratedValue
     private Integer id;
 
+    @Column
+    private Boolean enable;
+
     @OneToOne
     @JoinColumn(
         name = "uaGlobalId",
@@ -33,5 +36,13 @@ public class UaGroupOperator implements SlaveUserAccount{
 
     public void setUaGlobal(UaGlobal uaGlobal) {
         this.uaGlobal = uaGlobal;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

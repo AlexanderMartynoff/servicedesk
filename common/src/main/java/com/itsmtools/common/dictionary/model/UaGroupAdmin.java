@@ -19,6 +19,9 @@ public class UaGroupAdmin implements SlaveUserAccount{
     )
     private UaGlobal uaGlobal;
 
+    @Column
+    private Boolean enable;
+
     public Integer getId() {
         return id;
     }
@@ -35,5 +38,13 @@ public class UaGroupAdmin implements SlaveUserAccount{
     @Override
     public void setUaGlobal(UaGlobal uaGlobal) {
         this.uaGlobal = uaGlobal;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

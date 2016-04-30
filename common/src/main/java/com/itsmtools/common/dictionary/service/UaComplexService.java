@@ -23,6 +23,8 @@ public class UaComplexService {
     @Autowired
     private UaContextBackendService contextBackendService;
     @Autowired
+    private UaGroupCustomerService customerService;
+    @Autowired
     private UaContextFrontendService contextFrontendService;
     @Autowired
     private UaGroupAdminService groupAdminService;
@@ -86,6 +88,7 @@ public class UaComplexService {
     private Map<SlaveUserAccount, UserAccountService> buildUaServiceMap(ComplexUa complexUa){
         Map<SlaveUserAccount, UserAccountService> uaServiceMap = new HashMap<>();
 
+        uaServiceMap.put(complexUa.getUaGroupCustomer(), customerService);
         uaServiceMap.put(complexUa.getUaContextBackend(), contextBackendService);
         uaServiceMap.put(complexUa.getUaContextFrontend(), contextFrontendService);
         uaServiceMap.put(complexUa.getUaGroupAdmin(), groupAdminService);
@@ -101,6 +104,7 @@ public class UaComplexService {
         ComplexUa complexUa = new ComplexUa();
         complexUa.setUaGlobal(global);
 
+        customerService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupCustomer);
         contextBackendService.getByUaGlobal(global).ifPresent(complexUa::setUaContextBackend);
         contextFrontendService.getByUaGlobal(global).ifPresent(complexUa::setUaContextFrontend);
         groupAdminService.getByUaGlobal(global).ifPresent(complexUa::setUaGroupAdmin);

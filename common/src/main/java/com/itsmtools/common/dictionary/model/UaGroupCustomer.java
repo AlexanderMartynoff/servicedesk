@@ -1,19 +1,16 @@
 package com.itsmtools.common.dictionary.model;
 
+
 import javax.persistence.*;
-import java.util.Set;
 
 
 @Entity
-public class UaGroupManager implements SlaveUserAccount{
+public class UaGroupCustomer implements SlaveUserAccount{
 
     @Id
     @Column
     @GeneratedValue
     private Integer id;
-
-    @Column
-    private Boolean enable;
 
     @OneToOne
     @JoinColumn(
@@ -22,13 +19,8 @@ public class UaGroupManager implements SlaveUserAccount{
     )
     private UaGlobal uaGlobal;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "ConcatUaGroupManagerSupportLevels",
-        joinColumns = @JoinColumn(name = "uaGroupManagerId", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "supportLevelId", referencedColumnName = "id")
-    )
-    private Set<SupportLevel> supportLevels;
+    @Column
+    private Boolean enable;
 
     public Integer getId() {
         return id;
@@ -38,20 +30,14 @@ public class UaGroupManager implements SlaveUserAccount{
         this.id = id;
     }
 
+    @Override
     public UaGlobal getUaGlobal() {
         return uaGlobal;
     }
 
+    @Override
     public void setUaGlobal(UaGlobal uaGlobal) {
         this.uaGlobal = uaGlobal;
-    }
-
-    public Set<SupportLevel> getSupportLevels() {
-        return supportLevels;
-    }
-
-    public void setSupportLevels(Set<SupportLevel> supportLevels) {
-        this.supportLevels = supportLevels;
     }
 
     public Boolean getEnable() {

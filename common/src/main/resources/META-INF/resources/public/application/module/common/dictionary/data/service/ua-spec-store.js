@@ -28,6 +28,10 @@ angular.module("common.dictionary.data")
       uaGroupPerformer: {
         type: "group",
         label: "Исполнитель"
+      },
+      uaGroupCustomer: {
+        type: "group",
+        label: "Клиент"
       }
     };
   });

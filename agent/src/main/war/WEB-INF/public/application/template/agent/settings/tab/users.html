@@ -12,25 +12,29 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <table class="table table-striped table-hover x-table-clickable">
+            <table class="table x-table-clickable table-striped table-hover users-table">
                 <thead>
                     <tr>
-                        <th>Имя корневой учетной записи</th>
-                        <th>Контексты</th>
-                        <th>Группы</th>
+                        <th class="login-col">Логин</th>
+                        <th class="application-col">Приложения</th>
+                        <th class="group-col">Роли</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="user in paginator.getCurrentPage()" ng-click="openUser(user.$$complexUa)">
                         <td>{{user.login}}</td>
                         <td>
-                            <span ng-repeat="context in user.contexts">
-                                <a href="#">{{context.label}}</a>{{$last ? '' : ' |'}}
+                            <span class="user-table-label label label-info"
+                                  ng-if="context.enable"
+                                  ng-repeat="context in user.contexts">
+                                {{context.label}}
                             </span>
                         </td>
                         <td>
-                            <span ng-repeat="group in user.groups">
-                                <a href="#">{{group.label}}</a>{{$last ? '' : ' |'}}
+                            <span class="user-table-label label label-success"
+                                  ng-if="group.enable"
+                                  ng-repeat="group in user.groups">
+                                {{group.label}}
                             </span>
                         </td>
                     </tr>

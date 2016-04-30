@@ -39,6 +39,7 @@ public class UaGroupManagerService implements UserAccountService<UaGroupManager,
     public void update(UaGroupManager entity) {
         UaGroupManager uaGroupManager = (UaGroupManager) session.get(UaGroupManager.class, entity.getId());
         uaGroupManager.setSupportLevels(entity.getSupportLevels());
+        uaGroupManager.setEnable(entity.getEnable());
 
         session.save(uaGroupManager);
         session.flush();
