@@ -22,7 +22,9 @@ public class PerformerService {
 
     public void save(UaGlobal entity) {}
 
-    public void update(UaGlobal entity) {}
+    public void update(UaGlobal entity) {
+
+    }
 
     public void delete(Integer id) {
         Optional.ofNullable(session.get(UaGlobal.class, id)).ifPresent((i) -> {

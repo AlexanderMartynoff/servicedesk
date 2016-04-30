@@ -35,7 +35,13 @@ public class UaGroupPerformerService implements UserAccountService<UaGroupPerfor
         session.flush();
     }
 
-    public void update(UaGroupPerformer entity) {}
+    public void update(UaGroupPerformer entity) {
+        UaGroupPerformer ua = (UaGroupPerformer) session.get(UaGroupPerformer.class, entity.getId());
+        ua.setSupportLevels(entity.getSupportLevels());
+
+        session.save(ua);
+        session.flush();
+    }
 
     public List<UaGroupPerformer> list() {
         return null;

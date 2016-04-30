@@ -18,7 +18,7 @@ angular.module('backend.settings')
         });
 
         scope.$watch('model', function(newValue){
-          if(newValue[attr.flag]){
+          if(newValue && newValue[attr.flag]){
             element.removeClass('fa-circle-o');
             element.addClass('fa-dot-circle-o');
           }else{
