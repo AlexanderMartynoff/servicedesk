@@ -2,7 +2,8 @@
     <div class="modal-header">
         <div class="row">
             <div class="col-xs-10">
-                <h3 class="modal-title">{{complexUa.uaGlobal.id ? 'Редактирование' : 'Создание'}} пользователя</h3>
+                <h3 ng-if="false" class="modal-title">{{complexUa.uaGlobal.id ? 'Редактирование' : 'Создание'}} пользователя</h3>
+                <h3 class="modal-title">Пользователь</h3>
             </div>
             <div class="col-xs-2 text-right">
                 <button class="btn btn-default btn-sm" ng-click="cancel()">
@@ -14,11 +15,11 @@
 
     <div class="modal-body">
         <uib-tabset>
-            <uib-tab heading="Глобальная учетная запись">
+            <uib-tab heading="Аккаунт">
                 <ng-include src="tplDir + 'ua-global.html'"></ng-include>
             </uib-tab>
 
-            <uib-tab heading="Учетная запись контекста">
+            <uib-tab heading="Приложения">
 
                 <div class="x-margin-top-10">
                     <uib-accordion>
@@ -38,7 +39,7 @@
                 </div>
             </uib-tab>
 
-            <uib-tab heading="Учетная запись группы">
+            <uib-tab heading="Роли">
 
                 <div class="x-margin-top-10">
                     <uib-accordion close-others="true">

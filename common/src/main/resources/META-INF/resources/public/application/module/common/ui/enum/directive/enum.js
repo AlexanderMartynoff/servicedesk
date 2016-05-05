@@ -2,7 +2,7 @@ angular.module('common.ui.enum')
   .directive('enum', function(){
     return {
       restrict: 'E',
-      templateUrl: '/public/template/common/ui/enum/enum.html',
+      templateUrl: '/public/application/template/common/ui/enum/enum.html',
       scope: {
         model: '=',
         store: '='
