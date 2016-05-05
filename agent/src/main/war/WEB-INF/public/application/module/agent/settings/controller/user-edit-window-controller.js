@@ -6,9 +6,9 @@ angular.module("backend.settings")
 
     $scope.tplDir = '/public/application/template/agent/settings/form/';
     $scope.user = uaComplex || new UaComplexModel();
-    $scope.user.uaContextFrontend = $scope.user.uaContextFrontend || new UaCommonStub();
-    $scope.user.uaContextBackend = $scope.user.uaContextBackend || new UaCommonStub();
-    $scope.user.uaGroupManager = $scope.user.uaGroupManager || new UaCommonStub();
+    $scope.user.customer = $scope.user.customer || new UaCommonStub();
+    $scope.user.agent = $scope.user.agent || new UaCommonStub();
+    $scope.user.agentManager = $scope.user.agentManager || new UaCommonStub();
 
     $scope.covered = false;
 
@@ -23,7 +23,7 @@ angular.module("backend.settings")
       });
     };
 
-    $scope.save = function(complexUa){
+    $scope.save = function(user){
       $scope.covered = true;
       uaService.saveComplex(user).then(function(response){
         $rootScope.$broadcast('ua::change');
@@ -31,7 +31,7 @@ angular.module("backend.settings")
       });
     };
 
-    $scope.update = function(complexUa){
+    $scope.update = function(user){
       $scope.covered = true;
       uaService.updateComplex(user).then(function(response){
         $rootScope.$broadcast('ua::change');
