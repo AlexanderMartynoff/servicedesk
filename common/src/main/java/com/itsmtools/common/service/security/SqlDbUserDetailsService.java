@@ -1,8 +1,8 @@
 package com.itsmtools.common.service.security;
 
 
-import com.itsmtools.common.dictionary.model.ComplexUa;
-import com.itsmtools.common.dictionary.service.UaComplexService;
+import com.itsmtools.common.dictionary.model.User;
+import com.itsmtools.common.dictionary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,18 +21,18 @@ public class SqlDbUserDetailsService implements UserDetailsService {
     private Map<String, Object> map = new HashMap<>();
 
     @Autowired
-    private UaComplexService uaService;
+    private UserService uaService;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        ComplexUa ua = uaService.getByLogin(login)
+        User ua = uaService.getByLogin(login)
             .orElseThrow(() -> new UsernameNotFoundException("No such user"));
 
-        map.put("ContextBackend", ua.getUaContextBackend());
-        map.put("ContextFrontend", ua.getUaContextFrontend());
-        map.put("GroupAdmin", ua.getUaGroupAdmin());
-        map.put("GroupOperator", ua.getUaGroupOperator());
-        map.put("GroupPerformer", ua.getUaGroupPerformer());
+        map.put("ContextBackend", ua.getAgent());
+        map.put("ContextFrontend", ua.getCustomer());
+        map.put("GroupAdmin", ua.getAgentAdmin());
+        map.put("GroupOperator", ua.getAgentOperator());
+        map.put("GroupPerformer", ua.getAgentPerformer());
 
         map.entrySet()
             .stream()

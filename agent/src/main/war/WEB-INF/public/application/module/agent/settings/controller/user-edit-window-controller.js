@@ -3,13 +3,12 @@ angular.module("backend.settings")
                                                     $uibModalInstance, UaComplexModel, uaService,
                                                     supportLevelService) {
 
-    var tplRootUrl = '/public/application/template/agent/settings/form/';
 
-    $scope.tplDir = tplRootUrl;
-    $scope.complexUa = uaComplex || new UaComplexModel();
-    $scope.complexUa.uaContextFrontend = $scope.complexUa.uaContextFrontend || new UaCommonStub();
-    $scope.complexUa.uaContextBackend = $scope.complexUa.uaContextBackend || new UaCommonStub();
-    $scope.complexUa.uaGroupManager = $scope.complexUa.uaGroupManager || new UaCommonStub();
+    $scope.tplDir = '/public/application/template/agent/settings/form/';
+    $scope.user = uaComplex || new UaComplexModel();
+    $scope.user.uaContextFrontend = $scope.user.uaContextFrontend || new UaCommonStub();
+    $scope.user.uaContextBackend = $scope.user.uaContextBackend || new UaCommonStub();
+    $scope.user.uaGroupManager = $scope.user.uaGroupManager || new UaCommonStub();
 
     $scope.covered = false;
 
@@ -26,7 +25,7 @@ angular.module("backend.settings")
 
     $scope.save = function(complexUa){
       $scope.covered = true;
-      uaService.saveComplex(complexUa).then(function(response){
+      uaService.saveComplex(user).then(function(response){
         $rootScope.$broadcast('ua::change');
         $scope.cancel();
       });
@@ -34,7 +33,7 @@ angular.module("backend.settings")
 
     $scope.update = function(complexUa){
       $scope.covered = true;
-      uaService.updateComplex(complexUa).then(function(response){
+      uaService.updateComplex(user).then(function(response){
         $rootScope.$broadcast('ua::change');
         $scope.cancel();
       });

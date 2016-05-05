@@ -4,10 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
-public class UaGlobal {
+@Table(name = "account")
+public class Account {
 
     @Id
     @Column
@@ -32,12 +34,12 @@ public class UaGlobal {
     @Column
     private Boolean enable;
 
-    public UaGlobal(String login, String password){
+    public Account(String login, String password){
         this.login = login;
         this.password = password;
     }
 
-    public UaGlobal(){}
+    public Account(){}
 
     public Integer getId() {
         return id;

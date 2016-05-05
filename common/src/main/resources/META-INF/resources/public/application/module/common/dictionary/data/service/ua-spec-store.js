@@ -1,35 +1,35 @@
 angular.module("common.dictionary.data")
   .factory("uaSpecStore", function () {
     return {
-      uaGlobal: {
-        type: "global",
+      account: {
+        type: "account",
         label: "Глобальная учетная запись"
       },
-      uaContextBackend: {
-        type: "context",
+      agent: {
+        type: "application",
         label: "Агент"
       },
-      uaContextFrontend: {
-        type: "context",
+      customer: {
+        type: "application",
         label: "Клиент"
       },
-      uaGroupAdmin: {
+      agentAdmin: {
         type: "group",
         label: "Администратор"
       },
-      uaGroupManager: {
+      agentManager: {
         type: "group",
         label: "Менеджер"
       },
-      uaGroupOperator: {
+      agentOperator: {
         type: "group",
         label: "Оператор"
       },
-      uaGroupPerformer: {
+      agentPerformer: {
         type: "group",
         label: "Исполнитель"
       },
-      uaGroupCustomer: {
+      customerCustomer: {
         type: "group",
         label: "Клиент"
       }

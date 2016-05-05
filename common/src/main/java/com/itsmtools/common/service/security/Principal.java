@@ -1,21 +1,21 @@
 package com.itsmtools.common.service.security;
 
 
-import com.itsmtools.common.dictionary.model.ComplexUa;
+import com.itsmtools.common.dictionary.model.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+
 import java.util.List;
 
 
-public class Principal extends User {
-    private ComplexUa ua;
+public class Principal extends org.springframework.security.core.userdetails.User {
+    private User user;
 
-    public Principal(ComplexUa ua, List<SimpleGrantedAuthority> grantedAuthorities) {
-        super(ua.getUaGlobal().getLogin(), ua.getUaGlobal().getPassword(), grantedAuthorities);
-        this.ua = ua;
+    public Principal(User user, List<SimpleGrantedAuthority> grantedAuthorities) {
+        super(user.getAccount().getLogin(), user.getAccount().getPassword(), grantedAuthorities);
+        this.user = user;
     }
 
-    public ComplexUa getUa() {
-        return ua;
+    public User getUser() {
+        return user;
     }
 }

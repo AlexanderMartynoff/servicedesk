@@ -22,14 +22,13 @@ angular.module("common.dictionary.data")
                 ua.label = uaSpec.label;
 
                 switch (uaSpec.type) {
-                  case "global":
-                    //angular.extend(record, ua);
+                  case "account":
                     record.login = ua.login;
                     break;
                   case "group":
                     record.groups.push(ua);
                     break;
-                  case "context":
+                  case "application":
                     record.contexts.push(ua);
                 }
 

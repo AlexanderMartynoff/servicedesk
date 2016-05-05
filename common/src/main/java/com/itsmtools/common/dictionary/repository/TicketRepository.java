@@ -35,7 +35,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
             request.setProgress(100);
         }
 
-        request.setAuthor(getPrincipal().getUa().getUaGlobal());
+        request.setAuthor(getPrincipal().getUser().getAccount());
         session.save(request);
         session.flush();
     }

@@ -1,11 +1,11 @@
 package com.itsmtools.common.dictionary.model;
 
-
 import javax.persistence.*;
 
 
 @Entity
-public class UaGroupOperator implements SlaveUserAccount{
+@Table(name = "profile_agent")
+public class ProfileAgent implements Profile {
 
     @Id
     @Column
@@ -15,12 +15,15 @@ public class UaGroupOperator implements SlaveUserAccount{
     @Column
     private Boolean enable;
 
+    @Column
+    String position;
+
     @OneToOne
     @JoinColumn(
-        name = "uaGlobalId",
+        name = "account_id",
         referencedColumnName = "id"
     )
-    private UaGlobal uaGlobal;
+    private Account account;
 
     public Integer getId() {
         return id;
@@ -30,12 +33,12 @@ public class UaGroupOperator implements SlaveUserAccount{
         this.id = id;
     }
 
-    public UaGlobal getUaGlobal() {
-        return uaGlobal;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUaGlobal(UaGlobal uaGlobal) {
-        this.uaGlobal = uaGlobal;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Boolean getEnable() {
@@ -44,5 +47,13 @@ public class UaGroupOperator implements SlaveUserAccount{
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

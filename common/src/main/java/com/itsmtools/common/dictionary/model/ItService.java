@@ -1,14 +1,11 @@
 package com.itsmtools.common.dictionary.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
+@Table(name = "it_service")
 public class ItService {
-
     @Id
     @Column
     @GeneratedValue

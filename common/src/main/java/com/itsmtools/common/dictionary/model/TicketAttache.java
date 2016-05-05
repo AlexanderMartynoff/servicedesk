@@ -1,15 +1,12 @@
 package com.itsmtools.common.dictionary.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
+@Table(name = "ticket_attache")
 public class TicketAttache {
-
     @Id
     @Column
     @GeneratedValue

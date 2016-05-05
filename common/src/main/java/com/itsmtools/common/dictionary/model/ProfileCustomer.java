@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 
 @Entity
-public class UaContextBackend implements SlaveUserAccount{
+@Table(name = "profile_customer")
+public class ProfileCustomer implements Profile {
 
     @Id
     @Column
@@ -17,12 +18,19 @@ public class UaContextBackend implements SlaveUserAccount{
     @Column
     String position;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
-        name = "uaGlobalId",
+        name = "contractor_id",
         referencedColumnName = "id"
     )
-    private UaGlobal uaGlobal;
+    private Contractor contractor;
+
+    @OneToOne
+    @JoinColumn(
+        name = "account_id",
+        referencedColumnName = "id"
+    )
+    private Account account;
 
     public Integer getId() {
         return id;
@@ -32,20 +40,28 @@ public class UaContextBackend implements SlaveUserAccount{
         this.id = id;
     }
 
-    public UaGlobal getUaGlobal() {
-        return uaGlobal;
-    }
-
-    public void setUaGlobal(UaGlobal uaGlobal) {
-        this.uaGlobal = uaGlobal;
-    }
-
     public Boolean getEnable() {
         return enable;
     }
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
     }
 
     public String getPosition() {

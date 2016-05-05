@@ -1,8 +1,8 @@
 package com.itsmtools.common.dictionary.service;
 
 
-import com.itsmtools.common.dictionary.model.UaContextBackend;
-import com.itsmtools.common.dictionary.model.UaGlobal;
+import com.itsmtools.common.dictionary.model.Account;
+import com.itsmtools.common.dictionary.model.ProfileAgent;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +13,38 @@ import java.util.Optional;
 
 
 @Service
-public class UaContextBackendService implements UserAccountService<UaContextBackend, UaGlobal> {
+public class ProfileAgentService implements ProfileService<ProfileAgent, Account> {
 
     @Autowired
     private Session session;
 
-    public Optional<UaContextBackend> get(Integer id) {
+    public Optional<ProfileAgent> get(Integer id) {
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<UaContextBackend> getByUaGlobal(UaGlobal uaGlobal) {
-        return session.createCriteria(UaContextBackend.class)
-            .add(Restrictions.eq("uaGlobal", uaGlobal))
+    public Optional<ProfileAgent> getByAccount(Account account) {
+        return session.createCriteria(ProfileAgent.class)
+            .add(Restrictions.eq("account", account))
             .list()
             .stream()
             .findFirst();
     }
 
-    public void save(UaContextBackend entity) {
+    public void save(ProfileAgent entity) {
         session.save(entity);
         session.flush();
     }
 
-    public void update(UaContextBackend entity) {
-        UaContextBackend ua = (UaContextBackend) session.get(UaContextBackend.class, entity.getId());
+    public void update(ProfileAgent entity) {
+        ProfileAgent ua = (ProfileAgent) session.get(ProfileAgent.class, entity.getId());
         ua.setEnable(entity.getEnable());
         ua.setPosition(entity.getPosition());
         session.save(ua);
         session.flush();
     }
 
-    public List<UaContextBackend> list() {
+    public List<ProfileAgent> list() {
         return null;
     }
 }

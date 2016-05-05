@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "ticket")
 public class Ticket {
 
     @Id
@@ -30,66 +31,59 @@ public class Ticket {
     @Column
     private Integer progress;
 
-
     @ManyToOne
     @JoinColumn(
-        name = "contractorId",
+        name = "contractor_id",
         referencedColumnName = "id"
     )
     private Contractor contractor;
 
     @ManyToOne
     @JoinColumn(
-        name = "consumerId",
+        name = "customer_id",
         referencedColumnName = "id"
     )
-    private UaGlobal consumer;
+    private Account customer;
 
     @ManyToOne
     @JoinColumn(
-        name = "authorId",
+        name = "author_id",
         referencedColumnName = "id"
     )
-    private UaGlobal author;
+    private Account author;
 
     @ManyToOne
     @JoinColumn(
-        name = "performerId",
+        name = "performer_id",
         referencedColumnName = "id"
     )
-    private UaGlobal performer;
+    private Account performer;
 
     @ManyToOne
     @JoinColumn(
-        name = "ticketTypeId",
+        name = "ticket_type_id",
         referencedColumnName = "id"
     )
     private TicketType ticketType;
 
     @ManyToOne
     @JoinColumn(
-        name = "itServiceId",
+        name = "it_service_id",
         referencedColumnName = "id"
     )
     private ItService itService;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "urgencyId",
-        referencedColumnName = "id"
-    )
-    private Urgency urgency;
 
     @ManyToOne
     @JoinColumn(
-        name = "priorityId",
+        name = "priority_id",
         referencedColumnName = "id"
     )
     private Priority priority;
 
     @ManyToOne
     @JoinColumn(
-        name = "supportLevelId",
+        name = "support_level_id",
         referencedColumnName = "id"
     )
     private SupportLevel supportLevel;
@@ -144,27 +138,27 @@ public class Ticket {
         this.progress = progress;
     }
 
-    public UaGlobal getConsumer() {
-        return consumer;
+    public Account getCustomer() {
+        return customer;
     }
 
-    public void setConsumer(UaGlobal consumer) {
-        this.consumer = consumer;
+    public void setCustomer(Account customer) {
+        this.customer = customer;
     }
 
-    public UaGlobal getAuthor() {
+    public Account getAuthor() {
         return author;
     }
 
-    public void setAuthor(UaGlobal author) {
+    public void setAuthor(Account author) {
         this.author = author;
     }
 
-    public UaGlobal getPerformer() {
+    public Account getPerformer() {
         return performer;
     }
 
-    public void setPerformer(UaGlobal performer) {
+    public void setPerformer(Account performer) {
         this.performer = performer;
     }
 
@@ -182,14 +176,6 @@ public class Ticket {
 
     public void setItService(ItService itService) {
         this.itService = itService;
-    }
-
-    public Urgency getUrgency() {
-        return urgency;
-    }
-
-    public void setUrgency(Urgency urgency) {
-        this.urgency = urgency;
     }
 
     public Priority getPriority() {

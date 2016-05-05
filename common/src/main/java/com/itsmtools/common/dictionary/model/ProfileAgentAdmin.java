@@ -5,7 +5,8 @@ import javax.persistence.*;
 
 
 @Entity
-public class UaGroupCustomer implements SlaveUserAccount{
+@Table(name = "profile_agent_admin")
+public class ProfileAgentAdmin implements Profile {
 
     @Id
     @Column
@@ -14,10 +15,10 @@ public class UaGroupCustomer implements SlaveUserAccount{
 
     @OneToOne
     @JoinColumn(
-        name = "uaGlobalId",
+        name = "account_id",
         referencedColumnName = "id"
     )
-    private UaGlobal uaGlobal;
+    private Account account;
 
     @Column
     private Boolean enable;
@@ -31,13 +32,13 @@ public class UaGroupCustomer implements SlaveUserAccount{
     }
 
     @Override
-    public UaGlobal getUaGlobal() {
-        return uaGlobal;
+    public Account getAccount() {
+        return account;
     }
 
     @Override
-    public void setUaGlobal(UaGlobal uaGlobal) {
-        this.uaGlobal = uaGlobal;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Boolean getEnable() {

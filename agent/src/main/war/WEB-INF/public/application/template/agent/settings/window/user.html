@@ -2,8 +2,7 @@
     <div class="modal-header">
         <div class="row">
             <div class="col-xs-10">
-                <h3 ng-if="false" class="modal-title">{{complexUa.uaGlobal.id ? 'Редактирование' : 'Создание'}} пользователя</h3>
-                <h3 class="modal-title">Пользователь</h3>
+                <h3 class="modal-title">{{user.account.id ? 'Редактирование' : 'Создание'}} пользователя</h3>
             </div>
             <div class="col-xs-2 text-right">
                 <button class="btn btn-default btn-sm" ng-click="cancel()">
@@ -25,13 +24,13 @@
                     <uib-accordion>
                         <uib-accordion-group is-open="ctxFrtOpen">
                             <uib-accordion-heading>
-                                Клиент <toggle ref="complexUa.uaContextFrontend" flag="enable"></toggle>
+                                Клиент <toggle ref="user.customer" flag="enable"></toggle>
                             </uib-accordion-heading>
                             <ng-include src="tplDir + 'ua-context-customer.html'"></ng-include>
                         </uib-accordion-group>
                         <uib-accordion-group>
                             <uib-accordion-heading>
-                                Агент <toggle ref="complexUa.uaContextBackend" flag="enable"></toggle>
+                                Агент <toggle ref="user.agent" flag="enable"></toggle>
                             </uib-accordion-heading>
                             <ng-include src="tplDir + 'ua-context-agent.html'"></ng-include>
                         </uib-accordion-group>
@@ -86,12 +85,12 @@
 
     <div class="modal-footer">
         <button class="btn btn-primary"
-                ng-if="!complexUa.uaGlobal.id"
-                type="button" ng-click="save(complexUa)"><i class="fa fa-plus"></i> Создать</button>
+                ng-if="!user.account.id"
+                type="button" ng-click="save(user)"><i class="fa fa-plus"></i> Создать</button>
 
         <button class="btn btn-primary"
-                ng-if="complexUa.uaGlobal.id"
-                ng-click="update(complexUa)"
+                ng-if="user.account.id"
+                ng-click="update(user)"
                 type="button"> <i class="fa fa-refresh"></i> Обновить</button>
 
         <button class="btn btn-danger" type="button" ng-click="cancel()">

@@ -5,22 +5,23 @@ import javax.persistence.*;
 
 
 @Entity
-public class UaGroupAdmin implements SlaveUserAccount{
+@Table(name = "profile_agent_operator")
+public class ProfileAgentOperator implements Profile {
 
     @Id
     @Column
     @GeneratedValue
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(
-        name = "uaGlobalId",
-        referencedColumnName = "id"
-    )
-    private UaGlobal uaGlobal;
-
     @Column
     private Boolean enable;
+
+    @OneToOne
+    @JoinColumn(
+        name = "account_id",
+        referencedColumnName = "id"
+    )
+    private Account account;
 
     public Integer getId() {
         return id;
@@ -30,14 +31,12 @@ public class UaGroupAdmin implements SlaveUserAccount{
         this.id = id;
     }
 
-    @Override
-    public UaGlobal getUaGlobal() {
-        return uaGlobal;
+    public Account getAccount() {
+        return account;
     }
 
-    @Override
-    public void setUaGlobal(UaGlobal uaGlobal) {
-        this.uaGlobal = uaGlobal;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Boolean getEnable() {

@@ -1,8 +1,8 @@
 package com.itsmtools.common.dictionary.service;
 
 
-import com.itsmtools.common.dictionary.model.UaContextFrontend;
-import com.itsmtools.common.dictionary.model.UaGlobal;
+import com.itsmtools.common.dictionary.model.Account;
+import com.itsmtools.common.dictionary.model.ProfileCustomer;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +12,31 @@ import java.util.Optional;
 
 
 @Service
-public class UaContextFrontendService implements UserAccountService<UaContextFrontend, UaGlobal> {
+public class ProfileCustomerService implements ProfileService<ProfileCustomer, Account> {
 
     @Autowired
     Session session;
 
-    public Optional<UaContextFrontend> get(Integer id) {
+    public Optional<ProfileCustomer> get(Integer id) {
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<UaContextFrontend> getByUaGlobal(UaGlobal uaGlobal) {
-        return session.createCriteria(UaContextFrontend.class)
-            .add(Restrictions.eq("uaGlobal", uaGlobal))
+    public Optional<ProfileCustomer> getByAccount(Account account) {
+        return session.createCriteria(ProfileCustomer.class)
+            .add(Restrictions.eq("account", account))
             .list()
             .stream()
             .findFirst();
     }
 
-    public void save(UaContextFrontend entity) {
+    public void save(ProfileCustomer entity) {
         session.save(entity);
         session.flush();
     }
 
-    public void update(UaContextFrontend entity) {
-        UaContextFrontend ua  = (UaContextFrontend) session.get(UaContextFrontend.class, entity.getId());
+    public void update(ProfileCustomer entity) {
+        ProfileCustomer ua  = (ProfileCustomer) session.get(ProfileCustomer.class, entity.getId());
         ua.setContractor(entity.getContractor());
         ua.setEnable(entity.getEnable());
         ua.setPosition(entity.getPosition());
@@ -45,7 +45,7 @@ public class UaContextFrontendService implements UserAccountService<UaContextFro
         session.flush();
     }
 
-    public List<UaContextFrontend> list() {
+    public List<ProfileCustomer> list() {
         return null;
     }
 }

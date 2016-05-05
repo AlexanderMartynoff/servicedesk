@@ -5,7 +5,8 @@ import java.util.Set;
 
 
 @Entity
-public class UaGroupManager implements SlaveUserAccount{
+@Table(name = "profile_agent_manager")
+public class ProfileAgentManager implements Profile {
 
     @Id
     @Column
@@ -17,16 +18,16 @@ public class UaGroupManager implements SlaveUserAccount{
 
     @OneToOne
     @JoinColumn(
-        name = "uaGlobalId",
+        name = "account_id",
         referencedColumnName = "id"
     )
-    private UaGlobal uaGlobal;
+    private Account account;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "ConcatUaGroupManagerSupportLevels",
-        joinColumns = @JoinColumn(name = "uaGroupManagerId", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "supportLevelId", referencedColumnName = "id")
+        name = "profile_role_agent_manager_support_level",
+        joinColumns = @JoinColumn(name = "profile_role_agent_manager_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "support_level_id", referencedColumnName = "id")
     )
     private Set<SupportLevel> supportLevels;
 
@@ -38,12 +39,12 @@ public class UaGroupManager implements SlaveUserAccount{
         this.id = id;
     }
 
-    public UaGlobal getUaGlobal() {
-        return uaGlobal;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUaGlobal(UaGlobal uaGlobal) {
-        this.uaGlobal = uaGlobal;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Set<SupportLevel> getSupportLevels() {
