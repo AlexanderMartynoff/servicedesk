@@ -31,16 +31,16 @@ public class ProfileAgentOperatorService implements ProfileService<ProfileAgentO
             .findFirst();
     }
 
-    public void save(ProfileAgentOperator entity) {
-        session.save(entity);
+    public void save(ProfileAgentOperator input) {
+        session.save(input);
         session.flush();
     }
 
-    public void update(ProfileAgentOperator entity) {
-        ProfileAgentOperator profileRoleAgentOperator = (ProfileAgentOperator) session.get(ProfileAgentOperator.class, entity.getId());
-        profileRoleAgentOperator.setEnable(entity.getEnable());
+    public void update(ProfileAgentOperator input) {
+        ProfileAgentOperator profile = (ProfileAgentOperator) session.get(ProfileAgentOperator.class, input.getId());
 
-        session.save(profileRoleAgentOperator);
+        profile.setEnable(input.getEnable());
+        session.save(profile);
         session.flush();
     }
 

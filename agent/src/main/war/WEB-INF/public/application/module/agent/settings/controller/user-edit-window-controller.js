@@ -3,7 +3,6 @@ angular.module("backend.settings")
                                                     $uibModalInstance, UaComplexModel, uaService,
                                                     supportLevelService) {
 
-
     $scope.tplDir = '/public/application/template/agent/settings/form/';
     $scope.user = uaComplex || new UaComplexModel();
     $scope.user.customer = $scope.user.customer || new UaCommonStub();

@@ -3,11 +3,9 @@ package com.itsmtools.common.dictionary.service;
 
 import com.itsmtools.common.dictionary.model.*;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,27 +20,24 @@ public class UserService {
     @Autowired
     private AccountService accountService;
     @Autowired
-    private ProfileAgentService contextBackendService;
+    private ProfileAgentService agentService;
     @Autowired
-    private ProfileCustomerCustomerService customerService;
+    private ProfileCustomerCustomerService customerCustomerService;
     @Autowired
-    private ProfileCustomerService contextFrontendService;
+    private ProfileCustomerService customerService;
     @Autowired
-    private ProfileAgentAdminService groupAdminService;
+    private ProfileAgentAdminService agentAdminService;
     @Autowired
-    private ProfileAgentManagerService groupManagerService;
+    private ProfileAgentManagerService agentManagerService;
     @Autowired
-    private ProfileAgentOperatorService groupOperatorService;
+    private ProfileAgentOperatorService agentOperatorService;
     @Autowired
-    private ProfileAgentPerformerService groupPerformerService;
+    private ProfileAgentPerformerService agentPerformerService;
 
-    @SuppressWarnings("unchecked")
     public List<User> list() {
-        return (List<User>) session.createCriteria(Account.class)
-            .addOrder(Order.desc("id"))
-            .list()
+        return accountService.list()
             .stream()
-            .map(e -> buildByUaGlobal((Account) e))
+            .map(e -> buildByAccount((Account) e))
             .collect(Collectors.toList());
     }
 
@@ -53,32 +48,32 @@ public class UserService {
             .list()
             .stream()
             .findFirst()
-            .map(e -> buildByUaGlobal((Account) e));
+            .map(e -> buildByAccount((Account) e));
     }
 
     @SuppressWarnings("unchecked")
-    public void save(User complexUa) {
-        Map<Profile, ProfileService> uaServiceMap = buildUaServiceMap(complexUa);
-        accountService.save(complexUa.getAccount());
+    public void save(User user) {
+        Map<Profile, ProfileService> map = buildProfileServiceMap(user);
+        accountService.save(user.getAccount());
 
-        uaServiceMap.entrySet().stream()
+        map.entrySet().stream()
             .filter(e -> e.getKey() != null)
             .forEach(e -> {
-                e.getKey().setAccount(complexUa.getAccount());
+                e.getKey().setAccount(user.getAccount());
                 e.getValue().save(e.getKey());
             });
     }
 
     @SuppressWarnings("unchecked")
-    public void update(User complexUa){
-        Map<Profile, ProfileService> uaServiceMap = buildUaServiceMap(complexUa);
-        accountService.update(complexUa.getAccount());
+    public void update(User user){
+        Map<Profile, ProfileService> uaServiceMap = buildProfileServiceMap(user);
+        accountService.update(user.getAccount());
 
         uaServiceMap.entrySet().stream()
             .filter(e -> e.getKey() != null)
             .forEach(e -> {
                 if(e.getKey().getId() == null){
-                    e.getKey().setAccount(complexUa.getAccount());
+                    e.getKey().setAccount(user.getAccount());
                     e.getValue().save(e.getKey());
                 }else{
                     e.getValue().update(e.getKey());
@@ -86,34 +81,38 @@ public class UserService {
             });
     }
 
-    private Map<Profile, ProfileService> buildUaServiceMap(User complexUa){
-        Map<Profile, ProfileService> uaServiceMap = new HashMap<>();
+    private Map<Profile, ProfileService> buildProfileServiceMap(User user){
+        Map<Profile, ProfileService> map = new HashMap<>();
 
-        uaServiceMap.put(complexUa.getCustomerCustomer(), customerService);
-        uaServiceMap.put(complexUa.getAgent(), contextBackendService);
-        uaServiceMap.put(complexUa.getCustomer(), contextFrontendService);
-        uaServiceMap.put(complexUa.getAgentAdmin(), groupAdminService);
-        uaServiceMap.put(complexUa.getAgentManager(), groupManagerService);
-        uaServiceMap.put(complexUa.getAgentOperator(), groupOperatorService);
-        uaServiceMap.put(complexUa.getAgentPerformer(), groupPerformerService);
+        // agent profiles
+        map.put(user.getAgent(), agentService);
+        map.put(user.getAgentAdmin(), agentAdminService);
+        map.put(user.getAgentManager(), agentManagerService);
+        map.put(user.getAgentOperator(), agentOperatorService);
+        map.put(user.getAgentPerformer(), agentPerformerService);
+        // customer profiles
+        map.put(user.getCustomer(), customerService);
+        map.put(user.getCustomerCustomer(), customerCustomerService);
 
-        return uaServiceMap;
+        return map;
     }
 
-    // builder ComplexUa object
-    private User buildByUaGlobal(Account global) {
-        User complexUa = new User();
-        complexUa.setAccount(global);
+    // builder User object
+    private User buildByAccount(Account account) {
+        User user = new User();
+        user.setAccount(account);
 
-        customerService.getByAccount(global).ifPresent(complexUa::setCustomerCustomer);
-        contextBackendService.getByAccount(global).ifPresent(complexUa::setAgent);
-        contextFrontendService.getByAccount(global).ifPresent(complexUa::setCustomer);
-        groupAdminService.getByAccount(global).ifPresent(complexUa::setAgentAdmin);
-        groupManagerService.getByAccount(global).ifPresent(complexUa::setAgentManager);
-        groupManagerService.getByAccount(global).ifPresent(complexUa::setAgentManager);
-        groupOperatorService.getByAccount(global).ifPresent(complexUa::setAgentOperator);
-        groupPerformerService.getByAccount(global).ifPresent(complexUa::setAgentPerformer);
+        // agent profiles
+        agentService.getByAccount(account).ifPresent(user::setAgent);
+        agentAdminService.getByAccount(account).ifPresent(user::setAgentAdmin);
+        agentManagerService.getByAccount(account).ifPresent(user::setAgentManager);
+        agentManagerService.getByAccount(account).ifPresent(user::setAgentManager);
+        agentOperatorService.getByAccount(account).ifPresent(user::setAgentOperator);
+        agentPerformerService.getByAccount(account).ifPresent(user::setAgentPerformer);
+        // customer profiles
+        customerService.getByAccount(account).ifPresent(user::setCustomer);
+        customerCustomerService.getByAccount(account).ifPresent(user::setCustomerCustomer);
 
-        return complexUa;
+        return user;
     }
 }

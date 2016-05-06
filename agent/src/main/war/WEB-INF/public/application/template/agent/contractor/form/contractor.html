@@ -16,22 +16,57 @@
     </div>
 
     <div class="modal-body">
-        <form class="form-horizontal">
-            <fieldset>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label class="control-label">Заголовок</label>
-                        <input type="text" class="form-control" ng-model="contractor.fullName">
+
+        <uib-tabset>
+            <uib-tab heading="Данные">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Заголовок</label>
+                                <input type="text" class="form-control" ng-model="contractor.fullName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Описание</label>
+                                <textarea  ng-model="contractor.metaInfo" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </uib-tab>
+            <uib-tab heading="Услуги">
+                <div class="row x-margin-top-10">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Привязанные услуги</h3>
+                            </div>
+                            <div class="panel-body">
+                                <span ng-repeat="i in [0, 0, 0, 0, 0, 0, 0, 0, 0] track by $index">
+                                    <span class="label label-info">Установка Windows 8</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Услуги</h3>
+                            </div>
+                            <div class="panel-body">
+                                <span ng-repeat="i in [0, 0, 0, 0, 0, 0, 0, 0, 0] track by $index">
+                                    <span class="label label-info">1С настройка</span>
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label class="control-label">Описание</label>
-                        <textarea  ng-model="contractor.metaInfo" class="form-control" rows="5"></textarea>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+
+            </uib-tab>
+        </uib-tabset>
     </div>
 
     <div class="modal-footer">

@@ -93,7 +93,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
                 ));
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            throw (RuntimeException) new RuntimeException(e).initCause(e);
         }
 
         criteria.addOrder(Order.desc("id"));

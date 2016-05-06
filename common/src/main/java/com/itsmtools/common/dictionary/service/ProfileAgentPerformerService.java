@@ -35,12 +35,16 @@ public class ProfileAgentPerformerService implements ProfileService<ProfileAgent
         session.flush();
     }
 
-    public void update(ProfileAgentPerformer entity) {
-        ProfileAgentPerformer ua = (ProfileAgentPerformer) session.get(ProfileAgentPerformer.class, entity.getId());
-        ua.setSupportLevels(entity.getSupportLevels());
-        ua.setEnable(entity.getEnable());
+    public void update(ProfileAgentPerformer input) {
+        ProfileAgentPerformer profile = (ProfileAgentPerformer) session.get(
+            ProfileAgentPerformer.class,
+            input.getId()
+        );
 
-        session.save(ua);
+        profile.setSupportLevels(input.getSupportLevels());
+        profile.setEnable(input.getEnable());
+
+        session.save(profile);
         session.flush();
     }
 

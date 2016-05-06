@@ -19,7 +19,7 @@ public class ProfileAgentService implements ProfileService<ProfileAgent, Account
     private Session session;
 
     public Optional<ProfileAgent> get(Integer id) {
-        return null;
+        return Optional.ofNullable((ProfileAgent) session.get(ProfileAgent.class, id));
     }
 
     @SuppressWarnings("unchecked")
@@ -36,11 +36,11 @@ public class ProfileAgentService implements ProfileService<ProfileAgent, Account
         session.flush();
     }
 
-    public void update(ProfileAgent entity) {
-        ProfileAgent ua = (ProfileAgent) session.get(ProfileAgent.class, entity.getId());
-        ua.setEnable(entity.getEnable());
-        ua.setPosition(entity.getPosition());
-        session.save(ua);
+    public void update(ProfileAgent input) {
+        ProfileAgent profile = (ProfileAgent) session.get(ProfileAgent.class, input.getId());
+        profile.setEnable(input.getEnable());
+        profile.setPosition(input.getPosition());
+        session.save(profile);
         session.flush();
     }
 

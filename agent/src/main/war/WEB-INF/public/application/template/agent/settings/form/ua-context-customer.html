@@ -6,9 +6,9 @@
 
                     <label class="control-label">Контрагент</label>
                     <input type="text"
-                           ng-model="complexUa.uaContextFrontend.contractor"
+                           ng-model="user.customer.contractor"
                            uib-typeahead="contractor as contractor.fullName for contractor in contractors | filter:$viewValue"
-                           ng-disabled="!user.uaContextFrontend.enable || !contractors.length"
+                           ng-disabled="!user.customer.enable || !contractors.length"
                            class="form-control">
                 </div>
                 <div class="col-xs-6">
@@ -16,9 +16,9 @@
                            class="control-label">Должность</label>
                     <input type="text"
                            id="position"
-                           ng-disabled="!user.uaContextFrontend.enable"
+                           ng-disabled="!user.customer.enable"
                            class="form-control"
-                           ng-model="complexUa.uaContextFrontend.position"/>
+                           ng-model="user.customer.position"/>
                 </div>
             </div>
         </fieldset>
