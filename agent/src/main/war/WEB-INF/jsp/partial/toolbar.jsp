@@ -62,7 +62,7 @@
                                                 <em>Управление контрагентами</em>
                                             </span>
                                         </a>
-                                        <a href="#/contractor"
+                                        <a href="#/service"
                                            class="list-group-item"
                                            ng-class="{active: selModule == 'service'}"
                                            ng-click="selModule = 'service'">

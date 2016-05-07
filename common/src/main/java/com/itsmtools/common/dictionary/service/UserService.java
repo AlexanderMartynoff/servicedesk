@@ -48,7 +48,7 @@ public class UserService {
             .list()
             .stream()
             .findFirst()
-            .map(e -> buildByAccount((Account) e));
+            .map(a -> buildByAccount((Account) a));
     }
 
     @SuppressWarnings("unchecked")

@@ -58,6 +58,15 @@ angular.module('backend.application')
           }
         }
       })
+      .state('service', {
+        url: '/service',
+        views: {
+          index: {
+            controller: 'IndexServiceController',
+            templateUrl: rootUrl + 'service/page/index.html'
+          }
+        }
+      })
       .state('404', {
         url: '/404',
         views: {

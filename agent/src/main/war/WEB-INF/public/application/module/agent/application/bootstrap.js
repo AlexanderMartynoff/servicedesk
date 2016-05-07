@@ -1,10 +1,10 @@
 (function(angular, document, window){
   angular.element(document).ready(function(event){
-    var injector, $http, $log, bootstrap, logged;
+    var injector, $http, $log, logged;
 
-    bootstrap = function(modules){
+    function bootstrap (modules){
       angular.bootstrap(document, modules);
-    };
+    }
 
     injector = angular.injector(['ng']);
 
