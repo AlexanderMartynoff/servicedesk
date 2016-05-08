@@ -3,12 +3,12 @@ angular.module("backend.service")
     return {
       open: function (record, $scope) {
         $uibModal.open({
-          scope: $scope || undefined,
+          scope: $scope,
           controller: 'FormServiceController',
           resolve: {record: record},
           size: 'lg',
           backdrop: 'static',
-          templateUrl: '/public/application/template/agent/contractor/form/service.html'
+          templateUrl: '/public/application/template/agent/service/form/service.html'
         });
       }
     };

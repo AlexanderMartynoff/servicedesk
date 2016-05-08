@@ -16,15 +16,28 @@
     </div>
 
     <div class="modal-body">
-
         <uib-tabset>
-            <uib-tab heading="Данные">
+            <uib-tab heading="Информация">
                 <form class="form-horizontal">
                     <fieldset>
                         <div class="form-group">
-                            <div class="col-xs-12">
-                                <label class="control-label">Заголовок</label>
+                            <div class="col-xs-6">
+                                <label class="control-label">Полное наименование</label>
                                 <input type="text" class="form-control" ng-model="contractor.fullName"/>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="control-label">Короткое наименование</label>
+                                <input type="text" class="form-control" ng-model="contractor.shortName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label class="control-label">ИНН</label>
+                                <input type="text" class="form-control" ng-model="contractor.inn"/>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="control-label">Адрес</label>
+                                <input type="text" class="form-control" ng-model="contractor.address"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -45,8 +58,8 @@
                             </div>
                             <div class="panel-body">
                                 <span class="pointer"
-                                      ng-click="move(e)"
-                                      ng-repeat="e in ownService track by $index">
+                                      ng-click="move(e, -1)"
+                                      ng-repeat="e in contractor.services track by $index">
                                     <span class="label classic-label label-info">{{e.title}}</span>
                                 </span>
                             </div>
@@ -59,8 +72,8 @@
                             </div>
                             <div class="panel-body">
                                 <span class="pointer"
-                                      ng-click="move(e)"
-                                      ng-repeat="e in allService track by $index">
+                                      ng-click="move(e, 1)"
+                                      ng-repeat="e in services track by $index">
                                     <span class="label classic-label label-warning">{{e.title}}</span>
                                 </span>
                             </div>
@@ -79,7 +92,7 @@
 
         <button class="btn btn-primary"
                 type="button"
-                ng-click="new(contractor)"
+                ng-click="create(contractor)"
                 ng-if="!contractor.id">Создать</button>
 
         <button class="btn btn-warning" type="button" ng-click="close()">Отмена</button>

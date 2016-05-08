@@ -24,14 +24,13 @@ public class ContractorService{
         session.save(entity);
     }
 
-    public void update(Contractor entity) {
-        Optional.ofNullable((Contractor) session.get(Contractor.class, entity.getId()))
-            .ifPresent((value) -> {
-                value.setFullName(entity.getFullName());
-                value.setMetaInfo(entity.getMetaInfo());
-                session.update(value);
-                session.flush();
-            });
+    public void update(Contractor input) {
+        Contractor contractor = (Contractor) session.get(Contractor.class, input.getId());
+        contractor.setServices(input.getServices());
+        contractor.setFullName(input.getFullName());
+        contractor.setMetaInfo(input.getMetaInfo());
+        session.save(contractor);
+        session.flush();
     }
 
     public void delete(Integer id) {

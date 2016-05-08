@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 @Repository
-public class ItServiceRepository extends AbstractRepository<ItService, Integer, String> {
+public class ServiceRepository extends AbstractRepository<ItService, Integer, String> {
 
     @Autowired
     private Session session;
@@ -27,7 +27,13 @@ public class ItServiceRepository extends AbstractRepository<ItService, Integer, 
     }
 
     @Override
-    public void update(ItService input) {}
+    public void update(ItService input) {
+        ItService itService = (ItService) session.get(ItService.class, input.getId());
+        itService.setTitle(input.getTitle());
+        itService.setDescription(input.getDescription());
+        session.save(itService);
+        session.flush();
+    }
 
     @Override
     public void delete(Integer id) {}

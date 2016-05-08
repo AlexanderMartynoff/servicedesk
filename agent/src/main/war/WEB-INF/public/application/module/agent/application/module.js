@@ -7,7 +7,9 @@ angular.module('backend.application', [
   'backend.auth',
   'backend.ticket',
   'backend.settings',
+  'backend.service',
   'backend.contractor',
+  // commons modules
   'common.dictionary.data',
   'common.dictionary.util',
   'common.ui.cover',

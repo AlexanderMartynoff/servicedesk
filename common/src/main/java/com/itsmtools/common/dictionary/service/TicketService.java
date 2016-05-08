@@ -23,16 +23,16 @@ public class TicketService{
         repository.create(request);
     }
 
-    public void update(Ticket request) {
-        Ticket ticket = repository.get(request.getId());
+    public void update(Ticket input) {
+        Ticket ticket = repository.get(input.getId());
 
-        ticket.setTitle(request.getTitle());
-        ticket.setDescription(request.getDescription());
-        ticket.setDateOpen(request.getDateOpen());
-        ticket.setContractor(request.getContractor());
-        ticket.setPerformer(request.getPerformer());
-        ticket.setProgress(request.getProgress());
-        ticket.setSupportLevel(request.getSupportLevel());
+        ticket.setTitle(input.getTitle());
+        ticket.setDescription(input.getDescription());
+        ticket.setDateOpen(input.getDateOpen());
+        ticket.setContractor(input.getContractor());
+        ticket.setPerformer(input.getPerformer());
+        ticket.setProgress(input.getProgress());
+        ticket.setSupportLevel(input.getSupportLevel());
 
         repository.update(ticket);
     }

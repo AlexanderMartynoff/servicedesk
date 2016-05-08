@@ -1,6 +1,7 @@
 package com.itsmtools.common.dictionary.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -23,6 +24,15 @@ public class Contractor {
 
     @Column
     private String metaInfo;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "contractor_it_service",
+        joinColumns = @JoinColumn(name = "contractor_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "it_service_id", referencedColumnName = "id")
+    )
+    private Set<ItService> services;
 
     public Integer getId() {
         return id;
@@ -62,5 +72,13 @@ public class Contractor {
 
     public void setMetaInfo(String metaInfo) {
         this.metaInfo = metaInfo;
+    }
+
+    public Set<ItService> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<ItService> services) {
+        this.services = services;
     }
 }

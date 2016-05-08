@@ -2,7 +2,7 @@ package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.ItService;
-import com.itsmtools.common.dictionary.repository.ItServiceRepository;
+import com.itsmtools.common.dictionary.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.Map;
 
 
 @Service
-public class ItServiceService {
+public class ServiceService {
 
     @Autowired
-    ItServiceRepository repository;
+    ServiceRepository repository;
 
     public ItService item(Integer id) {
         return repository.get(id);
@@ -21,6 +21,10 @@ public class ItServiceService {
 
     public void save(ItService input) {
         repository.create(input);
+    }
+
+    public void update(ItService input) {
+        repository.update(input);
     }
 
     public List<ItService> list(Map<String, String> filter) {
