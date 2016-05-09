@@ -71,7 +71,7 @@ public class Ticket {
         name = "it_service_id",
         referencedColumnName = "id"
     )
-    private ItService itService;
+    private Service service;
 
 
     @ManyToOne
@@ -170,12 +170,12 @@ public class Ticket {
         this.ticketType = ticketType;
     }
 
-    public ItService getItService() {
-        return itService;
+    public Service getService() {
+        return service;
     }
 
-    public void setItService(ItService itService) {
-        this.itService = itService;
+    public void setService(Service service) {
+        this.service = service;
     }
 
     public Priority getPriority() {

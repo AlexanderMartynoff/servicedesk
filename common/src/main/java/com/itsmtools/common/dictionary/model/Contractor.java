@@ -32,7 +32,7 @@ public class Contractor {
         joinColumns = @JoinColumn(name = "contractor_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "it_service_id", referencedColumnName = "id")
     )
-    private Set<ItService> services;
+    private Set<Service> services;
 
     public Integer getId() {
         return id;
@@ -74,11 +74,11 @@ public class Contractor {
         this.metaInfo = metaInfo;
     }
 
-    public Set<ItService> getServices() {
+    public Set<Service> getServices() {
         return services;
     }
 
-    public void setServices(Set<ItService> services) {
+    public void setServices(Set<Service> services) {
         this.services = services;
     }
 }

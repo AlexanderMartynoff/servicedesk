@@ -33,6 +33,7 @@ public class TicketService{
         ticket.setPerformer(input.getPerformer());
         ticket.setProgress(input.getProgress());
         ticket.setSupportLevel(input.getSupportLevel());
+        ticket.setService(input.getService());
 
         repository.update(ticket);
     }

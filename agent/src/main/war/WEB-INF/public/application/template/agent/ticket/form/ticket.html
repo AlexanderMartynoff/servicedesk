@@ -18,9 +18,16 @@
         <form class="form-horizontal">
             <fieldset>
                 <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="col-xs-10">
                         <label for="title" class="control-label">Заголовок</label>
                         <input type="text" class="form-control" id="title" ng-model="ticket.title">
+                    </div>
+                    <div class="col-xs-2">
+                        <label class="control-label">Приоритет</label>
+                        <select class="form-control">
+                            <option>Высокий</option>
+                            <option selected="selected">Средний</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,14 +50,6 @@
                                 </button>
                             </span>
                         </p>
-                    </div>
-
-                    <div class="col-xs-4">
-                        <label class="control-label">Приоритет</label>
-                        <select class="form-control">
-                            <option>Высокий</option>
-                            <option selected="selected">Средний</option>
-                        </select>
                     </div>
 
                     <div class="col-xs-4">
@@ -80,6 +79,15 @@
                         </p>
                     </div>
 
+                    <div class="col-xs-4">
+                        <label class="control-label">Услуга</label>
+                        <input type="text"
+                               ng-disabled="!ticket.contractor.services.length"
+                               ng-model="ticket.service"
+                               uib-typeahead="service as service.title for service in ticket.contractor.services | filter:$viewValue"
+                               class="form-control">
+                    </div>
+
                 </div>
 
                 <div class="form-group">
@@ -92,19 +100,20 @@
                     </div>
 
                     <div class="col-xs-4">
-                        <label class="control-label">Контрагент</label>
-                        <input type="text" ng-model="ticket.contractor"
-                               uib-typeahead="contractor as contractor.fullName for contractor in contractorStore | filter:$viewValue"
-                               class="form-control">
-                    </div>
-
-                    <div class="col-xs-4">
                         <label class="control-label">Исполнитель</label>
                         <input type="text" ng-model="ticket.performer"
                                uib-typeahead="performer as performer.firstName for performer in performerStore | filter:$viewValue"
                                class="form-control">
                     </div>
+
+                    <div class="col-xs-4">
+                        <label class="control-label">Контрагент</label>
+                        <input type="text" ng-model="ticket.contractor"
+                               uib-typeahead="contractor as contractor.fullName for contractor in contractorStore | filter:$viewValue"
+                               class="form-control">
+                    </div>
                 </div>
+
 
                 <div class="form-group">
                     <div class="col-xs-12">
@@ -123,6 +132,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label for="description" class="control-label">Описание</label>

@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "it_service")
-public class ItService {
+public class Service {
     @Id
     @Column
     @GeneratedValue

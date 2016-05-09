@@ -1,7 +1,7 @@
 package com.itsmtools.common.dictionary.repository;
 
 
-import com.itsmtools.common.dictionary.model.ItService;
+import com.itsmtools.common.dictionary.model.Service;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,28 +10,28 @@ import java.util.Map;
 
 
 @Repository
-public class ServiceRepository extends AbstractRepository<ItService, Integer, String> {
+public class ServiceRepository extends AbstractRepository<Service, Integer, String> {
 
     @Autowired
     private Session session;
 
     @Override
-    public ItService get(Integer id) {
+    public Service get(Integer id) {
         return null;
     }
 
     @Override
-    public void create(ItService input) {
+    public void create(Service input) {
         session.save(input);
         session.flush();
     }
 
     @Override
-    public void update(ItService input) {
-        ItService itService = (ItService) session.get(ItService.class, input.getId());
-        itService.setTitle(input.getTitle());
-        itService.setDescription(input.getDescription());
-        session.save(itService);
+    public void update(Service input) {
+        Service service = (Service) session.get(Service.class, input.getId());
+        service.setTitle(input.getTitle());
+        service.setDescription(input.getDescription());
+        session.save(service);
         session.flush();
     }
 
@@ -40,7 +40,7 @@ public class ServiceRepository extends AbstractRepository<ItService, Integer, St
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ItService> list(Map<String, String> filter) {
-        return session.createCriteria(ItService.class).list();
+    public List<Service> list(Map<String, String> filter) {
+        return session.createCriteria(Service.class).list();
     }
 }
