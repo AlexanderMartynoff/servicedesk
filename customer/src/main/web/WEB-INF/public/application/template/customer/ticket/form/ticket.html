@@ -25,18 +25,29 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                         <label class="control-label">Дата фиксации</label>
                         <input class="form-control" ng-model="ticket.dateOpen" readonly/>
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                         <label class="control-label">Приоритет</label>
                         <select class="form-control" ng-if="!ticket.id">
                             <option>Высокий</option>
                             <option selected="selected">Средний</option>
                         </select>
                         <input value="Средний" class="form-control" ng-if="ticket.id" readonly/>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label class="control-label">Услуга</label>
+                        <input type="text"
+                               ng-readonly="ticket.id"
+                               ng-model="ticket.service"
+                               uib-typeahead="service as service.title for service in logged.customer.contractor.services | filter:$viewValue"
+                               typeahead-min-length="0"
+                               typeahead-show-hint="true"
+                               class="form-control">
                     </div>
                 </div>
 
@@ -51,7 +62,7 @@
 
                     <div class="col-xs-6">
                         <label class="control-label">Исполнитель</label>
-                        <input type="text" ng-model="ticket.performer" class="form-control" readonly/>
+                        <input type="text" ng-model="ticket.performer.firstName" class="form-control" readonly/>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 ticketService, contractorService,
-                                                ticket, uaPerformerService, supportLevelService) {
+                                                ticket, agentPerformerService, supportLevelService) {
 
     $scope.covered = true;
     $scope.ticket = ticket;
@@ -61,7 +61,7 @@ angular.module("backend.ticket")
     };
 
     $scope.updatePerformerStore = function () {
-      uaPerformerService.listAsUaGlobal().then(function (response) {
+      agentPerformerService.listAccount().then(function (response) {
         $scope.performerStore = response;
       });
     };

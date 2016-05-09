@@ -15,7 +15,7 @@
     <div class="modal-body">
         <uib-tabset>
             <uib-tab heading="Аккаунт">
-                <ng-include src="tplDir + 'ua-global.html'"></ng-include>
+                <ng-include src="tplDir + 'account.html'"></ng-include>
             </uib-tab>
 
             <uib-tab heading="Приложения">
@@ -25,13 +25,13 @@
                             <uib-accordion-heading>
                                 Клиент <toggle ref="user.customer" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-context-customer.html'"></ng-include>
+                            <ng-include src="tplDir + 'customer.html'"></ng-include>
                         </uib-accordion-group>
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Агент <toggle ref="user.agent" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-context-agent.html'"></ng-include>
+                            <ng-include src="tplDir + 'agent.html'"></ng-include>
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>
@@ -44,35 +44,35 @@
                             <uib-accordion-heading>
                                 Оператор <toggle ref="user.agentOperator" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-group-operator.html'"></ng-include>
+                            <ng-include src="tplDir + 'agent-operator.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Менеджер <toggle ref="user.agentManager" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-group-manager.html'"></ng-include>
+                            <ng-include src="tplDir + 'agent-manager.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Клиент <toggle ref="user.customerCustomer" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-group-customer.html'"></ng-include>
+                            <ng-include src="tplDir + 'customer-customer.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Исполнитель <toggle ref="user.agentPerformer" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-group-performer.html'"></ng-include>
+                            <ng-include src="tplDir + 'agent-performer.html'"></ng-include>
                         </uib-accordion-group>
 
                         <uib-accordion-group>
                             <uib-accordion-heading>
                                 Администратор <toggle ref="user.agentAdmin" flag="enable"></toggle>
                             </uib-accordion-heading>
-                            <ng-include src="tplDir + 'ua-group-admin.html'"></ng-include>
+                            <ng-include src="tplDir + 'agent-admin.html'"></ng-include>
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>

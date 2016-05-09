@@ -85,6 +85,8 @@
                                ng-disabled="!ticket.contractor.services.length"
                                ng-model="ticket.service"
                                uib-typeahead="service as service.title for service in ticket.contractor.services | filter:$viewValue"
+                               typeahead-min-length="0"
+                               typeahead-show-hint="true"
                                class="form-control">
                     </div>
 
@@ -103,6 +105,8 @@
                         <label class="control-label">Исполнитель</label>
                         <input type="text" ng-model="ticket.performer"
                                uib-typeahead="performer as performer.firstName for performer in performerStore | filter:$viewValue"
+                               typeahead-min-length="0"
+                               typeahead-show-hint="true"
                                class="form-control">
                     </div>
 
@@ -110,10 +114,11 @@
                         <label class="control-label">Контрагент</label>
                         <input type="text" ng-model="ticket.contractor"
                                uib-typeahead="contractor as contractor.fullName for contractor in contractorStore | filter:$viewValue"
+                               typeahead-min-length="0"
+                               typeahead-show-hint="true"
                                class="form-control">
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <div class="col-xs-12">
