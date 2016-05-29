@@ -27,12 +27,12 @@ public class ContractorController extends ApplicationController {
     @RequestMapping(value = "/contractor", method = RequestMethod.POST)
     public Response create(@RequestBody Contractor contractor) {
         contractors.save(contractor);
-        return empty();
+        return ok();
     }
 
     @RequestMapping(value = "/contractor", method = RequestMethod.PUT)
     public Response update(@RequestBody Contractor contractor) {
         contractors.update(contractor);
-        return empty();
+        return ok();
     }
 }

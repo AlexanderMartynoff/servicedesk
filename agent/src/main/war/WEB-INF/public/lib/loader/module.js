@@ -79,7 +79,7 @@ angular.module('shared.loader', ["ng"])
          */
         this.load = function (modules) {
           if (!Array.isArray(modules)) {
-            throw "modules must be Array";
+            throw Error("modules must be Array");
           }
           this._defer = $q.defer();
           this._load(modules);

@@ -7,7 +7,7 @@ import com.itsmtools.common.controller.response.Response;
 
 abstract public class ApplicationController {
 
-    public Response jsonOk(){
+    public Response ok(){
         return new BaseResponse();
     }
 
