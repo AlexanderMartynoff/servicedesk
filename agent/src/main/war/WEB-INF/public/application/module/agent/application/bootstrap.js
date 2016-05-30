@@ -13,7 +13,24 @@
 
     $http.get('/logged', {}).then(function(response){
       try{
-        angular.module('backend.logged', []).constant('logged', angular.fromJson(response.data));
+
+        logged = angular.extend(angular.fromJson(response.data), {
+          isJustPerformer: function(){
+            this.agentPerformer = this.agentPerformer || {};
+            this.agentOperator = this.agentOperator || {};
+            this.agentManager = this.agentManager || {};
+
+            return this.agentPerformer.enable && !this.agentOperator.enable && !this.agentManager.enable;
+          },
+
+          isAdmin: function(){
+            this.agentAdmin = this.agentAdmin || {};
+
+            return this.agentAdmin.enable;
+          }
+        });
+
+        angular.module('backend.logged', []).constant('logged', logged);
         bootstrap(['backend.application', 'backend.logged']);
       }catch(e){
         bootstrap(['backend.application']);

@@ -8,4 +8,9 @@ angular.module('backend.application')
     $scope.firstName = logged.account.firstName;
     $scope.secondName = logged.account.secondName;
     $scope.position = logged.agent.position;
+
+
+    $scope.isAdmin = function(){
+      return logged.isAdmin();
+    }
   });

@@ -7,10 +7,7 @@ angular.module("backend.ticket")
     $scope.covered = true;
 
     $scope.isJustPerformer = function(){
-      logged.agentPerformer = logged.agentPerformer || {};
-      logged.agentOperator = logged.agentOperator || {};
-
-      return logged.agentPerformer.enable && !logged.agentOperator.enable;
+      return logged.isJustPerformer();
     };
 
     $scope.edit = function (ticket) {

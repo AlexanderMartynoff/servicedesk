@@ -57,6 +57,10 @@
                                 <h3 class="panel-title">Оказываемые услуги</h3>
                             </div>
                             <div class="panel-body">
+                                <div ng-if="contractor.services.length === 0" class="alert alert-info x-no-margin ng-scope">
+                                    Тут ничего нет
+                                </div>
+
                                 <span class="pointer"
                                       ng-click="move(e, -1)"
                                       ng-repeat="e in contractor.services track by $index">
@@ -71,6 +75,10 @@
                                 <h3 class="panel-title">Все услуги</h3>
                             </div>
                             <div class="panel-body">
+                                <div ng-if="services.length === 0" class="alert alert-info x-no-margin ng-scope">
+                                    Тут ничего нет
+                                </div>
+
                                 <span class="pointer"
                                       ng-click="move(e, 1)"
                                       ng-repeat="e in services track by $index">

@@ -1,6 +1,6 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
-                                                ticketService, contractorService,
+                                                logged, ticketService, contractorService,
                                                 ticket, agentPerformerService, supportLevelService) {
 
     $scope.covered = true;
@@ -17,6 +17,11 @@ angular.module("backend.ticket")
         state += step;
       }
     })(0, 10, 100);
+
+
+    $scope.isJustPerformer = function(){
+      return logged.isJustPerformer();
+    };
 
     $uibModalInstance.opened.then(function (reason) {
       $scope.covered = false;

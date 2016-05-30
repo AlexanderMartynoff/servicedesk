@@ -42,6 +42,7 @@
             .form-control[type="password"] {
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
+                margin-bottom: 5px;
             }
         </style>
     </head>
@@ -67,16 +68,6 @@
                        class="form-control"
                        placeholder="Пароль">
 
-                <div class="checkbox">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <label>
-                                <input type="checkbox" value="remember-me"> Запомнить меня
-                            </label>
-                        </div>
-                        <div class="col-xs-6" style="text-align: right"><a href="#">Забыли пароль?</a></div>
-                    </div>
-                </div>
 
                 <a class="btn btn-primary btn-block"
                    type="submit" ng-click="submit()">Войти</a>
