@@ -23,6 +23,10 @@ angular.module("backend.ticket")
       return logged.isJustPerformer();
     };
 
+    $scope.isHasPerformer = function(){
+      return logged.isHasPerformer();
+    };
+
     $uibModalInstance.opened.then(function (reason) {
       $scope.covered = false;
     });

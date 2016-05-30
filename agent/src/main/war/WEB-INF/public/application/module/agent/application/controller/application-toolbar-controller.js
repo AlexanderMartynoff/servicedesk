@@ -11,6 +11,9 @@ angular.module('backend.application')
 
 
     $scope.isAdmin = function(){
+      console.log(logged.isAdmin());
+      console.log(logged);
+
       return logged.isAdmin();
     }
   });

@@ -64,7 +64,7 @@
                         <label for="line-support" class="control-label">Уровень поддержки</label>
                         <p class="input-group">
                             <span class="input-group-btn">
-                                <button ng-disabled="ticket.supportLevel.number <= 1"
+                                <button ng-disabled="ticket.supportLevel.number <= 1 || isJustPerformer()"
                                         type="button"
                                         class="btn btn-default"
                                         ng-click="doEscalation(-1)">
@@ -97,7 +97,6 @@
                                typeahead-show-hint="true"
                                class="form-control">
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -128,7 +127,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" ng-if="isHasPerformer()">
                     <div class="col-xs-12">
                         <label class="control-label">Прогресс (%)</label>
                         <div class="btn-group btn-group-justified" role="group">

@@ -82,7 +82,7 @@
                        tooltip-placement="bottom"
                        uib-tooltip="Конфигурирование"
                        ng-click="selModule = null"
-                            ng-if="isAdmin()">
+                       ng-if="isAdmin()">
                         <b class="fa fa-cog"></b>
                     </a>
                 </li>
