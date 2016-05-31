@@ -1,13 +1,10 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 logged$user, ticketService, contractorService,
-                                                ticket, agentPerformerService, supportLevelService) {
+                                                ticket, agentPerformerService, uaService, supportLevelService) {
 
     $scope.covered = true;
     $scope.ticket = ticket;
-    $scope.contractorStore = [];
-    $scope.performerStore = [];
-    $scope.supportLevelStore = [];
     $scope.levelNumber = 1;
     $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
@@ -61,6 +58,13 @@ angular.module("backend.ticket")
         $scope.contractorStore = response;
       });
     };
+
+    $scope.updateInitiatorStore = function () {
+      uaService.listAccount().then(function (response) {
+        $scope.initialStore = response;
+      });
+    };
+
 
     $scope.updatePerformerStore = function () {
       agentPerformerService.listAccount().then(function (response) {

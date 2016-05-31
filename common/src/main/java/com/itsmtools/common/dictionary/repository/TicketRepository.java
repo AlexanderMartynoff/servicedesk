@@ -62,6 +62,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
             criteria.add(Restrictions.like("title", params.get("title"), MatchMode.ANYWHERE));
         }
 
+        // rename this parameter ... maybe `performerSearchString`
         if (params.containsKey("performer")) {
             criteria.createAlias("performer", "performer")
                 .add(Restrictions.or(
@@ -69,6 +70,11 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
                     Restrictions.like("performer.secondName", params.get("performer"), MatchMode.ANYWHERE),
                     Restrictions.like("performer.thirdName", params.get("performer"), MatchMode.ANYWHERE)
                 ));
+        }
+
+        if(params.containsKey("initiatorId")){
+            criteria.createAlias("initiator", "initiator")
+                .add(Restrictions.eq("initiator.id", Integer.valueOf(params.get("initiatorId"))));
         }
 
         try {

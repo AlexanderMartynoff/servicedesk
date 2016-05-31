@@ -4,6 +4,14 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
   function User(){
     var data = this.data = prepare$logged$data(logged$data);
 
+    this.getId = function(){
+      return data.account.id;
+    };
+
+    this.getAccount = function(){
+      return data.account;
+    };
+
     // admin logic
     this.isAdmin = function(){
       return data.agentAdmin.enable;

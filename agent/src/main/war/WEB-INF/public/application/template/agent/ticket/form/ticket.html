@@ -101,11 +101,12 @@
 
                 <div class="form-group">
                     <div class="col-xs-4">
-                        <label class="control-label">Инициатор</label>
-                        <input type="text"
-                               value="{{ticket.author.firstName}} {{ticket.author.secondName}}"
-                               class="form-control"
-                               readonly>
+                        <label class="control-label">Инициатор <span class="label classic-label label-info">Я</span></label>
+                        <input type="text" ng-model="ticket.initiator"
+                               uib-typeahead="performer as (performer.firstName + ' ' + performer.secondName) for performer in performerStore | filter:$viewValue"
+                               typeahead-min-length="0"
+                               typeahead-show-hint="true"
+                               class="form-control">
                     </div>
 
                     <div class="col-xs-4">

@@ -40,10 +40,10 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(
-        name = "customer_id",
+        name = "initiator_id",
         referencedColumnName = "id"
     )
-    private Account customer;
+    private Account initiator;
 
     @ManyToOne
     @JoinColumn(
@@ -138,12 +138,12 @@ public class Ticket {
         this.progress = progress;
     }
 
-    public Account getCustomer() {
-        return customer;
+    public Account getInitiator() {
+        return initiator;
     }
 
-    public void setCustomer(Account customer) {
-        this.customer = customer;
+    public void setInitiator(Account initiator) {
+        this.initiator = initiator;
     }
 
     public Account getAuthor() {

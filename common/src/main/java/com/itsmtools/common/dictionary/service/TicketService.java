@@ -29,6 +29,7 @@ public class TicketService{
         ticket.setTitle(input.getTitle());
         ticket.setDescription(input.getDescription());
         ticket.setDateOpen(input.getDateOpen());
+        ticket.setInitiator(input.getInitiator());
         ticket.setContractor(input.getContractor());
         ticket.setPerformer(input.getPerformer());
         ticket.setProgress(input.getProgress());

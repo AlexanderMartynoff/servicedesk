@@ -11,6 +11,8 @@ angular.module('customer.ticket')
     };
 
     $scope.new = function(data){
+      data.initiator = logged$user.getAccount();
+
       $scope.covered = true;
       ticketService.new(data).then(function(response){
         $scope.covered = false;

@@ -1,6 +1,13 @@
 angular.module("common.dictionary.data")
   .factory("uaService", function ($http, uaSpecStore) {
     return {
+      listAccount: function(){
+        return $http.get('/ua', {}).then(function(response){
+          return response.data.map(function(complex){
+            return complex.account;
+          });
+        });
+      },
       listComplex: function (start, limit) {
         return $http.get('/ua', {})
           .then(function (response) {
