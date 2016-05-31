@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
 <!doctype html>
-<html ng-cloack>
+<html ng-app="customer.authentication" ng-cloack>
     <head>
-        <jsp:include page="partial/head.jsp"/>
+        <jsp:include page="partial/authentication-head.jsp"/>
         <style type="text/css">
             body {
                 background: #f8f8f8;
@@ -33,7 +33,7 @@
         </style>
     </head>
     <body>
-        <form class="form-signin" ng-controller="CustomerAuthController">
+        <form class="form-signin" ng-controller="CustomerAuthenticationController">
             <cover trigger="covered" classes="grey">
 
                 <div ng-if="response.status !== 200" class="alert alert-small alert-danger">

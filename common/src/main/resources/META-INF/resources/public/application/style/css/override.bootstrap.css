@@ -115,3 +115,9 @@ h1 {
 .popover *{
     font-size: 13px !important;
 }
+
+/* for uib bootstrap*/
+[uib-typeahead-popup].dropdown-menu{
+    max-height: 200px;
+    overflow: auto;
+}

@@ -18,4 +18,3 @@
 <script src="${pageContext.request.contextPath}/public/vendor/ui-bootstrap-tpls-1.3.2.js"></script>
 <script src="${pageContext.request.contextPath}/public/vendor/sprintf.js"></script>
 
-<script src="${pageContext.request.contextPath}/public/application/build.js"></script>

@@ -3,7 +3,7 @@
 <!doctype html>
 <html ng-controller="RootController" ng-cloak>
     <head>
-        <jsp:include page="./partial/head.jsp"/>
+        <jsp:include page="./partial/application-head.jsp"/>
     </head>
     <body>
         <div class="x-layout">

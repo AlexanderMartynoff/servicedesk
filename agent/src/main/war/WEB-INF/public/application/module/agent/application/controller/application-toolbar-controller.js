@@ -1,19 +1,12 @@
 angular.module('backend.application')
-  .controller('ApplicationToolbar', function($scope, logged) {
+  .controller('ApplicationToolbar', function($scope, logged$user) {
     $scope.selModule = 'ticket';
 
-    logged.account = logged.account || {};
-    logged.agent = logged.agent || {};
-
-    $scope.firstName = logged.account.firstName;
-    $scope.secondName = logged.account.secondName;
-    $scope.position = logged.agent.position;
-
+    $scope.firstName = logged$user.data.account.firstName;
+    $scope.secondName = logged$user.data.account.secondName;
+    $scope.position = logged$user.data.agent.position;
 
     $scope.isAdmin = function(){
-      console.log(logged.isAdmin());
-      console.log(logged);
-
-      return logged.isAdmin();
+      return logged$user.isAdmin();
     }
   });

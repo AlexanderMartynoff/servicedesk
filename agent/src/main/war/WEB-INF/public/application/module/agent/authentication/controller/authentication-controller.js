@@ -1,8 +1,10 @@
-angular.module('customer.application')
-  .controller('CustomerAuthController', function ($scope, $window, authentication) {
+angular.module('backend.authentication')
+  .controller('AuthenticationController', function ($scope, $http, $location, $window, $timeout, authentication) {
     /** @namespace response.data.redirectUrl */
 
     $scope.covered = false;
+    $scope.username = null;
+    $scope.password = null;
     $scope.response = {
       status: 200,
       statusText: null
@@ -22,8 +24,7 @@ angular.module('customer.application')
 
     $scope.submit = function () {
       $scope.covered = true;
-      authentication($scope.username, $scope.password)
-        .then(responseSuccessHandler, responseFailureHandler);
+      authentication($scope.username, $scope.password).then(responseSuccessHandler, responseFailureHandler);
     };
 
   });

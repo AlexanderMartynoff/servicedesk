@@ -1,9 +1,10 @@
 angular.module('customer.ticket')
-  .controller('TicketFormController', function($scope, $uibModalInstance, $rootScope, ticket, ticketService, logged){
+  .controller('TicketFormController', function($scope, $uibModalInstance, $rootScope,
+                                               ticket, ticketService, logged$user){
 
     $scope.covered = false;
     $scope.ticket = ticket;
-    $scope.logged = logged;
+    $scope.customer = logged$user.data.customer;
 
     $scope.close = function(){
       $uibModalInstance.close();

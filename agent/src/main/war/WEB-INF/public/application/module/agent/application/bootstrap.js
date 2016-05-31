@@ -1,1 +1,1 @@
-__application_bootstrap('backend.application', 'backend.logged');
+__application_bootstrap('backend.application');

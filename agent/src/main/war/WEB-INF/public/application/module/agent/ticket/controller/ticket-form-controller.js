@@ -1,6 +1,6 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
-                                                logged, ticketService, contractorService,
+                                                logged$user, ticketService, contractorService,
                                                 ticket, agentPerformerService, supportLevelService) {
 
     $scope.covered = true;
@@ -8,23 +8,16 @@ angular.module("backend.ticket")
     $scope.contractorStore = [];
     $scope.performerStore = [];
     $scope.supportLevelStore = [];
-    $scope.progressStates = [];
     $scope.levelNumber = 1;
-
-    (function (state, step, limit) {
-      while (state <= limit) {
-        $scope.progressStates.push(state);
-        state += step;
-      }
-    })(0, 10, 100);
+    $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 
     $scope.isJustPerformer = function(){
-      return logged.isJustPerformer();
+      return logged$user.isOnlyPerformer();
     };
 
     $scope.isHasPerformer = function(){
-      return logged.isHasPerformer();
+      return logged$user.isPerformer();
     };
 
     $uibModalInstance.opened.then(function (reason) {

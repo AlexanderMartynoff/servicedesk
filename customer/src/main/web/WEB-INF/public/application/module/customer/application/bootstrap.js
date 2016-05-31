@@ -1,1 +1,1 @@
-__application_bootstrap('customer.application', 'customer.logged');
+__application_bootstrap('customer.application');

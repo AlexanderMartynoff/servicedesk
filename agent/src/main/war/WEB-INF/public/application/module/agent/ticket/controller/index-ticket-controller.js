@@ -1,5 +1,5 @@
 angular.module("backend.ticket")
-  .controller("IndexTicketController", function ($scope, logged, ticketForm, TicketModel, ticketService, $timeout, Paginator) {
+  .controller("IndexTicketController", function ($scope, logged$user, ticketForm, TicketModel, ticketService, $timeout, Paginator) {
 
     $scope.filter = {};
     $scope.paginator = new Paginator();
@@ -7,7 +7,7 @@ angular.module("backend.ticket")
     $scope.covered = true;
 
     $scope.isJustPerformer = function(){
-      return logged.isJustPerformer();
+      return logged$user.isOnlyPerformer();
     };
 
     $scope.edit = function (ticket) {
@@ -22,7 +22,7 @@ angular.module("backend.ticket")
       $scope.covered = true;
 
       if($scope.isJustPerformer()){
-        $scope.filter.performer = logged.account.firstName;
+        $scope.filter.performer = logged$user.data.account.firstName;
       }
 
       ticketService.list($scope.filter).then(function (response) {

@@ -4,7 +4,6 @@ angular.module('backend.application', [
   'ui.bootstrap',
   // application modules
   'common.security',
-  'backend.auth',
   'backend.ticket',
   'backend.settings',
   'backend.service',
@@ -14,5 +13,6 @@ angular.module('backend.application', [
   'common.dictionary.util',
   'common.ui.cover',
   'common.ui.xinputfile',
-  'common.ui.enum'
+  'common.ui.enum',
+  'common.logged'
 ]);
