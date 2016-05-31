@@ -23,7 +23,7 @@ task ngApplicationBuild(type: JsConcat) {
   ordPattern = /module.js$/
   filterPattern = /\.js$/
   srcDirName = [jsDir, commonJsDir]
-  targetFileUri = "$appDirName/WEB-INF/public/application/build.js"
+  targetFileUri = "$appDirName/WEB-INF/public/application/application.build.js"
   externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
 }
 
