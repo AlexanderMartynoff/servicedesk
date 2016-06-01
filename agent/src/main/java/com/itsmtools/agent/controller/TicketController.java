@@ -7,9 +7,9 @@ import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Ticket;
 import com.itsmtools.common.dictionary.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
-import java.util.Map;
 
 
 @RestController
@@ -24,8 +24,8 @@ public class TicketController extends ApplicationController {
     }
 
     @RequestMapping(value="/ticket", method = RequestMethod.GET)
-    public Collection<?> list(@RequestParam Map<String, String> filter) {
-        return ticketService.list(filter);
+    public Collection<?> list(@RequestParam MultiValueMap<String, String> multiParams) {
+        return ticketService.list(multiParams.toSingleValueMap(), multiParams);
     }
 
     @RequestMapping(value="/ticket", method = RequestMethod.POST)

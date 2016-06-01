@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -55,51 +56,55 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ticket> list(Map<String, String> params) {
+    public List<Ticket> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
         Criteria criteria = session.createCriteria(Ticket.class);
 
-        if (params.containsKey("title")) {
-            criteria.add(Restrictions.like("title", params.get("title"), MatchMode.ANYWHERE));
+        if (singleParams.containsKey("title")) {
+            criteria.add(Restrictions.like("title", singleParams.get("title"), MatchMode.ANYWHERE));
         }
 
-        // rename this parameter ... maybe `performerSearchString`
-        if (params.containsKey("performer")) {
-            criteria.createAlias("performer", "performer")
-                .add(Restrictions.or(
-                    Restrictions.like("performer.firstName", params.get("performer"), MatchMode.ANYWHERE),
-                    Restrictions.like("performer.secondName", params.get("performer"), MatchMode.ANYWHERE),
-                    Restrictions.like("performer.thirdName", params.get("performer"), MatchMode.ANYWHERE)
-                ));
+        if(singleParams.containsKey("performerId")){
+            criteria.add(Restrictions.eq(
+                "performer.id",
+                Integer.valueOf(singleParams.get("performerId"))
+            ));
         }
 
-        if(params.containsKey("initiatorId")){
+        if(singleParams.containsKey("initiatorId")){
             criteria.createAlias("initiator", "initiator")
-                .add(Restrictions.eq("initiator.id", Integer.valueOf(params.get("initiatorId"))));
+                .add(Restrictions.eq("initiator.id", Integer.valueOf(singleParams.get("initiatorId"))));
         }
 
         try {
-            if (params.containsKey("dateOpenFrom") && params.containsKey("dateOpenUntil")) {
+            if (singleParams.containsKey("dateOpenFrom") && singleParams.containsKey("dateOpenUntil")) {
                 // if both
                 criteria.add(Restrictions.between(
                     "dateOpen",
-                    format.parse(params.get("dateOpenFrom")).getTime(),
-                    format.parse(params.get("dateOpenUntil")).getTime()
+                    format.parse(singleParams.get("dateOpenFrom")).getTime(),
+                    format.parse(singleParams.get("dateOpenUntil")).getTime()
                 ));
-            } else if (params.containsKey("dateOpenFrom")) {
+            } else if (singleParams.containsKey("dateOpenFrom")) {
                 // if just from
                 criteria.add(Restrictions.ge(
                     "dateOpen",
-                    format.parse(params.get("dateOpenFrom")).getTime()
+                    format.parse(singleParams.get("dateOpenFrom")).getTime()
                 ));
-            } else if (params.containsKey("dateOpenUntil")) {
+            } else if (singleParams.containsKey("dateOpenUntil")) {
                 // if just until
                 criteria.add(Restrictions.le(
                     "dateOpen",
-                    format.parse(params.get("dateOpenUntil")).getTime()
+                    format.parse(singleParams.get("dateOpenUntil")).getTime()
                 ));
             }
         } catch (ParseException e) {
             throw (RuntimeException) new RuntimeException(e).initCause(e);
+        }
+
+        if(multiParams.containsKey("levelIds") && multiParams.get("levelIds").size() > 0){
+            criteria.add(Restrictions.in(
+                "supportLevel.id",
+                multiParams.get("levelIds").stream().map(Integer::valueOf).collect(Collectors.toList())
+            ));
         }
 
         criteria.addOrder(Order.desc("id"));

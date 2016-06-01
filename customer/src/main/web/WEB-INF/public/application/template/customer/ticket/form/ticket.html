@@ -46,6 +46,7 @@
                                ng-model="ticket.service"
                                uib-typeahead="service as service.title for service in customer.contractor.services | filter:$viewValue"
                                typeahead-min-length="0"
+                               typeahead-editable="false"
                                typeahead-show-hint="true"
                                class="form-control">
                     </div>

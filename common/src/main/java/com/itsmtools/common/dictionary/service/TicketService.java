@@ -43,7 +43,7 @@ public class TicketService{
         repository.delete(id);
     }
 
-    public List<Ticket> list(Map<String, String> filter) {
-        return repository.list(filter);
+    public List<Ticket> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
+        return repository.list(singleParams, multiParams);
     }
 }

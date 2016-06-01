@@ -19,5 +19,5 @@ abstract public class AbstractRepository<E, I, V>{
     abstract public void create(E input);
     abstract public void update(E input);
     abstract public void delete(I id);
-    abstract public List<E> list(Map<String, V> params);
+    abstract public List<E> list(Map<String, V> singleParams, Map<String, List<V>> multiParams);
 }

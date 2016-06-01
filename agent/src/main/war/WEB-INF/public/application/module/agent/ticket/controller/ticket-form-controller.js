@@ -7,6 +7,7 @@ angular.module("backend.ticket")
     $scope.ticket = ticket;
     $scope.levelNumber = 1;
     $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    $scope.ticket.progress = $scope.ticket.progress || 0;
 
 
     $scope.isJustPerformer = function(){

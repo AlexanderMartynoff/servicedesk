@@ -27,7 +27,7 @@ public class ServiceService {
         repository.update(input);
     }
 
-    public List<Service> list(Map<String, String> filter) {
-        return repository.list(filter);
+    public List<Service> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
+        return repository.list(singleParams, multiParams);
     }
 }

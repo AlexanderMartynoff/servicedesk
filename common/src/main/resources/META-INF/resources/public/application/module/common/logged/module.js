@@ -32,8 +32,19 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
     this.isOperator = function(){};
     this.isOnlyOperator = function(){};
 
+    // manager logic
+    this.isManager = function(){
+      return data.agentManager.enable;
+    };
+
     // common logic
-    this.isCanEscalation = function(number){}
+    this.isCanEscalation = function(toNumber, limitOfNumber){
+
+    };
+
+    this.isCanEditTicket = function(){
+      return data.agentOperator.enable && data.agentManager.enable;
+    }
   }
 
   // helpers

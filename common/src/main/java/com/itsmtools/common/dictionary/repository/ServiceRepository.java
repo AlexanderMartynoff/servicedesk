@@ -40,7 +40,7 @@ public class ServiceRepository extends AbstractRepository<Service, Integer, Stri
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Service> list(Map<String, String> filter) {
+    public List<Service> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
         return session.createCriteria(Service.class).list();
     }
 }

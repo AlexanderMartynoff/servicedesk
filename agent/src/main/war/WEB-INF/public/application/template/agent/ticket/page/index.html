@@ -43,9 +43,10 @@
                         </span>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
+                <div class="col-sm-12" ng-if="logged$user.isManager()">
+                    <label class="control-label">Уровень поддержки</label><br/>
+                    <enum model="selectedLevels" store="levels"></enum>
+                </div>
                 <div class="col-sm-12">
                     <label class="control-label">Заголовок</label>
                     <input type="text"
@@ -58,19 +59,8 @@
                            ng-model="filter.contractor"
                            class="form-control">
                 </div>
-                <div class="col-sm-6" ng-hide="isJustPerformer()">
-                    <label class="control-label">Исполнитель</label><br/>
-                    <input type="text"
-                           ng-model="filter.performer"
-                           class="form-control">
-                </div>
-                <div class="col-sm-6" ng-hide="isJustPerformer()">
-                    <label class="control-label">Автор</label><br/>
-                    <input type="text"
-                           ng-model="filter.author"
-                           class="form-control">
-                </div>
             </div>
+
 
             <div class="form-group">
                 <div class="col-sm-6">

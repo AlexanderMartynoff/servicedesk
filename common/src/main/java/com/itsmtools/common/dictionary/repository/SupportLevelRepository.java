@@ -32,13 +32,11 @@ public class SupportLevelRepository extends AbstractRepository<SupportLevel, Int
     }
 
     @Override
-    public void delete(Integer id) {
-
-    }
+    public void delete(Integer id) {}
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<SupportLevel> list(Map<String, String> filter) {
+    public List<SupportLevel> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
         return session.createCriteria(SupportLevel.class).list();
     }
 }

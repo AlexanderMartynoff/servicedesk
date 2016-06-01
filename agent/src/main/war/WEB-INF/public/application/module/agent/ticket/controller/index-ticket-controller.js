@@ -1,14 +1,22 @@
 angular.module("backend.ticket")
-  .controller("IndexTicketController", function ($scope, logged$user, ticketForm, TicketModel, ticketService, $timeout, Paginator) {
+  .controller("IndexTicketController", function ($scope, logged$user, supportLevelService, ticketForm,
+                                                 TicketModel, ticketService, $timeout, Paginator) {
 
     $scope.filter = {};
     $scope.paginator = new Paginator();
     $scope.pageSize = 10;
     $scope.covered = true;
+    $scope.selectedLevels = [];
+    $scope.logged$user = logged$user;
 
-    $scope.isJustPerformer = function(){
-      return logged$user.isOnlyPerformer();
-    };
+    function prepareFilter(){
+      if(logged$user.isOnlyPerformer()){
+        $scope.filter.performerId = logged$user.getId();
+      }
+      if(logged$user.isManager()){
+        $scope.filter.levelIds = $scope.selectedLevels.map(function(e){ return e.id });
+      }
+    }
 
     $scope.edit = function (ticket) {
       ticketForm.open(ticket);
@@ -20,14 +28,16 @@ angular.module("backend.ticket")
 
     $scope.updateTicketList = function () {
       $scope.covered = true;
-
-      if($scope.isJustPerformer()){
-        $scope.filter.performer = logged$user.data.account.firstName;
-      }
-
+      prepareFilter();
       ticketService.list($scope.filter).then(function (response) {
         $scope.paginator.load(response, $scope.pageSize);
         $scope.covered = false;
+      });
+    };
+
+    $scope.updateLevels = function(){
+      supportLevelService.list().then(function(result){
+        $scope.levels = result;
       });
     };
 
@@ -35,5 +45,6 @@ angular.module("backend.ticket")
       $scope.updateTicketList();
     });
 
+    $scope.updateLevels();
     $scope.updateTicketList();
   });
