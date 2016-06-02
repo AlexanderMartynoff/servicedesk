@@ -3,20 +3,17 @@ angular.module("backend.ticket")
                                                 logged$user, ticketService, contractorService,
                                                 ticket, agentPerformerService, uaService, supportLevelService) {
 
+    console.log(ticket);
+
+
     $scope.covered = true;
     $scope.ticket = ticket;
     $scope.levelNumber = 1;
     $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     $scope.ticket.progress = $scope.ticket.progress || 0;
-
-
-    $scope.isJustPerformer = function(){
-      return logged$user.isOnlyPerformer();
-    };
-
-    $scope.isHasPerformer = function(){
-      return logged$user.isPerformer();
-    };
+    $scope.priorityStore = ['Высокий', 'Средний'];
+    $scope.typeStore = ['Инцидент', 'Запрос на обслуживание'];
+    $scope.l$u = logged$user;
 
     $uibModalInstance.opened.then(function (reason) {
       $scope.covered = false;

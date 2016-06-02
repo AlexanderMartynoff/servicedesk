@@ -1,7 +1,10 @@
 package com.itsmtools.common.dictionary.model;
 
 
-public class User {
+import java.io.Serializable;
+
+
+public class User implements Serializable{
     private Account account;
 
     // agent application

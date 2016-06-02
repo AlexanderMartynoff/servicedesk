@@ -43,8 +43,12 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
     };
 
     this.isCanEditTicket = function(){
-      return data.agentOperator.enable && data.agentManager.enable;
-    }
+      return data.agentOperator.enable || data.agentManager.enable;
+    };
+
+    this.isServiceDeskPersonal = function(){
+      return data.agentOperator.enable || data.agentManager.enable || data.agentPerformer.enable;
+    };
   }
 
   // helpers
@@ -54,6 +58,7 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
     logged$data.agentAdmin = logged$data.agentAdmin || new UaCommonStub();
     logged$data.agentManager = logged$data.agentManager || new UaCommonStub();
     logged$data.agentOperator = logged$data.agentOperator || new UaCommonStub();
+    logged$data.agentPerformer = logged$data.agentPerformer || new UaCommonStub();
     logged$data.customerCustomer = logged$data.customerCustomer || new UaCommonStub();
     logged$data.customer = logged$data.customer || new UaCommonStub();
 

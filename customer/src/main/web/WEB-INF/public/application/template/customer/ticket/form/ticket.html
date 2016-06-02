@@ -44,7 +44,7 @@
                         <input type="text"
                                ng-readonly="ticket.id"
                                ng-model="ticket.service"
-                               uib-typeahead="service as service.title for service in customer.contractor.services | filter:$viewValue"
+                               uib-typeahead="_ as _.title for _ in customer.contractor.services | filter:$viewValue"
                                typeahead-min-length="0"
                                typeahead-editable="false"
                                typeahead-show-hint="true"
