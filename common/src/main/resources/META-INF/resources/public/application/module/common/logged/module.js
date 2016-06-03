@@ -2,7 +2,7 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
 
   // user model with all business authorization logic
   function User(){
-    var data = this.data = prepare$logged$data(logged$data);
+    var data = this.data = logged$data;
 
     this.getId = function(){
       return data.account.id;
@@ -38,8 +38,12 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
     };
 
     // common logic
-    this.isCanEscalation = function(toNumber, limitOfNumber){
-
+    this.isCanEscalation = function(ticket, direction, limitOfNumber){
+      if(direction > 0){
+        return (ticket.supportLevel.number < limitOfNumber) && this.isCanEditTicket();
+      } else if (direction < 0){
+        return (ticket.supportLevel.number > 1) && this.isCanEditTicket();
+      }
     };
 
     this.isCanEditTicket = function(){
@@ -49,20 +53,10 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
     this.isServiceDeskPersonal = function(){
       return data.agentOperator.enable || data.agentManager.enable || data.agentPerformer.enable;
     };
-  }
 
-  // helpers
-  function prepare$logged$data(logged$data){
-    logged$data.account = logged$data.account || new UaCommonStub();
-    logged$data.agent = logged$data.agent || new UaCommonStub();
-    logged$data.agentAdmin = logged$data.agentAdmin || new UaCommonStub();
-    logged$data.agentManager = logged$data.agentManager || new UaCommonStub();
-    logged$data.agentOperator = logged$data.agentOperator || new UaCommonStub();
-    logged$data.agentPerformer = logged$data.agentPerformer || new UaCommonStub();
-    logged$data.customerCustomer = logged$data.customerCustomer || new UaCommonStub();
-    logged$data.customer = logged$data.customer || new UaCommonStub();
-
-    return logged$data;
+    this.isCanFilterLine = function(){
+      return data.agentOperator.enable || data.agentManager.enable;
+    };
   }
 
   return new User();

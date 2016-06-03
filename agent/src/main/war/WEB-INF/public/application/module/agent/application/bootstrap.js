@@ -1,1 +1,1 @@
-__application_bootstrap('backend.application');
+_application$bootstrap('backend.application');

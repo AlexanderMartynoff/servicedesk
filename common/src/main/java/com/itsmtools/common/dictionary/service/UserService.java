@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,7 @@ public class UserService {
             .list()
             .stream()
             .findFirst()
-            .map(a -> buildByAccount((Account) a));
+            .map(account -> buildByAccount((Account) account));
     }
 
     @SuppressWarnings("unchecked")
@@ -56,29 +57,25 @@ public class UserService {
         Map<Profile, ProfileService> map = buildProfileServiceMap(user);
         accountService.save(user.getAccount());
 
-        map.entrySet().stream()
-            .filter(e -> e.getKey() != null)
-            .forEach(e -> {
-                e.getKey().setAccount(user.getAccount());
-                e.getValue().save(e.getKey());
-            });
+        map.forEach((key, value) -> {
+            key.setAccount(user.getAccount());
+            value.save(key);
+        });
     }
 
     @SuppressWarnings("unchecked")
     public void update(User user){
-        Map<Profile, ProfileService> uaServiceMap = buildProfileServiceMap(user);
+        Map<Profile, ProfileService> map = buildProfileServiceMap(user);
         accountService.update(user.getAccount());
 
-        uaServiceMap.entrySet().stream()
-            .filter(e -> e.getKey() != null)
-            .forEach(e -> {
-                if(e.getKey().getId() == null){
-                    e.getKey().setAccount(user.getAccount());
-                    e.getValue().save(e.getKey());
-                }else{
-                    e.getValue().update(e.getKey());
-                }
-            });
+        map.forEach((key, value) -> {
+            if (key.getId() == null) {
+                key.setAccount(user.getAccount());
+                value.save(key);
+            } else {
+                value.update(key);
+            }
+        });
     }
 
     private Map<Profile, ProfileService> buildProfileServiceMap(User user){
@@ -90,11 +87,15 @@ public class UserService {
         map.put(user.getAgentManager(), agentManagerService);
         map.put(user.getAgentOperator(), agentOperatorService);
         map.put(user.getAgentPerformer(), agentPerformerService);
+
         // customer profiles
         map.put(user.getCustomer(), customerService);
         map.put(user.getCustomerCustomer(), customerCustomerService);
 
-        return map;
+        return map.entrySet()
+            .stream()
+            .filter(entry -> entry.getKey() != null)
+            .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
     }
 
     // builder User object

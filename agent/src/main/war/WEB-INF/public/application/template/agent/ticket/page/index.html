@@ -60,18 +60,14 @@
                            class="form-control">
                 </div>
             </div>
-
-
             <div class="form-group">
-                <div class="col-sm-6">
-                    <button class="btn btn-xs btn-info form-control"
-                       ng-click="updateTicketList()">
-                        <b class="fa fa-refresh fa-left"></b>Обновить
+                <div ng-class="{'col-sm-6': l$u.isCanEditTicket(), 'col-sm-12': !l$u.isCanEditTicket()}">
+                    <button class="btn btn-xs btn-info form-control" ng-click="updateTicketList()">
+                        <b class="fa fa-circle fa-left"></b>Показать
                     </button>
                 </div>
-                <div class="col-sm-6">
-                    <button class="btn btn-xs btn-success form-control"
-                       ng-click="new()">
+                <div class="col-sm-6" ng-if="l$u.isCanEditTicket()">
+                    <button class="btn btn-xs btn-success form-control" ng-click="new()">
                         <b class="fa fa-plus-square fa-left"></b>Создать
                     </button>
                 </div>
@@ -98,18 +94,19 @@
                                 <th>Прогресс</th>
                             </tr>
                         </thead>
-                        <tr ng-repeat="i in paginator.getCurrentPage()" ng-click="edit(i)">
-                            <td>{{i.id}}</td>
-                            <td>{{i.dateOpen}}</td>
-                            <td>{{i.title}}</td>
-                            <td>{{i.supportLevel.title}}</td>
-                            <td>{{i.author.firstName}} {{i.author.secondName}}</td>
+                        <tr ng-repeat="_ in paginator.getCurrentPage()" ng-click="edit(_)">
+                            <td>{{_.id}}</td>
+                            <td>{{_.dateOpen}}</td>
+                            <td>{{_.title}}</td>
+                            <td>{{_.supportLevel.title}}</td>
+                            <td>{{_.author.firstName}} {{_.author.secondName}}</td>
                             <td>
                                 <uib-progressbar animate="true"
-                                                 value="i.progress"
+                                                 value="_.progress"
                                                  tooltip-placement="top"
-                                                 uib-tooltip="{{i.progress}}%"
-                                                 type="success"></uib-progressbar>
+                                                 uib-tooltip="{{_.progress}}%"
+                                                 type="success">
+                                </uib-progressbar>
                             </td>
                         </tr>
                     </table>

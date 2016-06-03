@@ -7,7 +7,7 @@ angular.module("backend.ticket")
     $scope.pageSize = 10;
     $scope.covered = true;
     $scope.selectedLevels = [];
-    $scope.logged$user = logged$user;
+    $scope.logged$user = $scope.l$u = logged$user;
 
     function prepareFilter(){
       if(logged$user.isOnlyPerformer()){

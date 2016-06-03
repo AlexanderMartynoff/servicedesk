@@ -3,9 +3,6 @@ angular.module("backend.ticket")
                                                 logged$user, ticketService, contractorService,
                                                 ticket, agentPerformerService, uaService, supportLevelService) {
 
-    console.log(ticket);
-
-
     $scope.covered = true;
     $scope.ticket = ticket;
     $scope.levelNumber = 1;
@@ -15,7 +12,14 @@ angular.module("backend.ticket")
     $scope.typeStore = ['Инцидент', 'Запрос на обслуживание'];
     $scope.l$u = logged$user;
 
-    $uibModalInstance.opened.then(function (reason) {
+    function autoComplete(){
+      if(logged$user.isOnlyPerformer() && !ticket.id){
+        ticket.performer = logged$user.getAccount();
+        ticket.initiator = logged$user.getAccount();
+      }
+    }
+
+    $uibModalInstance.opened.then(function(){
       $scope.covered = false;
     });
 
@@ -63,7 +67,6 @@ angular.module("backend.ticket")
       });
     };
 
-
     $scope.updatePerformerStore = function () {
       agentPerformerService.listAccount().then(function (response) {
         $scope.performerStore = response;
@@ -89,7 +92,9 @@ angular.module("backend.ticket")
       });
     };
 
+    autoComplete();
     $scope.updateSupportLevelStore();
     $scope.updatePerformerStore();
     $scope.updateContractorStore();
+
   });
