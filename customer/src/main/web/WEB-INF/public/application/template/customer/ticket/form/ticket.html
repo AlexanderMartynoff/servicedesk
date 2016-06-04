@@ -27,24 +27,29 @@
                 <div class="form-group">
                     <div class="col-xs-4">
                         <label class="control-label">Дата фиксации</label>
-                        <input class="form-control" ng-model="ticket.dateOpen" readonly/>
+                        <input class="form-control"
+                               uib-datepicker-popup="dd.MM.yyyy"
+                               ng-model="ticket.dateOpen"
+                               readonly/>
                     </div>
 
                     <div class="col-xs-4">
                         <label class="control-label">Приоритет</label>
-                        <select class="form-control" ng-if="!ticket.id">
-                            <option>Высокий</option>
-                            <option selected="selected">Средний</option>
-                        </select>
-                        <input value="Средний" class="form-control" ng-if="ticket.id" readonly/>
+                        <input type="text"
+                               ng-disabled="ticket.id"
+                               ng-model="ticket.priority"
+                               typeahead-editable="false"
+                               uib-typeahead="$ as $.title for $ in priorityStore | filter: $viewValue || ''"
+                               typeahead-min-length="0"
+                               typeahead-show-hint="true"
+                               class="form-control">
                     </div>
 
                     <div class="col-xs-4">
                         <label class="control-label">Услуга</label>
                         <input type="text"
-                               ng-readonly="ticket.id"
                                ng-model="ticket.service"
-                               uib-typeahead="_ as _.title for _ in customer.contractor.services | filter:$viewValue"
+                               uib-typeahead="$ as $.title for $ in customer.contractor.services | filter:$viewValue"
                                typeahead-min-length="0"
                                typeahead-editable="false"
                                typeahead-show-hint="true"
@@ -63,7 +68,10 @@
 
                     <div class="col-xs-6">
                         <label class="control-label">Исполнитель</label>
-                        <input type="text" ng-model="ticket.performer.firstName" class="form-control" readonly/>
+                        <input type="text"
+                               ng-model="ticket.performer.firstName"
+                               class="form-control"
+                               readonly/>
                     </div>
                 </div>
 

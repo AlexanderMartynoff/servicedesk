@@ -35,6 +35,8 @@ public class TicketService{
         ticket.setProgress(input.getProgress());
         ticket.setSupportLevel(input.getSupportLevel());
         ticket.setService(input.getService());
+        ticket.setTicketType(input.getTicketType());
+        ticket.setPriority(input.getPriority());
 
         repository.update(ticket);
     }

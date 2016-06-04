@@ -96,7 +96,7 @@
                         </thead>
                         <tr ng-repeat="_ in paginator.getCurrentPage()" ng-click="edit(_)">
                             <td>{{_.id}}</td>
-                            <td>{{_.dateOpen}}</td>
+                            <td>{{_.dateOpen | date:'medium'}}</td>
                             <td>{{_.title}}</td>
                             <td>{{_.supportLevel.title}}</td>
                             <td>{{_.author.firstName}} {{_.author.secondName}}</td>

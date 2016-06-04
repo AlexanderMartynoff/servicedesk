@@ -1,4 +1,4 @@
-<h1>Мои заявки</h1>
+<h1>Заявки</h1>
 
 <div class="row">
     <div class="col-sm-3">
@@ -59,8 +59,8 @@
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <a href="" class="vertical-align-btm btn btn-info form-control" ng-click="updateTicketList()">
-                        <b class="fa fa-refresh fa-left"></b>Обновить
+                    <a href="" class="vertical-align-btm btn btn-info form-control">
+                        <b class="fa fa-circle fa-left"></b>Обновить
                     </a>
                 </div>
                 <div class="col-sm-6">
@@ -77,20 +77,22 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Дата фиксации</th>
                 <th>Наименование</th>
                 <th>Описание</th>
                 <th>Прогресс</th>
             </tr>
             </thead>
-            <tr ng-repeat="ticket in paginator.getCurrentPage()" ng-click="open(ticket)">
-                <td>{{ticket.id}}</td>
-                <td>{{ticket.title}}</td>
-                <td>{{ticket.description}}</td>
+            <tr ng-repeat="_ in paginator.getCurrentPage()" ng-click="open(_)">
+                <td>{{_.id}}</td>
+                <td>{{_.dateOpen | date: 'medium'}}</td>
+                <td>{{_.title}}</td>
+                <td>{{_.description}}</td>
                 <td>
                     <uib-progressbar animate="true"
-                                     value="ticket.progress"
+                                     value="_.progress"
                                      tooltip-placement="top"
-                                     uib-tooltip="{{ticket.progress}}%"
+                                     uib-tooltip="{{_.progress}}%"
                                      type="success"></uib-progressbar>
                 </td>
             </tr>

@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "priority")
-public class Priority {
+public class TicketPriority {
 
     @Id
     @Column

@@ -39,6 +39,11 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
 
     // common logic
     this.isCanEscalation = function(ticket, direction, limitOfNumber){
+
+      if(!ticket.supportLevel){
+        return false;
+      }
+
       if(direction > 0){
         return (ticket.supportLevel.number < limitOfNumber) && this.isCanEditTicket();
       } else if (direction < 0){

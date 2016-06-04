@@ -1,23 +1,15 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 logged$user, ticketService, contractorService,
-                                                ticket, agentPerformerService, uaService, supportLevelService) {
+                                                ticket, agentPerformerService, uaService,
+                                                supportLevelService, ticketTypeService, ticketPriorityService) {
 
     $scope.covered = true;
     $scope.ticket = ticket;
     $scope.levelNumber = 1;
     $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     $scope.ticket.progress = $scope.ticket.progress || 0;
-    $scope.priorityStore = ['Высокий', 'Средний'];
-    $scope.typeStore = ['Инцидент', 'Запрос на обслуживание'];
     $scope.l$u = logged$user;
-
-    function autoComplete(){
-      if(logged$user.isOnlyPerformer() && !ticket.id){
-        ticket.performer = logged$user.getAccount();
-        ticket.initiator = logged$user.getAccount();
-      }
-    }
 
     $uibModalInstance.opened.then(function(){
       $scope.covered = false;
@@ -55,25 +47,26 @@ angular.module("backend.ticket")
       ticketService.doEscalation(ticket, offset, $scope.supportLevelStore);
     };
 
-    $scope.updateContractorStore = function () {
+    // updaters
+    function updateContractorStore() {
       contractorService.list().then(function (response) {
         $scope.contractorStore = response;
       });
-    };
+    }
 
-    $scope.updateInitiatorStore = function () {
+    function updateInitiatorStore() {
       uaService.listAccount().then(function (response) {
-        $scope.initialStore = response;
+        $scope.initiatorStore = response;
       });
-    };
+    }
 
-    $scope.updatePerformerStore = function () {
+    function updatePerformerStore() {
       agentPerformerService.listAccount().then(function (response) {
         $scope.performerStore = response;
       });
-    };
+    }
 
-    $scope.setTicketLevelSupport = function (store) {
+    function setTicketLevelSupport(store) {
       if (ticket.supportLevel)
         return;
 
@@ -82,19 +75,31 @@ angular.module("backend.ticket")
       }).forEach(function (level) {
         ticket.supportLevel = level;
       });
+    }
 
-    };
-
-    $scope.updateSupportLevelStore = function () {
+    function updateSupportLevelStore() {
       supportLevelService.list().then(function (data) {
-        $scope.setTicketLevelSupport(data);
+        setTicketLevelSupport(data);
         $scope.supportLevelStore = data;
       });
-    };
+    }
 
-    autoComplete();
-    $scope.updateSupportLevelStore();
-    $scope.updatePerformerStore();
-    $scope.updateContractorStore();
+    function updateTicketTypeStore(){
+      ticketTypeService.list().then(function(response){
+        $scope.typeStore = response;
+      });
+    }
 
+    function updateTicketPriorityStore(){
+      ticketPriorityService.list().then(function(response){
+        $scope.priorityStore = response;
+      });
+    }
+
+    updateTicketTypeStore();
+    updateTicketPriorityStore();
+    updateSupportLevelStore();
+    updatePerformerStore();
+    updateContractorStore();
+    updateInitiatorStore();
   });

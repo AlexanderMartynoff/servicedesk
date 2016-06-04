@@ -27,7 +27,7 @@ function _application$bootstrap(applicationModule) {
       });
     });
 
-    // when all our promise is resolve
+    // when all our promises is resolve
     $q.all([loggedPromise]).then(function () {
       angular.bootstrap(document, [applicationModule, '$$bootstrap']);
     })

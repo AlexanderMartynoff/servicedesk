@@ -103,7 +103,9 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         if(multiParams.containsKey("levelIds") && multiParams.get("levelIds").size() > 0){
             criteria.add(Restrictions.in(
                 "supportLevel.id",
-                multiParams.get("levelIds").stream().map(Integer::valueOf).collect(Collectors.toList())
+                multiParams.get("levelIds")
+                    .stream()
+                    .map(Integer::valueOf).collect(Collectors.toList())
             ));
         }
 

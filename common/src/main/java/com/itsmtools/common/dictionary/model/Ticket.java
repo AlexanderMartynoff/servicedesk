@@ -79,7 +79,7 @@ public class Ticket {
         name = "priority_id",
         referencedColumnName = "id"
     )
-    private Priority priority;
+    private TicketPriority priority;
 
     @ManyToOne
     @JoinColumn(
@@ -178,11 +178,11 @@ public class Ticket {
         this.service = service;
     }
 
-    public Priority getPriority() {
+    public TicketPriority getPriority() {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
+    public void setPriority(TicketPriority priority) {
         this.priority = priority;
     }
 
