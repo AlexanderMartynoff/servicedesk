@@ -1,6 +1,8 @@
 package com.itsmtools.customer.config.springframework;
 
 
+import com.itsmtools.common.service.security.DbUserDetailsService;
+import com.itsmtools.common.service.security.DbUserDetailsService.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,14 +18,20 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    @Autowired
+    public void autowiredUserDetailsService(DbUserDetailsService dbUserDetailsService){
+        dbUserDetailsService.setRequiredApplicationRoles(Roles.CUSTOMER);
+        dbUserDetailsService.setRequiredGroupRoles(Roles.CUSTOMER_CUSTOMER);
+        userDetailsService = dbUserDetailsService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {

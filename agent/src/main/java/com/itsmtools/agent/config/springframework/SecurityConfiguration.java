@@ -16,7 +16,7 @@ import com.itsmtools.common.service.security.DbUserDetailsService.Roles;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    DbUserDetailsService userDetailsService;
+    private DbUserDetailsService userDetailsService;
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
@@ -51,9 +51,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .csrf()
             .disable()
-            //.exceptionHandling()
-            // .authenticationEntryPoint(authenticationEntryPoint)
-            //.and()
             .formLogin()
             .loginPage("/login")
             .usernameParameter("username")

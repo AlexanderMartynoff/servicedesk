@@ -5,6 +5,7 @@ angular.module('customer.ticket')
     $scope.covered = false;
     $scope.ticket = ticket;
     $scope.customer = logged$user.data.customer;
+    $scope.ticket.contractor = $scope.customer.contractor;
 
     $scope.close = function(){
       $uibModalInstance.close();
