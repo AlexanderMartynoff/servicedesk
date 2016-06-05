@@ -236,3 +236,7 @@ textarea {
     border-radius: 3px !important;
     padding: 3px !important;
 }
+.hover:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

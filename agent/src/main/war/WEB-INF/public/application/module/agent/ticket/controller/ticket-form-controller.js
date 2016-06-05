@@ -47,6 +47,10 @@ angular.module("backend.ticket")
       ticketService.doEscalation(ticket, offset, $scope.supportLevelStore);
     };
 
+    $scope.assignToMe = function(){
+      ticket.performer = logged$user.getAccount();
+    };
+
     // updaters
     function updateContractorStore() {
       contractorService.list().then(function (response) {

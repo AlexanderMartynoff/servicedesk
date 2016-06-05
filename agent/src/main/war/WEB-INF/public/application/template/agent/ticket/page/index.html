@@ -43,7 +43,21 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-sm-12" ng-if="logged$user.isManager()">
+                <div class="col-sm-12">
+                    <br/><div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <button class="btn btn-xs btn-warning form-control"
+                                    ng-model="filter.showComplete"
+                                    uib-btn-checkbox>Завершенные</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-xs btn-warning form-control"
+                                    ng-model="filter.showUnComplete"
+                                    uib-btn-checkbox>Не завершенные</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12" ng-if="l$u.isManager() || l$u.isOperator()">
                     <label class="control-label">Уровень поддержки</label><br/>
                     <enum model="selectedLevels" store="levels"></enum>
                 </div>
@@ -94,17 +108,17 @@
                                 <th>Прогресс</th>
                             </tr>
                         </thead>
-                        <tr ng-repeat="_ in paginator.getCurrentPage()" ng-click="edit(_)">
-                            <td>{{_.id}}</td>
-                            <td>{{_.dateOpen | date:'medium'}}</td>
-                            <td>{{_.title}}</td>
-                            <td>{{_.supportLevel.title}}</td>
-                            <td>{{_.author.firstName}} {{_.author.secondName}}</td>
+                        <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="edit($)">
+                            <td>{{$.id}}</td>
+                            <td>{{$.dateOpen | date:'medium'}}</td>
+                            <td>{{$.title}}</td>
+                            <td>{{$.supportLevel.title}}</td>
+                            <td>{{$.author.firstName}} {{$.author.secondName}}</td>
                             <td>
                                 <uib-progressbar animate="true"
-                                                 value="_.progress"
+                                                 value="$.progress"
                                                  tooltip-placement="top"
-                                                 uib-tooltip="{{_.progress}}%"
+                                                 uib-tooltip="{{$.progress}}%"
                                                  type="success">
                                 </uib-progressbar>
                             </td>

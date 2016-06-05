@@ -29,7 +29,9 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
     };
 
     // operator logic
-    this.isOperator = function(){};
+    this.isOperator = function(){
+      return data.agentOperator.enable;
+    };
     this.isOnlyOperator = function(){};
 
     // manager logic
@@ -39,11 +41,9 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
 
     // common logic
     this.isCanEscalation = function(ticket, direction, limitOfNumber){
-
       if(!ticket.supportLevel){
         return false;
       }
-
       if(direction > 0){
         return (ticket.supportLevel.number < limitOfNumber) && this.isCanEditTicket();
       } else if (direction < 0){
@@ -51,8 +51,19 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
       }
     };
 
+    this.isCanAssignToMe = function(ticket){
+      return (data.agentOperator.enable || data.agentOperator.enable) && data.agentPerformer.enable;
+    };
+
     this.isCanEditTicket = function(){
       return data.agentOperator.enable || data.agentManager.enable;
+    };
+
+    this.isCanSetTicketProgress  = function(ticket){
+      if(!(ticket.performer && ticket.performer.id)) {
+        return false;
+      }
+      return this.isPerformer() && (ticket.performer.id == this.getAccount().id);
     };
 
     this.isServiceDeskPersonal = function(){

@@ -127,7 +127,12 @@
                     </div>
 
                     <div class="col-xs-4">
-                        <label class="control-label">Исполнитель</label>
+                        <label class="control-label">
+                            Исполнитель
+                            <span ng-if="l$u.isCanAssignToMe(ticket)">-
+                                <span class="text-primary hover" ng-click="assignToMe()">назначить себя</span>
+                            </span>
+                        </label>
                         <input type="text"
                                ng-disabled="!l$u.isManager()"
                                ng-model="ticket.performer"
@@ -157,7 +162,7 @@
                         <div class="btn-group btn-group-justified" role="group">
                             <div class="btn-group" ng-repeat="state in progressStates">
                                 <button type="button"
-                                        ng-disabled="!l$u.isPerformer()"
+                                        ng-disabled="!l$u.isCanSetTicketProgress(ticket)"
                                         ng-class="{
                                         'btn-secondary': ticket.progress !== state,
                                         'btn-success': ticket.progress === state

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
+
 @RestController
 public class TicketTypeController extends ApplicationController {
     @Autowired
@@ -18,7 +19,6 @@ public class TicketTypeController extends ApplicationController {
 
     @RequestMapping(path = "/ticket/type", method = RequestMethod.GET)
     public Collection<TicketType> list(@RequestParam MultiValueMap<String, String> multiParams){
-
         return repository.list(multiParams.toSingleValueMap(), multiParams);
     }
 }

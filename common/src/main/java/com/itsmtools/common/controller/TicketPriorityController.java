@@ -15,7 +15,7 @@ import java.util.Collection;
 @RestController
 public class TicketPriorityController extends ApplicationController {
     @Autowired
-    TicketPriorityRepository repository;
+    private TicketPriorityRepository repository;
 
     @RequestMapping(path = "/ticket/priority", method = RequestMethod.GET)
     public Collection<TicketPriority> list(@RequestParam MultiValueMap<String, String> multiParams){

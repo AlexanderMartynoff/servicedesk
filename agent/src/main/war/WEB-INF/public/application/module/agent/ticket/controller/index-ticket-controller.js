@@ -9,13 +9,13 @@ angular.module("backend.ticket")
     $scope.selectedLevels = [];
     $scope.logged$user = $scope.l$u = logged$user;
 
+
     function prepareFilter(){
       if(logged$user.isOnlyPerformer()){
         $scope.filter.performerId = logged$user.getId();
       }
-      if(logged$user.isManager()){
-        $scope.filter.levelIds = $scope.selectedLevels.map(function(e){ return e.id });
-      }
+
+      $scope.filter.levelIds = $scope.selectedLevels.map(function(e){ return e.id });
     }
 
     $scope.edit = function (ticket) {
