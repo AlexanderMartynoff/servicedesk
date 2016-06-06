@@ -26,6 +26,7 @@ angular.module("backend.knowledge")
       knowledgeService.create(record).then(function(response){
         $scope.covered = false;
         $scope.close();
+        $rootScope.$broadcast('knowledge::change');
       });
     };
 
@@ -34,6 +35,7 @@ angular.module("backend.knowledge")
       knowledgeService.create(record).then(function(response){
         $scope.covered = false;
         $scope.close();
+        $rootScope.$broadcast('knowledge::change');
       });
     };
   });

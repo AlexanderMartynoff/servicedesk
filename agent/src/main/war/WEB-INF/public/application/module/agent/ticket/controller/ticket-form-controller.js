@@ -64,7 +64,7 @@ angular.module("backend.ticket")
     // updaters
     function updateContractorStore() {
       contractorService.list().then(function (response) {
-        $scope.knowledgeStore = response;
+        $scope.contractorStore = response;
       });
     }
 

@@ -15,7 +15,7 @@ angular.module("backend.knowledge")
       knowledgeDetail.open(undefined, record)
     };
 
-    $scope.$on('contractor::change', function(e){
+    $scope.$on('knowledge::change', function(e){
       $scope.updateKnowledgeStore();
     });
 
