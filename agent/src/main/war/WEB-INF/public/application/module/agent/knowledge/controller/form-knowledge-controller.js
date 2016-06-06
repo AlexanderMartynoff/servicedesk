@@ -23,7 +23,7 @@ angular.module("backend.knowledge")
 
     $scope.update = function(record){
       $scope.covered = true;
-      knowledgeService.create(record).then(function(response){
+      knowledgeService.update(record).then(function(response){
         $scope.covered = false;
         $scope.close();
         $rootScope.$broadcast('knowledge::change');

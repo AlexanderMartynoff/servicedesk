@@ -72,8 +72,11 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
             queryCriteria.add(Restrictions.or(progressCriteria.toArray(new SimpleExpression[progressCriteria.size()])));
         }
 
-        if (singleParams.containsKey("title")) {
-            queryCriteria.add(Restrictions.like("title", singleParams.get("title"), MatchMode.ANYWHERE));
+        if (singleParams.containsKey("anywhere")) {
+            queryCriteria.add(Restrictions.or(
+                Restrictions.like("title", singleParams.get("anywhere"), MatchMode.ANYWHERE),
+                Restrictions.like("description", singleParams.get("anywhere"), MatchMode.ANYWHERE)
+            ));
         }
 
         if(singleParams.containsKey("performerId")){

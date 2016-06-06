@@ -1,11 +1,14 @@
 angular.module("common.dictionary.data")
   .factory("knowledgeService", function ($http) {
     return {
-      list: function (start, limit) {
-        return $http.get('/knowledge', {})
-          .then(function (response) {
+      list: function (filter, start, limit) {
+        return $http({
+          method: "GET",
+          params: filter,
+          url: "/knowledge"
+        }).then(function (response) {
             return response.data;
-          });
+        });
       },
 
       create: function(data){

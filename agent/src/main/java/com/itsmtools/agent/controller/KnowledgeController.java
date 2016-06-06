@@ -23,6 +23,12 @@ public class KnowledgeController extends ApplicationController{
         return empty();
     }
 
+    @RequestMapping(value = "/knowledge", method = RequestMethod.PUT)
+    public Response update(@RequestBody Knowledge knowledge) {
+        repository.update(knowledge);
+        return empty();
+    }
+
     @RequestMapping(value = "/knowledge", method = RequestMethod.GET)
     public Collection<?> list(@RequestParam MultiValueMap<String, String> multiParams) {
         return repository.list(multiParams.toSingleValueMap(), multiParams);

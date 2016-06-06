@@ -1,11 +1,11 @@
 angular.module("backend.knowledge")
   .controller("IndexKnowledgeController", function ($scope, knowledgeService, knowledgeDetail, Paginator) {
-
     $scope.knowledgeStore = [];
     $scope.paginator = new Paginator();
+    $scope.filter = {};
 
     $scope.updateKnowledgeStore = function () {
-      $scope.knowledgeStore = knowledgeService.list()
+      $scope.knowledgeStore = knowledgeService.list($scope.filter)
         .then(function (response) {
           $scope.paginator.load(response);
         });
