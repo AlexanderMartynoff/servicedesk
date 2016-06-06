@@ -57,6 +57,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         }
     }
 
+    @SuppressWarnings("unchecked")
     public List<Ticket> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
         Criteria queryCriteria = session.createCriteria(Ticket.class);
         List<SimpleExpression> progressCriteria = new ArrayList<>();
