@@ -9,7 +9,6 @@ angular.module("backend.ticket")
     $scope.selectedLevels = [];
     $scope.logged$user = $scope.l$u = logged$user;
 
-
     function prepareFilter(){
       if(logged$user.isOnlyPerformer()){
         $scope.filter.performerId = logged$user.getId();
