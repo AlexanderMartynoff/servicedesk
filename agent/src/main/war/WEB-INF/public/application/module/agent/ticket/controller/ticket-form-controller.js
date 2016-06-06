@@ -1,8 +1,9 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
                                                 logged$user, ticketService, contractorService,
-                                                ticket, agentPerformerService, uaService,
-                                                supportLevelService, ticketTypeService, ticketPriorityService) {
+                                                ticket, agentPerformerService, uaService, ticketForm,
+                                                supportLevelService, ticketTypeService,
+                                                ticketPriorityService, knowledgeDetail) {
 
     $scope.covered = true;
     $scope.ticket = ticket;
@@ -49,6 +50,14 @@ angular.module("backend.ticket")
 
     $scope.assignToMe = function(){
       ticket.performer = logged$user.getAccount();
+    };
+
+    // this show new modal window and close current
+    $scope.showKnowledgeDetail = function(){
+      $scope.close();
+      knowledgeDetail.open({}).closed.then(function(){
+        ticketForm.open(ticket);
+      });
     };
 
     // updaters

@@ -8,6 +8,7 @@ angular.module('backend.application', [
   'backend.settings',
   'backend.service',
   'backend.contractor',
+  'backend.knowledge',
   // commons modules
   'common.dictionary.data',
   'common.dictionary.util',

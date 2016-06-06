@@ -1,0 +1,50 @@
+<cover trigger="covered" type="success" label="подождите...">
+
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-10">
+                <h3 class="modal-title">
+                    {{knowledge.id ? "Редактирование известной проблемы #" + knowledge.id : "Новая известная проблема"}}
+                </h3>
+            </div>
+            <div class="col-xs-2 text-right">
+                <a href="" class="btn btn-default btn-sm" ng-click="close()">
+                    <b class="fa fa-close"></b>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label class="control-label">Заголовок</label>
+                        <input type="text" class="form-control" ng-model="knowledge.title"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label class="control-label">Описание</label>
+                        <textarea  ng-model="knowledge.description" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary"
+                type="button"
+                ng-if="knowledge.id"
+                ng-click="update(knowledge)">Сохранить</button>
+
+        <button class="btn btn-primary"
+                type="button"
+                ng-click="create(knowledge)"
+                ng-if="!knowledge.id">Создать</button>
+
+        <button class="btn btn-warning" type="button" ng-click="close()">Отмена</button>
+    </div>
+</cover>
