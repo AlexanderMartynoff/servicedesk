@@ -77,10 +77,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         }
 
         if(singleParams.containsKey("performerId")){
-            queryCriteria.add(Restrictions.eq(
-                "performer.id",
-                Integer.valueOf(singleParams.get("performerId"))
-            ));
+            queryCriteria.add(Restrictions.eq("performer.id", Integer.valueOf(singleParams.get("performerId"))));
         }
 
         if(singleParams.containsKey("initiatorId")){
