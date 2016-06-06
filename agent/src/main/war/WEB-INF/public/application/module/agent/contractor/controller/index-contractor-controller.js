@@ -4,11 +4,11 @@
 angular.module("backend.contractor")
   .controller("IndexContractorController", function ($scope, contractorForm, contractorService, Paginator) {
 
-    $scope.contractorStore = [];
+    $scope.knowledgeStore = [];
     $scope.paginator = new Paginator();
 
     $scope.updateContractorStore = function () {
-      $scope.contractorStore = contractorService.list()
+      $scope.knowledgeStore = contractorService.list()
         .then(function (response) {
           $scope.paginator.load(response);
         });

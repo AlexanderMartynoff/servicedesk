@@ -67,6 +67,15 @@ angular.module('backend.application')
           }
         }
       })
+      .state('knowledge', {
+        url: '/knowledge',
+        views: {
+          index: {
+            controller: 'IndexKnowledgeController',
+            templateUrl: rootUrl + 'knowledge/page/index.html'
+          }
+        }
+      })
       .state('404', {
         url: '/404',
         views: {

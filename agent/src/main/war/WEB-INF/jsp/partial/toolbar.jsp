@@ -43,7 +43,7 @@
                                             </span>
                                         </a>
 
-                                        <a href="#/skillhub/list"
+                                        <a href="#/knowledge"
                                            class="list-group-item"
                                            ng-class="{active: selModule == 'db'}"
                                            ng-click="selModule = 'db'">

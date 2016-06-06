@@ -53,9 +53,10 @@ angular.module("backend.ticket")
     };
 
     // this show new modal window and close current
+    // but after closed children window we comeback parent
     $scope.showKnowledgeDetail = function(){
       $scope.close();
-      knowledgeDetail.open({}).closed.then(function(){
+      knowledgeDetail.open(ticket).closed.then(function(reason){
         ticketForm.open(ticket);
       });
     };
@@ -63,7 +64,7 @@ angular.module("backend.ticket")
     // updaters
     function updateContractorStore() {
       contractorService.list().then(function (response) {
-        $scope.contractorStore = response;
+        $scope.knowledgeStore = response;
       });
     }
 
