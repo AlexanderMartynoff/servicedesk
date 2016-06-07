@@ -15,5 +15,6 @@ angular.module('backend.application', [
   'common.ui.cover',
   'common.ui.xinputfile',
   'common.ui.enum',
-  'common.logged'
+  'common.logged',
+  'common.ui.ticket-comments'
 ]);

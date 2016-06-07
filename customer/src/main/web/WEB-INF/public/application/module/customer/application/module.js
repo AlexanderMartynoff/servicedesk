@@ -10,5 +10,6 @@ angular.module('customer.application', [
   'common.ui.cover',
   'common.ui.xinputfile',
   // customer modules
-  'customer.ticket'
+  'customer.ticket',
+  'common.ui.ticket-comments'
 ]);

@@ -6,7 +6,14 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import static org.hibernate.criterion.Restrictions.le;
+import static org.hibernate.criterion.Restrictions.ge;
+import static org.hibernate.criterion.Restrictions.lt;
+import static org.hibernate.criterion.Restrictions.eq;
+import static org.hibernate.criterion.Restrictions.or;
+import static org.hibernate.criterion.Restrictions.in;
+import static org.hibernate.criterion.Restrictions.like;
+import static org.hibernate.criterion.Restrictions.between;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -58,68 +65,69 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ticket> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
-        final Criteria queryCriteria = session.createCriteria(Ticket.class);
+    public List<Ticket> list(Map<String, String> single, Map<String, List<String>> multi) {
+        final Criteria query = session.createCriteria(Ticket.class);
         final List<SimpleExpression> progressCriteria = new ArrayList<>();
 
-        if(singleParams.containsKey("showComplete") && singleParams.get("showComplete") != null && singleParams.get("showComplete").equals("true")){
-            progressCriteria.add(Restrictions.ge("progress", 100));
+        if(single.containsKey("showComplete") && single.get("showComplete") != null && single.get("showComplete").equals("true")){
+            progressCriteria.add(ge("progress", 100));
         }
-        if(singleParams.containsKey("showIncomplete") && singleParams.get("showIncomplete") != null && singleParams.get("showIncomplete").equals("true")){
-            progressCriteria.add(Restrictions.lt("progress", 100));
+        if(single.containsKey("showIncomplete") && single.get("showIncomplete") != null && single.get("showIncomplete").equals("true")){
+            progressCriteria.add(lt("progress", 100));
         }
         if(progressCriteria.size() > 0){
-            queryCriteria.add(Restrictions.or(progressCriteria.toArray(new SimpleExpression[progressCriteria.size()])));
+            query.add(or(progressCriteria.toArray(new SimpleExpression[progressCriteria.size()])));
         }
 
-        if (singleParams.containsKey("anywhere")) {
-            queryCriteria.add(Restrictions.or(
-                Restrictions.like("title", singleParams.get("anywhere"), MatchMode.ANYWHERE),
-                Restrictions.like("description", singleParams.get("anywhere"), MatchMode.ANYWHERE)
+        if (single.containsKey("anywhere")) {
+            query.add(or(
+                like("title", single.get("anywhere"), MatchMode.ANYWHERE),
+                like("description", single.get("anywhere"), MatchMode.ANYWHERE)
             ));
         }
 
-        if(singleParams.containsKey("performerId")){
-            queryCriteria.add(Restrictions.eq("performer.id", Integer.valueOf(singleParams.get("performerId"))));
+        if(single.containsKey("performerId")){
+            query.add(eq("performer.id", Integer.valueOf(single.get("performerId"))));
         }
 
-        if(singleParams.containsKey("initiatorId")){
-            queryCriteria.createAlias("initiator", "initiator")
-                .add(Restrictions.eq("initiator.id", Integer.valueOf(singleParams.get("initiatorId"))));
+        if(single.containsKey("initiatorId")){
+            query.createAlias("initiator", "initiator")
+                .add(eq("initiator.id", Integer.valueOf(single.get("initiatorId"))));
         }
 
-        try {
-            if (singleParams.containsKey("dateOpenFrom") && singleParams.containsKey("dateOpenUntil")) {
-                // if both
-                queryCriteria.add(Restrictions.between(
-                    "dateOpen",
-                    format.parse(singleParams.get("dateOpenFrom")).getTime(),
-                    format.parse(singleParams.get("dateOpenUntil")).getTime()
-                ));
-            } else if (singleParams.containsKey("dateOpenFrom")) {
-                // if just from
-                queryCriteria.add(Restrictions.ge(
-                    "dateOpen",
-                    format.parse(singleParams.get("dateOpenFrom")).getTime()
-                ));
-            } else if (singleParams.containsKey("dateOpenUntil")) {
-                // if just until
-                queryCriteria.add(Restrictions.le(
-                    "dateOpen",
-                    format.parse(singleParams.get("dateOpenUntil")).getTime()
-                ));
-            }
-        } catch (ParseException e) {
+        if (single.containsKey("dateOpenFrom") && single.containsKey("dateOpenUntil")) {
+            // if both
+            query.add(between(
+                "dateOpen",
+                timestamp(single.get("dateOpenFrom")),
+                timestamp(single.get("dateOpenUntil"))
+            ));
+        } else if (single.containsKey("dateOpenFrom")) {
+            // if just from
+            query.add(ge("dateOpen", timestamp(single.get("dateOpenFrom"))
+            ));
+        } else if (single.containsKey("dateOpenUntil")) {
+            // if just until
+            query.add(le("dateOpen", timestamp(single.get("dateOpenUntil"))));
+        }
+
+        if(multi.containsKey("levelIds") && multi.get("levelIds").size() > 0){
+            query.add(in("supportLevel.id", multi.get("levelIds")
+                .stream()
+                .map(Integer::valueOf)
+                .collect(Collectors.toList())));
+        }
+
+        query.addOrder(Order.desc("id"));
+
+        return query.list();
+    }
+
+    private Long timestamp(String date) {
+        try{
+            return format.parse(date).getTime();
+        }catch (ParseException e){
             throw (RuntimeException) new RuntimeException(e).initCause(e);
         }
-
-        if(multiParams.containsKey("levelIds") && multiParams.get("levelIds").size() > 0){
-            queryCriteria.add(Restrictions.in("supportLevel.id",
-                multiParams.get("levelIds").stream().map(Integer::valueOf).collect(Collectors.toList())));
-        }
-
-        queryCriteria.addOrder(Order.desc("id"));
-
-        return queryCriteria.list();
     }
 }

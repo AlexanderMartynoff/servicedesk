@@ -1,4 +1,4 @@
-REST API naming convention
+WEB API naming convention
 --------------------------
 
 + delete (DELETE) - entity/:id

@@ -1,0 +1,38 @@
+<cover trigger="commentsCovered" ng-if="ticket.id">
+    <uib-accordion>
+        <uib-accordion-group class="x-no-margin">
+            <uib-accordion-heading>
+                Общение с {{ticket.contractor.fullName}}<span class="pull-right badge">{{commentStore.length || 0}}</span>
+            </uib-accordion-heading>
+            <div style="position: relative">
+                <label for="comment" class="control-label">Введите текст чтобы оставить комментарий</label>
+                <textarea id="comment"
+                          ng-model="comment.text"
+                          class="form-control"
+                          rows="{{rows}}"
+                          ng-focus="focus()"
+                          ng-blur="blur()"></textarea>
+
+                <div ng-if="rows > 1"
+                     ng-mousedown="send(comment)"
+                     style="opacity: .5; position: absolute; bottom: 5px; left: 5px">
+                    <label class="btn btn-info btn-xs"><i class="fa fa-send"></i></label>
+                </div>
+            </div>
+
+            <div class="media" ng-repeat="$ in commentStore">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <i class="fa fa-left fa-user"></i>
+                        <span ng-if="$.author.id === l$u.account.id">Я</span>
+                        <span ng-if="$.author.id !== l$u.account.id">
+                            {{$.author.firstName}} {{$.author.secondName}}
+                        </span>
+                        <small>12.15.2016 18:05</small>
+                    </h4>
+                    {{$.text}}
+                </div>
+            </div>
+        </uib-accordion-group>
+    </uib-accordion>
+</cover>

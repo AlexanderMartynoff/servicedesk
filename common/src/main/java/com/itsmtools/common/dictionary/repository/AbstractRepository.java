@@ -1,6 +1,7 @@
 package com.itsmtools.common.dictionary.repository;
 
 
+import com.itsmtools.common.dictionary.model.Account;
 import com.itsmtools.common.service.security.Principal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
@@ -13,6 +14,12 @@ abstract public class AbstractRepository<E, I, V>{
         return (Principal) SecurityContextHolder.getContext()
             .getAuthentication()
             .getPrincipal();
+    }
+
+    public Account getAccount(){
+        return ((Principal) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal()).getUser().getAccount();
     }
 
     abstract public E get(I id);

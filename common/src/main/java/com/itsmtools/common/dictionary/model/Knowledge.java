@@ -1,5 +1,7 @@
 package com.itsmtools.common.dictionary.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 
@@ -16,9 +18,11 @@ public class Knowledge {
     private String title;
 
     @Column
+    @Type(type = "text")
     private String description;
 
     @Column
+    @Type(type = "text")
     private String resolution;
 
     @ManyToOne

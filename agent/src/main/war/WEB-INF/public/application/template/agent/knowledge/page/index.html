@@ -35,7 +35,7 @@
             <tbody>
                 <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="open($)">
                     <td>{{$.title}}</td>
-                    <td>{{$.description}}</td>
+                    <td>{{$.description.length < 100 ? $.description : $.description.substring(0, 100) + '...'}}</td>
                 </tr>
             </tbody>
         </table>

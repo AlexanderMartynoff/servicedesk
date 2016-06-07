@@ -79,20 +79,20 @@
                 <th>ID</th>
                 <th>Дата фиксации</th>
                 <th>Наименование</th>
-                <th>Описание</th>
+                <th>Услугп</th>
                 <th>Прогресс</th>
             </tr>
             </thead>
-            <tr ng-repeat="_ in paginator.getCurrentPage()" ng-click="open(_)">
-                <td>{{_.id}}</td>
-                <td>{{_.dateOpen | date: 'medium'}}</td>
-                <td>{{_.title}}</td>
-                <td>{{_.description}}</td>
+            <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="open($)">
+                <td>{{$.id}}</td>
+                <td>{{$.dateOpen | date: 'medium'}}</td>
+                <td>{{$.title}}</td>
+                <td>{{$.service.title}}</td>
                 <td>
                     <uib-progressbar animate="true"
-                                     value="_.progress"
+                                     value="$.progress"
                                      tooltip-placement="top"
-                                     uib-tooltip="{{_.progress}}%"
+                                     uib-tooltip="{{$.progress}}%"
                                      type="success"></uib-progressbar>
                 </td>
             </tr>

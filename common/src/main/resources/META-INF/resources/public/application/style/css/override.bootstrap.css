@@ -122,3 +122,9 @@ h1 {
     overflow: auto;
     width: 100%;
 }
+.accordion-grey .panel-body{
+    background: #f9f9f9;
+}
+.panel-group{
+    margin-bottom: 0 !important;
+}
