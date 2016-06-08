@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
     "com.itsmtools.customer",
     "com.itsmtools.common"
 })
-public class ApplicationConfig extends WebMvcConfigurerAdapter {
+public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     private String[] resourcesDirs = new String[] {
         "/WEB-INF/public/",

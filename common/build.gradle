@@ -1,9 +1,6 @@
 apply plugin: "java"
 
 // component version var
-def servletApiVer = "3.0.1"
-def jspApiVer = "2.1"
-def jstlVer = "1.1.2"
 def springVer = "4.2.2.RELEASE"
 def springSecurityVer = "4.0.3.RELEASE"
 def jacksonVer = "2.6.3"
@@ -15,10 +12,25 @@ repositories {
   mavenCentral()
 }
 
+configurations {
+  provided
+}
+
+sourceSets {
+  main {
+    compileClasspath += configurations.provided    
+  }
+  test {
+    compileClasspath += configurations.provided
+    runtimeClasspath += configurations.provided  
+  }
+}
+
 dependencies {
-  compile group: "javax.servlet", name: "javax.servlet-api", version: servletApiVer
-  compile group: "javax.servlet.jsp", name: "jsp-api", version: jspApiVer
-  compile group: "javax.servlet", name: "jstl", version: jstlVer
+  provided servletApiDependence
+  provided jspApiDependence
+  provided jstlDependence
+
   compile group: "org.springframework", name: "spring-webmvc", version: springVer
   compile group: "org.springframework", name: "spring-core", version: springVer
   compile group: "org.springframework", name: "spring-web", version: springVer
@@ -34,7 +46,4 @@ dependencies {
   compile group: "com.fasterxml.jackson.core", name: "jackson-core", version: jacksonVer
   compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVer
   compile group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVer
-
-  // unneeded
-  compile group: "io.javaslang", name: "javaslang", version: "2.0.2"
 }

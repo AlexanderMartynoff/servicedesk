@@ -16,7 +16,10 @@ repositories {
 }
 
 dependencies {
-    compile project(":common")
+  providedCompile servletApiDependence
+  providedCompile jspApiDependence
+  providedCompile jstlDependence
+  compile project(":common")
 }
 
 task ngApplicationBuild(type: JsConcat) {

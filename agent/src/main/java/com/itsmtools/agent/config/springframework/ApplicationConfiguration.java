@@ -24,7 +24,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 })
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
-    private String[] resourcesDirs = new String[] {"/WEB-INF/public/", "classpath:/META-INF/resources/public/"};
+    private String[] resourcesDirs = new String[] {
+        "/WEB-INF/public/",
+        "classpath:/META-INF/resources/public/"
+    };
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

@@ -1,6 +1,14 @@
+def servletApiVer = "3.0.1"
+def jspApiVer = "2.1"
+def jstlVer = "1.1.2"
+
 // import in all child projects
 subprojects {
   ext.JsConcat = JsConcat
+
+  ext.servletApiDependence = "javax.servlet:javax.servlet-api:${servletApiVer}"
+  ext.jspApiDependence = "javax.servlet.jsp:jsp-api:${jspApiVer}"
+  ext.jstlDependence = "javax.servlet:jstl:${jstlVer}"
 }
 
 @SuppressWarnings('all')
@@ -28,15 +36,9 @@ class JsConcat extends DefaultTask {
     }
 
     srcFiles.sort { a, b ->
-      if (a =~ ordPattern && b =~ ordPattern) {
-        0
-      } else if (a =~ ordPattern) {
-        -1
-      } else if (b =~ ordPattern) {
-        1
-      } else {
-        0
-      }
+      if (a =~ ordPattern && b =~ ordPattern) { 0 } else
+      if (a =~ ordPattern) { -1 } else
+      if (b =~ ordPattern) { 1 } else { 0 }
     }
 
     outFile = new File(targetFileUri)

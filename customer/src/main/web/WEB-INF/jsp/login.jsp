@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
 <!doctype html>
-<html ng-app="customer.authentication" ng-cloack>
+<html ng-app="customer.authentication">
     <head>
-        <jsp:include page="partial/authentication-head.jsp"/>
+        <jsp:include page="./partial/authentication-head.jsp"/>
         <style type="text/css">
             body {
                 background: #f8f8f8;
