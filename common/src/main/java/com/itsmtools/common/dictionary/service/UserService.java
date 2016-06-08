@@ -44,6 +44,7 @@ public class UserService {
 
     @SuppressWarnings("unchecked")
     public Optional<User> getByLogin(String login) {
+        session.clear();
         return session.createCriteria(Account.class)
             .add(Restrictions.eq("login", login))
             .list()

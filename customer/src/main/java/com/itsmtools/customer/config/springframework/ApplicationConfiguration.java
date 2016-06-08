@@ -44,9 +44,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean(name = "defaultHibernateSession")
     public Session hibernateSession() {
-        Session session = new HibernateSessionFactoryBuilder()
-            .getSessionFactory()
-            .openSession();
+        Session session = new HibernateSessionFactoryBuilder().getSessionFactory().openSession();
         session.setCacheMode(CacheMode.IGNORE);
         return session;
     }

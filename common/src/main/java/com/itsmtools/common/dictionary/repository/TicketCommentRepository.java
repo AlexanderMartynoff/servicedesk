@@ -25,6 +25,7 @@ public class TicketCommentRepository extends AbstractRepository<TicketComment, I
     @Override
     public void create(TicketComment input) {
         input.setAuthor(getAccount());
+        session.clear();
         session.save(input);
         session.flush();
     }
@@ -44,6 +45,8 @@ public class TicketCommentRepository extends AbstractRepository<TicketComment, I
             query.createAlias("ticket", "ticket")
                 .add(Restrictions.eq("ticket.id", Integer.valueOf(single.get("ticketId"))));
         }
+
+        session.clear();
 
         return query.list();
     }

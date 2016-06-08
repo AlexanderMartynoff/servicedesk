@@ -31,6 +31,7 @@ public class TicketPriorityRepository extends AbstractRepository<TicketPriority,
     @Override
     @SuppressWarnings("unchecked")
     public List<TicketPriority> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
+        session.clear();
         return session.createCriteria(TicketPriority.class).list();
     }
 }

@@ -35,6 +35,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     public Ticket get(Integer id) {
+        session.clear();
         return (Ticket) session.get(Ticket.class, id);
     }
 
@@ -46,6 +47,8 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         }
 
         request.setAuthor(getPrincipal().getUser().getAccount());
+
+        session.clear();
         session.save(request);
         session.flush();
     }
@@ -59,6 +62,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         Ticket instance = (Ticket) session.load(Ticket.class, id);
 
         if (instance != null) {
+            session.clear();
             session.delete(instance);
             session.flush();
         }
@@ -119,6 +123,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         }
 
         query.addOrder(Order.desc("id"));
+        session.clear();
 
         return query.list();
     }

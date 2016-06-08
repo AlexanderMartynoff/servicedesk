@@ -24,6 +24,7 @@ public class ProfileAgentOperatorService implements ProfileService<ProfileAgentO
 
     @SuppressWarnings("unchecked")
     public Optional<ProfileAgentOperator> getByAccount(Account account) {
+        session.clear();
         return session.createCriteria(ProfileAgentOperator.class)
             .add(Restrictions.eq("account", account))
             .list()
@@ -32,14 +33,16 @@ public class ProfileAgentOperatorService implements ProfileService<ProfileAgentO
     }
 
     public void save(ProfileAgentOperator input) {
+        session.clear();
         session.save(input);
         session.flush();
     }
 
     public void update(ProfileAgentOperator input) {
         ProfileAgentOperator profile = (ProfileAgentOperator) session.get(ProfileAgentOperator.class, input.getId());
-
         profile.setEnable(input.getEnable());
+
+        session.clear();
         session.save(profile);
         session.flush();
     }
