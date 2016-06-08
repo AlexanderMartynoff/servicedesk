@@ -3,6 +3,7 @@ package com.itsmtools.customer.config.springframework;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsmtools.common.service.hibernate.HibernateSessionFactoryBuilder;
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +44,11 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean(name = "defaultHibernateSession")
     public Session hibernateSession() {
-        return new HibernateSessionFactoryBuilder().getSessionFactory().openSession();
+        Session session = new HibernateSessionFactoryBuilder()
+            .getSessionFactory()
+            .openSession();
+        session.setCacheMode(CacheMode.IGNORE);
+        return session;
     }
 
     @Bean(name = "defaultHibernateSessionFactory")

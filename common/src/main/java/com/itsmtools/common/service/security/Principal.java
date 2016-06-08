@@ -3,7 +3,6 @@ package com.itsmtools.common.service.security;
 
 import com.itsmtools.common.dictionary.model.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.util.List;
 
 
