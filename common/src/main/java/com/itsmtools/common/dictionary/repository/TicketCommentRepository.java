@@ -4,6 +4,7 @@ package com.itsmtools.common.dictionary.repository;
 import com.itsmtools.common.dictionary.model.TicketComment;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,7 @@ public class TicketCommentRepository extends AbstractRepository<TicketComment, I
                 .add(Restrictions.eq("ticket.id", Integer.valueOf(single.get("ticketId"))));
         }
 
+        query.addOrder(Order.desc("id"));
         return query.list();
     }
 }

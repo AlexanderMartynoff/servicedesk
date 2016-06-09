@@ -29,11 +29,7 @@ public class ProfileCustomerCustomerService implements ProfileService<ProfileCus
             .add(Restrictions.eq("account", account))
             .list()
             .stream()
-            .findFirst()
-            .map(e -> {
-                session.refresh(e);
-                return e;
-            });
+            .findFirst();
     }
 
     public void save(ProfileCustomerCustomer entity) {

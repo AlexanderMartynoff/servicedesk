@@ -24,7 +24,8 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = service.getByLogin(login).orElseThrow(() -> new UsernameNotFoundException("No such user, or role"));
+        User user = service.getByLogin(login)
+            .orElseThrow(() -> new UsernameNotFoundException("No such user, or role"));
 
         Map<Roles, Profile> potentials = new HashMap<>();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

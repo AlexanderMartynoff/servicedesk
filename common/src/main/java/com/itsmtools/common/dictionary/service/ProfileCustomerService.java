@@ -27,11 +27,7 @@ public class ProfileCustomerService implements ProfileService<ProfileCustomer, A
             .add(Restrictions.eq("account", account))
             .list()
             .stream()
-            .findFirst()
-            .map(e -> {
-                session.refresh(e);
-                return e;
-            });
+            .findFirst();
     }
 
     public void save(ProfileCustomer entity) {
@@ -40,12 +36,12 @@ public class ProfileCustomerService implements ProfileService<ProfileCustomer, A
     }
 
     public void update(ProfileCustomer entity) {
-        ProfileCustomer ua  = (ProfileCustomer) session.get(ProfileCustomer.class, entity.getId());
-        ua.setContractor(entity.getContractor());
-        ua.setEnable(entity.getEnable());
-        ua.setPosition(entity.getPosition());
+        ProfileCustomer profile  = (ProfileCustomer) session.get(ProfileCustomer.class, entity.getId());
+        profile.setContractor(entity.getContractor());
+        profile.setEnable(entity.getEnable());
+        profile.setPosition(entity.getPosition());
 
-        session.save(ua);
+        session.save(profile);
         session.flush();
     }
 
