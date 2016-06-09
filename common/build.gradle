@@ -13,23 +13,23 @@ repositories {
 }
 
 configurations {
-  provided
+  providedCompile
 }
 
 sourceSets {
   main {
-    compileClasspath += configurations.provided    
+    compileClasspath += configurations.providedCompile
   }
   test {
-    compileClasspath += configurations.provided
-    runtimeClasspath += configurations.provided  
+    compileClasspath += configurations.providedCompile
+    runtimeClasspath += configurations.providedCompile
   }
 }
 
 dependencies {
-  provided servletApiDependence
-  provided jspApiDependence
-  provided jstlDependence
+  providedCompile servletApiDependence
+  providedCompile jspApiDependence
+  providedCompile jstlDependence
 
   compile group: "org.springframework", name: "spring-webmvc", version: springVer
   compile group: "org.springframework", name: "spring-core", version: springVer
