@@ -4,19 +4,14 @@ package com.itsmtools.common.dictionary.repository;
 import com.itsmtools.common.dictionary.model.Ticket;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import static org.hibernate.criterion.Restrictions.le;
-import static org.hibernate.criterion.Restrictions.ge;
-import static org.hibernate.criterion.Restrictions.lt;
-import static org.hibernate.criterion.Restrictions.eq;
-import static org.hibernate.criterion.Restrictions.or;
-import static org.hibernate.criterion.Restrictions.in;
-import static org.hibernate.criterion.Restrictions.like;
-import static org.hibernate.criterion.Restrictions.between;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static org.hibernate.criterion.Restrictions.*;
 
 
 @Repository
@@ -35,7 +32,6 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     public Ticket get(Integer id) {
-        session.clear();
         return (Ticket) session.get(Ticket.class, id);
     }
 
@@ -47,8 +43,6 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         }
 
         request.setAuthor(getPrincipal().getUser().getAccount());
-
-        session.clear();
         session.save(request);
         session.flush();
     }
@@ -62,7 +56,6 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         Ticket instance = (Ticket) session.load(Ticket.class, id);
 
         if (instance != null) {
-            session.clear();
             session.delete(instance);
             session.flush();
         }
@@ -73,13 +66,13 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         final Criteria query = session.createCriteria(Ticket.class);
         final List<SimpleExpression> progressCriteria = new ArrayList<>();
 
-        if(single.containsKey("showComplete") && single.get("showComplete") != null && single.get("showComplete").equals("true")){
+        if (single.containsKey("showComplete") && single.get("showComplete") != null && single.get("showComplete").equals("true")) {
             progressCriteria.add(ge("progress", 100));
         }
-        if(single.containsKey("showIncomplete") && single.get("showIncomplete") != null && single.get("showIncomplete").equals("true")){
+        if (single.containsKey("showIncomplete") && single.get("showIncomplete") != null && single.get("showIncomplete").equals("true")) {
             progressCriteria.add(lt("progress", 100));
         }
-        if(progressCriteria.size() > 0){
+        if (progressCriteria.size() > 0) {
             query.add(or(progressCriteria.toArray(new SimpleExpression[progressCriteria.size()])));
         }
 
@@ -90,11 +83,11 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
             ));
         }
 
-        if(single.containsKey("performerId")){
+        if (single.containsKey("performerId")) {
             query.add(eq("performer.id", Integer.valueOf(single.get("performerId"))));
         }
 
-        if(single.containsKey("initiatorId")){
+        if (single.containsKey("initiatorId")) {
             query.createAlias("initiator", "initiator")
                 .add(eq("initiator.id", Integer.valueOf(single.get("initiatorId"))));
         }
@@ -115,7 +108,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
             query.add(le("dateOpen", timestamp(single.get("dateOpenUntil"))));
         }
 
-        if(multi.containsKey("levelIds") && multi.get("levelIds").size() > 0){
+        if (multi.containsKey("levelIds") && multi.get("levelIds").size() > 0) {
             query.add(in("supportLevel.id", multi.get("levelIds")
                 .stream()
                 .map(Integer::valueOf)
@@ -123,15 +116,17 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         }
 
         query.addOrder(Order.desc("id"));
-        session.clear();
 
-        return query.list();
+        return ((List<Ticket>) query.list()).stream().map(e -> {
+            session.refresh(e);
+            return e;
+        }).collect(Collectors.toList());
     }
 
     private Long timestamp(String date) {
-        try{
+        try {
             return format.parse(date).getTime();
-        }catch (ParseException e){
+        } catch (ParseException e) {
             throw (RuntimeException) new RuntimeException(e).initCause(e);
         }
     }

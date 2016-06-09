@@ -23,7 +23,6 @@ public class KnowledgeRepository extends AbstractRepository<Knowledge, Integer, 
 
     @Override
     public void create(Knowledge entity) {
-        session.clear();
         session.save(entity);
         session.flush();
     }
@@ -34,7 +33,6 @@ public class KnowledgeRepository extends AbstractRepository<Knowledge, Integer, 
         knowledge.setTitle(input.getTitle());
         knowledge.setDescription(input.getDescription());
         knowledge.setResolution(input.getResolution());
-        session.clear();
         session.save(knowledge);
         session.flush();
     }
@@ -54,8 +52,6 @@ public class KnowledgeRepository extends AbstractRepository<Knowledge, Integer, 
                 Restrictions.like("resolution", singleParams.get("anywhere"), MatchMode.ANYWHERE)
             ));
         }
-
-        session.clear();
 
         return criteria.list();
     }

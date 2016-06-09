@@ -24,7 +24,7 @@ public class ProfileCustomerCustomerService implements ProfileService<ProfileCus
 
     @SuppressWarnings("unchecked")
     public Optional<ProfileCustomerCustomer> getByAccount(Account account) {
-        session.clear();
+
         return session.createCriteria(ProfileCustomerCustomer.class)
             .add(Restrictions.eq("account", account))
             .list()
@@ -33,7 +33,7 @@ public class ProfileCustomerCustomerService implements ProfileService<ProfileCus
     }
 
     public void save(ProfileCustomerCustomer entity) {
-        session.clear();
+
         session.save(entity);
         session.flush();
     }
@@ -42,7 +42,6 @@ public class ProfileCustomerCustomerService implements ProfileService<ProfileCus
         ProfileCustomerCustomer record = (ProfileCustomerCustomer) session.get(ProfileCustomerCustomer.class, request.getId());
         record.setEnable(request.getEnable());
 
-        session.clear();
         session.save(record);
         session.flush();
     }

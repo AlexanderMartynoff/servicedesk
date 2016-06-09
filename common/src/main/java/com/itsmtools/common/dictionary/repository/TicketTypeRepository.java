@@ -30,7 +30,6 @@ public class TicketTypeRepository extends AbstractRepository<TicketType, Integer
     @Override
     @SuppressWarnings("unchecked")
     public List<TicketType> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
-        session.clear();
         return session.createCriteria(TicketType.class).list();
     }
 }

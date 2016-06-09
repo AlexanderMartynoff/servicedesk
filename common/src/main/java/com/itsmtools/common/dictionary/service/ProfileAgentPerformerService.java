@@ -23,7 +23,6 @@ public class ProfileAgentPerformerService implements ProfileService<ProfileAgent
 
     @SuppressWarnings("unchecked")
     public Optional<ProfileAgentPerformer> getByAccount(Account account) {
-        session.clear();
         return session.createCriteria(ProfileAgentPerformer.class)
             .add(Restrictions.eq("account", account))
             .list()
@@ -32,7 +31,6 @@ public class ProfileAgentPerformerService implements ProfileService<ProfileAgent
     }
 
     public void save(ProfileAgentPerformer entity) {
-        session.clear();
         session.save(entity);
         session.flush();
     }
@@ -46,7 +44,6 @@ public class ProfileAgentPerformerService implements ProfileService<ProfileAgent
         profile.setSupportLevels(input.getSupportLevels());
         profile.setEnable(input.getEnable());
 
-        session.clear();
         session.save(profile);
         session.flush();
     }

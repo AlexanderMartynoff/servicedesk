@@ -37,7 +37,6 @@ public class SupportLevelRepository extends AbstractRepository<SupportLevel, Int
     @Override
     @SuppressWarnings("unchecked")
     public List<SupportLevel> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
-        session.clear();
         return session.createCriteria(SupportLevel.class).list();
     }
 }

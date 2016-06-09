@@ -1,5 +1,8 @@
 package com.itsmtools.common.dictionary.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -24,7 +27,6 @@ public class Contractor {
 
     @Column
     private String metaInfo;
-
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
