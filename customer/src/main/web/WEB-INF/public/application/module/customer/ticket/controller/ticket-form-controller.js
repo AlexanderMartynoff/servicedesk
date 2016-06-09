@@ -15,7 +15,7 @@ angular.module('customer.ticket')
           return e.number === 1;
         }).forEach(function (e) {
           ticket.supportLevel = e;
-        })
+        });
       });
     }
 

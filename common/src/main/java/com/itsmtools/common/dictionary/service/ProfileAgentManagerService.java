@@ -27,7 +27,11 @@ public class ProfileAgentManagerService implements ProfileService<ProfileAgentMa
             .add(Restrictions.eq("account", account))
             .list()
             .stream()
-            .findFirst();
+            .findFirst()
+            .map(e -> {
+                session.refresh(e);
+                return e;
+            });
     }
 
     public void save(ProfileAgentManager entity) {

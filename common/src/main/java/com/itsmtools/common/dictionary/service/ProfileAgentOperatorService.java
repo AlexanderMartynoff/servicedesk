@@ -28,7 +28,11 @@ public class ProfileAgentOperatorService implements ProfileService<ProfileAgentO
             .add(Restrictions.eq("account", account))
             .list()
             .stream()
-            .findFirst();
+            .findFirst()
+            .map(e -> {
+                session.refresh(e);
+                return e;
+            });
     }
 
     public void save(ProfileAgentOperator input) {
