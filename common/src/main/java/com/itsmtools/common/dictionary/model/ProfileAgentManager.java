@@ -1,5 +1,8 @@
 package com.itsmtools.common.dictionary.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -23,12 +26,13 @@ public class ProfileAgentManager implements Profile {
     )
     private Account account;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "profile_role_agent_manager_support_level",
         joinColumns = @JoinColumn(name = "profile_role_agent_manager_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "support_level_id", referencedColumnName = "id")
     )
+    @Fetch(FetchMode.SUBSELECT)
     private Set<SupportLevel> supportLevels;
 
     public Integer getId() {

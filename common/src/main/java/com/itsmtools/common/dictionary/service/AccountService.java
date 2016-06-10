@@ -3,6 +3,7 @@ package com.itsmtools.common.dictionary.service;
 
 import com.itsmtools.common.dictionary.model.Account;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +15,21 @@ import java.util.Optional;
 public class AccountService {
 
     @Autowired
-    private Session session;
+    private SessionFactory factory;
 
     public Optional<Account> get(Integer id) {
         return null;
     }
 
     public void save(Account input) {
+        Session session = factory.openSession();
         session.save(input);
         session.flush();
+        session.close();
     }
 
     public void update(Account input) {
+        Session session = factory.openSession();
         Account account = (Account) session.get(Account.class, input.getId());
 
         account.setLogin(input.getLogin());
@@ -36,12 +40,17 @@ public class AccountService {
 
         session.save(account);
         session.flush();
+        session.close();
     }
 
     @SuppressWarnings("all")
     public List<Account> list() {
-        return (List<Account>) session.createCriteria(Account.class)
+        Session session = factory.openSession();
+        List<Account> collection = (List<Account>) session.createCriteria(Account.class)
             .addOrder(Order.desc("id"))
             .list();
+        session.close();
+
+        return collection;
     }
 }

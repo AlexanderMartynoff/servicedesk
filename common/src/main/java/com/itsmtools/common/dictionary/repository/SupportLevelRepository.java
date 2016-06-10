@@ -3,9 +3,9 @@ package com.itsmtools.common.dictionary.repository;
 
 import com.itsmtools.common.dictionary.model.SupportLevel;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 public class SupportLevelRepository extends AbstractRepository<SupportLevel, Integer, String> {
 
     @Autowired
-    private Session session;
+    private SessionFactory factory;
 
     @Override
     public SupportLevel get(Integer id) {
@@ -37,6 +37,9 @@ public class SupportLevelRepository extends AbstractRepository<SupportLevel, Int
     @Override
     @SuppressWarnings("unchecked")
     public List<SupportLevel> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
-        return session.createCriteria(SupportLevel.class).list();
+        Session session = factory.openSession();
+        List<SupportLevel> collection = session.createCriteria(SupportLevel.class).list();
+        session.close();
+        return collection;
     }
 }

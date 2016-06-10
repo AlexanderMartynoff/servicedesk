@@ -3,6 +3,7 @@ package com.itsmtools.common.dictionary.service;
 
 import com.itsmtools.common.dictionary.model.*;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     @Autowired
-    private Session session;
+    private SessionFactory factory;
     @Autowired
     private AccountService accountService;
     @Autowired
@@ -44,12 +45,16 @@ public class UserService {
 
     @SuppressWarnings("unchecked")
     public Optional<User> getByLogin(String login) {
-        return session.createCriteria(Account.class)
+        Session session = factory.openSession();
+        Optional<User> instance = session.createCriteria(Account.class)
             .add(Restrictions.eq("login", login))
             .list()
             .stream()
             .findFirst()
             .map(account -> buildByAccount((Account) account));
+        session.close();
+
+        return instance;
     }
 
     @SuppressWarnings("unchecked")

@@ -1,8 +1,6 @@
 package com.itsmtools.common.dictionary.model;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -28,12 +26,13 @@ public class Contractor {
     @Column
     private String metaInfo;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "contractor_it_service",
         joinColumns = @JoinColumn(name = "contractor_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "it_service_id", referencedColumnName = "id")
     )
+    @Fetch(FetchMode.SUBSELECT)
     private Set<Service> services;
 
     public Integer getId() {

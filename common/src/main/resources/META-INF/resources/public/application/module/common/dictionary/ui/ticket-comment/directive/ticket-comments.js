@@ -38,10 +38,12 @@ angular.module('common.ui.ticket-comments')
         };
 
         $scope.send = function (comment) {
+          stopMonitoring();
           $scope.commentsCovered = true;
           return ticketCommentService.create(comment).then(function () {
             updateCommentsStore();
             $scope.commentsCovered = false;
+            startMonitoring();
           });
         };
 
@@ -49,13 +51,20 @@ angular.module('common.ui.ticket-comments')
         resetComment();
         updateCommentsStore();
 
-        if ($scope.ticket.id) {
+        function startMonitoring(){
           interval = $interval(function () {
             updateCommentsStore(true);
           }, 2000);
+        }
 
+        function stopMonitoring(){
+          $interval.cancel(interval);
+        }
+
+        if ($scope.ticket.id) {
+          startMonitoring();
           $scope.$on("$destroy", function () {
-            $interval.cancel(interval);
+            stopMonitoring();
           });
         }
       }

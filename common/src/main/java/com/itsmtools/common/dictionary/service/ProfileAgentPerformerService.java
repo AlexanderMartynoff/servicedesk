@@ -2,8 +2,10 @@ package com.itsmtools.common.dictionary.service;
 
 
 import com.itsmtools.common.dictionary.model.Account;
+import com.itsmtools.common.dictionary.model.ProfileAgentOperator;
 import com.itsmtools.common.dictionary.model.ProfileAgentPerformer;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class ProfileAgentPerformerService implements ProfileService<ProfileAgentPerformer, Account> {
 
     @Autowired
-    Session session;
+    SessionFactory factory;
 
     public Optional<ProfileAgentPerformer> get(Integer id) {
         return null;
@@ -23,19 +25,25 @@ public class ProfileAgentPerformerService implements ProfileService<ProfileAgent
 
     @SuppressWarnings("unchecked")
     public Optional<ProfileAgentPerformer> getByAccount(Account account) {
-        return session.createCriteria(ProfileAgentPerformer.class)
+        Session session = factory.openSession();
+        Optional<ProfileAgentPerformer> instance = session.createCriteria(ProfileAgentPerformer.class)
             .add(Restrictions.eq("account", account))
             .list()
             .stream()
             .findFirst();
+        session.close();
+        return instance;
     }
 
     public void save(ProfileAgentPerformer entity) {
+        Session session = factory.openSession();
         session.save(entity);
         session.flush();
+        session.close();
     }
 
     public void update(ProfileAgentPerformer input) {
+        Session session = factory.openSession();
         ProfileAgentPerformer profile = (ProfileAgentPerformer) session.get(
             ProfileAgentPerformer.class,
             input.getId()
@@ -44,8 +52,9 @@ public class ProfileAgentPerformerService implements ProfileService<ProfileAgent
         profile.setSupportLevels(input.getSupportLevels());
         profile.setEnable(input.getEnable());
 
-        session.save(profile);
+        session.update(profile);
         session.flush();
+        session.close();
     }
 
     public List<ProfileAgentPerformer> list() {

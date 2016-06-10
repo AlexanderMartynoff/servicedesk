@@ -3,9 +3,9 @@ package com.itsmtools.common.dictionary.repository;
 
 import com.itsmtools.common.dictionary.model.TicketPriority;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 public class TicketPriorityRepository extends AbstractRepository<TicketPriority, Integer, String> {
 
     @Autowired
-    private Session session;
+    private SessionFactory factory;
 
     @Override
     public TicketPriority get(Integer id) { return null; }
@@ -31,6 +31,9 @@ public class TicketPriorityRepository extends AbstractRepository<TicketPriority,
     @Override
     @SuppressWarnings("unchecked")
     public List<TicketPriority> list(Map<String, String> singleParams, Map<String, List<String>> multiParams) {
-        return session.createCriteria(TicketPriority.class).list();
+        Session session = factory.openSession();
+        List<TicketPriority> collection = session.createCriteria(TicketPriority.class).list();
+        session.close();
+        return collection;
     }
 }

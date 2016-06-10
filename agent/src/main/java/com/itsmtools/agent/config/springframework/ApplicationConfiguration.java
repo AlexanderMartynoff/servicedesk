@@ -4,10 +4,7 @@ package com.itsmtools.agent.config.springframework;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.itsmtools.common.service.hibernate.HibernateSessionFactoryBuilder;
-import org.hibernate.CacheMode;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.StatelessSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -47,18 +44,6 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/jsp/");
         resolver.setSuffix(".jsp");
         return resolver;
-    }
-
-    @Bean(name = "defaultHibernateSession")
-    public Session hibernateSession() {
-        Session session = new HibernateSessionFactoryBuilder().getSessionFactory().openSession();
-        session.setCacheMode(CacheMode.IGNORE);
-        return session;
-    }
-
-    @Bean(name = "statelessSession")
-    public StatelessSession statelessSession() {
-        return new HibernateSessionFactoryBuilder().getSessionFactory().openStatelessSession();
     }
 
     @Bean(name = "defaultHibernateSessionFactory")

@@ -4,6 +4,7 @@ package com.itsmtools.common.dictionary.repository;
 import com.itsmtools.common.dictionary.model.TicketComment;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class TicketCommentRepository extends AbstractRepository<TicketComment, Integer, String> {
 
     @Autowired
-    private Session session;
+    private SessionFactory factory;
 
     @Override
     public TicketComment get(Integer id) {
@@ -25,13 +26,17 @@ public class TicketCommentRepository extends AbstractRepository<TicketComment, I
 
     @Override
     public void create(TicketComment input) {
+        Session session = factory.openSession();
         input.setAuthor(getAccount());
         session.save(input);
         session.flush();
+        session.close();
     }
 
     @Override
-    public void update(TicketComment input) {}
+    public void update(TicketComment input) {
+        throw new RuntimeException("Not supported operation");
+    }
 
     @Override
     public void delete(Integer id) {}
@@ -39,14 +44,18 @@ public class TicketCommentRepository extends AbstractRepository<TicketComment, I
     @Override
     @SuppressWarnings("unchecked")
     public List<TicketComment> list(Map<String, String> single, Map<String, List<String>> multi) {
+        Session session = factory.openSession();
         Criteria query = session.createCriteria(TicketComment.class);
+        query.addOrder(Order.desc("id"));
 
         if(single.containsKey("ticketId")){
             query.createAlias("ticket", "ticket")
                 .add(Restrictions.eq("ticket.id", Integer.valueOf(single.get("ticketId"))));
         }
 
-        query.addOrder(Order.desc("id"));
-        return query.list();
+        List<TicketComment> list = query.list();
+        session.close();
+
+        return list;
     }
 }

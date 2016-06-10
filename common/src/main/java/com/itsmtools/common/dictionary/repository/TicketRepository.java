@@ -27,15 +27,19 @@ import static org.hibernate.criterion.Restrictions.*;
 public class TicketRepository extends AbstractRepository<Ticket, Integer, String> {
 
     @Autowired
-    private Session session;
+    private SessionFactory factory;
 
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     public Ticket get(Integer id) {
-        return (Ticket) session.get(Ticket.class, id);
+        Session session = factory.openSession();
+        Ticket ticket = (Ticket) session.get(Ticket.class, id);
+        session.close();
+        return ticket;
     }
 
     public void create(Ticket request) {
+        Session session = factory.openSession();
         if (request.getProgress() == null || request.getProgress() < 0) {
             request.setProgress(0);
         } else if (request.getProgress() > 100) {
@@ -45,24 +49,30 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         request.setAuthor(getPrincipal().getUser().getAccount());
         session.save(request);
         session.flush();
+        session.close();
     }
 
     public void update(Ticket ticket) {
-        session.save(ticket);
+        Session session = factory.openSession();
+        session.update(ticket);
         session.flush();
+        session.close();
     }
 
     public void delete(Integer id) {
+        Session session = factory.openSession();
         Ticket instance = (Ticket) session.load(Ticket.class, id);
 
         if (instance != null) {
             session.delete(instance);
             session.flush();
         }
+        session.close();
     }
 
     @SuppressWarnings("unchecked")
     public List<Ticket> list(Map<String, String> single, Map<String, List<String>> multi) {
+        final Session session = factory.openSession();
         final Criteria query = session.createCriteria(Ticket.class);
         final List<SimpleExpression> progressCriteria = new ArrayList<>();
 
@@ -117,10 +127,10 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
 
         query.addOrder(Order.desc("id"));
 
-        return ((List<Ticket>) query.list()).stream().map(e -> {
-            session.refresh(e);
-            return e;
-        }).collect(Collectors.toList());
+        List<Ticket> collection = query.list();
+        session.close();
+
+        return collection;
     }
 
     private Long timestamp(String date) {
