@@ -37,6 +37,7 @@ public class TicketService{
         ticket.setService(input.getService());
         ticket.setTicketType(input.getTicketType());
         ticket.setPriority(input.getPriority());
+        ticket.setAttaches(input.getAttaches());
 
         repository.update(ticket);
     }
