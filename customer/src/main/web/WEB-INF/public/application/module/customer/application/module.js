@@ -8,7 +8,7 @@ angular.module('customer.application', [
   'common.dictionary.data',
   'common.dictionary.util',
   'common.ui.cover',
-  'common.ui.xinputfile',
+  'common.ui.inputfile',
   // customer modules
   'customer.ticket',
   'common.ui.ticket-comments'
