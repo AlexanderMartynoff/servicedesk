@@ -4,6 +4,8 @@ angular.module('customer.application')
 
   .config(function ($stateProvider, customerTemplateRootUrl) {
 
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
+
     $stateProvider.state('home', {
         url: '',
         views: {
