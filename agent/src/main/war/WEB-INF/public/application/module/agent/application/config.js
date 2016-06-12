@@ -1,7 +1,9 @@
 angular.module('backend.application')
   // routing configuration
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($compileProvider, $stateProvider, $urlRouterProvider) {
+
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
 
     var rootUrl = '/public/application/template/agent/';
 

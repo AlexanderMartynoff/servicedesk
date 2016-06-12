@@ -1,20 +1,25 @@
 <div class="input-group">
     <span class="form-control">
         <span ng-repeat="file in files" style="margin-right: 10px">
-            <span uib-dropdown>
-                <a href="#"
-                   uib-dropdown-toggle>
-                    {{file.name}} <span class="caret"></span>
+            <span class="light-border" uib-dropdown>
+                <a href="#" uib-dropdown-toggle>
+                    {{file.title}} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
-                    <li><a href="#"><span class="fa fa-left fa-download"></span> Скачать</a></li>
-                    <li><a href="#"><span class="fa fa-left fa-remove"></span> Удалить</a></li>
+                    <li>
+                        <a href="{{file.content}}" download="{{file.title}}">
+                            <span class="fa fa-left fa-download"></span> Скачать
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" ng-click="delete(file)"><span class="fa fa-left fa-remove"></span> Удалить</a>
+                    </li>
                 </ul>
             </span>
         </span>
     </span>
     <span class="input-group-btn">
-        <button type="button" class="btn btn-default">
+        <button ng-hide="true" type="button" class="btn btn-default">
             <i class="fa fa-ellipsis-h"></i>
         </button>
         <button type="button" class="btn pointer btn-default relative overflow">

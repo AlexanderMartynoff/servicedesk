@@ -36,8 +36,8 @@ angular.module('common.ui.inputfile', [])
             promise = $q(function(resolve, reject){
               reader.onload = function(e){
                 resolve({
-                  name: file.name,
-                  base64: e.currentTarget.result
+                  title: file.name,
+                  content: e.currentTarget.result
                 });
               };
               reader.onerror = function(e){
@@ -54,6 +54,10 @@ angular.module('common.ui.inputfile', [])
           }, function(){
             onCompleteReadFn([]);
           });
+        };
+
+        $scope.delete = function(file){
+          $scope.files = $scope.files.filter(function(e){ return e.id !== file.id });
         };
       }
     }

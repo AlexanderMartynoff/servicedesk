@@ -1,8 +1,12 @@
 package com.itsmtools.common.dictionary.model;
 
 
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Set;
 
 
 @Entity
@@ -73,7 +77,6 @@ public class Ticket {
     )
     private Service service;
 
-
     @ManyToOne
     @JoinColumn(
         name = "priority_id",
@@ -87,6 +90,15 @@ public class Ticket {
         referencedColumnName = "id"
     )
     private SupportLevel supportLevel;
+
+    @OneToMany(
+        fetch = FetchType.EAGER,
+        cascade = CascadeType.ALL,
+        mappedBy = "ticket",
+        orphanRemoval=true
+    )
+    @Fetch(FetchMode.SUBSELECT)
+    private Set<TicketAttache> attaches;
 
     // getters and setters
 
@@ -200,5 +212,13 @@ public class Ticket {
 
     public void setContractor(Contractor contractor) {
         this.contractor = contractor;
+    }
+
+    public Set<TicketAttache> getAttaches() {
+        return attaches;
+    }
+
+    public void setAttaches(Set<TicketAttache> attaches) {
+        this.attaches = attaches;
     }
 }

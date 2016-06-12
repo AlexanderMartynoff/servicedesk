@@ -176,9 +176,10 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <inputfile on-read-begin="onRead($selection)"
-                                   on-read-complete="onCompete($selection)"
-                                   files="ticket.files"></inputfile>
+                        <label class="control-label">Вложения</label>
+                        <inputfile on-read-begin="true"
+                                   on-read-complete="true"
+                                   files="ticket.attaches"></inputfile>
                     </div>
                 </div>
                 <div class="form-group">

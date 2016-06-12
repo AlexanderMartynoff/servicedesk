@@ -5,7 +5,6 @@ import com.itsmtools.common.dictionary.model.Ticket;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.StatelessSession;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.SimpleExpression;
@@ -38,22 +37,31 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         return ticket;
     }
 
-    public void create(Ticket request) {
+    public void create(Ticket ticket) {
         Session session = factory.openSession();
-        if (request.getProgress() == null || request.getProgress() < 0) {
-            request.setProgress(0);
-        } else if (request.getProgress() > 100) {
-            request.setProgress(100);
+        if (ticket.getProgress() == null || ticket.getProgress() < 0) {
+            ticket.setProgress(0);
+        } else if (ticket.getProgress() > 100) {
+            ticket.setProgress(100);
         }
 
-        request.setAuthor(getPrincipal().getUser().getAccount());
-        session.save(request);
+        if(ticket.getAttaches() != null){
+            ticket.getAttaches().forEach(e -> e.setTicket(ticket));
+        }
+
+        ticket.setAuthor(getPrincipal().getUser().getAccount());
+        session.save(ticket);
         session.flush();
         session.close();
     }
 
     public void update(Ticket ticket) {
         Session session = factory.openSession();
+
+        if(ticket.getAttaches() != null){
+            ticket.getAttaches().forEach(e -> e.setTicket(ticket));
+        }
+
         session.update(ticket);
         session.flush();
         session.close();
