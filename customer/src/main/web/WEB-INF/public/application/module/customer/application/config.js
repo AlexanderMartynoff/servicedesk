@@ -2,7 +2,7 @@ angular.module('customer.application')
 
   .constant('customerTemplateRootUrl', '/public/application/template/customer/')
 
-  .config(function ($stateProvider, customerTemplateRootUrl) {
+  .config(function ($stateProvider, customerTemplateRootUrl, $compileProvider) {
 
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
 
