@@ -61,6 +61,14 @@ angular.module("backend.ticket")
       });
     };
 
+    $scope.onRead = function($files){
+      console.log($files);
+    };
+
+    $scope.onCompete = function($files){
+      console.log($files);
+    };
+
     // updaters
     function updateContractorStore() {
       contractorService.list().then(function (response) {

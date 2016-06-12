@@ -104,10 +104,10 @@
 {
     0%
     {
-        -webkit-transform: rotate(0);
-            -ms-transform: rotate(0);
-             -o-transform: rotate(0);
-                transform: rotate(0);
+        -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+             -o-transform: rotate(0deg);
+                transform: rotate(0deg);
     }
     100%
     {

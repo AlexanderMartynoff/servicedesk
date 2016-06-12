@@ -18,8 +18,6 @@ import com.itsmtools.common.service.security.DbUserDetailsService.Roles;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DbUserDetailsService userDetailsService;
     @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
-    @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;

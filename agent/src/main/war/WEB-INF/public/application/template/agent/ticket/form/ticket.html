@@ -174,7 +174,13 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <inputfile on-read-begin="onRead($selection)"
+                                   on-read-complete="onCompete($selection)"
+                                   files="ticket.files"></inputfile>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label for="description" class="control-label">Описание</label>

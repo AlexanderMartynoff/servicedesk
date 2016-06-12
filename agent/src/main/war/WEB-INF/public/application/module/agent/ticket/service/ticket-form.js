@@ -2,7 +2,7 @@ angular.module("backend.ticket")
   .factory("ticketForm", function ($uibModal) {
     return {
       open: function (ticket) {
-        $uibModal.open({
+        return $uibModal.open({
           controller: 'TicketFormController',
           resolve: {
             ticket: ticket

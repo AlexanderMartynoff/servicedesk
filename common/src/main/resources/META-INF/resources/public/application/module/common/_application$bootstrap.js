@@ -1,4 +1,15 @@
 function _application$bootstrap(applicationModule) {
+
+  function mask(){
+    var id = "bootstrap-mask";
+    angular.element(document.body).append("<div id=" + id + "></div>");
+    return id;
+  }
+
+  function unmask (id){
+    angular.element(document.getElementById(id)).remove();
+  }
+
   angular.element(document).ready(function () {
     var injector = angular.injector(['ng']),
       $http = injector.get('$http'),

@@ -1,6 +1,6 @@
 angular.module("backend.ticket")
   .controller("IndexTicketController", function ($scope, logged$user, supportLevelService, ticketForm,
-                                                 TicketModel, ticketService, $timeout, Paginator) {
+                                                 TicketModel, ticketService, $timeout, Paginator, $interval) {
 
     $scope.filter = {};
     $scope.paginator = new Paginator();
@@ -25,7 +25,7 @@ angular.module("backend.ticket")
       ticketForm.open(new TicketModel());
     };
 
-    $scope.updateTicketList = function () {
+    $scope.updateTicketList = function (silent) {
       $scope.covered = true;
       prepareFilter();
       ticketService.list($scope.filter).then(function (response) {

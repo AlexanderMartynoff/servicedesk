@@ -13,7 +13,7 @@ angular.module('backend.application', [
   'common.dictionary.data',
   'common.dictionary.util',
   'common.ui.cover',
-  'common.ui.xinputfile',
+  'common.ui.inputfile',
   'common.ui.enum',
   'common.logged',
   'common.ui.ticket-comments'

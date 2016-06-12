@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -19,8 +18,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
-    @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
@@ -48,9 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .csrf()
             .disable()
-            //.exceptionHandling()
-            // .authenticationEntryPoint(authenticationEntryPoint)
-            //.and()
             .formLogin()
             .loginPage("/login")
             .usernameParameter("username")
