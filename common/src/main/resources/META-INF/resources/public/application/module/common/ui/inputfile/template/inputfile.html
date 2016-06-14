@@ -1,9 +1,12 @@
 <div class="input-group">
     <span class="form-control">
         <span ng-repeat="file in files" style="margin-right: 10px">
-            <span class="light-border" uib-dropdown>
+            <span class="light-border"
+                  uib-dropdown
+                  tooltip-placement="top"
+                  uib-tooltip="{{file.title}}">
                 <a href="#" uib-dropdown-toggle>
-                    {{file.title}} <span class="caret"></span>
+                    {{makeFileName(file.title)}} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
@@ -22,12 +25,12 @@
         <button ng-hide="true" type="button" class="btn btn-default">
             <i class="fa fa-ellipsis-h"></i>
         </button>
-        <button type="button" class="btn pointer btn-default relative overflow">
+        <span class="btn pointer btn-default relative overflow">
             <input type="file"
                    onchange="angular.element(this).scope().change(this)"
                    class="inputfile pointer"
                    multiple/>
             <i class="fa fa-paperclip"></i>
-        </button>
+        </span>
     </span>
 </div>

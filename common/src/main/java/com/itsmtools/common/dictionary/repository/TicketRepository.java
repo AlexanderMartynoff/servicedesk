@@ -10,7 +10,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,26 +54,27 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         session.close();
     }
 
-    public void update(Ticket ticket) {
-        Session session = factory.openSession();
+    public void update(Ticket input) {
+        final Session session = factory.openSession();
 
-        if(ticket.getAttaches() != null){
-            ticket.getAttaches().forEach(e -> e.setTicket(ticket));
+        if(input.getAttaches() != null){
+            input.getAttaches().forEach(e -> e.setTicket(input));
         }
 
-        session.update(ticket);
+        session.update(input);
         session.flush();
         session.close();
     }
 
     public void delete(Integer id) {
-        Session session = factory.openSession();
-        Ticket instance = (Ticket) session.load(Ticket.class, id);
+        final Session session = factory.openSession();
+        final Ticket instance = (Ticket) session.load(Ticket.class, id);
 
         if (instance != null) {
             session.delete(instance);
             session.flush();
         }
+
         session.close();
     }
 
@@ -119,8 +119,7 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
             ));
         } else if (single.containsKey("dateOpenFrom")) {
             // if just from
-            query.add(ge("dateOpen", timestamp(single.get("dateOpenFrom"))
-            ));
+            query.add(ge("dateOpen", timestamp(single.get("dateOpenFrom"))));
         } else if (single.containsKey("dateOpenUntil")) {
             // if just until
             query.add(le("dateOpen", timestamp(single.get("dateOpenUntil"))));

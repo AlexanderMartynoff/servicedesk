@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -219,6 +220,12 @@ public class Ticket {
     }
 
     public void setAttaches(Set<TicketAttache> attaches) {
-        this.attaches = attaches;
+        if(this.attaches == null) {
+            this.attaches = attaches != null ? attaches : new HashSet<>();
+        }else{
+            this.attaches.clear();
+            this.attaches.addAll(attaches);
+        }
+        this.attaches.forEach(e -> e.setTicket(this));
     }
 }

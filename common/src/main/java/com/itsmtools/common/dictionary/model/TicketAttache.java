@@ -19,7 +19,6 @@ public class TicketAttache {
     @Column
     private String mime;
 
-
     @Column(length=16777215)
     private String content;
 

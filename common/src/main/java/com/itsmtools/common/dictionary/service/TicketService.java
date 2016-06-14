@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 @Service
-public class TicketService{
+public class TicketService {
 
     @Autowired
     TicketRepository repository;
