@@ -114,9 +114,10 @@
 
                             <td>{{$.id}}</td>
                             <td>{{$.dateOpen | date:'medium'}}</td>
-                            <td>
-                                <span tooltip-placement="top"
-                                      uib-tooltip="{{$.title}}">{{ellipsis($.title)}}</span>
+                            <td tooltip-placement="top"
+                                tooltip-append-to-body="true"
+                                uib-tooltip="{{$.title}}">
+                                {{ellipsis($.title)}}
                             </td>
                             <td>{{$.supportLevel.title}}</td>
                             <td>{{$.author.firstName}} {{$.author.secondName}}</td>

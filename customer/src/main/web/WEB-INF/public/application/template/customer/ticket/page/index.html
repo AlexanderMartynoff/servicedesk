@@ -86,9 +86,10 @@
             <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="open($)">
                 <td>{{$.id}}</td>
                 <td>{{$.dateOpen | date: 'medium'}}</td>
-                <td>
-                    <span tooltip-placement="top"
-                          uib-tooltip="{{$.title}}">{{ellipsis($.title)}}</span>
+                <td tooltip-placement="top"
+                    tooltip-append-to-body="true"
+                    uib-tooltip="{{$.title}}">
+                    {{ellipsis($.title)}}
                 </td>
                 <td>{{$.service.title}}</td>
                 <td>
