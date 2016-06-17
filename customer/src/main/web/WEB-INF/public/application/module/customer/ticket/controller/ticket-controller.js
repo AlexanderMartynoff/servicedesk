@@ -1,8 +1,9 @@
 angular.module('customer.ticket')
   .controller('TicketController', function ($scope, logged$user, ticketForm,
-                                            ticketService, Paginator, TicketModel) {
+                                            ticketService, Paginator, TicketModel, ellipsis) {
 
     $scope.paginator = new Paginator();
+    $scope.ellipsis = ellipsis;
 
     $scope.updateTickets = function () {
       ticketService.list({initiatorId: logged$user.getId()}).then(function (data) {

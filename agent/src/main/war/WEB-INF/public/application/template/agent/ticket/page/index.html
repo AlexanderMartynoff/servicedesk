@@ -109,10 +109,15 @@
                                 <th>Прогресс</th>
                             </tr>
                         </thead>
-                        <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="edit($)">
+                        <tr ng-repeat="$ in paginator.getCurrentPage()"
+                            ng-click="edit($)">
+
                             <td>{{$.id}}</td>
                             <td>{{$.dateOpen | date:'medium'}}</td>
-                            <td>{{$.title}}</td>
+                            <td>
+                                <span tooltip-placement="top"
+                                      uib-tooltip="{{$.title}}">{{ellipsis($.title)}}</span>
+                            </td>
                             <td>{{$.supportLevel.title}}</td>
                             <td>{{$.author.firstName}} {{$.author.secondName}}</td>
                             <td>

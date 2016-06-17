@@ -1,6 +1,6 @@
 angular.module("backend.ticket")
   .controller("IndexTicketController", function ($scope, logged$user, supportLevelService, ticketForm,
-                                                 TicketModel, ticketService, $timeout, Paginator, $interval) {
+                                                 TicketModel, ticketService, $timeout, Paginator, ellipsis) {
 
     $scope.filter = {};
     $scope.paginator = new Paginator();
@@ -8,6 +8,7 @@ angular.module("backend.ticket")
     $scope.covered = true;
     $scope.selectedLevels = [];
     $scope.logged$user = $scope.l$u = logged$user;
+    $scope.ellipsis = ellipsis;
 
     function prepareFilter(){
       if(logged$user.isOnlyPerformer()){
