@@ -2,14 +2,14 @@ angular.module("common.dictionary.data")
   .factory("uaService", function ($http, uaSpecStore) {
     return {
       listAccount: function(){
-        return $http.get('/ua', {}).then(function(response){
+        return $http.get('/account', {}).then(function(response){
           return response.data.map(function(complex){
             return complex.account;
           });
         });
       },
       listComplex: function (start, limit) {
-        return $http.get('/ua', {})
+        return $http.get('/account', {})
           .then(function (response) {
             var record, records = [];
 
@@ -51,7 +51,7 @@ angular.module("common.dictionary.data")
       },
 
       listRawComplex: function(){
-        return $http.get('/ua', {}).then(function(response){
+        return $http.get('/account', {}).then(function(response){
           return response.data;
         });
       },
@@ -64,13 +64,13 @@ angular.module("common.dictionary.data")
           }
         });
 
-        return $http.post('/ua', complexUa).then(function(response){
+        return $http.post('/account', complexUa).then(function(response){
           return response.data;
         });
       },
 
       updateComplex: function(complexUa){
-        return $http.put('/ua', complexUa).then(function(response){
+        return $http.put('/account', complexUa).then(function(response){
           return response.data;
         });
       }
