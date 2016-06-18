@@ -4,7 +4,7 @@ angular.module("backend.ticket")
                                                  agentPerformerService) {
 
     $scope.filter = {};
-    $scope.fullFilter = {};
+    $scope.modelFilter = {};
     $scope.paginator = new Paginator();
     $scope.pageSize = 10;
     $scope.covered = true;
@@ -14,16 +14,15 @@ angular.module("backend.ticket")
 
     // do filter
     function prepareFilter(){
+      var modelFilter = $scope.modelFilter, filter = $scope.filter;
 
-      if($scope.fullFilter.performer) {
-        $scope.filter.performerId = $scope.fullFilter.performer.id;
-      }
+      filter.performerId = $scope.modelFilter.performer ? modelFilter.performer.id : null;
 
       if(logged$user.isOnlyPerformer()){
-        $scope.filter.performerId = logged$user.getId();
+        filter.performerId = logged$user.getId();
       }
 
-      $scope.filter.levelIds = $scope.selectedLevels.map(function(e){ return e.id });
+      filter.levelIds = $scope.selectedLevels.map(function(e){ return e.id });
     }
 
     function forTypeHead(collection){
@@ -45,6 +44,12 @@ angular.module("backend.ticket")
       return isSingle ? result[0] : result;
     }
 
+     function updateLevels(){
+      supportLevelService.list().then(function(result){
+        $scope.levels = result;
+      });
+    }
+
     $scope.edit = function (ticket) {
       ticketForm.open(ticket);
     };
@@ -62,14 +67,8 @@ angular.module("backend.ticket")
       });
     };
 
-    $scope.updateLevels = function(){
-      supportLevelService.list().then(function(result){
-        $scope.levels = result;
-      });
-    };
-
     $scope.whereImPerformer = function(){
-      $scope.fullFilter.performer = forTypeHead($scope.l$u.getAccount());
+      $scope.modelFilter.performer = forTypeHead(logged$user.getAccount());
     };
 
     function updatePerformerStore() {
@@ -83,6 +82,6 @@ angular.module("backend.ticket")
     });
 
     updatePerformerStore();
-    $scope.updateLevels();
+    updateLevels();
     $scope.updateTicketList();
   });

@@ -71,7 +71,7 @@
                         </span>
                     </label>
                     <input type="text"
-                           ng-model="fullFilter.performer"
+                           ng-model="modelFilter.performer"
                            typeahead-editable="false"
                            uib-typeahead="$ as $.title for $ in performers | filter: $viewValue || ''"
                            typeahead-min-length="0"
