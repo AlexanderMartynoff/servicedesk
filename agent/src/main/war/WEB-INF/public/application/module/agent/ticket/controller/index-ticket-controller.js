@@ -27,12 +27,22 @@ angular.module("backend.ticket")
     }
 
     function forTypeHead(collection){
-      return collection.map(function(account){
+      var isSingle = false,
+        result;
+
+      if(!Array.isArray(collection)){
+        collection = [collection];
+        isSingle = true;
+      }
+
+      result = collection.map(function(account){
         return {
           title: account.firstName + ' ' + account.secondName,
           id: account.id
         }
       });
+
+      return isSingle ? result[0] : result;
     }
 
     $scope.edit = function (ticket) {
@@ -59,7 +69,7 @@ angular.module("backend.ticket")
     };
 
     $scope.whereImPerformer = function(){
-      $scope.fullFilter.performer = forTypeHead([$scope.l$u.getAccount()])[0];
+      $scope.fullFilter.performer = forTypeHead($scope.l$u.getAccount());
     };
 
     function updatePerformerStore() {
