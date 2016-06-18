@@ -55,6 +55,10 @@ angular.module("common.logged", []).factory('logged$user', function (logged$data
       return (data.agentOperator.enable || data.agentOperator.enable) && data.agentPerformer.enable;
     };
 
+    this.isCanFilterByPerformer = function(){
+      return this.isCanEditTicket();
+    };
+
     this.isCanEditTicket = function(){
       return data.agentOperator.enable || data.agentManager.enable;
     };

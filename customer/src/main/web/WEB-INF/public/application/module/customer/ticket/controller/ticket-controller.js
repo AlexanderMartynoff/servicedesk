@@ -6,8 +6,10 @@ angular.module('customer.ticket')
     $scope.ellipsis = ellipsis;
 
     $scope.updateTickets = function () {
+      $scope.covered = true;
       ticketService.list({initiatorId: logged$user.getId()}).then(function (data) {
         $scope.paginator.load(data);
+        $scope.covered = false;
       });
     };
 

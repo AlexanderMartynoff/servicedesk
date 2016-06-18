@@ -59,7 +59,9 @@
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <a href="" class="vertical-align-btm btn btn-info form-control">
+                    <a href=""
+                       ng-click="updateTickets()"
+                       class="vertical-align-btm btn btn-info form-control">
                         <b class="fa fa-circle fa-left"></b>Обновить
                     </a>
                 </div>
@@ -73,42 +75,45 @@
         </form>
     </div>
     <div class="col-sm-9">
-        <table class="table table-striped table-hover x-table-clickable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Дата фиксации</th>
-                <th>Наименование</th>
-                <th>Услугп</th>
-                <th>Прогресс</th>
-            </tr>
-            </thead>
-            <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="open($)">
-                <td>{{$.id}}</td>
-                <td>{{$.dateOpen | date: 'medium'}}</td>
-                <td tooltip-placement="top"
-                    tooltip-append-to-body="true"
-                    uib-tooltip="{{$.title}}">
-                    {{ellipsis($.title)}}
-                </td>
-                <td>{{$.service.title}}</td>
-                <td>
-                    <uib-progressbar animate="true"
-                                     value="$.progress"
-                                     tooltip-placement="top"
-                                     uib-tooltip="{{$.progress}}%"
-                                     type="success"></uib-progressbar>
-                </td>
-            </tr>
-        </table>
 
-        <div ng-if="paginator.$$collection.length > 0" class="center">
-            <uib-pagination total-items="paginator.$$collection.length"
-                            ng-model="paginator.$$index"
-                            direction-links="false"
-                            items-per-page="paginator.PAGE_SIZE"
-                            class="pagination-sm">
-            </uib-pagination>
-        </div>
+        <cover trigger="covered">
+            <table class="table table-striped table-hover x-table-clickable">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Дата фиксации</th>
+                    <th>Наименование</th>
+                    <th>Услугп</th>
+                    <th>Прогресс</th>
+                </tr>
+                </thead>
+                <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="open($)">
+                    <td>{{$.id}}</td>
+                    <td>{{$.dateOpen | date: 'medium'}}</td>
+                    <td tooltip-placement="top"
+                        tooltip-append-to-body="true"
+                        uib-tooltip="{{$.title}}">
+                        {{ellipsis($.title)}}
+                    </td>
+                    <td>{{$.service.title}}</td>
+                    <td>
+                        <uib-progressbar animate="true"
+                                         value="$.progress"
+                                         tooltip-placement="top"
+                                         uib-tooltip="{{$.progress}}%"
+                                         type="success"></uib-progressbar>
+                    </td>
+                </tr>
+            </table>
+
+            <div ng-if="paginator.$$collection.length > 0" class="center">
+                <uib-pagination total-items="paginator.$$collection.length"
+                                ng-model="paginator.$$index"
+                                direction-links="false"
+                                items-per-page="paginator.PAGE_SIZE"
+                                class="pagination-sm">
+                </uib-pagination>
+            </div>
+        </cover>
     </div>
 </div>

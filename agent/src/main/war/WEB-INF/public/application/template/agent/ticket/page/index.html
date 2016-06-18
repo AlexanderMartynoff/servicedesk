@@ -62,6 +62,22 @@
                     <label class="control-label">Уровень поддержки</label><br/>
                     <enum model="selectedLevels" store="levels"></enum>
                 </div>
+                <div class="col-sm-12"
+                     ng-if="l$u.isCanFilterByPerformer()">
+                    <label class="control-label">
+                        Исполнитель
+                        <span ng-if="l$u.isPerformer()"> -
+                            <span class="text-primary hover" ng-click="whereImPerformer()">только мои</span>
+                        </span>
+                    </label>
+                    <input type="text"
+                           ng-model="fullFilter.performer"
+                           typeahead-editable="false"
+                           uib-typeahead="$ as $.title for $ in performers | filter: $viewValue || ''"
+                           typeahead-min-length="0"
+                           typeahead-show-hint="true"
+                           class="form-control">
+                </div>
                 <div class="col-sm-12">
                     <label class="control-label">Поиск везде</label>
                     <input type="text"
