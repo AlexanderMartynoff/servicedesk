@@ -1,7 +1,7 @@
 angular.module("backend.ticket")
-  .controller("IndexTicketController", function ($scope, logged$user, supportLevelService, ticketForm,
-                                                 TicketModel, ticketService, $timeout, Paginator, ellipsis,
-                                                 agentPerformerService) {
+  .controller("IndexTicketController", function ($scope, logged, supportLevelService, ticketForm,
+                                                 TicketModel, ticketService, $timeout,
+                                                 Paginator, ellipsis, agentPerformerService) {
 
     $scope.filter = {};
     $scope.modelFilter = {};
@@ -9,7 +9,7 @@ angular.module("backend.ticket")
     $scope.pageSize = 10;
     $scope.covered = true;
     $scope.selectedLevels = [];
-    $scope.logged$user = $scope.l$u = logged$user;
+    $scope.l$u = logged;
     $scope.ellipsis = ellipsis;
 
     // do filter
@@ -18,8 +18,8 @@ angular.module("backend.ticket")
 
       filter.performerId = $scope.modelFilter.performer ? modelFilter.performer.id : null;
 
-      if(logged$user.isOnlyPerformer()){
-        filter.performerId = logged$user.getId();
+      if(logged.isOnlyPerformer()){
+        filter.performerId = logged.getId();
       }
 
       filter.levelIds = $scope.selectedLevels.map(function(e){ return e.id });
@@ -68,7 +68,7 @@ angular.module("backend.ticket")
     };
 
     $scope.whereImPerformer = function(){
-      $scope.modelFilter.performer = forTypeHead(logged$user.getAccount());
+      $scope.modelFilter.performer = forTypeHead(logged.getAccount());
     };
 
     function updatePerformerStore() {

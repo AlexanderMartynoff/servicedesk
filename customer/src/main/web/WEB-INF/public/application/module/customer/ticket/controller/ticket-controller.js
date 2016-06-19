@@ -1,5 +1,5 @@
 angular.module('customer.ticket')
-  .controller('TicketController', function ($scope, logged$user, ticketForm,
+  .controller('TicketController', function ($scope, logged, ticketForm,
                                             ticketService, Paginator, TicketModel, ellipsis) {
 
     $scope.paginator = new Paginator();
@@ -7,7 +7,7 @@ angular.module('customer.ticket')
 
     $scope.updateTickets = function () {
       $scope.covered = true;
-      ticketService.list({initiatorId: logged$user.getId()}).then(function (data) {
+      ticketService.list({initiatorId: logged.getId()}).then(function (data) {
         $scope.paginator.load(data);
         $scope.covered = false;
       });

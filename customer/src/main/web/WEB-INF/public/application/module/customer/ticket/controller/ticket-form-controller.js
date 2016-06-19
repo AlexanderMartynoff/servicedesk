@@ -1,11 +1,11 @@
 angular.module('customer.ticket')
   .controller('TicketFormController', function ($scope, $uibModalInstance, $rootScope,
                                                 ticket, ticketService, supportLevelService,
-                                                logged$user, ticketPriorityService) {
+                                                logged, ticketPriorityService) {
 
     $scope.covered = false;
     $scope.ticket = ticket;
-    $scope.customer = logged$user.data.customer;
+    $scope.customer = logged.logged.customer;
     $scope.ticket.contractor = $scope.customer.contractor;
 
     function setSupportLevel(ticket) {
@@ -24,7 +24,7 @@ angular.module('customer.ticket')
     };
 
     $scope.new = function (ticket) {
-      ticket.initiator = logged$user.getAccount();
+      ticket.initiator = logged.getAccount();
       $scope.covered = true;
       ticketService.new(ticket).then(function (response) {
         $scope.covered = false;

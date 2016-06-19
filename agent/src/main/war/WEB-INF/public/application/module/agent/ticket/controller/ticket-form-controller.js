@@ -1,6 +1,6 @@
 angular.module("backend.ticket")
   .controller("TicketFormController", function ($scope, $rootScope, $uibModalInstance,
-                                                logged$user, ticketService, contractorService,
+                                                logged, ticketService, contractorService,
                                                 ticket, agentPerformerService, uaService, ticketForm,
                                                 supportLevelService, ticketTypeService,
                                                 ticketPriorityService, knowledgeDetail) {
@@ -10,7 +10,7 @@ angular.module("backend.ticket")
     $scope.levelNumber = 1;
     $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     $scope.ticket.progress = $scope.ticket.progress || 0;
-    $scope.l$u = logged$user;
+    $scope.l$u = logged;
 
     $uibModalInstance.opened.then(function(){
       $scope.covered = false;
@@ -49,24 +49,24 @@ angular.module("backend.ticket")
     };
 
     $scope.assignToMe = function(){
-      ticket.performer = logged$user.getAccount();
+      ticket.performer = logged.getAccount();
     };
 
     // this show new modal window and close current
     // but after closed children window we comeback parent
     $scope.showKnowledgeDetail = function(){
       $scope.close();
-      knowledgeDetail.open(ticket).closed.then(function(reason){
+      knowledgeDetail.open(ticket).closed.then(function(){
         ticketForm.open(ticket);
       });
     };
 
     $scope.onRead = function($files){
-      console.log($files);
+      $scope.covered = true;
     };
 
     $scope.onCompete = function($files){
-      console.log($files);
+      $scope.covered = false;
     };
 
     // updaters

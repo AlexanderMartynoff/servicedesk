@@ -1,1 +1,1 @@
-_application$bootstrap('customer.application');
+ngApplicationBootstrap('customer.application');

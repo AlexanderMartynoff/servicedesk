@@ -2,10 +2,10 @@ angular.module('backend.application')
   // routing configuration
 
   .config(function ($compileProvider, $stateProvider, $urlRouterProvider) {
+    var rootUrl = '/public/application/template/agent/';
 
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
-
-    var rootUrl = '/public/application/template/agent/';
+    $urlRouterProvider.otherwise('/404');
 
     $stateProvider
       .state('root', {
@@ -86,6 +86,4 @@ angular.module('backend.application')
           }
         }
       });
-
-    $urlRouterProvider.otherwise('/404');
   });

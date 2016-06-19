@@ -6,10 +6,10 @@ angular.module('common.ui.ticket-comments')
       scope: {
         ticket: '='
       },
-      controller: function ($scope, ticketCommentService, converter, logged$user, $interval) {
+      controller: function ($scope, ticketCommentService, converter, logged, $interval) {
         var interval;
         $scope.commentsCovered = false;
-        $scope.l$u = logged$user.data;
+        $scope.l$u = logged.logged;
 
         function resetComment() {
           $scope.comment = {ticket: converter.out($scope.ticket)};

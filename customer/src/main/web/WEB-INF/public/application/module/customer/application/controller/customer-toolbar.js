@@ -1,8 +1,8 @@
 angular.module('customer.application')
-  .controller('CustomerToolbar', function ($scope, logged$user) {
+  .controller('CustomerToolbar', function ($scope, logged) {
     $scope.infoPopoverTplUrl = '/public/application/template/customer/application/popover/user-info.html';
-    $scope.firstName = logged$user.data.account.firstName;
-    $scope.secondName = logged$user.data.account.secondName;
-    $scope.contractor = logged$user.data.customer.contractor;
-    $scope.position = logged$user.data.customer.position;
+    $scope.firstName = logged.logged.account.firstName;
+    $scope.secondName = logged.logged.account.secondName;
+    $scope.contractor = logged.logged.customer.contractor;
+    $scope.position = logged.logged.customer.position;
   });

@@ -71,7 +71,7 @@ angular.module('common.ui.inputfile', [])
         };
 
         $scope.delete = function(file){
-          $scope.files = $scope.files.filter(function(e){ return e.id !== file.id });
+          $scope.files = $scope.files.filter(function(e){return e !== file});
         };
       }
     }
