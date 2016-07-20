@@ -1,5 +1,9 @@
-import {k, i} from 'config';
 import {angular} from 'angular';
+import {config} from './config';
+
+
+import {service} from '../../../../../../../../../../common/src/main/resources/META-INF/resources/public/application/module/common/dictionary/data/service/service-service';
+
 
 angular.module('backend.application', [
   // vendor modules
@@ -21,3 +25,6 @@ angular.module('backend.application', [
   'common.logged',
   'common.ui.ticket-comments'
 ]);
+
+
+angular.config(config);

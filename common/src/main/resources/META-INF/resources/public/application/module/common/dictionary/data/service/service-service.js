@@ -23,3 +23,6 @@ angular.module("common.dictionary.data")
       }
     }
   });
+
+
+export var service = 5;
