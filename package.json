@@ -1,0 +1,15 @@
+{
+  "name": "servicedesk",
+  "version": "0.0.0",
+  "description": "Service Desk (ITSM tools)",
+  "devDependencies": {
+    "webpack": "^1.13.1",
+    "babel-loader": "^6.2.4",
+    "babel-core": "^6.10.4",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.7"
+  },
+  "author": "Martynov Alexander"
+}

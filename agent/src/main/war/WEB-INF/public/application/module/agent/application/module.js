@@ -1,3 +1,6 @@
+import {k, i} from 'config';
+import {angular} from 'angular';
+
 angular.module('backend.application', [
   // vendor modules
   'ui.router',

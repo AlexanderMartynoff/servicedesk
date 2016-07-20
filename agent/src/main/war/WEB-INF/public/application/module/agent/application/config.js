@@ -87,3 +87,13 @@ angular.module('backend.application')
         }
       });
   });
+
+
+var e = 1;
+var i = 1;
+
+
+export {
+  e as k, i
+};
+
