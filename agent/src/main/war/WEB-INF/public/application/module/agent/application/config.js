@@ -5,8 +5,7 @@ export function config($compileProvider, $stateProvider, $urlRouterProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
   $urlRouterProvider.otherwise('/404');
 
-  $stateProvider
-    .state('root', {
+  $stateProvider.state('root', {
       url: '',
       views: {
         index: {
