@@ -1,5 +1,3 @@
-const commonUrl = '../../../../../../../../../../common/src/main/resources/META-INF/resources/public/application/module/common/';
-
 import {angular} from 'angular';
 import {config} from './config';
 
