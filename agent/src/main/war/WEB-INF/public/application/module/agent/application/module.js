@@ -1,8 +1,12 @@
-import {angular} from 'angular';
-import {config} from './config';
+import angular from 'angular';
+import config from './config';
 
+import service from 'dictionary/data/service/service-service';
 
-import {service} from '../../../../../../../../../../common/src/main/resources/META-INF/resources/public/application/module/common/dictionary/data/service/service-service';
+// vendor import
+import modal from 'angular-ui-bootstrap/src/modal/index-nocss.js';
+
+// import 'bootstrap/dist/css/bootstrap.css';
 
 
 angular.module('backend.application', [

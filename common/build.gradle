@@ -8,6 +8,13 @@ def gsonVer = "2.4"
 def hibernateVer = "4.3.5.Final"
 def mysqlVer = "5.1.6"
 
+
+def nodeModules = [
+  'angular',
+  'angular-ui-bootstrap',
+  'angular-ui-router'
+]
+
 repositories {
   mavenCentral()
 }

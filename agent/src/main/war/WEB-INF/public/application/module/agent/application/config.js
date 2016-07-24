@@ -1,4 +1,4 @@
-export function config($compileProvider, $stateProvider, $urlRouterProvider) {
+export default ($compileProvider, $stateProvider, $urlRouterProvider) => {
 
   const rootUrl = '/public/application/template/agent/';
 
@@ -83,4 +83,4 @@ export function config($compileProvider, $stateProvider, $urlRouterProvider) {
         }
       }
     });
-}
+};

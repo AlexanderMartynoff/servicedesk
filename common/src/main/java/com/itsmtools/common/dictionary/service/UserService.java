@@ -103,7 +103,7 @@ public class UserService {
             .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
     }
 
-    // builder User object
+    // build User object
     private User buildByAccount(Account account) {
         User user = new User();
         user.setAccount(account);

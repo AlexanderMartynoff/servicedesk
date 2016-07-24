@@ -1,17 +1,17 @@
 {
   "name": "servicedesk",
   "version": "0.0.1",
+  "author": "Martynov Alexander",
   "description": "OrgDesk",
-  "devDependencies": {
+  "dependencies": {
     "webpack": "^1.13.1",
     "babel-loader": "^6.2.4",
     "babel-core": "^6.10.4",
-    "babel-preset-es2015": "^6.9.0"
-  },
-  "dependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "bower": "^1.7.9",
     "angular": "^1.5.7",
     "angular-ui-bootstrap": "^2.0.0",
-    "angular-ui-router": "^0.2.18"
-  },
-  "author": "Martynov Alexander"
+    "angular-ui-router": "^0.2.18",
+    "bootstrap": "^3.3.6"
+  }
 }

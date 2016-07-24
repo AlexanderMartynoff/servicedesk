@@ -1,4 +1,7 @@
-function ngApplicationBootstrap(applicationModule) {
+import {angular} from 'angular';
+
+
+export const ngApplicationBootstrap = (applicationModule) => {
 
   angular.element(document).ready(function () {
     var injector = angular.injector(['ng']),
@@ -19,4 +22,4 @@ function ngApplicationBootstrap(applicationModule) {
       angular.bootstrap(document, [applicationModule, '$$bootstrap']);
     })
   });
-}
+};
