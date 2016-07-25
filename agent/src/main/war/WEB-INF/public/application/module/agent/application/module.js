@@ -1,12 +1,21 @@
+// angular import
 import angular from 'angular';
-import config from './config';
 
+// angular-ui-bootstrap import
+import modal from 'angular-ui-bootstrap/src/modal';
+
+// bootstrap style import
+import 'bootstrap/dist/css/bootstrap.css';
+
+// application module import
+import config from './config';
 import service from 'dictionary/data/service/service-service';
 
-// vendor import
-import modal from 'angular-ui-bootstrap/src/modal/index-nocss.js';
-
-// import 'bootstrap/dist/css/bootstrap.css';
+// application style import
+import 'cover.css';
+import 'loader.css';
+import 'main.css';
+import 'override.bootstrap.css';
 
 
 angular.module('backend.application', [
