@@ -2,49 +2,10 @@ def servletApiVer = "3.0.1"
 def jspApiVer = "2.1"
 def jstlVer = "1.1.2"
 
+
 // import in all child projects
 subprojects {
-  ext.JsConcat = JsConcat
-
   ext.servletApiDependence = "javax.servlet:javax.servlet-api:${servletApiVer}"
   ext.jspApiDependence = "javax.servlet.jsp:jsp-api:${jspApiVer}"
   ext.jstlDependence = "javax.servlet:jstl:${jstlVer}"
-}
-
-@SuppressWarnings('all')
-class JsConcat extends DefaultTask {
-  // for first in the line
-  def ordPattern
-  // take only by this pattern
-  def filterPattern
-  def srcDirName
-  def targetFileUri
-  def externalInfo
-  def outFile
-
-  @TaskAction
-  void concat() {
-    def srcFiles = []
-    srcDirName = srcDirName instanceof Collection ? srcDirName : [srcDirName]
-
-    srcDirName.forEach {
-      new File(it).eachFileRecurse {
-        if (it.isFile() && it.absolutePath =~ filterPattern) {
-          srcFiles << it
-        }
-      }
-    }
-
-    srcFiles.sort { a, b ->
-      if (a =~ ordPattern && b =~ ordPattern) { 0 } else
-      if (a =~ ordPattern) { -1 } else
-      if (b =~ ordPattern) { 1 } else { 0 }
-    }
-
-    outFile = new File(targetFileUri)
-
-    outFile.text = "// @count ${srcFiles.size()}\n"
-    outFile.text += "$externalInfo\n"
-    outFile.text += srcFiles.collect { it.text }.join("\n")
-  }
 }

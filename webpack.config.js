@@ -6,17 +6,38 @@ let resolve = require('path').resolve;
 
 
 module.exports = {
-  entry: './agent/src/main/war/WEB-INF/public/application/module/agent/application/module.js',
-
+  entry: {
+    // agent entries
+    'agent$application': './agent/src/main/war/WEB-INF/public/application/module/agent/application/module.js',
+    'agent$auth': './agent/src/main/war/WEB-INF/public/application/module/agent/application/module.js',
+    // customer entries
+    'customer$application': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js',
+    'customer$auth': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js'
+  },
+  output: {
+    filename: '[name].build.js',
+    path: './common/src/main/resources/META-INF/resources/public/build',
+    publicPath: '/public/application/build/'
+  },
+  resolve: {
+    modules: [
+      resolve('./common/src/main/resources/META-INF/resources/public/application/module/common'),
+      resolve('./common/src/main/resources/META-INF/resources/public/application/style/css'),
+      'node_modules'
+    ]
+  },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.less$/,
+        loader: "style!css!less"
       },
       {
         test: /\.css$/,
@@ -55,20 +76,7 @@ module.exports = {
       }
     ]
   },
-  output: {
-    filename: '[name].build.js',
-    path: './common/src/main/resources/META-INF/resources/public/build',
-    publicPath: '/public/application/build/'
-  },
-  resolve: {
-    modules: [
-      resolve('./common/src/main/resources/META-INF/resources/public/application/module/common'),
-      resolve('./common/src/main/resources/META-INF/resources/public/application/style/css'),
-      'node_modules'
-    ]
-  },
-
   plugins: [
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('build.css')
   ]
 };

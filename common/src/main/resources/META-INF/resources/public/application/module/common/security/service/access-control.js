@@ -1,4 +1,3 @@
-angular.module('common.security')
-  .factory('accessControl', ['$http', function($http){
+export default ['$http', ($http) => {
 
-  }]);
+}]

@@ -2,11 +2,6 @@ apply plugin: "war"
 
 version = "0.0.1"
 
-def appDirName = "$projectDir/src/main/war"
-def jsDir = "$appDirName/WEB-INF/public/application/module"
-def authJsDir = "$appDirName/WEB-INF/public/application/module/agent/authentication"
-def commonJsDir = "${project(':common').projectDir}/src/main/resources/META-INF/resources/public/application/module"
-
 war {
   webAppDirName = "src/main/war"
 }
@@ -21,22 +16,3 @@ dependencies {
   providedCompile jstlDependence
   compile project(":common")
 }
-
-task ngApplicationBuild(type: JsConcat) {
-  ordPattern = /module.js$/
-  filterPattern = /\.js$/
-  srcDirName = [jsDir, commonJsDir]
-  targetFileUri = "$appDirName/WEB-INF/public/application/application.build.js"
-  externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
-}
-
-task ngAuthenticationBuild(type: JsConcat) {
-  ordPattern = /module.js$/
-  filterPattern = /\.js$/
-  srcDirName = [authJsDir, commonJsDir]
-  targetFileUri = "$appDirName/WEB-INF/public/application/authentication.build.js"
-  externalInfo = "// @ver: $version\n// @date: ${new Date()}\n\n"
-}
-
-war.dependsOn ngApplicationBuild
-war.dependsOn ngAuthenticationBuild

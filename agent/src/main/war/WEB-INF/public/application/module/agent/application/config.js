@@ -1,85 +1,85 @@
 export default ($compileProvider, $stateProvider, $urlRouterProvider) => {
 
-  const rootUrl = '/public/application/template/agent/';
+  const root = `/public/application/template/agent/`;
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
-  $urlRouterProvider.otherwise('/404');
+  $urlRouterProvider.otherwise(`/404`);
 
-  $stateProvider.state('root', {
-      url: '',
+  $stateProvider.state(`root`, {
+      url: ``,
       views: {
         index: {
-          controller: 'IndexTicketController',
-          templateUrl: rootUrl + 'ticket/page/index.html'
+          controller: `IndexTicketController`,
+          templateUrl: `${root}ticket/page/index.html`
         }
       }
     })
-    .state('ticket', {
-      url: '/ticket/list',
+    .state(`ticket`, {
+      url: `/ticket/list`,
       views: {
         index: {
-          controller: 'IndexTicketController',
-          templateUrl: rootUrl + 'ticket/page/index.html'
+          controller: `IndexTicketController`,
+          templateUrl: `${root}ticket/page/index.html`
         }
       }
     })
-    .state('settings', {
-      url: '/settings',
+    .state(`settings`, {
+      url: `/settings`,
       views: {
         index: {
-          controller: 'IndexSettingsController',
-          templateUrl: rootUrl + 'settings/page/index.html'
+          controller: `IndexSettingsController`,
+          templateUrl: `${root}settings/page/index.html`
         }
       }
     })
-    .state('help', {
-      url: '/help/main',
+    .state(`help`, {
+      url: `/help/main`,
       views: {
         index: {
-          templateUrl: rootUrl + 'help/page/index.html'
+          templateUrl: `${root}help/page/index.html`
         }
       }
     })
-    .state('dashboard', {
-      url: '/dashboard',
+    .state(`dashboard`, {
+      url: `/dashboard`,
       views: {
         index: {
-          templateUrl: rootUrl + 'dashboard/page/index.html'
+          templateUrl: `${root}dashboard/page/index.html`
         }
       }
     })
-    .state('contractor', {
-      url: '/contractor',
+    .state(`contractor`, {
+      url: `/contractor`,
       views: {
         index: {
-          controller: 'IndexContractorController',
-          templateUrl: rootUrl + 'contractor/page/index.html'
+          controller: `IndexContractorController`,
+          templateUrl: `${root}contractor/page/index.html`
         }
       }
     })
-    .state('service', {
-      url: '/service',
+    .state(`service`, {
+      url: `/service`,
       views: {
         index: {
-          controller: 'IndexServiceController',
-          templateUrl: rootUrl + 'service/page/index.html'
+          controller: `IndexServiceController`,
+          templateUrl: `${root}service/page/index.html`
         }
       }
     })
-    .state('knowledge', {
-      url: '/knowledge',
+    .state(`knowledge`, {
+      url: `/knowledge`,
       views: {
         index: {
-          controller: 'IndexKnowledgeController',
-          templateUrl: rootUrl + 'knowledge/page/index.html'
+          controller: `IndexKnowledgeController`,
+          templateUrl: `knowledge/page/index.html`
         }
       }
     })
-    .state('404', {
-      url: '/404',
+    .state(`404`, {
+      url: `/404`,
       views: {
         index: {
-          templateUrl: rootUrl + 'error/404.html'
+          templateUrl: `${root}error/404.html`
         }
       }
     });
