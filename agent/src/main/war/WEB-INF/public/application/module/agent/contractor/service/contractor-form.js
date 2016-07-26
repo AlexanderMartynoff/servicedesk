@@ -1,4 +1,4 @@
-export default function($uibModal){
+export default $uibModal => {
   return {
     open: function (record, $scope) {
       $uibModal.open({

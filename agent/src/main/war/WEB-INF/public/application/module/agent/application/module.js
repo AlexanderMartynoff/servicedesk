@@ -1,6 +1,8 @@
 // for first import angular - IS IMPORTANT!
 import angular from 'angular';
 
+import 'angular-i18n/angular-locale_ru.js';
+
 // angular-ui import
 import angularUiBootstrapModule from 'angular-ui-bootstrap';
 import angularUiRouterModule from 'angular-ui-router/release/angular-ui-router';
@@ -27,21 +29,21 @@ import backendServiceModule from '../service/module';
 import backendContractorModule from '../contractor/module';
 import backendKnowledgeModule from '../knowledge/module';
 
-// application style import
-import 'cover.css';
-import 'loader.css';
-import 'main.css';
-import 'override.bootstrap.css';
 
 // bootstrap style import
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootswatch/yeti/bootstrap.min.css';
 
 // angular-ui-bootstrap style import
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 
 // angular-ui-bootstrap style import
 import 'font-awesome/css/font-awesome.css';
+
+// application style import
+import 'cover.css';
+import 'loader.css';
+import 'main.css';
+import 'override.bootstrap.css';
 
 // bootstrap tools
 import ngApplicationBootstrap from 'ng-application-bootstrap';

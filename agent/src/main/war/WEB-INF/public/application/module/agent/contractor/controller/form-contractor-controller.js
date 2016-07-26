@@ -1,5 +1,5 @@
-export default function ($scope, $rootScope, $uibModalInstance,
-                         contractorService, serviceService, record) {
+export default ($scope, $rootScope, $uibModalInstance,
+                contractorService, serviceService, record) => {
 
   $scope.covered = false;
   $scope.contractor = record;
@@ -12,7 +12,7 @@ export default function ($scope, $rootScope, $uibModalInstance,
    * if direction > 0 then for own,
    * if direction < 0 then from own
    */
-  $scope.move = function(el, dir){
+  $scope.move = (el, dir) => {
     var indexFrom, indexTo, from, to;
 
     if(dir > 0){
@@ -23,8 +23,8 @@ export default function ($scope, $rootScope, $uibModalInstance,
       to = $scope.services;
     }else{ return }
 
-    indexFrom = from.map(function(e){ return e.id }).indexOf(el.id);
-    indexTo = to.map(function(e){ return e.id }).indexOf(el.id);
+    indexFrom = from.map(e => e.id).indexOf(el.id);
+    indexTo = to.map(e => e.id ).indexOf(el.id);
 
     if(indexFrom !== -1){
       from.splice(indexFrom, 1);
@@ -35,36 +35,33 @@ export default function ($scope, $rootScope, $uibModalInstance,
     }
   };
 
-  $scope.updateServiceStore = function(){
+  $scope.updateServiceStore = () => {
     $scope.covered = true;
-    serviceService.list().then(function(response){
+    serviceService.list().then(response => {
       $scope.services = response;
       $scope.covered = false;
-      $scope.contractor.services.forEach(function(e){ $scope.move(e, 1) });
+      $scope.contractor.services.forEach(e => $scope.move(e, 1));
     });
   };
 
-  $scope.create = function(record){
+  $scope.create = record => {
     $scope.covered = true;
-    contractorService.new(record).then(function(response){
+    contractorService.new(record).then(response => {
       $rootScope.$broadcast('contractor::change');
       $scope.covered = false;
       $scope.close();
     });
   };
 
-  $scope.update = function(record){
+  $scope.update = record => {
     $scope.covered = true;
-    contractorService.update(record).then(function(){
+    contractorService.update(record).then(() => {
       $rootScope.$broadcast('contractor::change');
       $scope.covered = false;
       $scope.close();
     });
   };
 
-  $scope.close = function(){
-    $uibModalInstance.close();
-  };
-
+  $scope.close = () => $uibModalInstance.close();
   $scope.updateServiceStore();
 }

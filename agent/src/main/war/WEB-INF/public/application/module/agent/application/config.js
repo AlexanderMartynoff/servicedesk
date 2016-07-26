@@ -71,7 +71,7 @@ export default ($compileProvider, $stateProvider, $urlRouterProvider) => {
       views: {
         index: {
           controller: `IndexKnowledgeController`,
-          templateUrl: `knowledge/page/index.html`
+          templateUrl: `${root}knowledge/page/index.html`
         }
       }
     })

@@ -7,7 +7,7 @@ import contractorForm from './service/contractor-form';
 
 
 export default angular.module("backend.contractor", [])
-  .controller('FormContractorController', FormContractorController)
   .controller('IndexContractorController', IndexContractorController)
+  .controller('FormContractorController', FormContractorController)
   .factory('contractorForm', contractorForm)
   .name;
