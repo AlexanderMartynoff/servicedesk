@@ -9,3 +9,13 @@ subprojects {
   ext.jspApiDependence = "javax.servlet.jsp:jsp-api:${jspApiVer}"
   ext.jstlDependence = "javax.servlet:jstl:${jstlVer}"
 }
+
+task npmInstall (type: Exec) {
+  commandLine "npm"
+  args "install"
+}
+
+task webpack (type: Exec) {
+  commandLine "webpack"
+  dependsOn << npmInstall
+}

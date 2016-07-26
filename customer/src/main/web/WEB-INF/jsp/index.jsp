@@ -16,7 +16,7 @@
                                    popover-title="{{contractor.fullName || '---'}}"
                                    popover-placement="auto"
                                    uib-popover-template="infoPopoverTplUrl">
-                                    <i class="fa fa-left fa-info"></i>
+                                    <i class="fa fa-info"></i>
                                 </a>
                             </li>
                         </ul>

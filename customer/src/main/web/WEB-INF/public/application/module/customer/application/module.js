@@ -27,9 +27,6 @@ import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
 import 'bootswatch/yeti/bootstrap.min.css';
 
 // angular-ui-bootstrap style import
-import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
-
-// angular-ui-bootstrap style import
 import 'font-awesome/css/font-awesome.css';
 
 // application style import
