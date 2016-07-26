@@ -1,19 +1,18 @@
-angular.module("backend.settings")
-  .controller("UsersController", function ($scope, userEditWindow, uaService, Paginator) {
+export default ($scope, userEditWindow, uaService, Paginator) => {
 
-    $scope.paginator = new Paginator();
+  $scope.paginator = new Paginator();
 
-    function updateListComplex(){
-      uaService.listComplex().then(function (response) {
-        $scope.paginator.load(response);
-      });
-    }
+  function updateListComplex(){
+    uaService.listComplex().then(function (response) {
+      $scope.paginator.load(response);
+    });
+  }
 
-    $scope.openUser = function (record) {
-      userEditWindow.open(record);
-    };
+  $scope.openUser = function (record) {
+    userEditWindow.open(record);
+  };
 
-    $scope.$on('ua::change', updateListComplex);
+  $scope.$on('ua::change', updateListComplex);
 
-    updateListComplex();
-  });
+  updateListComplex();
+}
