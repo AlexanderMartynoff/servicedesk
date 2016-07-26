@@ -3,13 +3,13 @@ import angular from 'angular';
 
 // angular-ui import
 import angularUiBootstrapModule from 'angular-ui-bootstrap';
-import angularUiRouterModule from 'angular-ui-router/release/angular-ui-router.js';
+import angularUiRouterModule from 'angular-ui-router/release/angular-ui-router';
 
 // application module import
 import config from './config';
-import securityModule from 'security/module.js';
-import backendTicketModule from '../ticket/module.js';
-import backendSettingsModule from '../settings/module.js';
+import securityModule from 'security/module';
+import backendTicketModule from '../ticket/module';
+import backendSettingsModule from '../settings/module';
 
 
 // application style import
