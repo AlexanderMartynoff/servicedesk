@@ -21,4 +21,5 @@ export default angular.module("backend.settings", [])
   .controller('UaContextCustomerFormController', UaContextCustomerFormController)
   .controller('UaGlobalFormController', UaGlobalFormController)
   .controller('UsersController', UsersController)
+  .controller('UserEditWindowController', UserEditWindowController)
   .name;

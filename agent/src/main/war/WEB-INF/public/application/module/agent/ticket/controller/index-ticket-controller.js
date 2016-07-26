@@ -1,6 +1,6 @@
-export default function ($scope, logged, supportLevelService, ticketForm,
-                         TicketModel, ticketService, $timeout,
-                         Paginator, ellipsis, agentPerformerService) {
+export default ($scope, logged, supportLevelService, ticketForm,
+                TicketModel, ticketService, $timeout,
+                Paginator, ellipsis, agentPerformerService) => {
 
   $scope.filter = {};
   $scope.modelFilter = {};

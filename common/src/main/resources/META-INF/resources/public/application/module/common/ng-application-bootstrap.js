@@ -1,7 +1,7 @@
-import {angular} from 'angular';
+import angular from 'angular';
 
 
-export const ngApplicationBootstrap = (applicationModule) => {
+export default (applicationModule) => {
 
   angular.element(document).ready(function () {
     var injector = angular.injector(['ng']),
@@ -19,7 +19,7 @@ export const ngApplicationBootstrap = (applicationModule) => {
 
     // when all our promises is resolve
     $q.all([loggedPromise]).then(function () {
-      angular.bootstrap(document, [applicationModule, '$$bootstrap']);
+      angular.bootstrap(window.document, [applicationModule, '$$bootstrap']);
     })
   });
 };

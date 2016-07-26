@@ -1,8 +1,7 @@
-export default function ($scope, $rootScope, $uibModalInstance,
-                         logged, ticketService, contractorService,
-                         ticket, agentPerformerService, uaService, ticketForm,
-                         supportLevelService, ticketTypeService,
-                         ticketPriorityService, knowledgeDetail) {
+export default ($scope, $rootScope, $uibModalInstance, logged,
+                ticketService, contractorService, ticket, agentPerformerService,
+                uaService, ticketForm, supportLevelService, ticketTypeService,
+                ticketPriorityService, knowledgeDetail) => {
 
   $scope.covered = true;
   $scope.ticket = ticket;
@@ -11,7 +10,7 @@ export default function ($scope, $rootScope, $uibModalInstance,
   $scope.ticket.progress = $scope.ticket.progress || 0;
   $scope.l$u = logged;
 
-  $uibModalInstance.opened.then(function(){
+  $uibModalInstance.opened.then(function () {
     $scope.covered = false;
   });
 
@@ -47,24 +46,24 @@ export default function ($scope, $rootScope, $uibModalInstance,
     ticketService.doEscalation(ticket, offset, $scope.supportLevelStore);
   };
 
-  $scope.assignToMe = function(){
+  $scope.assignToMe = function () {
     ticket.performer = logged.getAccount();
   };
 
   // this show new modal window and close current
   // but after closed children window we comeback parent
-  $scope.showKnowledgeDetail = function(){
+  $scope.showKnowledgeDetail = function () {
     $scope.close();
-    knowledgeDetail.open(ticket).closed.then(function(){
+    knowledgeDetail.open(ticket).closed.then(function () {
       ticketForm.open(ticket);
     });
   };
 
-  $scope.onRead = function($files){
+  $scope.onRead = function ($files) {
     $scope.covered = true;
   };
 
-  $scope.onCompete = function($files){
+  $scope.onCompete = function ($files) {
     $scope.covered = false;
   };
 
@@ -105,14 +104,14 @@ export default function ($scope, $rootScope, $uibModalInstance,
     });
   }
 
-  function updateTicketTypeStore(){
-    ticketTypeService.list().then(function(response){
+  function updateTicketTypeStore() {
+    ticketTypeService.list().then(function (response) {
       $scope.typeStore = response;
     });
   }
 
-  function updateTicketPriorityStore(){
-    ticketPriorityService.list().then(function(response){
+  function updateTicketPriorityStore() {
+    ticketPriorityService.list().then(function (response) {
       $scope.priorityStore = response;
     });
   }

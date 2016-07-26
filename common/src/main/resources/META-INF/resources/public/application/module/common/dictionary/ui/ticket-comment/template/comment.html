@@ -1,6 +1,6 @@
 <cover trigger="commentsCovered" ng-if="ticket.id">
     <uib-accordion>
-        <uib-accordion-group class="x-no-margin">
+        <div uib-accordion-group class="x-no-margin">
             <uib-accordion-heading>
                 Комментарии<span class="pull-right badge"> {{commentStore.length || 0}}</span>
             </uib-accordion-heading>
@@ -33,6 +33,6 @@
                     {{$.text}}
                 </div>
             </div>
-        </uib-accordion-group>
+        </div>
     </uib-accordion>
 </cover>

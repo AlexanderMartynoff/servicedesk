@@ -1,7 +1,10 @@
-import {angular} from 'angular';
+import angular from 'angular';
 
-const __name__ = 'common.logged';
+import logged from './service/logged';
+import loggedNormalization from './service/logged-normalization';
 
-angular.module(__name__, []);
 
-export {__name__};
+export default angular.module('common.logged', [])
+  .factory('logged', logged)
+  .factory('loggedNormalization', loggedNormalization)
+  .name;

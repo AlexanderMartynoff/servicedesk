@@ -9,7 +9,7 @@ import TicketFormController from './controller/ticket-form-controller';
 
 
 export default angular.module("backend.ticket", [])
-  .factory(ticketForm)
+  .factory('ticketForm', ticketForm)
   .controller('DateTicketController', DateTicketController)
   .controller('IndexTicketController', IndexTicketController)
   .controller('TicketFormController', TicketFormController)

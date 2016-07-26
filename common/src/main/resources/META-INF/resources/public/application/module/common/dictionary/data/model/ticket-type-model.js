@@ -1,8 +1,8 @@
-angular.module("common.dictionary.data")
-  .factory("TicketTypeModel", function () {
-    return function TicketTypeModel(id, title, description){
-      this.id = id;
-      this.title = title;
-      this.description = description;
-    }
-  });
+export default function () {
+  return function (){
+    this.id = null;
+    this.description = null;
+    this.number = 0;
+    this.title = null;
+  }
+}

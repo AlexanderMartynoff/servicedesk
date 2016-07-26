@@ -8,16 +8,16 @@ let resolve = require('path').resolve;
 module.exports = {
   entry: {
     // agent entries
-    'agent$application': './agent/src/main/war/WEB-INF/public/application/module/agent/application/module.js',
-    'agent$auth': './agent/src/main/war/WEB-INF/public/application/module/agent/application/module.js',
+    'agent.application': './agent/src/main/war/WEB-INF/public/application/module/agent/application/module.js',
+    'agent.auth': './agent/src/main/war/WEB-INF/public/application/module/agent/authentication/module.js',
     // customer entries
-    'customer$application': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js',
-    'customer$auth': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js'
+    'customer.application': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js',
+    'customer.auth': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js'
   },
   output: {
-    filename: '[name].build.js',
+    filename: '[name].js',
     path: './common/src/main/resources/META-INF/resources/public/build',
-    publicPath: '/public/application/build/'
+    publicPath: '/public/build/'
   },
   resolve: {
     modules: [
@@ -77,6 +77,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('build.css')
+    new ExtractTextPlugin('[name].css')
   ]
 };

@@ -1,4 +1,4 @@
-function factory($http) {
+export default function ($http) {
   return {
     list: function (start, limit) {
       return $http.get('/service', {})
@@ -22,8 +22,3 @@ function factory($http) {
     }
   }
 }
-
-export const config = {
-  name: "serviceService",
-  fn: factory
-};

@@ -1,7 +1,7 @@
-export default function ($scope) {
+export default $scope => {
   $scope.opened = false;
 
-  $scope.open = function ($event) {
+  $scope.open = $event => {
     $scope.opened = true;
   };
 }
