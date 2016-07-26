@@ -1,1 +1,0 @@
-ngApplicationBootstrap('customer.application');

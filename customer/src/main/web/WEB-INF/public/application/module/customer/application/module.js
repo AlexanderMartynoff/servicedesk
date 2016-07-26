@@ -1,12 +1,36 @@
-// for first import angular - IS IMPORTANT!
 import angular from 'angular';
 
-// angular-ui-bootstrap import
-import modal from 'angular-ui-bootstrap/src/modal';
+import 'angular-i18n/angular-locale_ru.js';
 
-// application module import
+// angular-ui import
+import angularUiBootstrapModule from 'angular-ui-bootstrap';
+import angularUiRouterModule from 'angular-ui-router/release/angular-ui-router';
+
+// this module import
 import config from './config';
-import service from 'dictionary/data/service/service-service';
+import CustomerToolbar from './controller/customer-toolbar';
+
+import ticketModule from '../ticket/module';
+
+// commons application module import
+import securityModule from 'security/module';
+import dataModule from 'dictionary/data/module';
+import utilModule from 'dictionary/util/module';
+import coverModule from 'ui/cover/module';
+import inputFileModule from 'ui/inputfile/module';
+import enumModule from 'ui/enum/module';
+import loggedModule from 'logged/module';
+import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
+
+
+// bootstrap style import
+import 'bootswatch/yeti/bootstrap.min.css';
+
+// angular-ui-bootstrap style import
+import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
+
+// angular-ui-bootstrap style import
+import 'font-awesome/css/font-awesome.css';
 
 // application style import
 import 'cover.css';
@@ -14,23 +38,26 @@ import 'loader.css';
 import 'main.css';
 import 'override.bootstrap.css';
 
-// bootstrap style import
-import 'bootstrap/dist/css/bootstrap.css';
+// bootstrap tools
+import ngApplicationBootstrap from 'ng-application-bootstrap';
 
-
-angular.module('customer.application', [
+const mainModule = angular.module('customer.application', [
   // vendor modules
-  'ui.router',
-  'ui.bootstrap',
+  angularUiRouterModule,
+  angularUiBootstrapModule,
   // common modules
-  'common.security',
-  'common.logged',
-  'common.dictionary.data',
-  'common.dictionary.util',
-  'common.ui.cover',
-  'common.ui.inputfile',
+  securityModule,
+  loggedModule,
+  dataModule,
+  utilModule,
+  coverModule,
+  inputFileModule,
   // customer modules
-  'customer.ticket',
-  'common.ui.ticket-comments'
-])
-  .config(config);
+  ticketModule,
+  ticketCommentModule
+]);
+
+mainModule.config(config)
+  .controller('CustomerToolbar', CustomerToolbar);
+
+ngApplicationBootstrap(mainModule.name);

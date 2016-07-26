@@ -4,7 +4,6 @@
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let resolve = require('path').resolve;
 
-
 module.exports = {
   entry: {
     // agent entries
@@ -12,7 +11,7 @@ module.exports = {
     'agent.auth': './agent/src/main/war/WEB-INF/public/application/module/agent/authentication/module.js',
     // customer entries
     'customer.application': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js',
-    'customer.auth': './customer/src/main/web/WEB-INF/public/application/module/customer/application/module.js'
+    'customer.auth': './customer/src/main/web/WEB-INF/public/application/module/customer/authentication/module.js'
   },
   output: {
     filename: '[name].js',

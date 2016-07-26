@@ -1,4 +1,4 @@
-export default function ($scope, knowledgeService, knowledgeDetail, Paginator) {
+export default ($scope, knowledgeService, knowledgeDetail, Paginator) => {
   $scope.knowledgeStore = [];
   $scope.paginator = new Paginator();
   $scope.filter = {};

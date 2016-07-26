@@ -1,4 +1,3 @@
-// for first import angular - IS IMPORTANT!
 import angular from 'angular';
 
 import 'angular-i18n/angular-locale_ru.js';
@@ -48,9 +47,7 @@ import 'override.bootstrap.css';
 // bootstrap tools
 import ngApplicationBootstrap from 'ng-application-bootstrap';
 
-const applicationModule = `backend.application`;
-
-angular.module(applicationModule, [
+const mainModule = angular.module(`backend.application`, [
   // vendor modules
   angularUiBootstrapModule,
   angularUiRouterModule,
@@ -69,10 +66,10 @@ angular.module(applicationModule, [
   enumModule,
   loggedModule,
   ticketCommentModule
-])
-  .config(config)
+]);
+
+mainModule.config(config)
   .controller('ApplicationToolbar', ApplicationToolbar)
   .controller('RootController', RootController);
 
-
-ngApplicationBootstrap(applicationModule);
+ngApplicationBootstrap(mainModule.name);
