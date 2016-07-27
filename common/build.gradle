@@ -54,3 +54,18 @@ dependencies {
   compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVer
   compile group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVer
 }
+
+task npmInstall (type: Exec) {
+  workingDir "../"
+  commandLine "npm"
+  args "install"
+}
+
+task webpack (type: Exec) {
+  workingDir "../"
+  commandLine "webpack"
+  dependsOn << npmInstall
+}
+
+compileJava.dependsOn webpack
+
