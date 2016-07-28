@@ -7,13 +7,10 @@ def jacksonVer = "2.6.3"
 def gsonVer = "2.4"
 def hibernateVer = "4.3.5.Final"
 def mysqlVer = "5.1.6"
+def springAopVer = "2.5.6"
+def aspectjrtVer = "1.8.9"
+def aspectjweaverVer = "1.8.9"
 
-
-def nodeModules = [
-  'angular',
-  'angular-ui-bootstrap',
-  'angular-ui-router'
-]
 
 repositories {
   mavenCentral()
@@ -46,7 +43,10 @@ dependencies {
   compile group: "org.springframework.security", name: "spring-security-web", version: springSecurityVer
   compile group: "org.springframework.security", name: "spring-security-config", version: springSecurityVer
   compile group: "org.springframework", name: "spring-websocket", version: springVer
+  compile group: 'org.springframework', name: 'spring-aop', version: springAopVer
 
+  compile group: "org.aspectj", name: "aspectjrt", version: aspectjrtVer
+  compile group: 'org.aspectj', name: 'aspectjweaver', version: aspectjweaverVer
   compile group: "org.hibernate", name: "hibernate-core", version: hibernateVer
   compile group: "com.google.code.gson", name: "gson", version: gsonVer
   compile group: "mysql", name: "mysql-connector-java", version: mysqlVer

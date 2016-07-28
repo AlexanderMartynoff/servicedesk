@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import com.itsmtools.common.service.security.DbUserDetailsService.Roles;
+import com.itsmtools.common.service.security.DbUserDetailsService.Role;
 
 
 @Configuration
@@ -24,12 +24,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void autowiredUserDetailsService(DbUserDetailsService dbUserDetailsService){
-        dbUserDetailsService.setRequiredApplicationRoles(Roles.AGENT);
+        dbUserDetailsService.setRequiredApplicationRoles(Role.AGENT);
         dbUserDetailsService.setRequiredGroupRoles(
-            Roles.AGENT_ADMIN,
-            Roles.AGENT_MANAGER,
-            Roles.AGENT_OPERATOR,
-            Roles.AGENT_PERFORMER
+            Role.AGENT_ADMIN,
+            Role.AGENT_MANAGER,
+            Role.AGENT_OPERATOR,
+            Role.AGENT_PERFORMER
         );
         userDetailsService = dbUserDetailsService;
     }

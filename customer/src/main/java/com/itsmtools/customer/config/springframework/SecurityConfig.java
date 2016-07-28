@@ -2,7 +2,7 @@ package com.itsmtools.customer.config.springframework;
 
 
 import com.itsmtools.common.service.security.DbUserDetailsService;
-import com.itsmtools.common.service.security.DbUserDetailsService.Roles;
+import com.itsmtools.common.service.security.DbUserDetailsService.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,8 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void autowiredUserDetailsService(DbUserDetailsService dbUserDetailsService){
-        dbUserDetailsService.setRequiredApplicationRoles(Roles.CUSTOMER);
-        dbUserDetailsService.setRequiredGroupRoles(Roles.CUSTOMER_CUSTOMER);
+        dbUserDetailsService.setRequiredApplicationRoles(Role.CUSTOMER);
+        dbUserDetailsService.setRequiredGroupRoles(Role.CUSTOMER_CUSTOMER);
         userDetailsService = dbUserDetailsService;
     }
 

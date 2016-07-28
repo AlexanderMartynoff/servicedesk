@@ -16,52 +16,51 @@ import java.util.stream.Collectors;
 
 @Service
 public class DbUserDetailsService implements UserDetailsService {
-    private Collection<Roles> requiredApplicationRoles = new ArrayList<>();
-    private Collection<Roles> requiredGroupRoles = new ArrayList<>();
+    private Collection<Role> requiredApplicationRoles = new ArrayList<>();
+    private Collection<Role> requiredGroupRoles = new ArrayList<>();
 
     @Autowired
     private UserService service;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = service.getByLogin(login)
-            .orElseThrow(() -> new UsernameNotFoundException("No such user, or role"));
+        User user = service.getByLogin(login).orElseThrow(() -> new UsernameNotFoundException("No such user, or role"));
 
-        Map<Roles, Profile> potentials = new HashMap<>();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        Map<Role, Profile> potentialRoles = new HashMap<>();
+        List<SimpleGrantedAuthority> realAuthorities = new ArrayList<>();
 
-        potentials.put(Roles.AGENT, user.getAgent());
-        potentials.put(Roles.CUSTOMER, user.getCustomer());
-        potentials.put(Roles.CUSTOMER_CUSTOMER, user.getCustomerCustomer());
-        potentials.put(Roles.AGENT_ADMIN, user.getAgentAdmin());
-        potentials.put(Roles.AGENT_OPERATOR, user.getAgentOperator());
-        potentials.put(Roles.AGENT_PERFORMER, user.getAgentPerformer());
-        potentials.put(Roles.AGENT_MANAGER, user.getAgentManager());
+        potentialRoles.put(Role.AGENT, user.getAgent());
+        potentialRoles.put(Role.CUSTOMER, user.getCustomer());
+        potentialRoles.put(Role.CUSTOMER_CUSTOMER, user.getCustomerCustomer());
+        potentialRoles.put(Role.AGENT_ADMIN, user.getAgentAdmin());
+        potentialRoles.put(Role.AGENT_OPERATOR, user.getAgentOperator());
+        potentialRoles.put(Role.AGENT_PERFORMER, user.getAgentPerformer());
+        potentialRoles.put(Role.AGENT_MANAGER, user.getAgentManager());
 
-        potentials.forEach((key, value) -> {
+        potentialRoles.forEach((key, value) -> {
             if (value != null && value.getEnable() != null && value.getEnable()) {
-                authorities.add(new SimpleGrantedAuthority(key.name()));
+                realAuthorities.add(new SimpleGrantedAuthority(key.name()));
             }
         });
 
-        if (!(isHasAnyRole(requiredApplicationRoles, authorities) && isHasAnyRole(requiredGroupRoles, authorities))) {
+        if (!isHasAnyRole(requiredApplicationRoles, realAuthorities) || !isHasAnyRole(requiredGroupRoles, realAuthorities)) {
             throw new UsernameNotFoundException("No such user, or role");
         }
 
-        authorities.add(new SimpleGrantedAuthority(Roles.ACCOUNT.name()));
+        realAuthorities.add(new SimpleGrantedAuthority(Role.ACCOUNT.name()));
 
-        return new Principal(user, authorities);
+        return new Principal(user, realAuthorities);
     }
 
-    public void setRequiredApplicationRoles(Roles... roles) {
+    public void setRequiredApplicationRoles(Role... roles) {
         requiredApplicationRoles = Arrays.asList(roles);
     }
 
-    public void setRequiredGroupRoles(Roles... roles) {
+    public void setRequiredGroupRoles(Role... roles) {
         requiredGroupRoles = Arrays.asList(roles);
     }
 
-    private boolean isHasAnyRole(Collection<Roles> requiredRoles, List<SimpleGrantedAuthority> authorities) {
+    private boolean isHasAnyRole(Collection<Role> requiredRoles, List<SimpleGrantedAuthority> authorities) {
         return authorities.stream()
             .map(SimpleGrantedAuthority::getAuthority)
             .anyMatch(i -> requiredRoles.stream()
@@ -70,7 +69,7 @@ public class DbUserDetailsService implements UserDetailsService {
                 .contains(i));
     }
 
-    public enum Roles {
+    public enum Role {
         ACCOUNT,
         AGENT,
         AGENT_PERFORMER,
