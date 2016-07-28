@@ -47,7 +47,7 @@ import 'override.bootstrap.css';
 // bootstrap tools
 import ngApplicationBootstrap from 'ng-application-bootstrap';
 
-const mainModule = angular.module(`backend.application`, [
+const mainModule = angular.module('backend.application', [
   // vendor modules
   angularUiBootstrapModule,
   angularUiRouterModule,

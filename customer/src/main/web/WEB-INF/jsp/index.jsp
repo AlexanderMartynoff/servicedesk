@@ -12,11 +12,21 @@
                     <div id="navbar" class="navbar-collapse">
                         <ul class="nav navbar-nav user-info">
                             <li>
-                                <a href="#"
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"
                                    popover-title="{{contractor.fullName || '---'}}"
                                    popover-placement="auto"
                                    uib-popover-template="infoPopoverTplUrl">
                                     <i class="fa fa-info"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" ng-click="showInstruction()">
+                                    <i class="fa fa-question-circle"></i>
                                 </a>
                             </li>
                         </ul>

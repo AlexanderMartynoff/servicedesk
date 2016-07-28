@@ -1,5 +1,5 @@
 export default ($stateProvider, $compileProvider) => {
-  const customerTemplateRootUrl = '/public/application/template/customer/';
+  const url = '/public/application/template/customer/';
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
 
@@ -9,15 +9,7 @@ export default ($stateProvider, $compileProvider) => {
       views: {
         index: {
           controller: 'TicketController',
-          templateUrl: customerTemplateRootUrl + 'ticket/page/index.html'
-        }
-      }
-    }).state('ticket', {
-      url: '/ticket/list',
-      views: {
-        index: {
-          controller: 'TicketController',
-          templateUrl: customerTemplateRootUrl + 'ticket/page/index.html'
+          templateUrl: `${url}ticket/page/index.html`
         }
       }
     });

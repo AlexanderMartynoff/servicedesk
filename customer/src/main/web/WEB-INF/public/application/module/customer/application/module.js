@@ -11,6 +11,8 @@ import config from './config';
 import CustomerToolbar from './controller/customer-toolbar';
 
 import ticketModule from '../ticket/module';
+import instructionModule from '../instruction/module';
+
 
 // commons application module import
 import securityModule from 'security/module';
@@ -24,7 +26,7 @@ import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
 
 
 // bootstrap style import
-import 'bootswatch/yeti/bootstrap.min.css';
+import 'bootswatch/lumen/bootstrap.min.css';
 
 // angular-ui-bootstrap style import
 import 'font-awesome/css/font-awesome.css';
@@ -49,9 +51,10 @@ const mainModule = angular.module('customer.application', [
   utilModule,
   coverModule,
   inputFileModule,
+  ticketCommentModule,
   // customer modules
   ticketModule,
-  ticketCommentModule
+  instructionModule
 ]);
 
 mainModule.config(config)

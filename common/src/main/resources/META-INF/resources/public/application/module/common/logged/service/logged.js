@@ -1,88 +1,93 @@
-export default function (loggedData, loggedNormalization) {
+export default (loggedData, loggedNormalization) => {
 
-  return new (function (loggedNormalData) {
-    this.logged = loggedNormalData;
+  class Logged {
+    constructor(loggedNormalData) {
+      this.logged = loggedNormalData;
+    }
 
-    this.getId = function () {
+    getId() {
       return this.logged.account.id;
-    };
+    }
 
-    this.getAccount = function () {
+    getAccount() {
       return this.logged.account;
-    };
+    }
 
     // admin logic
-    this.isAdmin = function () {
+    isAdmin() {
       return this.logged.agentAdmin.enable;
-    };
+    }
 
-    this.isOnlyAdmin = function () {
-    };
+    isOnlyAdmin() {
+    }
 
     // performer logic
-    this.isPerformer = function () {
+    isPerformer() {
       return this.logged.agentPerformer.enable;
-    };
+    }
 
-    this.isOnlyPerformer = function () {
+    isOnlyPerformer() {
       return this.logged.agentPerformer.enable &&
         !this.logged.agentOperator.enable &&
         !this.logged.agentManager.enable;
-    };
+    }
 
     // operator logic
-    this.isOperator = function () {
+    isOperator() {
       return this.logged.agentOperator.enable;
-    };
+    }
 
-    this.isOnlyOperator = function () {
-    };
+    isOnlyOperator() {}
 
     // manager logic
-    this.isManager = function () {
+    isManager() {
       return this.logged.agentManager.enable;
-    };
+    }
 
     // common logic
-    this.isCanEscalation = function (ticket, direction, limitOfNumber) {
+    isCanEscalation(ticket, direction, limitOfNumber) {
       if (!ticket.supportLevel) {
         return false;
       }
+
       if (direction > 0) {
         return (ticket.supportLevel.number < limitOfNumber) && this.isCanEditTicket();
       } else if (direction < 0) {
         return (ticket.supportLevel.number > 1) && this.isCanEditTicket();
       }
-    };
+    }
 
-    this.isCanAssignToMe = function (ticket) {
+    isCanAssignToMe(ticket) {
       return (this.logged.agentOperator.enable | this.logged.agentOperator.enable) &&
         this.logged.agentPerformer.enable;
-    };
+    }
 
-    this.isCanFilterByPerformer = function () {
+    isCanFilterByPerformer() {
       return this.isCanEditTicket();
-    };
+    }
 
-    this.isCanEditTicket = function () {
+    isCanEditTicket() {
       return this.logged.agentOperator.enable || this.logged.agentManager.enable;
-    };
+    }
 
-    this.isCanSetTicketProgress = function (ticket) {
+    isCanSetTicketProgress(ticket) {
       if (!(ticket.performer && ticket.performer.id)) {
         return false;
       }
       return this.isPerformer() && (ticket.performer.id == this.getAccount().id);
-    };
+    }
 
-    this.isServiceDeskPersonal = function () {
+    isServiceDeskPersonal() {
       return this.logged.agentOperator.enable ||
         this.logged.agentManager.enable ||
         this.logged.agentPerformer.enable;
-    };
+    }
 
-    this.isCanFilterLine = function () {
+    isCanFilterLine() {
       return this.logged.agentOperator.enable || this.logged.agentManager.enable;
-    };
-  })(loggedNormalization(loggedData));
+    }
+
+  }
+
+  return new Logged(loggedNormalization(loggedData));
 }
