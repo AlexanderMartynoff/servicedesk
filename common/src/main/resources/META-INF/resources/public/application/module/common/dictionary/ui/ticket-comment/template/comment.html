@@ -30,15 +30,19 @@
                         </span>
                         <small>12.15.2016 18:05</small>
                     </h4>
-                    <span ng-if="editCommentId !== comment.id" ng-mousedown="openEdit(comment)">
+                    <div ng-if="editComment.id !== comment.id" ng-mousedown="openEdit(comment)">
                         {{comment.text}}
-                    </span>
-                    <span ng-if="editCommentId === comment.id">
+                    </div>
+                    <div style="position:relative"
+                         ng-if="editComment.id === comment.id">
                         <textarea ng-blur="closeEdit()"
                                   ng-model="comment.text"
                                   class="form-control"
                                   rows="3" autofocus></textarea>
-                    </span>
+                        <div style="opacity: .7; position: absolute; bottom: 5px; left: 5px">
+                            <label class="btn btn-info btn-xs"><i class="fa fa-send"></i></label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

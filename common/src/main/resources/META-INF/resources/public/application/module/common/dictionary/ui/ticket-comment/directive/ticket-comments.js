@@ -13,7 +13,9 @@ export default () => {
       var interval = null;
 
       var resetComment = () => {
-        $scope.comment = {ticket: converter.out($scope.ticket)};
+        $scope.comment = {
+          ticket: converter.out($scope.ticket)
+        };
       };
 
       var updateCommentsStore = silent => {
@@ -40,18 +42,21 @@ export default () => {
       var stopMonitoring = () => $interval.cancel(interval);
 
       $scope.openEdit = comment => {
+        if(comment.author.id !== $scope.logged.account.id){
+          return
+        }
         stopMonitoring();
-        $scope.editCommentId = comment.id;
+        $scope.editComment = comment;
       };
 
       // save edited comment
       $scope.closeEdit = () => {
         $scope.covered = true;
-        ticketCommentService.list({ticketId: $scope.ticket.id})
+        ticketCommentService.update($scope.editComment)
           .then(() => {
             startMonitoring();
             $scope.covered = false;
-            $scope.editCommentId = null;
+            $scope.editComment = null;
           });
       };
 
@@ -74,9 +79,7 @@ export default () => {
 
       if ($scope.ticket.id) {
         startMonitoring();
-        $scope.$on("$destroy", () => {
-          stopMonitoring();
-        });
+        $scope.$on("$destroy", stopMonitoring);
       }
     }
   }

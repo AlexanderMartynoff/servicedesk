@@ -35,7 +35,12 @@ public class TicketCommentRepository extends AbstractRepository<TicketComment, I
 
     @Override
     public void update(TicketComment input) {
-        throw new RuntimeException("Not supported operation");
+        Session session = factory.openSession();
+        TicketComment comment = (TicketComment) session.get(TicketComment.class, input.getId());
+        comment.setText(input.getText());
+        session.update(comment);
+        session.flush();
+        session.close();
     }
 
     @Override

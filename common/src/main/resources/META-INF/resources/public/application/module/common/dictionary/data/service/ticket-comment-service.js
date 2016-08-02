@@ -13,6 +13,11 @@ export default function ($http) {
       return $http.post('/ticket/comment', comment).then(function(resposne){
         return resposne.data;
       });
+    },
+    update: function(comment){
+      return $http.put('/ticket/comment', comment).then(function(resposne){
+        return resposne.data;
+      });
     }
   }
 }

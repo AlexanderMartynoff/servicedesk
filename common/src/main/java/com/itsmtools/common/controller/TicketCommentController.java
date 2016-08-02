@@ -26,4 +26,10 @@ public class TicketCommentController extends ApplicationController {
         repository.create(input);
         return empty();
     }
+
+    @RequestMapping(path = "/ticket/comment", method = RequestMethod.PUT)
+    public Response update(@RequestBody TicketComment input){
+        repository.update(input);
+        return empty();
+    }
 }

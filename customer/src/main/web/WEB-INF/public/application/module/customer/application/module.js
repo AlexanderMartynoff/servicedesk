@@ -19,10 +19,12 @@ import securityModule from 'security/module';
 import dataModule from 'dictionary/data/module';
 import utilModule from 'dictionary/util/module';
 import coverModule from 'ui/cover/module';
+import autofocusModule from 'ui/autofocus/module';
 import inputFileModule from 'ui/inputfile/module';
 import enumModule from 'ui/enum/module';
 import loggedModule from 'logged/module';
 import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
+
 
 
 // bootstrap style import
@@ -54,7 +56,8 @@ const mainModule = angular.module('customer.application', [
   ticketCommentModule,
   // customer modules
   ticketModule,
-  instructionModule
+  instructionModule,
+  autofocusModule
 ]);
 
 mainModule.config(config)
