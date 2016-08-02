@@ -75,8 +75,8 @@ export default ($compileProvider, $stateProvider, $urlRouterProvider) => {
         }
       }
     })
-    .state(`404`, {
-      url: `/404`,
+    .state('404', {
+      url: '/404',
       views: {
         index: {
           templateUrl: `${root}error/404.html`

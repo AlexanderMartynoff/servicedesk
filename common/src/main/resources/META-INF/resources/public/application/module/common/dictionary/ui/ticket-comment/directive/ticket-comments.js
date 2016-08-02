@@ -1,47 +1,69 @@
-export default function () {
+export default () => {
   return {
     restrict: 'E',
     templateUrl: '/public/application/module/common/dictionary/ui/ticket-comment/template/comment.html',
     scope: {
       ticket: '='
     },
-    controller: function ($scope, ticketCommentService, converter, logged, $interval) {
-      var interval;
-      $scope.commentsCovered = false;
-      $scope.l$u = logged.logged;
+    controller: ($scope, ticketCommentService, $interval, $attrs, converter, logged) => {
+      $scope.covered = false;
+      $scope.logged = logged.logged;
+      $scope.editCommentId = null;
 
-      function resetComment() {
+      var interval = null;
+
+      var resetComment = () => {
         $scope.comment = {ticket: converter.out($scope.ticket)};
-      }
+      };
 
-      function updateCommentsStore(silent) {
+      var updateCommentsStore = silent => {
         if (!$scope.ticket.id) {
           return;
         }
-        if (!silent) $scope.commentsCovered = true;
-        ticketCommentService.list({ticketId: $scope.ticket.id}).then(function (response) {
-          $scope.commentStore = response;
-          if (!silent) {
-            resetComment();
-            $scope.commentsCovered = false;
-          }
-        });
-      }
-
-      $scope.focus = function () {
-        $scope.rows = 3;
+        if (!silent) $scope.covered = true;
+        ticketCommentService.list({ticketId: $scope.ticket.id})
+          .then(response => {
+            $scope.commentStore = response;
+            if (!silent) {
+              resetComment();
+              $scope.covered = false;
+            }
+          });
       };
 
-      $scope.blur = function () {
-        $scope.rows = 1;
+      var startMonitoring = () => {
+        interval = $interval(() => {
+          updateCommentsStore(true);
+        }, 2000);
       };
 
-      $scope.send = function (comment) {
+      var stopMonitoring = () => $interval.cancel(interval);
+
+      $scope.openEdit = comment => {
         stopMonitoring();
-        $scope.commentsCovered = true;
-        return ticketCommentService.create(comment).then(function () {
+        $scope.editCommentId = comment.id;
+      };
+
+      // save edited comment
+      $scope.closeEdit = () => {
+        $scope.covered = true;
+        ticketCommentService.list({ticketId: $scope.ticket.id})
+          .then(() => {
+            startMonitoring();
+            $scope.covered = false;
+            $scope.editCommentId = null;
+          });
+      };
+
+      $scope.focus = () => $scope.rows = 3;
+      $scope.blur = () => $scope.rows = 1;
+
+      $scope.send = comment => {
+        stopMonitoring();
+        $scope.covered = true;
+        return ticketCommentService.create(comment).then(() => {
           updateCommentsStore();
-          $scope.commentsCovered = false;
+          $scope.covered = false;
           startMonitoring();
         });
       };
@@ -50,19 +72,9 @@ export default function () {
       resetComment();
       updateCommentsStore();
 
-      function startMonitoring(){
-        interval = $interval(function () {
-          updateCommentsStore(true);
-        }, 2000);
-      }
-
-      function stopMonitoring(){
-        $interval.cancel(interval);
-      }
-
       if ($scope.ticket.id) {
         startMonitoring();
-        $scope.$on("$destroy", function () {
+        $scope.$on("$destroy", () => {
           stopMonitoring();
         });
       }

@@ -16,6 +16,7 @@ import securityModule from 'security/module';
 import dataModule from 'dictionary/data/module';
 import utilModule from 'dictionary/util/module';
 import coverModule from 'ui/cover/module';
+import autofocusModule from 'ui/autofocus/module';
 import inputFileModule from 'ui/inputfile/module';
 import enumModule from 'ui/enum/module';
 import loggedModule from 'logged/module';
@@ -65,7 +66,8 @@ const mainModule = angular.module('backend.application', [
   inputFileModule,
   enumModule,
   loggedModule,
-  ticketCommentModule
+  ticketCommentModule,
+  autofocusModule
 ]);
 
 mainModule.config(config)

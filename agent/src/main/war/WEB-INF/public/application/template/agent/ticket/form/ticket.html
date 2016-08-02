@@ -106,7 +106,7 @@
                                ng-disabled="!lg.isCanEditTicket()"
                                typeahead-editable="false"
                                ng-model="ticket.service"
-                               uib-typeahead="$ as $.title for $ in ticket.contractor.services | filter: $viewValue || ''"
+                               uib-typeahead="i as i.title for i in ticket.contractor.services | filter: $viewValue || ''"
                                typeahead-min-length="0"
                                typeahead-show-hint="true"
                                class="form-control">
@@ -120,7 +120,7 @@
                                ng-disabled="!lg.isCanEditTicket()"
                                ng-model="ticket.initiator"
                                typeahead-editable="false"
-                               uib-typeahead="$ as $.firstName + ' ' + $.secondName for $ in initiatorStore | filter: $viewValue || ''"
+                               uib-typeahead="i as i.firstName + ' ' + i.secondName for i in initiatorStore | filter: $viewValue || ''"
                                typeahead-min-length="0"
                                typeahead-show-hint="true"
                                class="form-control">

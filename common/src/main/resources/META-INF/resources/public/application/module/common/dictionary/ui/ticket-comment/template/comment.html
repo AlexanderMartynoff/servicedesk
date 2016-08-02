@@ -1,4 +1,4 @@
-<cover trigger="commentsCovered" ng-if="ticket.id">
+<cover trigger="covered" ng-if="ticket.id">
     <uib-accordion>
         <div uib-accordion-group class="x-no-margin panel-default">
             <uib-accordion-heading>
@@ -20,17 +20,25 @@
                 </div>
             </div>
 
-            <div class="media" ng-repeat="$ in commentStore">
+            <div class="media" ng-repeat="comment in commentStore">
                 <div class="media-body">
                     <h4 class="media-heading">
                         <i class="fa fa-left fa-user"></i>
-                        <span ng-if="$.author.id === l$u.account.id">Я</span>
-                        <span ng-if="$.author.id !== l$u.account.id">
-                            {{$.author.firstName}} {{$.author.secondName}}
+                        <span ng-if="comment.author.id === logged.account.id">Я</span>
+                        <span ng-if="comment.author.id !== logged.account.id">
+                            {{comment.author.firstName}} {{comment.author.secondName}}
                         </span>
                         <small>12.15.2016 18:05</small>
                     </h4>
-                    {{$.text}}
+                    <span ng-if="editCommentId !== comment.id" ng-mousedown="openEdit(comment)">
+                        {{comment.text}}
+                    </span>
+                    <span ng-if="editCommentId === comment.id">
+                        <textarea ng-blur="closeEdit()"
+                                  ng-model="comment.text"
+                                  class="form-control"
+                                  rows="3" autofocus></textarea>
+                    </span>
                 </div>
             </div>
         </div>
