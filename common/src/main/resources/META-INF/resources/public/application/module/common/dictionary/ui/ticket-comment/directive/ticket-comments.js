@@ -8,7 +8,6 @@ export default () => {
     controller: ($scope, ticketCommentService, $interval, $attrs, converter, logged) => {
       $scope.covered = false;
       $scope.logged = logged.logged;
-      $scope.editCommentId = null;
 
       var interval = null;
 
