@@ -33,7 +33,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="/logout"
-                                   tooltip-placement="right"
+                                   tooltip-placement="left"
                                    uib-tooltip="Выход">
                                     <b class="fa fa-sign-out"></b></a>
                             </li>
