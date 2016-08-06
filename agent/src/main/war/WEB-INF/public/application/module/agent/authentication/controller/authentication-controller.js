@@ -21,11 +21,9 @@ export default ($scope, $http, $location, $window, $timeout, authentication) => 
     $scope.response = response;
   };
 
-
   $scope.submit = function () {
     $scope.covered = true;
     authentication($scope.username, $scope.password)
       .then(responseSuccessHandler, responseFailureHandler);
   };
-
 }

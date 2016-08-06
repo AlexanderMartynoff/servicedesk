@@ -15,6 +15,8 @@ public class ApplicationInitializer implements WebApplicationInitializer{
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
 
+        servletContext.addListener(new SessionListener());
+
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
 
         applicationContext.setServletContext(servletContext);
@@ -25,6 +27,7 @@ public class ApplicationInitializer implements WebApplicationInitializer{
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 
-        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy()).addMappingForUrlPatterns(null, true, "/*");
+        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy())
+            .addMappingForUrlPatterns(null, true, "/*");
     }
 }

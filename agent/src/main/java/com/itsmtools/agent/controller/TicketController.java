@@ -16,7 +16,7 @@ import java.util.Collection;
 public class TicketController extends ApplicationController {
 
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
 
     @RequestMapping(value = "/ticket/{id}", method = RequestMethod.GET)
     public Ticket get(@PathVariable("id") Integer id) {

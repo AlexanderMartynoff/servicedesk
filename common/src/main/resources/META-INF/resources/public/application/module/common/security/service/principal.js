@@ -1,3 +1,3 @@
-export default ['$http', function($http){
+export default $http => {
 
-}]
+}

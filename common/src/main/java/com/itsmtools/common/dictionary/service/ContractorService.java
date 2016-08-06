@@ -15,7 +15,7 @@ import java.util.Optional;
 public class ContractorService{
 
     @Autowired
-    SessionFactory factory;
+    private SessionFactory factory;
 
     public Contractor item(Integer id) {
         return null;

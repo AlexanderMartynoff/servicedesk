@@ -1,21 +1,21 @@
-export default function ($scope, $rootScope, serviceService, record, $uibModalInstance) {
+export default ($scope, $rootScope, serviceService, record, $uibModalInstance) => {
   $scope.service = record;
   $scope.covered = false;
 
   $scope.close = $uibModalInstance.close.bind($uibModalInstance);
 
-  $scope.create = function(record){
+  $scope.create = record => {
     $scope.covered = true;
-    serviceService.create(record).then(function(response){
+    serviceService.create(record).then(response => {
       $scope.covered = false;
       $rootScope.$broadcast('service::change');
       $scope.close();
     });
   };
 
-  $scope.update = function(record){
+  $scope.update = record => {
     $scope.covered = true;
-    serviceService.update(record).then(function(response){
+    serviceService.update(record).then(response => {
       $scope.covered = false;
       $rootScope.$broadcast('service::change');
       $scope.close();

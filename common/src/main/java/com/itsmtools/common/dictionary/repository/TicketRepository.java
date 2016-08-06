@@ -84,10 +84,14 @@ public class TicketRepository extends AbstractRepository<Ticket, Integer, String
         final Criteria query = session.createCriteria(Ticket.class);
         final List<SimpleExpression> progressCriteria = new ArrayList<>();
 
-        if (single.containsKey("showComplete") && single.get("showComplete") != null && single.get("showComplete").equals("true")) {
+        if (single.containsKey("showComplete") &&
+            single.get("showComplete") != null &&
+            single.get("showComplete").equals("true")) {
             progressCriteria.add(ge("progress", 100));
         }
-        if (single.containsKey("showIncomplete") && single.get("showIncomplete") != null && single.get("showIncomplete").equals("true")) {
+        if (single.containsKey("showIncomplete") &&
+            single.get("showIncomplete") != null &&
+            single.get("showIncomplete").equals("true")) {
             progressCriteria.add(lt("progress", 100));
         }
         if (progressCriteria.size() > 0) {

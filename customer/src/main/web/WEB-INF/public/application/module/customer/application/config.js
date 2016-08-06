@@ -1,4 +1,4 @@
-export default ($stateProvider, $compileProvider) => {
+export default ($stateProvider, $compileProvider, $httpProvider) => {
   const url = '/public/application/template/customer/';
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
@@ -13,4 +13,6 @@ export default ($stateProvider, $compileProvider) => {
         }
       }
     });
+
+  $httpProvider.interceptors.push('httpInterceptor');
 }

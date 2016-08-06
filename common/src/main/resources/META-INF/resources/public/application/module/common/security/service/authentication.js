@@ -1,6 +1,6 @@
-export default ['$http', function($http){
+export default $http => {
 
-  return function(username, password, url){
+  return (username, password, url) => {
     return $http({
       method: 'post',
       url: url || '/auth',
@@ -10,4 +10,4 @@ export default ['$http', function($http){
       }
     })
   }
-}]
+}

@@ -11,8 +11,8 @@ repositories {
 }
 
 dependencies {
-  providedCompile servletApiDependence
-  providedCompile jspApiDependence
-  providedCompile jstlDependence
+  providedCompile servletApi
+  providedCompile jspApi
+  providedCompile jstl
   compile project(":common")
 }

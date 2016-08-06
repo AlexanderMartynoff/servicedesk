@@ -1,76 +1,76 @@
-export default ($compileProvider, $stateProvider, $urlRouterProvider) => {
+export default ($compileProvider, $stateProvider, $urlRouterProvider, $httpProvider) => {
 
-  const root = `/public/application/template/agent/`;
+  const root = '/public/application/template/agent/';
 
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|data|mailto|chrome-extension):/);
-  $urlRouterProvider.otherwise(`/404`);
+  $urlRouterProvider.otherwise('/404');
 
-  $stateProvider.state(`root`, {
-      url: ``,
+  $stateProvider.state('root', {
+      url: '',
       views: {
         index: {
-          controller: `IndexTicketController`,
+          controller: 'IndexTicketController',
           templateUrl: `${root}ticket/page/index.html`
         }
       }
     })
-    .state(`ticket`, {
-      url: `/ticket/list`,
+    .state('ticket', {
+      url: '/ticket/list',
       views: {
         index: {
-          controller: `IndexTicketController`,
+          controller: 'IndexTicketController',
           templateUrl: `${root}ticket/page/index.html`
         }
       }
     })
-    .state(`settings`, {
-      url: `/settings`,
+    .state('settings', {
+      url: '/settings',
       views: {
         index: {
-          controller: `IndexSettingsController`,
+          controller: 'IndexSettingsController',
           templateUrl: `${root}settings/page/index.html`
         }
       }
     })
-    .state(`help`, {
-      url: `/help/main`,
+    .state('help', {
+      url: '/help/main',
       views: {
         index: {
           templateUrl: `${root}help/page/index.html`
         }
       }
     })
-    .state(`dashboard`, {
-      url: `/dashboard`,
+    .state('dashboard', {
+      url: '/dashboard',
       views: {
         index: {
           templateUrl: `${root}dashboard/page/index.html`
         }
       }
     })
-    .state(`contractor`, {
-      url: `/contractor`,
+    .state('contractor', {
+      url: '/contractor',
       views: {
         index: {
-          controller: `IndexContractorController`,
+          controller: 'IndexContractorController',
           templateUrl: `${root}contractor/page/index.html`
         }
       }
     })
-    .state(`service`, {
-      url: `/service`,
+    .state('service', {
+      url: '/service',
       views: {
         index: {
-          controller: `IndexServiceController`,
+          controller: 'IndexServiceController',
           templateUrl: `${root}service/page/index.html`
         }
       }
     })
-    .state(`knowledge`, {
-      url: `/knowledge`,
+    .state('knowledge', {
+      url: '/knowledge',
       views: {
         index: {
-          controller: `IndexKnowledgeController`,
+          controller: 'IndexKnowledgeController',
           templateUrl: `${root}knowledge/page/index.html`
         }
       }
@@ -83,4 +83,6 @@ export default ($compileProvider, $stateProvider, $urlRouterProvider) => {
         }
       }
     });
+
+  $httpProvider.interceptors.push('httpInterceptor');
 };

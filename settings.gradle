@@ -1,4 +1,1 @@
-include 'common'
-include 'agent'
-include 'customer'
-
+include 'common', 'agent', 'customer'

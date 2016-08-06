@@ -10,7 +10,7 @@ export default $scope => {
     },
     {
       id: 2,
-      heading: "Общие",
+      heading: "Тексты",
       templateUrl: "/public/application/template/agent/settings/tab/contexts.html"
     }
   ];

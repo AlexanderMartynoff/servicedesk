@@ -6,7 +6,10 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li uib-dropdown>
-                    <a href="#" uib-dropdown-toggle>
+                    <a href="#"
+                       uib-dropdown-toggle
+                       tooltip-placement="right"
+                       uib-tooltip="Навигация">
                         <b class="fa fa-bars"></b>
                         <span class="caret"></span>
                     </a>
@@ -30,16 +33,6 @@
                                             <i class="fa fa-left fa-ticket"></i> Заявки
                                             <span class="pull-right small">
                                                 <em>Управление заявками</em>
-                                            </span>
-                                        </a>
-
-                                        <a href="#/problem/list"
-                                           class="list-group-item"
-                                           ng-class="{active: selModule == 'problem'}"
-                                           ng-click="selModule = 'problem'">
-                                            <i class="fa fa-left fa-question"></i> Проблемы
-                                            <span class="pull-right small">
-                                                <em>Управление проблемами</em>
                                             </span>
                                         </a>
 
@@ -84,13 +77,6 @@
                        ng-click="selModule = null"
                        ng-if="isAdmin()">
                         <b class="fa fa-cog"></b>
-                    </a>
-                </li>
-                <li>
-                    <a tooltip-placement="bottom"
-                       uib-tooltip="Поведение"
-                       ng-click="selModule = null">
-                        <b class="fa fa-info-circle"></b>
                     </a>
                 </li>
             </ul>

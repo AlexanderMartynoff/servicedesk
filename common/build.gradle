@@ -30,10 +30,11 @@ sourceSets {
   }
 }
 
+
 dependencies {
-  providedCompile servletApiDependence
-  providedCompile jspApiDependence
-  providedCompile jstlDependence
+  providedCompile servletApi
+  providedCompile jspApi
+  providedCompile jstl
 
   compile group: "org.springframework", name: "spring-webmvc", version: springVer
   compile group: "org.springframework", name: "spring-core", version: springVer

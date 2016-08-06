@@ -54,8 +54,7 @@
                        class="form-control"
                        placeholder="Пароль">
 
-                <a class="btn btn-primary btn-block"
-                   type="submit" ng-click="submit()">Войти</a>
+                <a class="btn btn-primary btn-block" type="submit" ng-click="submit()">Войти</a>
             </cover>
         </form>
     </body>

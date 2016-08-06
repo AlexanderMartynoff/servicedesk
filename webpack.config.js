@@ -1,8 +1,7 @@
 'use strict';
 
-
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let resolve = require('path').resolve;
+let path = require('path');
 
 module.exports = {
   entry: {
@@ -19,11 +18,11 @@ module.exports = {
     publicPath: '/public/build/'
   },
   resolve: {
-    modules: [
-      resolve('./common/src/main/resources/META-INF/resources/public/application/module/common'),
-      resolve('./common/src/main/resources/META-INF/resources/public/application/style/css'),
-      'node_modules'
-    ]
+    root: [
+      path.resolve('./common/src/main/resources/META-INF/resources/public/application/style/css'),
+      path.resolve('./common/src/main/resources/META-INF/resources/public/application/module/common')
+    ],
+    modulesDirectories: ['node_modules']
   },
   module: {
     loaders: [
@@ -40,10 +39,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader'
-        })
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -53,7 +49,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff|woff2)$/,
+        test: /\.(woff|woff2)/,
         loader:'file',
         query: {
           name: "font/[name].[ext]"

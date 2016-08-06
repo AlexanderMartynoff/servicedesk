@@ -1,4 +1,4 @@
-export default function () {
+export default () => {
   return {
     templateUrl: '/public/application/module/common/ui/inputfile/template/inputfile.html',
     scope: {
@@ -6,12 +6,12 @@ export default function () {
       onReadBegin: '@',
       onReadComplete: '@'
     },
-    controller: function ($scope, $parse, $q) {
+    controller: ($scope, $parse, $q) => {
       var onBeginReadFn, onCompleteReadFn;
 
       $scope.files = $scope.files || [];
 
-      $scope.makeFileName = function(fileName){
+      $scope.makeFileName = fileName => {
         var firstSize = 3, lastSize = 3, delim = '\u2026';
 
         if(fileName.length > firstSize + lastSize){
@@ -22,19 +22,19 @@ export default function () {
         return fileName;
       };
 
-      onBeginReadFn = function(selection){
+      onBeginReadFn = selection => {
         return $parse($scope.onReadBegin)($scope.$parent, {
           $selection: selection
         })
       };
 
-      onCompleteReadFn = function(selection){
+      onCompleteReadFn = selection => {
         return $parse($scope.onReadComplete)($scope.$parent, {
           $selection: selection
         })
       };
 
-      $scope.change = function(input){
+      $scope.change = input => {
         var promise, promises = [], files = [], i;
 
         onBeginReadFn(input.files);
@@ -43,34 +43,33 @@ export default function () {
           files.push(input.files[i]);
         }
 
-        files.forEach(function(file){
+        files.forEach(file => {
           var reader = new FileReader();
-          promise = $q(function(resolve, reject){
-            reader.onload = function(e){
+          promise = $q((resolve, reject) => {
+            reader.onload = e => {
 
               resolve({
                 title: file.name,
                 content: e.currentTarget.result
               });
+
             };
-            reader.onerror = function(e){
-              reject(e);
-            };
+            reader.onerror = e => reject(e);
           });
           reader.readAsDataURL(file);
           promises.push(promise);
         });
 
-        $q.all(promises).then(function(collection){
+        $q.all(promises).then(collection => {
           $scope.files = $scope.files.concat(collection);
           onCompleteReadFn(collection);
-        }, function(){
+        }, () => {
           onCompleteReadFn([]);
         });
       };
 
-      $scope.delete = function(file){
-        $scope.files = $scope.files.filter(function(e){return e !== file});
+      $scope.delete = file => {
+        $scope.files = $scope.files.filter(e => e !== file);
       };
     }
   }

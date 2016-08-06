@@ -64,9 +64,9 @@ public class DbUserDetailsService implements UserDetailsService {
         return authorities.stream()
             .map(SimpleGrantedAuthority::getAuthority)
             .anyMatch(i -> requiredRoles.stream()
-                .map(Enum::name)
-                .collect(Collectors.toList())
-                .contains(i));
+                    .map(Enum::name)
+                    .collect(Collectors.toList())
+                    .contains(i));
     }
 
     public enum Role {
