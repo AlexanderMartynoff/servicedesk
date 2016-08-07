@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" %>
 
-<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="ApplicationToolbar">
+<div class="navbar navbar-default navbar-fixed-top" ng-controller="ApplicationToolbar">
     <div class="navbar-collapse collapse">
 
         <div class="container-fluid">
@@ -14,7 +14,9 @@
                         <span class="caret"></span>
                     </a>
 
-                    <ul class="uib-dropdown-menu x-app-menu" uib-dropdown-menu>
+                    <ul class="uib-dropdown-menu x-app-menu"
+                        style="background: transparent"
+                        uib-dropdown-menu>
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">

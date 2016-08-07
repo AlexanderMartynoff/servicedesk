@@ -28,7 +28,10 @@ import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
 
 
 // bootstrap style import
-import 'bootswatch/lumen/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
+// angular-ui-bootstrap style import
+import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 
 // angular-ui-bootstrap style import
 import 'font-awesome/css/font-awesome.css';

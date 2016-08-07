@@ -222,7 +222,7 @@ public class Ticket {
     public void setAttaches(Set<TicketAttache> attaches) {
         if(this.attaches == null) {
             this.attaches = attaches != null ? attaches : new HashSet<>();
-        }else{
+        } else {
             this.attaches.clear();
             this.attaches.addAll(attaches);
         }

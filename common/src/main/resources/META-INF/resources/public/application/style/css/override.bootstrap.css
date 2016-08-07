@@ -51,6 +51,9 @@ tr td, tr th {
 .control-label {
     padding: 0;
 }
+label{
+    font-weight: normal !important;
+}
 .form-control[readonly]{
     background: #ffffff;
 }
@@ -133,4 +136,3 @@ h1 {
 .panel-group{
     margin-bottom: 0 !important;
 }
-

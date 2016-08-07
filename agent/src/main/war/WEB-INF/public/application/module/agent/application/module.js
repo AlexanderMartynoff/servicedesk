@@ -31,7 +31,7 @@ import backendKnowledgeModule from '../knowledge/module';
 
 
 // bootstrap style import
-import 'bootswatch/yeti/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // angular-ui-bootstrap style import
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';

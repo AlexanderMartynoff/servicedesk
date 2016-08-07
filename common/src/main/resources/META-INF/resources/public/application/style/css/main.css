@@ -5,7 +5,7 @@
 
 html, body {
     height: 100%;
-    font-family: Helvetica, Arial, sans-serif !important;
+    font-family: "Segoe UI", "Segoe UI", "Ubuntu", Helvetica, Arial, sans-serif !important;
 }
 
 a:hover, a:focus {
@@ -61,7 +61,7 @@ textarea {
 }
 
 .x-content {
-    margin-top: 53px;
+    margin-top: 60px;
 }
 
 .x-topbar {
@@ -240,4 +240,9 @@ textarea {
     text-decoration: underline;
     cursor: pointer;
 }
-
+.uib-weeks td{
+    padding: 1px;
+}
+.dropdown-menu > li > a {
+    white-space: normal;
+}
