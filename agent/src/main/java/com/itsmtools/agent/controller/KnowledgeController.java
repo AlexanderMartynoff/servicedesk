@@ -1,32 +1,31 @@
 package com.itsmtools.agent.controller;
 
 import com.itsmtools.common.controller.ApplicationController;
-import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Knowledge;
 import com.itsmtools.common.dictionary.repository.KnowledgeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 
 @RestController
-public class KnowledgeController extends ApplicationController{
+public class KnowledgeController extends ApplicationController {
 
     @Autowired
     private KnowledgeRepository repository;
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/knowledge", method = RequestMethod.POST)
-    public Response create(@RequestBody Knowledge knowledge) {
+    public void create(@RequestBody Knowledge knowledge) {
         repository.create(knowledge);
-        return empty();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/knowledge", method = RequestMethod.PUT)
-    public Response update(@RequestBody Knowledge knowledge) {
+    public void update(@RequestBody Knowledge knowledge) {
         repository.update(knowledge);
-        return empty();
     }
 
     @RequestMapping(value = "/knowledge", method = RequestMethod.GET)

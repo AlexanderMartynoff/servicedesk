@@ -13,7 +13,7 @@ import java.util.Collection;
 
 
 @RestController
-public class TicketPriorityController extends ApplicationController {
+public class TicketPriorityController {
     @Autowired
     private TicketPriorityRepository repository;
 

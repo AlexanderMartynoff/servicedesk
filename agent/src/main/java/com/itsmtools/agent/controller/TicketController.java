@@ -1,25 +1,23 @@
 package com.itsmtools.agent.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.itsmtools.common.controller.ApplicationController;
-import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Ticket;
 import com.itsmtools.common.dictionary.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 
 @RestController
-public class TicketController extends ApplicationController {
+public class TicketController {
 
     @Autowired
     private TicketService ticketService;
 
     @RequestMapping(value = "/ticket/{id}", method = RequestMethod.GET)
-    public Ticket get(@PathVariable("id") Integer id) {
+    public Ticket get(@PathVariable("id") final Integer id) {
         return ticketService.item(id);
     }
 
@@ -28,21 +26,21 @@ public class TicketController extends ApplicationController {
         return ticketService.list(multiParams.toSingleValueMap(), multiParams);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="/ticket", method = RequestMethod.POST)
-    public Response create(@RequestBody Ticket ticket) throws JsonProcessingException {
+    public void create(@RequestBody Ticket ticket) {
         ticketService.save(ticket);
-        return empty();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="/ticket", method = RequestMethod.PUT)
-    public Response update(@RequestBody Ticket ticket) {
+    public void update(@RequestBody Ticket ticket) {
         ticketService.update(ticket);
-        return empty();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/ticket/{id}", method = RequestMethod.DELETE)
-    public Response delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable("id") final int id) {
         ticketService.delete(id);
-        return empty();
     }
 }

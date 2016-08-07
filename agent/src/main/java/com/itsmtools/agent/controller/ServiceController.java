@@ -2,10 +2,10 @@ package com.itsmtools.agent.controller;
 
 
 import com.itsmtools.common.controller.ApplicationController;
-import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Service;
 import com.itsmtools.common.dictionary.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
@@ -22,15 +22,15 @@ public class ServiceController extends ApplicationController {
         return service.list(multiParams.toSingleValueMap(), multiParams);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/service", method = RequestMethod.POST)
-    public Response create(@RequestBody Service service) {
+    public void create(@RequestBody Service service) {
         this.service.save(service);
-        return empty();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/service", method = RequestMethod.PUT)
-    public Response update(@RequestBody Service service) {
+    public void update(@RequestBody Service service) {
         this.service.update(service);
-        return empty();
     }
 }

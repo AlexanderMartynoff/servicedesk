@@ -2,14 +2,12 @@ package com.itsmtools.agent.controller;
 
 
 import com.itsmtools.common.controller.ApplicationController;
-import com.itsmtools.common.controller.response.Response;
 import com.itsmtools.common.dictionary.model.Contractor;
 import com.itsmtools.common.dictionary.service.ContractorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Collection;
 
 
@@ -24,15 +22,15 @@ public class ContractorController extends ApplicationController {
         return contractors.list();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/contractor", method = RequestMethod.POST)
-    public Response create(@RequestBody Contractor contractor) {
+    public void create(@RequestBody Contractor contractor) {
         contractors.save(contractor);
-        return ok();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/contractor", method = RequestMethod.PUT)
-    public Response update(@RequestBody Contractor contractor) {
+    public void update(@RequestBody Contractor contractor) {
         contractors.update(contractor);
-        return ok();
     }
 }

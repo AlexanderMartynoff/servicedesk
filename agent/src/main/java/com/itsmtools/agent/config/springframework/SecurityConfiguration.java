@@ -47,6 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/**")
             .authenticated()
             .and()
+
             .csrf()
             .disable()
             .formLogin()
@@ -57,10 +58,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .successHandler(authenticationSuccessHandler)
             .failureHandler(authenticationFailureHandler)
             .and()
+
             .logout()
             .logoutSuccessUrl("/login")
             .logoutUrl("/logout")
             .and()
+
             .exceptionHandling();
     }
 }
