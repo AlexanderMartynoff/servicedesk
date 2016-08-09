@@ -1,6 +1,7 @@
 package com.itsmtools.customer.config.springframework;
 
 
+import com.itsmtools.common.service.security.SessionListener;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -14,6 +15,8 @@ public class ApplicationInitializer implements WebApplicationInitializer{
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+
+        servletContext.addListener(new SessionListener());
 
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
 

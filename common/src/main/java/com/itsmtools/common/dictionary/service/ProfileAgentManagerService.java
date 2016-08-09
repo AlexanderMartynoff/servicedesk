@@ -29,6 +29,7 @@ public class ProfileAgentManagerService implements ProfileService<ProfileAgentMa
             .list()
             .stream()
             .findFirst();
+        session.flush();
         session.close();
         return instance;
     }

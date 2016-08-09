@@ -77,6 +77,11 @@
     <div class="col-sm-9">
 
         <cover trigger="covered">
+
+            <div ng-if="paginator.$$collection.length === 0" class="alert alert-info">
+                Записи удовлетворяющие условиям поиска не найдены
+            </div>
+
             <table ng-if="paginator.$$collection.length > 0"
                    class="table table-striped table-hover x-table-clickable">
                 <thead>
@@ -84,7 +89,7 @@
                     <th>ID</th>
                     <th>Дата фиксации</th>
                     <th>Наименование</th>
-                    <th>Услугп</th>
+                    <th>Услуга</th>
                     <th>Прогресс</th>
                 </tr>
                 </thead>
