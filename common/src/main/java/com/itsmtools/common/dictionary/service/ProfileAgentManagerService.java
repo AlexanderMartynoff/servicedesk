@@ -40,12 +40,12 @@ public class ProfileAgentManagerService implements ProfileService<ProfileAgentMa
         session.close();
     }
 
-    public void update(ProfileAgentManager entity) {
+    public void update(ProfileAgentManager input) {
         Session session = factory.openSession();
-        ProfileAgentManager profileRoleAgentManager = (ProfileAgentManager) session.get(ProfileAgentManager.class, entity.getId());
-        profileRoleAgentManager.setSupportLevels(entity.getSupportLevels());
-        profileRoleAgentManager.setEnable(entity.getEnable());
-        session.update(profileRoleAgentManager);
+        ProfileAgentManager profile = (ProfileAgentManager) session.get(ProfileAgentManager.class, input.getId());
+        profile.setSupportLevels(input.getSupportLevels());
+        profile.setEnable(input.getEnable());
+        session.update(profile);
         session.flush();
         session.close();
     }
