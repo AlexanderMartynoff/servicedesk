@@ -3,6 +3,7 @@ build
 *build.*
 !script/build
 !*.gradle
+.gradle
 *.iml
 .idea/
 *.iws

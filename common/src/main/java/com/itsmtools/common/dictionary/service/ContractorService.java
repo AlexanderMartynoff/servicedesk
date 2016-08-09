@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import static java.util.Optional.ofNullable;
 
 
 @Service
@@ -17,8 +18,12 @@ public class ContractorService{
     @Autowired
     private SessionFactory factory;
 
-    public Contractor item(Integer id) {
-        return null;
+    public Optional<Contractor> get(Integer id) {
+        Session session = factory.openSession();
+        Optional<Contractor> contractor = ofNullable((Contractor) session.get(Contractor.class, id));
+        session.flush();
+        session.close();
+        return contractor;
     }
 
     public void save(Contractor entity) {
@@ -40,12 +45,12 @@ public class ContractorService{
     }
 
     public void delete(Integer id) {
-        Session session = factory.openSession();
-        Optional.ofNullable(session.get(Contractor.class, id)).ifPresent(i -> {
+        get(id).ifPresent(i -> {
+            Session session = factory.openSession();
             session.delete(i);
             session.flush();
+            session.close();
         });
-        session.close();
     }
 
     @SuppressWarnings("unchecked")
