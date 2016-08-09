@@ -8,7 +8,7 @@ import angularUiRouterModule from 'angular-ui-router/release/angular-ui-router';
 
 // this module import
 import config from './config';
-import ApplicationToolbar from './controller/application-toolbar-controller';
+import ApplicationToolbarController from './controller/application-toolbar-controller';
 import RootController from './controller/root-controller';
 
 // application module import
@@ -71,7 +71,7 @@ const mainModule = angular.module('backend.application', [
 ]);
 
 mainModule.config(config)
-  .controller('ApplicationToolbar', ApplicationToolbar)
+  .controller('ApplicationToolbar', ApplicationToolbarController)
   .controller('RootController', RootController);
 
 ngApplicationBootstrap(mainModule.name);
