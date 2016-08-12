@@ -21,6 +21,7 @@ export default () => {
         if (!$scope.ticket.id) {
           return;
         }
+
         if (!silent) $scope.covered = true;
         ticketCommentService.list({ticketId: $scope.ticket.id})
           .then(response => {
