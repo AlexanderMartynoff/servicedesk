@@ -5,11 +5,10 @@ export default () => {
     scope: {
       ticket: '='
     },
-    controller: ($scope, ticketCommentService, $interval, $attrs, converter, logged) => {
+    controller: ($scope, ticketCommentService, $timeout, $interval, $attrs, converter, logged, monitor) => {
+
       $scope.covered = false;
       $scope.logged = logged.logged;
-
-      var interval = null;
 
       var resetComment = () => {
         $scope.comment = {
@@ -22,64 +21,60 @@ export default () => {
           return;
         }
 
-        if (!silent) $scope.covered = true;
-        ticketCommentService.list({ticketId: $scope.ticket.id})
-          .then(response => {
-            $scope.commentStore = response;
-            if (!silent) {
-              resetComment();
-              $scope.covered = false;
-            }
-          });
-      };
+        if (!silent) {
+          $scope.covered = true;
+        }
 
-      var startMonitoring = () => {
-        interval = $interval(() => {
-          updateCommentsStore(true);
-        }, 2000);
+        return ticketCommentService.list({ticketId: $scope.ticket.id}).then(response => {
+          $scope.commentStore = response;
+          if (!silent) {
+            resetComment();
+            $scope.covered = false;
+          }
+          return response;
+        });
       };
-
-      var stopMonitoring = () => $interval.cancel(interval);
 
       $scope.openEdit = comment => {
-        if(comment.author.id !== $scope.logged.account.id){
-          return
+        if (comment.author.id !== $scope.logged.account.id) {
+          return;
         }
-        stopMonitoring();
-        $scope.editComment = comment;
+        $scope.covered = true;
+        monitor.stop().then(() => {
+          alert('edit');
+          $scope.editComment = comment;
+          $scope.covered = false;
+        });
       };
 
       // save edited comment
       $scope.closeEdit = () => {
         $scope.covered = true;
-        ticketCommentService.update($scope.editComment)
-          .then(() => {
-            startMonitoring();
-            $scope.covered = false;
-            $scope.editComment = null;
-          });
+        ticketCommentService.update($scope.editComment).then(() => {
+          $scope.covered = false;
+          $scope.editComment = null;
+          monitor.start();
+        });
       };
 
       $scope.focus = () => $scope.rows = 3;
       $scope.blur = () => $scope.rows = 1;
 
       $scope.send = comment => {
-        stopMonitoring();
         $scope.covered = true;
         return ticketCommentService.create(comment).then(() => {
           updateCommentsStore();
           $scope.covered = false;
-          startMonitoring();
         });
       };
 
       $scope.blur();
       resetComment();
-      updateCommentsStore();
+      monitor.configure({service: () => updateCommentsStore(true)});
 
       if ($scope.ticket.id) {
-        startMonitoring();
-        $scope.$on("$destroy", stopMonitoring);
+        monitor.start();
+        $scope.$on("$destroy", () => monitor.stop());
       }
     }
   }
