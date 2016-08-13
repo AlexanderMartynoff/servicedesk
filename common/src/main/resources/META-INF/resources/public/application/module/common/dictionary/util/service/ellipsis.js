@@ -1,9 +1,9 @@
-export default function(){
-  return function (string, limit){
+export default () => {
+  return (string, limit) => {
     limit = limit || 25;
-    try{
+    try {
       return string.length >= limit ? string.substring(0, limit) + ' ...' : string;
-    }catch(e){
+    } catch (e) {
       return "";
     }
   }

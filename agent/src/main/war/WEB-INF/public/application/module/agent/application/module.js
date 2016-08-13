@@ -14,13 +14,14 @@ import RootController from './controller/root-controller';
 // application module import
 import securityModule from 'security/module';
 import dataModule from 'dictionary/data/module';
-import utilModule from 'dictionary/util/module';
+import dictionaryUtilModule from 'dictionary/util/module';
 import coverModule from 'ui/cover/module';
 import autofocusModule from 'ui/autofocus/module';
 import inputFileModule from 'ui/inputfile/module';
 import enumModule from 'ui/enum/module';
 import loggedModule from 'logged/module';
 import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
+import monitorModule from 'util/monitor/module';
 
 
 import backendTicketModule from '../ticket/module';
@@ -61,13 +62,14 @@ const mainModule = angular.module('backend.application', [
   backendKnowledgeModule,
   // commons modules
   dataModule,
-  utilModule,
+  dictionaryUtilModule,
   coverModule,
   inputFileModule,
   enumModule,
   loggedModule,
   ticketCommentModule,
-  autofocusModule
+  autofocusModule,
+  monitorModule
 ]);
 
 mainModule.config(config)
