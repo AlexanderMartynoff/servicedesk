@@ -33,9 +33,8 @@
                     <div ng-if="editComment.id !== comment.id" ng-mousedown="openEdit(comment)">
                         {{comment.text}}
                     </div>
-                    <div style="position:relative"
-                         ng-if="editComment.id === comment.id">
-                        <textarea ng-blur="closeEdit()"
+                    <div style="position:relative" ng-if="editComment.id === comment.id">
+                        <textarea ng-blur="closeEdit(comment)"
                                   ng-model="comment.text"
                                   class="form-control"
                                   rows="3" autofocus></textarea>

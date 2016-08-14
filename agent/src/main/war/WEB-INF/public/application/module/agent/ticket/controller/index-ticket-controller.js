@@ -1,6 +1,11 @@
+import angular from 'angular';
+
+
 export default ($scope, logged, supportLevelService, ticketForm,
-                TicketModel, ticketService, $timeout,
-                Paginator, ellipsis, agentPerformerService) => {
+                TicketModel, ticketService, $timeout, Paginator,
+                ellipsis, agentPerformerService, Monitor) => {
+
+  var monitor = Monitor.instance();
 
   $scope.filter = {};
   $scope.modelFilter = {};
@@ -8,11 +13,16 @@ export default ($scope, logged, supportLevelService, ticketForm,
   $scope.pageSize = 10;
   $scope.covered = true;
   $scope.selectedLevels = [];
-  $scope.l$u = logged;
+  $scope.logged = logged;
   $scope.ellipsis = ellipsis;
 
+  // event handing
+  $scope.$on('ticket::form::close', () => monitor.start());
+  $scope.$on('ticket::form::open', () => monitor.stop());
+  $scope.$on('$$destroy', () => monitor.stop());
+
   // do filter
-  function prepareFilter() {
+  var prepareFilter = () => {
     var modelFilter = $scope.modelFilter, filter = $scope.filter;
 
     filter.performerId = $scope.modelFilter.performer ? modelFilter.performer.id : null;
@@ -24,9 +34,9 @@ export default ($scope, logged, supportLevelService, ticketForm,
     filter.levelIds = $scope.selectedLevels.map(function (e) {
       return e.id
     });
-  }
+  };
 
-  function forTypeHead(collection) {
+  var forTypeHead = collection => {
     var isSingle = false,
       result;
 
@@ -35,7 +45,7 @@ export default ($scope, logged, supportLevelService, ticketForm,
       isSingle = true;
     }
 
-    result = collection.map(function (account) {
+    result = collection.map(account => {
       return {
         title: account.firstName + ' ' + account.secondName,
         id: account.id
@@ -43,46 +53,52 @@ export default ($scope, logged, supportLevelService, ticketForm,
     });
 
     return isSingle ? result[0] : result;
-  }
+  };
 
-  function updateLevels() {
+  var updateSupportLevels = () => {
     supportLevelService.list().then(function (result) {
       $scope.levels = result;
     });
-  }
-
-  $scope.edit = function (ticket) {
-    ticketForm.open(ticket);
   };
 
-  $scope.new = function () {
-    ticketForm.open(new TicketModel());
-  };
-
-  $scope.updateTicketList = function (silent) {
-    $scope.covered = true;
-    prepareFilter();
-    ticketService.list($scope.filter).then(function (response) {
-      $scope.paginator.load(response, $scope.pageSize);
-      $scope.covered = false;
+  var updatePerformerStore = () => {
+    agentPerformerService.listAccount().then(function (response) {
+      $scope.performers = forTypeHead(response);
     });
+  };
+
+  var updateTicketList = silentMode => {
+    prepareFilter();
+
+    if (!silentMode) {
+      $scope.covered = true;
+    }
+
+    return ticketService.list($scope.filter).then(response => {
+      $scope.paginator.load(response, $scope.pageSize);
+      if (!silentMode) {
+        $scope.covered = false;
+      }
+    });
+  };
+
+  $scope.updateTicketList = updateTicketList;
+
+  $scope.form = (ticket=new TicketModel()) => {
+    $scope.$broadcast('ticket::form::open');
+    ticketForm.open(angular.copy(ticket));
   };
 
   $scope.whereImPerformer = function () {
     $scope.modelFilter.performer = forTypeHead(logged.getAccount());
   };
 
-  function updatePerformerStore() {
-    agentPerformerService.listAccount().then(function (response) {
-      $scope.performers = forTypeHead(response);
-    });
-  }
-
-  $scope.$on('ticket::change', function () {
-    $scope.updateTicketList();
+  monitor.configure({
+    service: () => updateTicketList(true),
+    timeout: 7000
   });
 
   updatePerformerStore();
-  updateLevels();
-  $scope.updateTicketList();
+  updateSupportLevels();
+  updateTicketList().then(() => monitor.start());
 }

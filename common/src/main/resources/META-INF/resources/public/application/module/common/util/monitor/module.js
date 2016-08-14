@@ -9,10 +9,14 @@ class Monitor {
     this.$q = $q;
     this.$log = $log;
 
-    this.defaultTimeout = 3000;
+    this.defaultTimeout = 2000;
     this.isAlive = false;
     this.stopThis = false;
     this.stopDefer = null;
+  }
+
+  setService(service){
+    this.configure({service: service});
   }
 
   configure(props){
@@ -25,7 +29,7 @@ class Monitor {
     } else if(angular.isString(this.props.url)){
       this.executor = this.doHttpRequest;
     } else {
-      this.executor = null;
+      throw new Error('url or service must be provided');
     }
 
     return this;
@@ -94,6 +98,7 @@ class Monitor {
 }
 
 export default angular.module('common.ui.monitor', [])
-  .factory('monitor', ($http, $timeout, $q, $log) => {
-    return new Monitor($http, $timeout, $q, $log);
+  .factory('Monitor', ($http, $timeout, $q, $log) => {
+    Monitor.instance = () => new  Monitor($http, $timeout, $q, $log);
+    return Monitor;
   }).name;

@@ -24,7 +24,7 @@ import inputFileModule from 'ui/inputfile/module';
 import enumModule from 'ui/enum/module';
 import loggedModule from 'logged/module';
 import ticketCommentModule from 'dictionary/ui/ticket-comment/module';
-
+import monitorModule from 'util/monitor/module';
 
 
 // bootstrap style import
@@ -60,7 +60,8 @@ const mainModule = angular.module('customer.application', [
   // customer modules
   ticketModule,
   instructionModule,
-  autofocusModule
+  autofocusModule,
+  monitorModule
 ]);
 
 mainModule.config(config)

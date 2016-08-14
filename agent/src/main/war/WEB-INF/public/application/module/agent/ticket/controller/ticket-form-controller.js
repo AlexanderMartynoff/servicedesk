@@ -12,29 +12,34 @@ export default ($scope, $rootScope, $uibModalInstance, logged,
 
   $uibModalInstance.opened.then(() => $scope.covered = false);
 
-  $scope.close = () => {
-    $uibModalInstance.close();
+  var closeInstance = (throwEvent=false) => {
     $scope.covered = false;
+    $uibModalInstance.close();
+    if(throwEvent){
+      $rootScope.$broadcast('ticket::form::close');
+    }
   };
+
+  $scope.close = closeInstance;
 
   $scope.update = data => {
     $scope.covered = true;
-    ticketService.update(data).then(response => $scope.close());
-  };
-
-  $scope.new = data => {
-    $scope.covered = true;
-    ticketService.new(data).then(response => {
-      $scope.close();
-      $rootScope.$broadcast('ticket::change');
+    ticketService.update(data).then(() => {
+      $scope.covered = false;
     });
   };
 
-  $scope.delete = id => {
+  $scope.create = data => {
     $scope.covered = true;
-    ticketService.delete(id).then(response => {
-      $scope.close();
-      $rootScope.$broadcast('ticket::change');
+    ticketService.new(data).then(() => {
+      $scope.covered = false;
+    });
+  };
+
+  $scope.remove = id => {
+    $scope.covered = true;
+    ticketService.delete(id).then(() => {
+      closeInstance(true);
     });
   };
 
@@ -45,7 +50,7 @@ export default ($scope, $rootScope, $uibModalInstance, logged,
   // this show new modal window and close current
   // but after closed children window we comeback parent
   $scope.showKnowledgeDetail = () => {
-    $scope.close();
+    closeInstance();
     knowledgeDetail.open(ticket).closed.then(() => {
       ticketForm.open(ticket);
     });

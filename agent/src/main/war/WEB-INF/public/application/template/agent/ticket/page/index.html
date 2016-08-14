@@ -58,22 +58,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12" ng-if="l$u.isManager() || l$u.isOperator()">
+                <div class="col-sm-12" ng-if="logged.isManager() || logged.isOperator()">
                     <label class="control-label">Уровень поддержки</label><br/>
                     <enum model="selectedLevels" store="levels"></enum>
                 </div>
                 <div class="col-sm-12"
-                     ng-if="l$u.isCanFilterByPerformer()">
+                     ng-if="logged.isCanFilterByPerformer()">
                     <label class="control-label">
                         Исполнитель
-                        <span ng-if="l$u.isPerformer()"> -
+                        <span ng-if="logged.isPerformer()"> -
                             <span class="text-primary hover" ng-click="whereImPerformer()">только мои</span>
                         </span>
                     </label>
                     <input type="text"
                            ng-model="modelFilter.performer"
                            typeahead-editable="false"
-                           uib-typeahead="$ as $.title for $ in performers | filter: $viewValue || ''"
+                           uib-typeahead="$ as item.title for $ in performers | filter: $viewValue || ''"
                            typeahead-min-length="0"
                            typeahead-show-hint="true"
                            class="form-control">
@@ -92,13 +92,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <div ng-class="{'col-sm-6': l$u.isCanEditTicket(), 'col-sm-12': !l$u.isCanEditTicket()}">
+                <div ng-class="{'col-sm-6': logged.isCanEditTicket(), 'col-sm-12': !logged.isCanEditTicket()}">
                     <button class="btn btn-xs btn-info form-control" ng-click="updateTicketList()">
                         <b class="fa fa-circle fa-left"></b>Показать
                     </button>
                 </div>
-                <div class="col-sm-6" ng-if="l$u.isCanEditTicket()">
-                    <button class="btn btn-xs btn-success form-control" ng-click="new()">
+                <div class="col-sm-6" ng-if="logged.isCanEditTicket()">
+                    <button class="btn btn-xs btn-success form-control" ng-click="form()">
                         <b class="fa fa-plus-square fa-left"></b>Создать
                     </button>
                 </div>
@@ -125,24 +125,19 @@
                                 <th>Прогресс</th>
                             </tr>
                         </thead>
-                        <tr ng-repeat="$ in paginator.getCurrentPage()"
-                            ng-click="edit($)">
+                        <tr ng-repeat="item in paginator.getCurrentPage()" ng-click="form(item)">
 
-                            <td>{{$.id}}</td>
-                            <td>{{$.dateOpen | date:'medium'}}</td>
-                            <td tooltip-placement="top"
-                                tooltip-append-to-body="true"
-                                uib-tooltip="{{$.title}}">
-                                {{ellipsis($.title)}}
-                            </td>
-                            <td>{{$.supportLevel.title}}</td>
-                            <td>{{$.author.firstName}} {{$.author.secondName}}</td>
+                            <td>{{item.id}}</td>
+                            <td>{{item.dateOpen | date:'medium'}}</td>
+                            <td title="{{item.title}}">{{ellipsis(item.title)}}</td>
+                            <td>{{item.supportLevel.title}}</td>
+                            <td>{{item.author.firstName}} {{item.author.secondName}}</td>
                             <td>
                                 <uib-progressbar animate="true"
-                                                 value="$.progress"
-                                                 tooltip-placement="top"
-                                                 uib-tooltip="{{$.progress}}%"
+                                                 value="item.progress"
+                                                 title="{{item.progress}}%"
                                                  type="success">
+                                    {{item.progress > 30 ? item.progress + '%' : null}}
                                 </uib-progressbar>
                             </td>
                         </tr>

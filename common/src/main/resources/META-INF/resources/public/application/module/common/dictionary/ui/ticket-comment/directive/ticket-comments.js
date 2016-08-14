@@ -5,7 +5,9 @@ export default () => {
     scope: {
       ticket: '='
     },
-    controller: ($scope, ticketCommentService, $timeout, $interval, $attrs, converter, logged, monitor) => {
+    controller: ($scope, ticketCommentService, $timeout, $interval, $attrs, converter, logged, Monitor) => {
+
+      var monitor = Monitor.instance();
 
       $scope.covered = false;
       $scope.logged = logged.logged;
@@ -47,9 +49,10 @@ export default () => {
       };
 
       // save edited comment
-      $scope.closeEdit = () => {
+      $scope.closeEdit = (comment) => {
+
         $scope.covered = true;
-        ticketCommentService.update($scope.editComment).then(() => {
+        ticketCommentService.update(comment).then(() => {
           $scope.covered = false;
           $scope.editComment = null;
           monitor.start();
@@ -67,9 +70,9 @@ export default () => {
         });
       };
 
-      $scope.blur();
       resetComment();
-      monitor.configure({service: () => updateCommentsStore(true)});
+      $scope.blur();
+      monitor.setService(() => updateCommentsStore(true));
 
       if ($scope.ticket.id) {
         monitor.start();
