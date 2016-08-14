@@ -2,15 +2,17 @@ import angular from 'angular';
 
 
 class Monitor {
-  constructor($http, $timeout){
+  constructor($http, $timeout, $q, $log){
     // angular services
     this.$http = $http;
     this.$timeout = $timeout;
+    this.$q = $q;
+    this.$log = $log;
 
     this.defaultTimeout = 3000;
     this.isAlive = false;
     this.stopThis = false;
-    this.currentPromise = null;
+    this.stopDefer = null;
   }
 
   configure(props){
@@ -31,14 +33,15 @@ class Monitor {
 
   stop(){
     this.stopThis = true;
-    return this.currentPromise;
+    this.stopDefer = this.$q.defer();
+    return this.stopDefer.promise;
   }
 
   start(){
     if(!this.isAlive) {
       this.step();
     } else {
-      console.log('already in progress');
+      this.$log.info('already in progress');
     }
   }
 
@@ -47,14 +50,14 @@ class Monitor {
    * @returns {Promise}
    */
   step(){
-    this.currentPromise = this.executor().then(response => {
+    this.executor().then(response => {
       this.props.successCallback(response);
       if(this.stopThis){
-        alert('stop');
         this.isAlive = false;
         this.stopThis = false;
+        this.stopDefer.$$resolve(response);
+        this.stopDefer = null;
       } else {
-        // TODO - вот из-за этого мы получаем разрезолвенный (предыдущий) промис
         this.$timeout(() => {
           this.step();
         }, this.props.timeout || this.defaultTimeout);
@@ -64,6 +67,7 @@ class Monitor {
     }, reason => {
       this.isAlive = false;
       this.stopThis = false;
+      this.stopDefer = null;
       this.props.errorCallback(reason);
       return reason;
     });
@@ -90,6 +94,6 @@ class Monitor {
 }
 
 export default angular.module('common.ui.monitor', [])
-  .factory('monitor', ($http, $timeout) => {
-    return new Monitor($http, $timeout);
+  .factory('monitor', ($http, $timeout, $q, $log) => {
+    return new Monitor($http, $timeout, $q, $log);
   }).name;

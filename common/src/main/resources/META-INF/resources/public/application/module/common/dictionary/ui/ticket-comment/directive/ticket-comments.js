@@ -41,7 +41,6 @@ export default () => {
         }
         $scope.covered = true;
         monitor.stop().then(() => {
-          alert('edit');
           $scope.editComment = comment;
           $scope.covered = false;
         });
