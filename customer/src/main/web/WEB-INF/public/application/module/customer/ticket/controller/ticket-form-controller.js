@@ -6,39 +6,37 @@ export default ($scope, $uibModalInstance, $rootScope, ticket, ticketService,
   $scope.customer = logged.logged.customer;
   $scope.ticket.contractor = $scope.customer.contractor;
 
-  function setSupportLevel(ticket) {
-    if (ticket.supportLevel)
+  var setSupportLevel = ticket => {
+    if (ticket.supportLevel){
       return;
+    }
     supportLevelService.list().then(response => {
       response.filter(e => e.number === 1).forEach(e => ticket.supportLevel = e);
     });
-  }
+  };
+
+  var updateTicketPriorityStore = () => {
+    ticketPriorityService.list().then(response => {
+      $scope.priorityStore = response;
+    });
+  };
 
   $scope.close = () => $uibModalInstance.close();
 
-  $scope.new = ticket => {
+  $scope.create = ticket => {
     ticket.initiator = logged.getAccount();
     $scope.covered = true;
-    ticketService.new(ticket).then(function (response) {
+    ticketService.new(ticket).then(response => {
       $scope.covered = false;
-      $scope.close();
-      $rootScope.$broadcast("ticket::change");
     });
   };
 
   $scope.update = data => {
     $scope.covered = true;
-    ticketService.update(data).then(function (response) {
-      $scope.close();
+    ticketService.update(data).then(response => {
       $scope.covered = false;
     });
   };
-
-  function updateTicketPriorityStore(){
-    ticketPriorityService.list().then(function(response){
-      $scope.priorityStore = response;
-    });
-  }
 
   updateTicketPriorityStore();
   setSupportLevel(ticket);

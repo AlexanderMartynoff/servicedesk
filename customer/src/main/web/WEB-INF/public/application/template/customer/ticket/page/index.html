@@ -45,15 +45,11 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label class="control-label">Заголовок</label>
-                    <input type="text"
-                           ng-model="filter.title"
-                           class="form-control">
+                    <input type="text" ng-model="filter.title" class="form-control">
                 </div>
                 <div class="col-sm-12">
                     <label class="control-label">Исполнитель</label><br/>
-                    <input type="text"
-                           ng-model="filter.performer"
-                           class="form-control">
+                    <input type="text" ng-model="filter.performer" class="form-control">
                 </div>
             </div>
 
@@ -66,7 +62,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="" class="vertical-align-btm btn btn-success form-control" ng-click="new()">
+                    <a href="" class="vertical-align-btm btn btn-success form-control" ng-click="form()">
                         <b class="fa fa-plus-square fa-left"></b>Создать
                     </a>
                 </div>
@@ -82,8 +78,7 @@
                 Записи удовлетворяющие условиям поиска не найдены
             </div>
 
-            <table ng-if="paginator.$$collection.length > 0"
-                   class="table table-striped table-hover x-table-clickable">
+            <table ng-if="paginator.$$collection.length > 0" class="table table-striped table-hover x-table-clickable">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -93,21 +88,15 @@
                     <th>Прогресс</th>
                 </tr>
                 </thead>
-                <tr ng-repeat="$ in paginator.getCurrentPage()" ng-click="open($)">
-                    <td>{{$.id}}</td>
-                    <td>{{$.dateOpen | date: 'medium'}}</td>
-                    <td tooltip-placement="top"
-                        tooltip-append-to-body="true"
-                        uib-tooltip="{{$.title}}">
-                        {{ellipsis($.title)}}
-                    </td>
-                    <td>{{$.service.title}}</td>
-                    <td>
-                        <uib-progressbar animate="true"
-                                         value="$.progress"
-                                         tooltip-placement="top"
-                                         uib-tooltip="{{$.progress}}%"
-                                         type="success"></uib-progressbar>
+                <tr ng-repeat="item in paginator.getCurrentPage()" ng-click="form(item)">
+                    <td>{{item.id}}</td>
+                    <td>{{item.dateOpen | date: 'medium'}}</td>
+                    <td title="{{item.title}}">{{ellipsis(item.title)}}</td>
+                    <td>{{item.service.title}}</td>
+                    <td title="{{item.progress}}%">
+                        <uib-progressbar value="item.progress" type="success">
+                            {{item.progress > 30 ? item.progress + '%' : null}}
+                        </uib-progressbar>
                     </td>
                 </tr>
             </table>

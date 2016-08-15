@@ -73,7 +73,7 @@
                     <input type="text"
                            ng-model="modelFilter.performer"
                            typeahead-editable="false"
-                           uib-typeahead="$ as item.title for $ in performers | filter: $viewValue || ''"
+                           uib-typeahead="p as p.title for p in performers | filter: $viewValue || ''"
                            typeahead-min-length="0"
                            typeahead-show-hint="true"
                            class="form-control">
@@ -132,10 +132,9 @@
                             <td title="{{item.title}}">{{ellipsis(item.title)}}</td>
                             <td>{{item.supportLevel.title}}</td>
                             <td>{{item.author.firstName}} {{item.author.secondName}}</td>
-                            <td>
+                            <td title="{{item.progress}}%">
                                 <uib-progressbar animate="true"
                                                  value="item.progress"
-                                                 title="{{item.progress}}%"
                                                  type="success">
                                     {{item.progress > 30 ? item.progress + '%' : null}}
                                 </uib-progressbar>
@@ -144,11 +143,11 @@
                     </table>
 
                     <div ng-if="paginator.$$collection.length > 0" class="center">
-                        <uib-pagination total-items="paginator.$$collection.length"
-                                        ng-model="paginator.$$index"
-                                        direction-links="false"
-                                        items-per-page="pageSize">
-                        </uib-pagination>
+                        <ul total-items="paginator.$$collection.length"
+                            ng-model="paginator.$$index"
+                            direction-links="false"
+                            items-per-page="pageSize"
+                            uib-pagination></ul>
                     </div>
                 </cover>
             </div>

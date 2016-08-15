@@ -1,7 +1,7 @@
 export default $uibModal => {
   return {
     open: ticket => {
-      $uibModal.open({
+      return $uibModal.open({
         controller: 'TicketFormController',
         resolve: { ticket: ticket },
         size: 'lg',

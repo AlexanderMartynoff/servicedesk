@@ -31,72 +31,57 @@ export default ($scope, logged, supportLevelService, ticketForm,
       filter.performerId = logged.getId();
     }
 
-    filter.levelIds = $scope.selectedLevels.map(function (e) {
-      return e.id
-    });
-  };
-
-  var forTypeHead = collection => {
-    var isSingle = false,
-      result;
-
-    if (!Array.isArray(collection)) {
-      collection = [collection];
-      isSingle = true;
-    }
-
-    result = collection.map(account => {
-      return {
-        title: account.firstName + ' ' + account.secondName,
-        id: account.id
-      }
-    });
-
-    return isSingle ? result[0] : result;
+    filter.levelIds = $scope.selectedLevels.map(e => e.id);
   };
 
   var updateSupportLevels = () => {
-    supportLevelService.list().then(function (result) {
+    supportLevelService.list().then(result => {
       $scope.levels = result;
     });
   };
 
   var updatePerformerStore = () => {
-    agentPerformerService.listAccount().then(function (response) {
-      $scope.performers = forTypeHead(response);
+    agentPerformerService.listAccount().then(response => {
+      $scope.performers = response.map(e => {
+        return {id: e.id, title: `${e.firstName} ${e.secondName}`}
+      });
     });
   };
 
-  var updateTicketList = silentMode => {
+  var updateTicketList = silent => {
     prepareFilter();
 
-    if (!silentMode) {
+    if (!silent) {
       $scope.covered = true;
     }
 
     return ticketService.list($scope.filter).then(response => {
       $scope.paginator.load(response, $scope.pageSize);
-      if (!silentMode) {
+      if (!silent) {
         $scope.covered = false;
       }
     });
   };
-
-  $scope.updateTicketList = updateTicketList;
 
   $scope.form = (ticket=new TicketModel()) => {
     $scope.$broadcast('ticket::form::open');
     ticketForm.open(angular.copy(ticket));
   };
 
-  $scope.whereImPerformer = function () {
-    $scope.modelFilter.performer = forTypeHead(logged.getAccount());
+  $scope.whereImPerformer = () => {
+    let account = logged.getAccount();
+    $scope.modelFilter.performer = {
+      id: account.id,
+      title: `${account.firstName} ${account.secondName}`
+    };
   };
 
   monitor.configure({
     service: () => updateTicketList(true),
-    timeout: 7000
+    timeout: 3000
   });
+
+  $scope.updateTicketList = updateTicketList;
 
   updatePerformerStore();
   updateSupportLevels();
