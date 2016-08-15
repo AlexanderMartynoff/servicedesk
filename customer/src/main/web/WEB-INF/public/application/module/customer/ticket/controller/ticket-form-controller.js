@@ -28,6 +28,7 @@ export default ($scope, $uibModalInstance, $rootScope, ticket, ticketService,
     $scope.covered = true;
     ticketService.new(ticket).then(response => {
       $scope.covered = false;
+      $scope.close();
     });
   };
 

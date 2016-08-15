@@ -33,6 +33,7 @@ export default ($scope, $rootScope, $uibModalInstance, logged,
     $scope.covered = true;
     ticketService.new(data).then(() => {
       $scope.covered = false;
+      closeInstance(true);
     });
   };
 
