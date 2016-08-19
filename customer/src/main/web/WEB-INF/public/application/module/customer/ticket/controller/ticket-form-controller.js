@@ -16,9 +16,7 @@ export default ($scope, $uibModalInstance, $rootScope, ticket, ticketService,
   };
 
   var updateTicketPriorityStore = () => {
-    ticketPriorityService.list().then(response => {
-      $scope.priorityStore = response;
-    });
+    ticketPriorityService.list().then(response => $scope.priorityStore = response);
   };
 
   $scope.close = () => $uibModalInstance.close();
@@ -34,9 +32,7 @@ export default ($scope, $uibModalInstance, $rootScope, ticket, ticketService,
 
   $scope.update = data => {
     $scope.covered = true;
-    ticketService.update(data).then(response => {
-      $scope.covered = false;
-    });
+    ticketService.update(data).then(response => $scope.covered = false);
   };
 
   updateTicketPriorityStore();

@@ -1,19 +1,16 @@
-export default ($scope, $rootScope, logged, ticketForm, ticketService,
-                Paginator, TicketModel, ellipsis, Monitor) => {
-
-  const monitor = Monitor.instance();
+export default ($scope, $rootScope, logged, ticketForm,
+                ticketService, Paginator, TicketModel, ellipsis) => {
 
   $scope.paginator = new Paginator();
   $scope.ellipsis = ellipsis;
 
-  $scope.$on("ticket::form:close", () => monitor.start());
-  $scope.$on("ticket:form::open", () => monitor.stop());
+  $scope.$on('ticket::data::change', () => $scope.updateTickets());
 
-  $scope.updateTickets = (silent) => {
+  $scope.updateTickets = (silent=false) => {
     if(!silent){
       $scope.covered = true;
     }
-    return ticketService.list({initiatorId: logged.getId()}).then(function (data) {
+    return ticketService.list({initiatorId: logged.getId()}).then(data => {
       $scope.paginator.load(data);
       if(!silent){
         $scope.covered = false;
@@ -21,15 +18,6 @@ export default ($scope, $rootScope, logged, ticketForm, ticketService,
     });
   };
 
-  $scope.form = (ticket=new TicketModel()) => {
-    $scope.$broadcast('ticket:form::open');
-    ticketForm.open(ticket).closed.then(() => monitor.start());
-  };
-
-  monitor.configure({
-    service: () => $scope.updateTickets(true),
-    timeout: 3000
-  });
-
-  $scope.updateTickets().then(() => monitor.start());
+  $scope.form = (ticket=new TicketModel()) => ticketForm.open(ticket);
+  $scope.updateTickets();
 }

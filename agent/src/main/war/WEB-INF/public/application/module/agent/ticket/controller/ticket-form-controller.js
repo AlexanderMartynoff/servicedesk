@@ -8,7 +8,7 @@ export default ($scope, $rootScope, $uibModalInstance, logged,
   $scope.levelNumber = 1;
   $scope.progressStates = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   $scope.ticket.progress = $scope.ticket.progress || 0;
-  $scope.lg = logged;
+  $scope.logged = logged;
 
   $uibModalInstance.opened.then(() => $scope.covered = false);
 
@@ -24,27 +24,24 @@ export default ($scope, $rootScope, $uibModalInstance, logged,
 
   $scope.update = data => {
     $scope.covered = true;
-    ticketService.update(data).then(() => {
-      $scope.covered = false;
-    });
+    ticketService.update(data).then(() => $scope.covered = false);
   };
 
   $scope.create = data => {
     $scope.covered = true;
-    ticketService.new(data).then(() => {
-      $scope.covered = false;
-      closeInstance(true);
-    });
+    ticketService.new(data).then(() => closeInstance(true));
   };
 
   $scope.remove = id => {
     $scope.covered = true;
-    ticketService.delete(id).then(() => {
-      closeInstance(true);
-    });
+    ticketService.delete(id).then(() => closeInstance(true));
   };
 
-  $scope.doEscalation = offset => ticketService.doEscalation(ticket, offset, $scope.supportLevelStore);
+  $scope.doEscalation = offset => ticketService.doEscalation(
+    ticket,
+    offset,
+    $scope.supportLevelStore
+  );
 
   $scope.assignToMe = () => ticket.performer = logged.getAccount();
 
@@ -62,32 +59,24 @@ export default ($scope, $rootScope, $uibModalInstance, logged,
 
   // updaters
   var  updateContractorStore = () => {
-    contractorService.list().then(response => {
-      $scope.contractorStore = response;
-    });
+    contractorService.list().then(response => $scope.contractorStore = response);
   };
 
   var updateInitiatorStore = () => {
-    uaService.listAccount().then(response => {
-      $scope.initiatorStore = response;
-    });
+    uaService.listAccount().then(response => $scope.initiatorStore = response);
   };
 
   var updatePerformerStore = () => {
-    agentPerformerService.listAccount().then(response => {
-      $scope.performerStore = response;
-    });
+    agentPerformerService.listAccount().then(response => $scope.performerStore = response);
   };
 
   var setTicketLevelSupport = store => {
-    if (ticket.supportLevel)
+    if (ticket.supportLevel) {
       return;
+    }
 
-    store.filter(level => {
-      return level.number === $scope.levelNumber;
-    }).forEach(level => {
-      ticket.supportLevel = level;
-    });
+    store.filter(level => level.number === $scope.levelNumber)
+      .forEach(level => ticket.supportLevel = level);
   };
 
   var updateSupportLevelStore = () => {

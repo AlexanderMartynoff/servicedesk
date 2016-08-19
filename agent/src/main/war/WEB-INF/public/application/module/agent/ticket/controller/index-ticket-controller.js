@@ -1,11 +1,9 @@
 import angular from 'angular';
 
 
-export default ($scope, logged, supportLevelService, ticketForm,
-                TicketModel, ticketService, $timeout, Paginator,
-                ellipsis, agentPerformerService, Monitor) => {
-
-  var monitor = Monitor.instance();
+export default ($scope, $timeout, logged, supportLevelService, ticketForm,
+                TicketModel, ticketService, Paginator,
+                ellipsis, agentPerformerService) => {
 
   $scope.filter = {};
   $scope.modelFilter = {};
@@ -17,9 +15,11 @@ export default ($scope, logged, supportLevelService, ticketForm,
   $scope.ellipsis = ellipsis;
 
   // event handing
-  $scope.$on('ticket::form::close', () => monitor.start());
-  $scope.$on('ticket::form::open', () => monitor.stop());
-  $scope.$on('$$destroy', () => monitor.stop());
+  [
+    'ticket::data::change',
+    'ticket::form::close'
+  ]
+    .forEach((event) => $scope.$on(event, () => updateTicketList()));
 
   // do filter
   var prepareFilter = () => {
@@ -64,7 +64,6 @@ export default ($scope, logged, supportLevelService, ticketForm,
   };
 
   $scope.form = (ticket=new TicketModel()) => {
-    $scope.$broadcast('ticket::form::open');
     ticketForm.open(angular.copy(ticket));
   };
 
@@ -76,14 +75,9 @@ export default ($scope, logged, supportLevelService, ticketForm,
     };
   };
 
-  monitor.configure({
-    service: () => updateTicketList(true),
-    timeout: 3000
-  });
-
   $scope.updateTicketList = updateTicketList;
 
   updatePerformerStore();
   updateSupportLevels();
-  updateTicketList().then(() => monitor.start());
+  updateTicketList();
 }
